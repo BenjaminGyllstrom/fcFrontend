@@ -1,0 +1,18 @@
+
+<div class="create-deck-container">
+  <h3 class="create-deck-title">Create Deck</h3>
+
+
+  <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inputField">
+      Title:
+      <input type="text" id="title" formControlName="title">
+    </div>
+
+    <button type="submit" class="button button__create-deck">Create</button>
+  </form>
+
+
+
+</div>
+

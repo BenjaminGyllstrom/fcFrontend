@@ -1,0 +1,15 @@
+<div class="edit-card-container" *ngIf="card">
+  <div class="card-input">
+    <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="form-container">
+
+      <h2>Question</h2>
+      <quill-editor id="question" formControlName="question" class="editor" [styles]="{height: '300px'}">
+      </quill-editor>
+
+      <h2>Answer</h2>
+      <quill-editor id="answer" formControlName="answer" class="editor" [styles]="{height: '300px'}">
+      </quill-editor>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</div>

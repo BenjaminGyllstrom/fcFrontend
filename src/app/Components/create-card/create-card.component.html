@@ -1,0 +1,28 @@
+<div class="create-card-container">
+  <div class="card-input">
+
+    <h1 class="page-title">Create Card</h1>
+    <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="form-container">
+
+      <div *ngIf="showQuestion">
+        <h2>Question</h2>
+        <quill-editor id="question" formControlName="question" class="editor" [styles]="{height: '400px'}">
+        </quill-editor>
+      </div>
+
+      <div *ngIf="!showQuestion">
+        <h2>Answer</h2>
+        <quill-editor id="answer" formControlName="answer" class="editor" [styles]="{height: '400px'}">
+        </quill-editor>
+      </div>
+
+      <div class="actions">
+        <button *ngIf="showQuestion" type="button" class="button" (click)="showQuestion = !showQuestion">Answer</button>
+        <button *ngIf="!showQuestion" type="button" class="button" (click)="showQuestion = !showQuestion">Question</button>
+        <button type="button" class="button">Preview</button>
+        <button type="submit" class="button">Submit</button>
+
+      </div>
+    </form>
+  </div>
+</div>

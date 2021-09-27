@@ -1,0 +1,32 @@
+<h1 class="page-title">Study</h1>
+
+<div *ngIf="dueCardsAvailable" class="card-container">
+  <h2 *ngIf="!showAnswer" class="field-type">Question</h2>
+  <h2 *ngIf="showAnswer" class="field-type">Answer</h2>
+  <div class="card">
+    <div class="card-field" *ngIf="!showAnswer">
+      <quill-view [content]="currentCard.question" format="html"></quill-view>
+    </div>
+
+    <div class="card-field" *ngIf="showAnswer">
+      <quill-view [content]="currentCard.answer" format="html"></quill-view>
+    </div>
+
+    <button *ngIf="!showAnswer" class="button-show-answer" (click)="showAnswer = !showAnswer; showAnswerButtons = true">Show Answer</button>
+    <button *ngIf="showAnswer" class="button-show-answer" (click)="showAnswer = !showAnswer">Show Question</button>
+  </div>
+
+
+</div>
+
+<div *ngIf="showAnswerButtons" class="answer-buttons">
+  <button  class="button button__next" (click)="onNext('button-a')">{{nextRecurrence[0]}}</button>
+  <button  class="button button__next" (click)="onNext('button-b')">{{nextRecurrence[1]}}</button>
+  <button  class="button button__next" (click)="onNext('button-c')">{{nextRecurrence[2]}}</button>
+</div>
+
+<div *ngIf="dueCardsAvailable == false" class="study-container">
+  <div class="card-container">
+    <p>No due cards atm</p>
+  </div>
+</div>

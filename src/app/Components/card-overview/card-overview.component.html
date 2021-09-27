@@ -1,0 +1,27 @@
+<div *ngIf="card" class="card-overview-container">
+  <div class="card-container">
+
+    <div class="card-field">
+      id: {{card.id}}
+    </div>
+    <div class="card-field">
+      due: {{card.dueDate | date:'yyyy-MM-d, h:mm:ss a'}}
+    </div>
+    <div class="card-field">
+      recurrenceNumber: {{card.recurrenceNumber}}
+    </div>
+
+    <div class="card-field">
+      question: <quill-view [content]="card.question" format="html"></quill-view>
+    </div>
+    <div class="card-field">
+      answer: <quill-view [content]="card.answer" format="html"></quill-view>
+    </div>
+
+    <div class="actions">
+      <button class="button button__edit" (click)="onEdit()">Edit</button>
+      <button class="button button__delete" (click)="onDelete()">Delete</button>
+    </div>
+
+  </div>
+</div>

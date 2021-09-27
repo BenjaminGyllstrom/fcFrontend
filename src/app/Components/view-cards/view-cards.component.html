@@ -1,0 +1,8 @@
+<div class="view-cards-container">
+  <div *ngIf="deck" class="cards-container">
+
+    <h3 class="deck-title">{{deck.title}}</h3>
+
+    <app-card-list-overview class="card" *ngFor="let card of cards" [card]="card"></app-card-list-overview>
+  </div>
+</div>

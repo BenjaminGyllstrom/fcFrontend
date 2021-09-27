@@ -1,0 +1,47 @@
+.header-container{
+  // background-color: grey;
+  width: 100vw;
+  height: 50px;
+  margin-bottom: 20px;
+  padding: 5px;
+
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action-field{
+  display: flex;
+
+}
+
+.user-field{
+  margin-right: 40px;
+}
+
+.header-button{
+  margin-left: 20px;
+
+  &__logo{
+    margin-left: 80px;
+    font-size: 36px;
+  }
+  &__action{
+    margin-left: 30px;
+    font-size: 20px;
+  }
+  &__log-in{
+    font-size: 20px;
+
+  }
+  &__sign-up{
+    margin-left: 30px;
+    padding: 3px 5px;
+    font-size: 20px;
+    background-color: #3DB6AE;
+    border-radius: 10px;
+
+  }
+}
+
