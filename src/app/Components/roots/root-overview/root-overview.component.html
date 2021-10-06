@@ -1,0 +1,14 @@
+<div *ngIf="root" class="root-overview-container">
+  <h1>{{root.title}}</h1>
+  <div class="root-content">
+    <div class="root-info">
+      <p class="root-info__id">id: {{root.id}}</p>
+    </div>
+    <a class="button" (click)="onCreateChapter()">Create Chapter</a>
+
+    <h2 class="chapters-title">Chapters</h2>
+    <div class="chapters">
+      <app-chapter-list-item *ngFor="let chapter of root.chapters" [chapter]="chapter"></app-chapter-list-item>
+    </div>
+  </div>
+</div>

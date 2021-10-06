@@ -1,0 +1,13 @@
+
+<div *ngIf="chapter" class="chapter-overview-container">
+  <h1>{{chapter.title}}</h1>
+  <p>id: {{chapter.id}}</p>
+
+  <a class="button" (click)="onCreateNode()">Create deck</a>
+
+  <div class="chapters">
+    <app-deck-list-overview *ngFor="let deck of chapter.nodes" [deck]="deck"></app-deck-list-overview>
+  </div>
+</div>
+
+

@@ -1,0 +1,18 @@
+
+<div class="create-chapter-container">
+  <h3 class="create-chapter-title">Create Chapter</h3>
+
+
+  <form [formGroup]="chapterForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inputField">
+      Title:
+      <input type="text" id="title" formControlName="title">
+    </div>
+
+    <button type="submit" class="button button__create-chapter">Create</button>
+  </form>
+
+
+
+</div>
+

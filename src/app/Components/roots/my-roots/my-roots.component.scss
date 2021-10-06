@@ -1,0 +1,18 @@
+:Host{
+  width: 100%;
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+}
+
+.my-roots-container{
+  grid-column: 2/5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.root-list{
+  margin-bottom: 40px;
+}

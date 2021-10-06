@@ -1,0 +1,15 @@
+
+<div class="create-root-container">
+  <h3 class="create-root-title">Create Root</h3>
+
+
+  <form [formGroup]="rootForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inputField">
+      Title:
+      <input type="text" id="title" formControlName="title">
+    </div>
+
+    <button type="submit" class="button button__create-root">Create</button>
+  </form>
+</div>
+
