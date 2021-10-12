@@ -26,16 +26,21 @@
 .deck-actions{
   display: flex;
   flex-direction: row;
-  column-gap: 20px;
+  column-gap: 10px;
   margin-bottom: 40px;
-}
-.button__edit{
-  cursor: pointer;
 
+  &__edit{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
+  &__delete{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+  }
 }
-.button__delete{
-  cursor: pointer;
-}
+
 
 .deck-content{
   margin-top: 20px;

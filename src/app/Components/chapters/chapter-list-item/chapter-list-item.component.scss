@@ -1,3 +1,16 @@
-.chapter{
+.chapter-conatiner{
   cursor: pointer;
+  margin-top: 15px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 20px;
+
+  height: 60px;
+  width: 700px;
+  display: flex;
+  align-items: center;
+}
+
+.chapter-title{
+
 }

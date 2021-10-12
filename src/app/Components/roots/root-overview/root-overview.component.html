@@ -1,5 +1,10 @@
 <div *ngIf="root" class="root-overview-container">
   <h1>{{root.title}}</h1>
+  <div class="action-buttons">
+    <button class="action-buttons__edit" (click)="onEdit()">Edit</button>
+    <button class="action-buttons__delete" (click)="onDelete()">Delete</button>
+  </div>
+
   <div class="root-content">
     <div class="root-info">
       <p class="root-info__id">id: {{root.id}}</p>
@@ -7,8 +12,10 @@
     <a class="button" (click)="onCreateChapter()">Create Chapter</a>
 
     <h2 class="chapters-title">Chapters</h2>
-    <div class="chapters">
-      <app-chapter-list-item *ngFor="let chapter of root.chapters" [chapter]="chapter"></app-chapter-list-item>
+
+    <div class="chapter-list">
+      <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of root.chapters" ></app-chapter-list-item>
     </div>
+
   </div>
 </div>

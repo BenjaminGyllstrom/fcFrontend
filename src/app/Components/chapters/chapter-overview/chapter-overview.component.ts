@@ -25,4 +25,12 @@ export class ChapterOverviewComponent implements OnInit {
   onCreateNode(){
     this.router.navigate(['/createDeck/', this.chapter.id])
   }
+
+  onEdit(){
+  }
+  onDelete(){
+    this.chapterHttpService.delete(this.chapter.id).subscribe(() => {
+      this.router.navigate(['/home']);
+    })
+  }
 }

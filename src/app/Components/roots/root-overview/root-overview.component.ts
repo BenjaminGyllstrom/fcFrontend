@@ -25,4 +25,14 @@ export class RootOverviewComponent implements OnInit {
   onCreateChapter(){
     this.router.navigate(['/createChapter/', this.root.id])
   }
+
+  onEdit(){
+
+  }
+  onDelete(){
+    this.rootHttpService.delete(this.root.id).subscribe(() => {
+      this.router.navigate(['/home']);
+    });
+  }
+
 }

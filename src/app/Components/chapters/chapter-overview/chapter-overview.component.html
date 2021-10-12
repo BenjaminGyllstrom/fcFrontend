@@ -1,6 +1,10 @@
 
 <div *ngIf="chapter" class="chapter-overview-container">
   <h1>{{chapter.title}}</h1>
+  <div class="action-buttons">
+    <button class="action-buttons__edit" (click)="onEdit()">Edit</button>
+    <button class="action-buttons__delete" (click)="onDelete()">Delete</button>
+  </div>
   <p>id: {{chapter.id}}</p>
 
   <a class="button" (click)="onCreateNode()">Create deck</a>
