@@ -1,0 +1,22 @@
+
+<div class="create-explain-container">
+  <h3 class="create-explain-title">Create Explain</h3>
+
+
+  <form [formGroup]="explainForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inputField">
+      Title:
+      <input type="text" id="title" formControlName="title">
+
+      <h2>Question</h2>
+      <quill-editor id="text" formControlName="text" class="editor" [styles]="{height: '400px'}">
+      </quill-editor>
+    </div>
+
+    <button type="submit" class="button button__create-explain">Create</button>
+  </form>
+
+
+
+</div>
+

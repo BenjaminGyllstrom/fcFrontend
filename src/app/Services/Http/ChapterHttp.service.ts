@@ -1,16 +1,18 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Chapter, IChapter } from "src/app/Models/chapter.model";
+import { IDeck } from "src/app/Models/deck.model";
 import { HttpService } from "../Http/http.service";
 import { CardHttpService } from "./CardHttp.service";
 import { DeckHttpService } from "./DeckHttp.service";
+import { ExplainHttpService } from "./ExplainHttp.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChapterHttpService {
 
-  constructor(private httpService: HttpService, private deckHttpService: DeckHttpService) {}
+  constructor(private httpService: HttpService, private deckHttpService: DeckHttpService, private explainHttpService: ExplainHttpService) {}
 
   get() : Observable<any> {
     return this.httpService.get('chapters');
@@ -33,7 +35,7 @@ export class ChapterHttpService {
     const newChapter = new Chapter();
     newChapter.id = collectedChapter._id;
     newChapter.title = collectedChapter.title;
-    newChapter.nodes = this.deckHttpService.parseToDecks(collectedChapter.nodes);
+    newChapter.nodes = this.getListOfNodes(collectedChapter.nodes)
     return newChapter;
   }
 
@@ -44,4 +46,21 @@ export class ChapterHttpService {
     });
     return newChapterList;
   }
+
+  getListOfNodes(collectedNodes: any[]){
+    const nodes: any[] = [];
+
+    collectedNodes.forEach(node => {
+      if(node.type == 'deck'){
+        nodes.push(this.deckHttpService.parseToDeck(node));
+      }
+      else{
+        nodes.push(this.explainHttpService.parseToExplain(node));
+      }
+    });
+
+    nodes.sort((a,b) => a.listIndex - b.listIndex)
+    return nodes;
+  }
+
 }

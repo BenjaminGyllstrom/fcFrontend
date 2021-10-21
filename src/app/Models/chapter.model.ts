@@ -4,7 +4,7 @@ export class Chapter{
   id: string;
   title: string;
   rootId: string
-  nodes: Deck[]
+  nodes: any[]
 }
 
 export interface IChapter{

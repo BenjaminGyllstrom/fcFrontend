@@ -1,0 +1,14 @@
+:host{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+}
+
+.study-expalin-container{
+  grid-column: 2/5;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,14 @@
+<div class="edit-explain-container" *ngIf="explain">
+  <div class="explain-input">
+    <form [formGroup]="explainForm" (ngSubmit)="onSubmit()" class="form-container">
+
+      <h2>Title</h2>
+      <input type="text" id="title" formControlName="title">
+
+      <h2>Text</h2>
+      <quill-editor id="text" formControlName="text" class="editor" [styles]="{height: '300px'}">
+      </quill-editor>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</div>

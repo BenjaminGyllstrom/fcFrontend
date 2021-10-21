@@ -1,0 +1,17 @@
+<div *ngIf="explain" class="explain-overview-container">
+
+  <h1 class="explain-title">{{explain.title}}</h1>
+  <div class="explain-actions">
+    <button class="explain-actions__edit" (click)="onEdit()">Edit</button>
+    <button class="explain-actions__delete" (click)="onDelete()">Delete</button>
+  </div>
+
+  <div class="explain-content">
+    <div class="explain-info">
+      <p class="explain-info__id">id: {{explain.id}}</p>
+      <p class="explain-info__list-index">listIndex: {{explain.listIndex}}</p>
+    </div>
+
+    <quill-view [content]="explain.text" format="html"></quill-view>
+  </div>
+</div>

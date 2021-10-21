@@ -25,7 +25,7 @@ export class DeckOverviewComponent implements OnInit {
 
   onDelete(){
     this.deckHttpService.delete(this.deck.id).subscribe(() => {
-      this.router.navigate(['/home'])
+      this.router.navigate(['/chapterOverview', this.deck.parentId])
     })
   }
   onCreateCard(){

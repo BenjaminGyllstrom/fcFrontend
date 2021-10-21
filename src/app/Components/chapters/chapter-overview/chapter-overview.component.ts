@@ -22,8 +22,11 @@ export class ChapterOverviewComponent implements OnInit {
     });
   }
 
-  onCreateNode(){
+  onCreateDeck(){
     this.router.navigate(['/createDeck/', this.chapter.id])
+  }
+  onCreateExplain(){
+    this.router.navigate(['/createExplain/', this.chapter.id])
   }
 
   onEdit(){

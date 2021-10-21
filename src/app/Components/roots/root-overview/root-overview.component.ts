@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Chapter } from 'src/app/Models/chapter.model';
 import { IRoot, Root } from 'src/app/Models/root.model';
 import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
 
@@ -11,6 +12,7 @@ import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
 export class RootOverviewComponent implements OnInit {
 
   root: Root
+  chapters: Chapter[]
 
   constructor(private route: ActivatedRoute, private router: Router, private rootHttpService: RootHttpService) { }
 
@@ -19,6 +21,7 @@ export class RootOverviewComponent implements OnInit {
     this.rootHttpService.getById(id).subscribe((collectedRoot: IRoot)=> {
       const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
       this.root = newRoot;
+      this.chapters = this.root.chapters;
     });
   }
 
@@ -35,4 +38,7 @@ export class RootOverviewComponent implements OnInit {
     });
   }
 
+  onChapterDelete(chapter : Chapter){
+    this.chapters.splice(this.chapters.indexOf(chapter), 1);
+  }
 }

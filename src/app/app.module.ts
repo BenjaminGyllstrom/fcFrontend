@@ -26,6 +26,14 @@ import { RootOverviewComponent } from './Components/roots/root-overview/root-ove
 import { ChapterListItemComponent } from './Components/chapters/chapter-list-item/chapter-list-item.component';
 import { ChapterOverviewComponent } from './Components/chapters/chapter-overview/chapter-overview.component';
 import { CreateChapterComponent } from './Components/chapters/create-chapter/create-chapter.component';
+import { ChapterStudyComponent } from './Components/chapters/chapter-study/chapter-study.component';
+import { DeckNodeComponent } from './Components/Nodes/deck-node/deck-node.component';
+import { ExplainNodeComponent } from './Components/Nodes/explain-node/explain-node.component';
+import { ExplainListOverviewComponent } from './Components/Explains/explain-list-overview/explain-list-overview.component';
+import { CreateExplainComponent } from './Components/Explains/create-explain/create-explain.component';
+import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
+import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
+import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +57,14 @@ import { CreateChapterComponent } from './Components/chapters/create-chapter/cre
     ChapterListItemComponent,
     ChapterOverviewComponent,
     CreateChapterComponent,
+    ChapterStudyComponent,
+    DeckNodeComponent,
+    ExplainNodeComponent,
+    ExplainListOverviewComponent,
+    CreateExplainComponent,
+    ExplainOverviewComponent,
+    EditExplainComponent,
+    StudyExplainComponent,
   ],
   imports: [
     BrowserModule,

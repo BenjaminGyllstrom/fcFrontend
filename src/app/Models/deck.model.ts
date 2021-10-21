@@ -6,6 +6,10 @@ export class Deck{
   numCards: number;
   cards: Card[];
   parentId: string;
+  listIndex: number;
+  locked: boolean;
+  newCards: number;
+  type: String = 'deck';
 
   constructor(title:string) {
     this.title = title;
@@ -20,5 +24,8 @@ export interface IDeck{
   numCards: number;
   cards: ICard[]
   parentId: string;
+  listIndex: number;
+  locked: boolean;
+  newCards: number;
 }
 

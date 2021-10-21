@@ -1,5 +1,16 @@
-<div *ngIf="chapter" class="chapter-conatiner" (click)="onClick()">
-  <div class="chapter-title">
+<div *ngIf="chapter && !expand" class="chapter-conatiner" (click)="expand = !expand">
     <h1>{{chapter.title}}</h1>
-  </div>
+</div>
+
+<div *ngIf="chapter && expand" class="chapter-conatiner-expanded" (click)="expand = !expand">
+    <h1>{{chapter.title}}</h1>
+    <div class="chapter-content">
+      <p>id: {{chapter.id}}</p>
+      <p>due: 0</p>
+    </div>
+    <div class="action-buttons">
+      <a class="button chapter-button" (click)="onDelete()">Delete</a>
+      <a class="button chapter-button" (click)="onEdit()">Edit</a>
+      <a class="button chapter-button" (click)="onStudy()">Study</a>
+    </div>
 </div>

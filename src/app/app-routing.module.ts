@@ -14,6 +14,11 @@ import { MyRootsComponent } from './Components/roots/my-roots/my-roots.component
 import { RootOverviewComponent } from './Components/roots/root-overview/root-overview.component';
 import { StudyComponent } from './Components/study/study.component';
 import { ViewCardsComponent } from './Components/Cards/view-cards/view-cards.component';
+import { ChapterStudyComponent } from './Components/chapters/chapter-study/chapter-study.component';
+import { CreateExplainComponent } from './Components/Explains/create-explain/create-explain.component';
+import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
+import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
+import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -24,15 +29,20 @@ const routes: Routes = [
   {path: 'rootOverview/:id', component:RootOverviewComponent},
   {path: 'createChapter/:id', component:CreateChapterComponent},
   {path: 'chapterOverview/:id', component:ChapterOverviewComponent},
+  {path: 'chapterStudy/:id', component:ChapterStudyComponent},
   {path: 'createDeck', component:CreateDeckComponent},
+  {path: 'createExplain/:id', component:CreateExplainComponent},
   {path: 'createDeck/:id', component:CreateDeckComponent},
   {path: 'deckOverview', component:DeckOverviewComponent},
   {path: 'deckOverview/:id', component:DeckOverviewComponent},
+  {path: 'explainOverview/:id', component:ExplainOverviewComponent},
+  {path: 'editExplain/:id', component:EditExplainComponent},
   {path: 'deckOverview/createCard/:deckId', component:CreateCardComponent},
   {path: 'deckOverview/viewCards/:deckId', component:ViewCardsComponent},
   {path: 'cardOverview/:id', component:CardOverviewComponent},
   {path: 'editCard/:cardId', component:EditCardComponent},
   {path: 'deck/study/:deckId', component:StudyComponent},
+  {path: 'studyExplain/:id', component:StudyExplainComponent},
 ];
 
 @NgModule({

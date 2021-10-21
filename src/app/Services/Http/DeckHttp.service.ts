@@ -19,8 +19,6 @@ export class DeckHttpService {
     return this.httpService.get(`decks/${id}`);
   }
   post(deck: any) : Observable<any> {
-    console.log(deck);
-
     return this.httpService.post('decks', deck);
   }
   delete(id: string) : Observable<any> {
@@ -39,6 +37,9 @@ export class DeckHttpService {
     newDeck.id = collectedDeck._id;
     newDeck.numCards = collectedDeck.numCards;
     newDeck.parentId = collectedDeck.parentId;
+    newDeck.listIndex = collectedDeck.listIndex;
+    newDeck.locked = collectedDeck.locked;
+    newDeck.newCards = collectedDeck.newCards;
 
     if(collectedDeck.cards.length > 0){
       newDeck.cards = this.cardHttpService.parseToCards(collectedDeck.cards);

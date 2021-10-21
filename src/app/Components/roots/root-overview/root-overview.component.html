@@ -14,7 +14,7 @@
     <h2 class="chapters-title">Chapters</h2>
 
     <div class="chapter-list">
-      <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of root.chapters" ></app-chapter-list-item>
+      <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of chapters" (onDelete)="onChapterDelete($event)"></app-chapter-list-item>
     </div>
 
   </div>

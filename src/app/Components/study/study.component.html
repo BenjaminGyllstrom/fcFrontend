@@ -19,14 +19,21 @@
 
 </div>
 
-<div *ngIf="showAnswerButtons" class="answer-buttons">
+<div *ngIf="showAnswerButtons && dueCardsAvailable" class="answer-buttons">
   <button  class="button button__next" (click)="onNext('button-a')">{{nextRecurrence[0]}}</button>
   <button  class="button button__next" (click)="onNext('button-b')">{{nextRecurrence[1]}}</button>
   <button  class="button button__next" (click)="onNext('button-c')">{{nextRecurrence[2]}}</button>
 </div>
 
-<div *ngIf="dueCardsAvailable == false" class="study-container">
-  <div class="card-container">
-    <p>No due cards atm</p>
+<div *ngIf="dueCardsAvailable == false" class="no-due">
+  <div *ngIf="deck && deck.newCards > 0" class="no-due__content">
+    <h3>You have finnished today recommended card limit</h3>
+    <p>This deck stil contains {{deck.newCards}} unlearned cards. Come back tomorrow for more learning</p>
+  </div>
+
+  <div *ngIf="deck && deck.newCards == 0" class="no-due__content">
+    <h3>Congratulations you have iterated through all cards in this deck</h3>
+    <p>Press 'next' to continue this course</p>
+    <button class="button" (click)="onContinueStudy()">Next</button>
   </div>
 </div>

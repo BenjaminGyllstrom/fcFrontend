@@ -7,10 +7,16 @@
   </div>
   <p>id: {{chapter.id}}</p>
 
-  <a class="button" (click)="onCreateNode()">Create deck</a>
+  <div style="margin-top: 20px;">
+    <a class="button" (click)="onCreateDeck()">Create deck</a>
+    <a class="button" (click)="onCreateExplain()">Create Explain</a>
+  </div>
 
   <div class="chapters">
-    <app-deck-list-overview *ngFor="let deck of chapter.nodes" [deck]="deck"></app-deck-list-overview>
+    <div *ngFor="let node of chapter.nodes">
+      <app-explain-list-overview  *ngIf="node.type == 'explain'" [explain]="node"></app-explain-list-overview>
+      <app-deck-list-overview *ngIf="node.type == 'deck'" [deck]="node"></app-deck-list-overview>
+    </div>
   </div>
 </div>
 

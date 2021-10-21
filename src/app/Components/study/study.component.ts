@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Card, ICard } from 'src/app/Models/card.model';
+import { Deck, IDeck } from 'src/app/Models/deck.model';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { StudyService } from 'src/app/Services/Study.service';
@@ -13,6 +14,7 @@ import { StudyService } from 'src/app/Services/Study.service';
 export class StudyComponent implements OnInit {
 
   deckId: string;
+  deck: Deck;
   cards: Card[];
   currentCard: Card;
   dueCardsAvailable: boolean = false;
@@ -22,11 +24,15 @@ export class StudyComponent implements OnInit {
 
   nextRecurrence : string[]
 
-  constructor(private route: ActivatedRoute, private deckHttpService: DeckHttpService, private cardHttpService: CardHttpService, private studyService: StudyService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private deckHttpService: DeckHttpService, private cardHttpService: CardHttpService, private studyService: StudyService) { }
 
   ngOnInit(): void {
     const deckId = this.route.snapshot.params['deckId'];
     this.deckId = deckId;
+
+    this.deckHttpService.getById(deckId).subscribe((collectedDeck: IDeck) => {
+      this.deck = this.deckHttpService.parseToDeck(collectedDeck);
+    })
 
     this.deckHttpService.getDueCards(deckId).subscribe((collectedCards: ICard[]) => {
       const cards = this.cardHttpService.parseToCards(collectedCards);
@@ -85,5 +91,9 @@ export class StudyComponent implements OnInit {
     else{
       this.dueCardsAvailable = false;
     }
+  }
+
+  onContinueStudy(){
+    this.router.navigate(['/chapterStudy', this.deck.parentId])
   }
 }

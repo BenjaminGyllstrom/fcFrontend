@@ -1,0 +1,33 @@
+:Host{
+  width: 100%;
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+}
+
+.chapter-study-container{
+  grid-column: 2/5;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nodes{
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+
+.rows{
+  display: flex;
+  flex-direction: column;
+}
+.row{
+  display: flex;
+}
