@@ -41,6 +41,7 @@ export class CreateCardComponent implements OnInit {
     });
 
     this.cardForm.reset();
+    this.showQuestion = true;
   }
 
 }

@@ -40,7 +40,7 @@ export class CardHttpService {
     newCard.deckId = collectedCard.deckId;
     newCard.question = collectedCard.question;
     newCard.answer = collectedCard.answer;
-
+    newCard.new = collectedCard.new;
 
     newCard.dueDate = this.fromUtcToNow(collectedCard.dueDate);
     newCard.recurrenceNumber = collectedCard.recurrenceNumber;

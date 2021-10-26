@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Explain } from 'src/app/Models/explain.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Explain, IExplain } from 'src/app/Models/explain.model';
 import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 
 @Component({
@@ -16,7 +16,8 @@ export class CreateExplainComponent implements OnInit {
   constructor(
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   explainForm = this.formBuilder.group({
     title:'',
@@ -37,7 +38,9 @@ export class CreateExplainComponent implements OnInit {
     explain.text = text;
     explain.parentId = this.parentId;
     this.explainForm.reset();
-    this.explainHttpService.post(explain).subscribe();
+    this.explainHttpService.post(explain).subscribe((newExplain: IExplain) => {
+      this.router.navigate(['/explainOverview', newExplain._id])
+    });
   }
 
 }

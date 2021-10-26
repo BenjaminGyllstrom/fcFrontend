@@ -45,7 +45,9 @@ export class StudyComponent implements OnInit {
 
   onNext(option: string){
     const currentCard = this.currentCard;
+    this.showAnswerButtons = false;
     this.removeCurrentCardFromDue();
+    this.setNumNewCardsOnDeck(currentCard);
     this.setCurrentCard();
 
     if(option == "button-a"){
@@ -80,7 +82,11 @@ export class StudyComponent implements OnInit {
   removeCurrentCardFromDue(){
     this.cards.splice(this.cards.indexOf(this.currentCard), 1);
   }
-
+  setNumNewCardsOnDeck(card: Card){
+    if(card.new){
+      this.deck.newCards -= 1;
+    }
+  }
   setCurrentCard(){
     if(this.cards.length > 0){
       this.showAnswer = false;

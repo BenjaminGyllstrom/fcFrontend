@@ -9,6 +9,7 @@ export class Deck{
   listIndex: number;
   locked: boolean;
   newCards: number;
+  finnished: boolean;
   type: String = 'deck';
 
   constructor(title:string) {
@@ -27,5 +28,6 @@ export interface IDeck{
   listIndex: number;
   locked: boolean;
   newCards: number;
+  finnished: boolean;
 }
 

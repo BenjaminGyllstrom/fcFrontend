@@ -4,6 +4,7 @@ export class Card{
   answer: string;
   dueDate: Date;
   recurrenceNumber: number;
+  new:boolean;
   deckId:string
 }
 
@@ -13,5 +14,6 @@ export interface ICard{
   answer: string;
   dueDate: Date;
   recurrenceNumber: number;
+  new:boolean;
   deckId: string;
 }

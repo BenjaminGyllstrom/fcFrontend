@@ -32,6 +32,10 @@ export class DeckHttpService {
     return this.httpService.get(`decks/Study/${deckId}`);
   }
 
+  getIsFinnished(deckId:string) : Observable<any> {
+    return this.httpService.get(`decks/isFinnished/${deckId}`);
+  } 
+
   parseToDeck(collectedDeck: IDeck) : Deck {
     var newDeck = new Deck(collectedDeck.title);
     newDeck.id = collectedDeck._id;
@@ -40,7 +44,7 @@ export class DeckHttpService {
     newDeck.listIndex = collectedDeck.listIndex;
     newDeck.locked = collectedDeck.locked;
     newDeck.newCards = collectedDeck.newCards;
-
+    newDeck.finnished = collectedDeck.finnished;
     if(collectedDeck.cards.length > 0){
       newDeck.cards = this.cardHttpService.parseToCards(collectedDeck.cards);
     }

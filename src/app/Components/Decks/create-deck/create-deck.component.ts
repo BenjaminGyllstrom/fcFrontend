@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { FormBuilder } from '@angular/forms';
-import { Deck } from 'src/app/Models/deck.model';
-import { ActivatedRoute } from '@angular/router';
+import { Deck, IDeck } from 'src/app/Models/deck.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-deck',
@@ -16,7 +16,8 @@ export class CreateDeckComponent implements OnInit {
   constructor(
     private deckHttpService: DeckHttpService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   deckForm = this.formBuilder.group({
     title:''
@@ -35,7 +36,9 @@ export class CreateDeckComponent implements OnInit {
     const deck = new Deck(title);
     deck.parentId = this.parentId;
     this.deckForm.reset();
-    this.deckHttpService.post(deck).subscribe();
+    this.deckHttpService.post(deck).subscribe((newDeck: IDeck) => {
+      this.router.navigate(['/deckOverview', newDeck._id])
+    });
   }
 
 }
