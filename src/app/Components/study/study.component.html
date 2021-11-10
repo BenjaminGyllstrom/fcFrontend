@@ -33,6 +33,9 @@
 
   <div *ngIf="deck && (deck.finnished || deck.newCards == 0)" class="no-due__content">
     <h3>Congratulations you have iterated through all cards in this deck</h3>
+
+    <p *ngIf="notDueCards.length > 0">Next due card is ready in {{minutes}}:{{seconds}}</p>
+
     <p>Press 'next' to continue this course</p>
     <button class="button" (click)="onContinueStudy()">Next</button>
   </div>

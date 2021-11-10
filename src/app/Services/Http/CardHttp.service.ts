@@ -41,7 +41,7 @@ export class CardHttpService {
     newCard.question = collectedCard.question;
     newCard.answer = collectedCard.answer;
     newCard.new = collectedCard.new;
-
+    newCard.lastStudied = this.fromUtcToNow(collectedCard.lastStudied)
     newCard.dueDate = this.fromUtcToNow(collectedCard.dueDate);
     newCard.recurrenceNumber = collectedCard.recurrenceNumber;
 

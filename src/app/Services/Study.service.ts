@@ -28,7 +28,20 @@ export class StudyService {
     const dateNow = new Date();
     return card.dueDate < dateNow
   }
+  isDueToday(card: Card): boolean{
+    const dateNow = new Date();
+    dateNow.setHours(23,59,59,999)
+    return card.dueDate < dateNow
+  }
+  lastStudiedToday(card: Card): boolean{
+    const dateNowStart = new Date();
+    dateNowStart.setHours(0,0,0,0);
 
+    const dateNowEnd = new Date();
+    dateNowEnd.setHours(23,59,59,999);
+
+    return card.lastStudied >= dateNowStart && card.lastStudied <= dateNowEnd;
+  }
 }
 
 
