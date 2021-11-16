@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, 
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuillEditorComponent, QuillViewComponent } from 'ngx-quill';
-import Quill from 'quill';
+import Quill, { RangeStatic } from 'quill';
 import { Card } from 'src/app/Models/card.model';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 
@@ -15,93 +15,119 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
 
   deckId:string;
   showQuestion:boolean = true;
-  @ViewChild('questionElement', { read: ElementRef, static: false }) questionElementRef: ElementRef
-  @ViewChild('answerElement', { read: ElementRef, static: false }) answerElementRef: ElementRef
-  @ViewChild('questionElement', { read: QuillEditorComponent, static: false }) questionElement: QuillEditorComponent
-  @ViewChild('answerElement', { read: QuillEditorComponent, static: false }) answerElement: QuillEditorComponent
 
-  questionIndex = 0;
-  answerIndex = 0;
+  @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
+
+  questionIndex: RangeStatic = {index:0, length:0};
+  answerIndex: RangeStatic = {index:0, length:0};
+
+  question:string= '';
+  answer:string= '';
+  quillContent:string = ''
+
+  quill:Quill;
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private cardHttpService: CardHttpService, private el: ElementRef) { }
-
-  cardForm = this.formBuilder.group({
-    question:'',
-    answer:''
-  }, );
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
     if(event.key == "Tab"){
-      this.onToggleField();
+      this.onToggle();
+    }
+    if(event.shiftKey && event.key == 'Enter'){
+        this.onSubmit();
     }
 }
+
+toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+    ['blockquote', 'code-block'],
+    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    [{ 'direction': 'rtl' }],                         // text direction
+    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+    ['clean'],                                         // remove formatting button
+    ['link', 'image', 'video'],
+  ];
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['deckId'];
     this.deckId = id;
   }
   async ngAfterViewInit(){
-    await this.switchQuill(100);
-  }
-
-  async onToggleField(){
-
-    const element = this.showQuestion? this.questionElement.quillEditor : this.answerElement.quillEditor;
-    const oldIndex = element.getSelection()?.index;
-    if(this.showQuestion){
-      this.questionIndex = oldIndex? oldIndex : 0;
-    }else{
-      this.answerIndex = oldIndex? oldIndex : 0;
-    }
-
-    this.showQuestion = !this.showQuestion;
-
-    this.switchQuill(0);
-
-    const keyboard = element.getModule('keyboard');
-    keyboard.bindings[9] = [];
-
-    // await this.setIndex().then(() => {
-    //   this.showQuestion = !this.showQuestion;
-    //   this.switchQuill()
-    // });
-  }
-
-  async setIndex(): Promise<any>{
-    const timeout = new Promise<never>((_, reject) => {
-        const element = this.showQuestion? this.questionElement.quillEditor : this.answerElement.quillEditor;
-        const oldIndex = element.getSelection()?.index;
-        if(this.showQuestion){
-          this.questionIndex = oldIndex? oldIndex-1 : 0;
-        }else{
-          this.answerIndex = oldIndex? oldIndex-1 : 0;
+    const quill = new Quill(this.editor.nativeElement, {
+      modules: {
+        toolbar: this.toolbarOptions,
+        keyboard: {
+          bindings: {
+            'tab': {
+              key: 9,
+              handler: function() {
+                return false;
+              }
+            },
+            'enter':{
+              key: 13,
+              shiftKey:true,
+              handler: function() {
+                return false;
+              }
+            }
+          }
         }
+        },
+
+        theme: 'snow',
       });
+
+    quill.insertText(0, this.quillContent)
+    this.quill = quill
   }
 
-  async switchQuill(deplay: number){
-    await setTimeout(async () => {
+  onToggle(){
+    const index = this.quill.getSelection();
+    if(this.showQuestion){
+      this.questionIndex = index ? index : this.questionIndex
+      this.question = this.quill.root.innerHTML;
 
-      const element = this.showQuestion? this.questionElement.quillEditor : this.answerElement.quillEditor;
-      const elementRef = this.showQuestion? this.questionElementRef.nativeElement : this.answerElementRef.nativeElement;
-      const index = this.showQuestion? this.questionIndex : this.answerIndex;
-      if(elementRef)
-      {
-        const editor = elementRef.querySelector('.ql-editor');
-        editor.focus();
-        element.setSelection(index, 0)
-      }
+      this.quill.root.innerHTML = this.answer
+      this.setIndex(this.answerIndex)
+    }else{
+      this.answerIndex = index ? index : this.answerIndex
+      this.answer = this.quill.root.innerHTML;
 
-      const keyboard = element.getModule('keyboard');
-      keyboard.bindings[9] = [];
-    }, deplay);
+      this.quill.root.innerHTML = this.question
+      this.setIndex(this.questionIndex)
+    }
+    this.showQuestion = !this.showQuestion;
+  }
+
+  setIndex(index: RangeStatic){
+    setTimeout(() => {
+      this.quill.focus();
+      this.quill.setSelection(index)
+    });
+  }
+
+  resetQuill(){
+    this.question = '';
+    this.answer = ''
+    this.questionIndex = {index:0, length:0};
+    this.answerIndex = {index:0, length:0};
+
+    this.quill.root.innerHTML = '';
   }
 
   onSubmit(){
     const card = new Card();
-    card.question = this.cardForm.value.question;
-    card.answer = this.cardForm.value.answer;
+    card.question = this.question;
+    card.answer = this.answer;
 
     if(this.deckId == ""){
       return;
@@ -109,10 +135,10 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
 
     this.cardHttpService.post(card, this.deckId).subscribe((card) => {
       console.log(card);
-
     });
 
-    this.cardForm.reset();
+    this.resetQuill();
+
     this.showQuestion = true;
   }
 }
