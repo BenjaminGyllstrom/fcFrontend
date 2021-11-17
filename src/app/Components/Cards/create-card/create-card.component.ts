@@ -48,23 +48,6 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
     }
   }
 
-// toolbarOptions = [
-//     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-//     ['blockquote', 'code-block'],
-//     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-//     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-//     [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-//     [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-//     [{ 'direction': 'rtl' }],                         // text direction
-//     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-//     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-//     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-//     [{ 'font': [] }],
-//     [{ 'align': [] }],
-//     ['clean'],                                         // remove formatting button
-//     ['link', 'image', 'video'],
-//   ];
-
   ngOnInit(): void {
     const id = this.route.snapshot.params['deckId'];
     this.deckId = id;
@@ -74,37 +57,8 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
     });
 
   }
-  async ngAfterViewInit(){
-
+  ngAfterViewInit(){
     this.quill = this.quillService.createQuill(this.editor);
-
-    // const quill = new Quill(this.editor.nativeElement, {
-    //   modules: {
-    //     toolbar: this.toolbarOptions,
-    //     keyboard: {
-    //       bindings: {
-    //         'tab': {
-    //           key: 9,
-    //           handler: function() {
-    //             return false;
-    //           }
-    //         },
-    //         'enter':{
-    //           key: 13,
-    //           shiftKey:true,
-    //           handler: function() {
-    //             return false;
-    //           }
-    //         }
-    //       }
-    //     }
-    //     },
-
-    //     theme: 'snow',
-    //   });
-
-    // quill.insertText(0, this.quillContent)
-    // this.quill = quill
   }
 
   onToggle(){
@@ -143,8 +97,8 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
 
   onSubmit(){
     const card = new Card();
-    card.question = this.question;
-    card.answer = this.answer;
+    card.question = this.showQuestion? this.quill.root.innerHTML : this.question;
+    card.answer = this.showQuestion? this.answer : this.quill.root.innerHTML;
 
     if(this.deckId == ""){
       return;

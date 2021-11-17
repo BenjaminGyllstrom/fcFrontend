@@ -18,12 +18,20 @@
 
 .editor{
   margin-bottom: 5px;
+  height: 400px;
+}
+
+.actions{
+  align-self: center;
+  margin-top: 40px;
+  width: 80%;
+  display: flex;
+  justify-content:space-around;
 }
 
 .submit-button{
   align-self: center;
   border: none;
-  background-color: #4ef18f;
 
   width: 150px;
 

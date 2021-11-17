@@ -1,15 +1,16 @@
-<div class="edit-card-container" *ngIf="card">
+<div class="edit-card-container">
   <div class="card-input">
-    <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="form-container">
 
-      <h2>Question</h2>
-      <quill-editor id="question" formControlName="question" class="editor" [styles]="{height: '300px'}">
-      </quill-editor>
+    <div class="form-container">
+      <h2 *ngIf="showQuestion">Question</h2>
+      <h2 *ngIf="!showQuestion">Answer</h2>
+      <div #editor class="editor"></div>
 
-      <h2>Answer</h2>
-      <quill-editor id="answer" formControlName="answer" class="editor" [styles]="{height: '300px'}">
-      </quill-editor>
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
+      <div class="actions">
+        <button *ngIf="showQuestion" type="button" class="button" (click)="onToggle()">Answer</button>
+        <button *ngIf="!showQuestion" type="button" class="button" (click)="onToggle()">question</button>
+        <button type="button" class="button" (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
   </div>
 </div>
