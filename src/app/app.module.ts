@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { QuillModule } from 'ngx-quill'
 import { QuillModule } from 'ngx-quill'
+
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+// import {  } from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +39,8 @@ import { CreateExplainComponent } from './Components/Explains/create-explain/cre
 import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
 import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
 import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -71,9 +78,15 @@ import { StudyExplainComponent } from './Components/Explains/study-explain/study
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

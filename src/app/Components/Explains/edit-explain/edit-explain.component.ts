@@ -1,21 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Quill from 'quill';
 import { Explain, IExplain } from 'src/app/Models/explain.model';
 import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
+import { QuillService } from 'src/app/Services/quill.service';
 
 @Component({
   selector: 'app-edit-explain',
   templateUrl: './edit-explain.component.html',
   styleUrls: ['./edit-explain.component.scss']
 })
-export class EditExplainComponent implements OnInit {
+export class EditExplainComponent implements OnInit, AfterViewInit {
 
   explain: Explain
 
-  explainForm: FormGroup;
+  explainForm = this.formBuilder.group({
+    title:'',
+  });
 
-  constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private explainHttpService: ExplainHttpService) { }
+  constructor(
+    private route:
+    ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private explainHttpService: ExplainHttpService,
+    private quillService: QuillService) { }
+
+
+    @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
+    quill:Quill;
+
+    quillContent: string;
+
+  ngAfterViewInit(){
+    this.quill = this.quillService.createQuill(this.editor);
+
+    if(this.quillContent){
+      this.quill.root.innerHTML = this.quillContent;
+    }
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
@@ -25,8 +49,11 @@ export class EditExplainComponent implements OnInit {
 
       this.explainForm = this.formBuilder.group({
         title: explain.title,
-        text: explain.text
       })
+
+      if(this.quill){
+        this.quill.root.innerHTML = explain.text;
+      }
 
       this.explain = explain;
     })

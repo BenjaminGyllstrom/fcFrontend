@@ -8,9 +8,8 @@
       Title:
       <input type="text" id="title" formControlName="title">
 
-      <h2>Question</h2>
-      <quill-editor id="text" formControlName="text" class="editor" [styles]="{height: '400px'}">
-      </quill-editor>
+      <h2>Explanation</h2>
+      <div #editor class="editor"></div>
     </div>
 
     <button type="submit" class="button button__create-explain">Create</button>

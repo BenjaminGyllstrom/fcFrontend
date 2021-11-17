@@ -21,13 +21,13 @@
   border: 1px solid black;
   border-radius: 20px;
 
-  height: 200px;
+  height: 230px;
   width: 700px;
 
   display: grid;
   grid-template-rows: 60px auto 40px;
   align-items: center;
-  row-gap: 30px;
+  row-gap: 15px;
 
   z-index: 0;
 }

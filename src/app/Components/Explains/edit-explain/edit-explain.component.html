@@ -1,13 +1,14 @@
-<div class="edit-explain-container" *ngIf="explain">
+<div class="edit-explain-container" >
   <div class="explain-input">
     <form [formGroup]="explainForm" (ngSubmit)="onSubmit()" class="form-container">
+      <div class="inputField">
+        Title:
+        <input type="text" id="title" formControlName="title" class="title-input">
 
-      <h2>Title</h2>
-      <input type="text" id="title" formControlName="title">
+        <h2>Explanation</h2>
+        <div #editor class="editor"></div>
+      </div>
 
-      <h2>Text</h2>
-      <quill-editor id="text" formControlName="text" class="editor" [styles]="{height: '300px'}">
-      </quill-editor>
       <button type="submit" class="submit-button">Submit</button>
     </form>
   </div>

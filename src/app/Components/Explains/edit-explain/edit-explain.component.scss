@@ -1,3 +1,4 @@
+
 .edit-explain-container{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -13,11 +14,26 @@
 .form-container{
   display: flex;
   flex-direction: column;
+}
 
+.inputField{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.title-input{
+  align-self: center;
+  width: 200px;
+  margin-bottom: 20px;
 }
 
 .editor{
   margin-bottom: 5px;
+  height: 400px;
+  align-self: stretch;
 }
 
 .submit-button{

@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QuillEditorComponent, QuillViewComponent } from 'ngx-quill';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import Quill, { RangeStatic } from 'quill';
 import { Card } from 'src/app/Models/card.model';
+import { Explain, IExplain } from 'src/app/Models/explain.model';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
+import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
+import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
+import { QuillService } from 'src/app/Services/quill.service';
 
 @Component({
   selector: 'app-create-card',
@@ -14,9 +16,9 @@ import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 export class CreateCardComponent implements OnInit, AfterViewInit  {
 
   deckId:string;
+  explain:Explain;
   showQuestion:boolean = true;
-
-  @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
+  showExplain:boolean = false;
 
   questionIndex: RangeStatic = {index:0, length:0};
   answerIndex: RangeStatic = {index:0, length:0};
@@ -25,9 +27,16 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
   answer:string= '';
   quillContent:string = ''
 
+
+  @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
   quill:Quill;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private cardHttpService: CardHttpService, private el: ElementRef) { }
+  constructor(
+    private route: ActivatedRoute,
+    private cardHttpService: CardHttpService,
+    private deckHttpService: DeckHttpService,
+    private explainHttpService: ExplainHttpService,
+    private quillService: QuillService) { }
 
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
@@ -37,57 +46,65 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
     if(event.shiftKey && event.key == 'Enter'){
         this.onSubmit();
     }
-}
+  }
 
-toolbarOptions = [
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    ['blockquote', 'code-block'],
-    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-    [{ 'direction': 'rtl' }],                         // text direction
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-    ['clean'],                                         // remove formatting button
-    ['link', 'image', 'video'],
-  ];
+// toolbarOptions = [
+//     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+//     ['blockquote', 'code-block'],
+//     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+//     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+//     [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+//     [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+//     [{ 'direction': 'rtl' }],                         // text direction
+//     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+//     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+//     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+//     [{ 'font': [] }],
+//     [{ 'align': [] }],
+//     ['clean'],                                         // remove formatting button
+//     ['link', 'image', 'video'],
+//   ];
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['deckId'];
     this.deckId = id;
+
+    this.deckHttpService.getAssociatedExplain(id).subscribe((collectedExplain: IExplain) => {
+      this.explain = this.explainHttpService.parseToExplain(collectedExplain);
+    });
+
   }
   async ngAfterViewInit(){
-    const quill = new Quill(this.editor.nativeElement, {
-      modules: {
-        toolbar: this.toolbarOptions,
-        keyboard: {
-          bindings: {
-            'tab': {
-              key: 9,
-              handler: function() {
-                return false;
-              }
-            },
-            'enter':{
-              key: 13,
-              shiftKey:true,
-              handler: function() {
-                return false;
-              }
-            }
-          }
-        }
-        },
 
-        theme: 'snow',
-      });
+    this.quill = this.quillService.createQuill(this.editor);
 
-    quill.insertText(0, this.quillContent)
-    this.quill = quill
+    // const quill = new Quill(this.editor.nativeElement, {
+    //   modules: {
+    //     toolbar: this.toolbarOptions,
+    //     keyboard: {
+    //       bindings: {
+    //         'tab': {
+    //           key: 9,
+    //           handler: function() {
+    //             return false;
+    //           }
+    //         },
+    //         'enter':{
+    //           key: 13,
+    //           shiftKey:true,
+    //           handler: function() {
+    //             return false;
+    //           }
+    //         }
+    //       }
+    //     }
+    //     },
+
+    //     theme: 'snow',
+    //   });
+
+    // quill.insertText(0, this.quillContent)
+    // this.quill = quill
   }
 
   onToggle(){

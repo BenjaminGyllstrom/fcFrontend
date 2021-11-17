@@ -11,6 +11,7 @@ export class Deck{
   newCards: number;
   finnished: boolean;
   type: String = 'deck';
+  associatedExplain:string
 
   constructor(title:string) {
     this.title = title;
@@ -29,5 +30,6 @@ export interface IDeck{
   locked: boolean;
   newCards: number;
   finnished: boolean;
+  associatedExplain:string;
 }
 

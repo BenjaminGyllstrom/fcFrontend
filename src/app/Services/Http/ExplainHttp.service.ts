@@ -29,8 +29,11 @@ export class ExplainHttpService {
     return this.httpService.patch(`explains/${id}`, explain);
   }
 
-  updateAsRead(explain: any, id:string){
+  updateAsRead(explain: any, id:string): Observable<any> {
     return this.httpService.patch(`explains/updateAsRead/${id}`, explain);
+  }
+  getTitlesInChapter(chapterid:string): Observable<any> {
+    return this.httpService.get(`explains/titles/${chapterid}`);
   }
 
   parseToExplain(collectedExplain: IExplain) : Explain {

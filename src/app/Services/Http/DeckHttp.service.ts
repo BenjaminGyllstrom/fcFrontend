@@ -34,7 +34,11 @@ export class DeckHttpService {
 
   getIsFinnished(deckId:string) : Observable<any> {
     return this.httpService.get(`decks/isFinnished/${deckId}`);
-  } 
+  }
+
+  getAssociatedExplain(deckId:string) : Observable<any> {
+    return this.httpService.get(`decks/AssociatedExplain/${deckId}`);
+  }
 
   parseToDeck(collectedDeck: IDeck) : Deck {
     var newDeck = new Deck(collectedDeck.title);
@@ -45,6 +49,8 @@ export class DeckHttpService {
     newDeck.locked = collectedDeck.locked;
     newDeck.newCards = collectedDeck.newCards;
     newDeck.finnished = collectedDeck.finnished;
+    newDeck.associatedExplain = collectedDeck.associatedExplain;
+
     if(collectedDeck.cards.length > 0){
       newDeck.cards = this.cardHttpService.parseToCards(collectedDeck.cards);
     }
