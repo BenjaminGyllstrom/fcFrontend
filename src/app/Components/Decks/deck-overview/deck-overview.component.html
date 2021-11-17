@@ -2,7 +2,7 @@
 
     <h1 class="deck-title">{{deck.title}}</h1>
     <div class="deck-actions">
-      <button class="deck-actions__edit">Edit</button>
+      <button class="deck-actions__edit" (click)="onEdit()">Edit</button>
       <button class="deck-actions__delete" (click)="onDelete()">Delete</button>
     </div>
 
@@ -11,6 +11,7 @@
         <p class="deck-info__id">id: {{deck.id}}</p>
         <p class="deck-info__card-count">cards: {{deck.numCards}}</p>
         <p class="deck-info__list-index">listIndex: {{deck.listIndex}}</p>
+        <p class="deck-info__list-index">Associated explain: {{deck.associatedExplain}}</p>
       </div>
 
 

@@ -11,18 +11,21 @@ import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 export class DeckOverviewComponent implements OnInit {
 
   deck: Deck;
+  deckId:string;
 
   constructor(private route: ActivatedRoute, private router: Router, private deckHttpService: DeckHttpService) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+   this.deckId = this.route.snapshot.params['id'];
 
-    this.deckHttpService.getById(id).subscribe((collectedDeck: IDeck) => {
+    this.deckHttpService.getById(this.deckId).subscribe((collectedDeck: IDeck) => {
       this.deck = this.deckHttpService.parseToDeck(collectedDeck);
     });
   }
 
-
+  onEdit(){
+    this.router.navigate(['/editDeck', this.deckId])
+  }
   onDelete(){
     this.deckHttpService.delete(this.deck.id).subscribe(() => {
       this.router.navigate(['/chapterOverview', this.deck.parentId])

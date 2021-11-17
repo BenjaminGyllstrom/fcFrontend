@@ -36,6 +36,10 @@ export class ExplainHttpService {
     return this.httpService.get(`explains/titles/${chapterid}`);
   }
 
+  getTitlesInChapterByDeckId(deckid:string): Observable<any> {
+    return this.httpService.get(`explains/titlesByDeckId/${deckid}`);
+  }
+
   parseToExplain(collectedExplain: IExplain) : Explain {
     var newExplain = new Explain();
     newExplain.title = collectedExplain.title;
