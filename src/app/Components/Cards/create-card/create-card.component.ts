@@ -38,7 +38,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
     private explainHttpService: ExplainHttpService,
     private quillService: QuillService) { }
 
-  @HostListener('window:keyup', ['$event'])
+  @HostListener('window:keydown', ['$event'])
     keyEvent(event: KeyboardEvent) {
     if(event.key == "Tab"){
       this.onToggle();

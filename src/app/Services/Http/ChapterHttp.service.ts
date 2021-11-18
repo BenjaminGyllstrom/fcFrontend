@@ -30,6 +30,10 @@ export class ChapterHttpService {
     return this.httpService.patch(`chapters/${id}`, chapter);
   }
 
+  getDueCardsByDeckId(deckId:string) : Observable<any> {
+    return this.httpService.get(`chapters/Due/deck/${deckId}`);
+  }
+
   parseToChapter(collectedChapter: IChapter) : Chapter {
 
     const newChapter = new Chapter();

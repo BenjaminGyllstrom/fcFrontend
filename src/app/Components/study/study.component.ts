@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Card, ICard } from 'src/app/Models/card.model';
@@ -7,6 +7,7 @@ import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { StudyService } from 'src/app/Services/Study.service';
 import { interval } from 'rxjs';
+import { ChapterHttpService } from 'src/app/Services/Http/ChapterHttp.service';
 
 @Component({
   selector: 'app-study',
@@ -20,6 +21,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   cards: Card[];
   currentCard: Card;
   dueCardsAvailable: boolean = false;
+  skipTimer = false;
 
   sub:Subscription;
 
@@ -34,7 +36,27 @@ export class StudyComponent implements OnInit, OnDestroy {
   seconds: number;
   interval: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private deckHttpService: DeckHttpService, private cardHttpService: CardHttpService, private studyService: StudyService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private deckHttpService: DeckHttpService,
+    private cardHttpService: CardHttpService,
+    private chapterHttpService: ChapterHttpService,
+    private studyService: StudyService) { }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+  if(event.key == "Tab"){
+    this.onToggle();
+  }
+  if(event.key == "1"){
+    this.onNext('button-a')
+  }else if(event.key == "2"){
+    this.onNext('button-b')
+  }else if(event.key == "3"){
+    this.onNext('button-c')
+  }
+}
 
   ngOnDestroy(){
     this.sub.unsubscribe();
@@ -48,7 +70,8 @@ export class StudyComponent implements OnInit, OnDestroy {
       this.deck = this.deckHttpService.parseToDeck(collectedDeck);
     })
 
-    this.deckHttpService.getDueCards(deckId).subscribe((collectedCards: ICard[]) => {
+
+    this.chapterHttpService.getDueCardsByDeckId(deckId).subscribe((collectedCards: ICard[]) => {
       const cards = this.cardHttpService.parseToCards(collectedCards);
 
       const dueCards: Card[] = [];
@@ -77,6 +100,12 @@ export class StudyComponent implements OnInit, OnDestroy {
 
     this.sub = interval(3000).subscribe((val) => { this.checkDueCards(); });
   }
+
+  onToggle(){
+    this.showAnswer = !this.showAnswer;
+    this.showAnswerButtons = true
+  }
+
 
   setTimer(){
 
@@ -110,6 +139,26 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   sortNotDue(){
     const sorted = this.notDueCards.sort((a,b) => a.dueDate.getTime() - b.dueDate.getTime());
+  }
+
+  onSkipTimer(){
+    this.skipTimer = true;
+    const cardsDue: Card[] = [];
+
+    this.notDueCards.forEach(card => {
+      cardsDue.push(card);
+    });
+
+    this.notDueCards = [];
+
+    cardsDue.forEach(card => {
+      if(this.cards.length < 1){
+        this.cards.push(card);
+        this.setCurrentCard()
+      }else{
+        this.cards.push(card);
+      }
+    });
   }
 
   checkDueCards(){

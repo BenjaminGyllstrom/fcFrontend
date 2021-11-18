@@ -12,8 +12,8 @@
       <quill-view [content]="currentCard.answer" format="html"></quill-view>
     </div>
 
-    <button *ngIf="!showAnswer" class="button-show-answer" (click)="showAnswer = !showAnswer; showAnswerButtons = true">Show Answer</button>
-    <button *ngIf="showAnswer" class="button-show-answer" (click)="showAnswer = !showAnswer">Show Question</button>
+    <button *ngIf="!showAnswer" class="button-show-answer" (click)="onToggle()">Show Answer</button>
+    <button *ngIf="showAnswer" class="button-show-answer" (click)="onToggle()">Show Question</button>
   </div>
 
 
@@ -34,7 +34,10 @@
   <div *ngIf="deck && (deck.finnished || deck.newCards == 0)" class="no-due__content">
     <h3>Congratulations you have iterated through all cards in this deck</h3>
 
-    <p *ngIf="notDueCards.length > 0">Next due card is ready in {{minutes}}:{{seconds}}</p>
+    <div *ngIf="notDueCards.length > 0" class="timer">
+      <p >Next due card is ready in {{minutes}}:{{seconds}}</p>
+      <button class="button-skip" (click)="onSkipTimer()">Press to skip timer</button>
+    </div>
 
     <p>Press 'next' to continue this course</p>
     <button class="button" (click)="onContinueStudy()">Next</button>
