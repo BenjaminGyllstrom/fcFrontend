@@ -42,6 +42,8 @@ import { StudyExplainComponent } from './Components/Explains/study-explain/study
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.component';
+import { MainDisplayComponent } from './Components/MainDisplay/main-display/main-display.component';
+import { MainDisplayHomeComponent } from './Components/MainDisplay/main-display-home/main-display-home.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.compon
     EditExplainComponent,
     StudyExplainComponent,
     EditDeckComponent,
+    MainDisplayComponent,
+    MainDisplayHomeComponent,
   ],
   imports: [
     BrowserModule,

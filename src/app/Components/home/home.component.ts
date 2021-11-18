@@ -9,14 +9,14 @@ import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 })
 export class HomeComponent implements OnInit {
 
-  decks:Deck[] = []
+  // decks:Deck[] = []
 
-  constructor(private deckHttpService: DeckHttpService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.deckHttpService.get().subscribe((collectedDecks: IDeck[]) => {
-      this.decks = this.deckHttpService.parseToDecks(collectedDecks);
-    });
+    // this.deckHttpService.get().subscribe((collectedDecks: IDeck[]) => {
+    //   this.decks = this.deckHttpService.parseToDecks(collectedDecks);
+    // });
   }
 
 }
