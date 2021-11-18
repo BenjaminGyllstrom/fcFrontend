@@ -44,7 +44,7 @@ export class CreateDeckComponent implements OnInit {
     const title = this.deckForm.value.title;
     const deck = new Deck(title);
     deck.parentId = this.parentId;
-    deck.associatedExplain = this.selectedExplain._id
+    deck.associatedExplain = this.selectedExplain?._id
     this.deckForm.reset();
     this.deckHttpService.post(deck).subscribe((newDeck: IDeck) => {
       this.router.navigate(['/deckOverview', newDeck._id])

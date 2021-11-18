@@ -53,7 +53,9 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
     this.deckId = id;
 
     this.deckHttpService.getAssociatedExplain(id).subscribe((collectedExplain: IExplain) => {
-      this.explain = this.explainHttpService.parseToExplain(collectedExplain);
+      if(collectedExplain){
+        this.explain = this.explainHttpService.parseToExplain(collectedExplain);
+      }
     });
 
   }

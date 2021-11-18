@@ -1,5 +1,5 @@
 
-  <div *ngIf="showExplain" class="explain-container">
+  <div *ngIf="showExplain && explain" class="explain-container">
     <quill-view [content]="explain.text" class="quill-explain"></quill-view>
   </div>
 
