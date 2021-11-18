@@ -1,25 +1,28 @@
-:host{
-  width: 100%;
-  display: grid;
+$main-color: #021E39;
 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+.sevenColLayout{
+  // height: 64px;
+  width: 100vw;
+  background-color: $main-color;
+  font: white;
 }
 
-.home-container{
-  grid-column: 2/5;
-  justify-self: center;
-
+.home-main-content{
+  grid-column: 4;
+  align-self: flex-start;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .home-title{
+  color: white;
   margin-bottom: 30px;
 }
 
 .home-content{
+  color: white;
   display: flex;
   justify-items: center;
   align-items: center;
