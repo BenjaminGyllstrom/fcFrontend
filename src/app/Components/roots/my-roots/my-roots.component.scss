@@ -1,16 +1,57 @@
-:Host{
-  width: 100%;
-  display: grid;
+// :Host{
+//   width: 100%;
+//   display: grid;
 
-  grid-template-columns: repeat(5, 1fr);
-  justify-items: center;
+//   grid-template-columns: repeat(5, 1fr);
+//   justify-items: center;
+// }
+
+
+// .my-roots-container{
+//     display: grid;
+//   grid-template-columns: repeat(5, 1fr);
+// }
+
+// .my-roots-container{
+//   grid-column: 2/5;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+.sevenColLayout{
+  // align-items: center;
+  // justify-content: center;
 }
 
-.my-roots-container{
-  grid-column: 2/5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.roots{
+
+  &__list{
+
+    margin-top: 30px;
+    grid-column: 2/7;
+    margin-bottom: 40px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    // column-gap: 15px;
+    // row-gap: 15px;
+  }
+  &__button{
+    grid-column: 4;
+  }
+  &__list-item{
+    width: 680px;
+    height: 150px;
+
+    // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    &:hover{
+      transition: transform .2s;
+      transform: scale(1.03);
+    }
+  }
 }
 
 .root-list{

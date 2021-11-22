@@ -44,6 +44,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.component';
 import { MainDisplayComponent } from './Components/MainDisplay/main-display/main-display.component';
 import { MainDisplayHomeComponent } from './Components/MainDisplay/main-display-home/main-display-home.component';
+import { MainDisplayRootsComponent } from './Components/MainDisplay/main-display-roots/main-display-roots.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { MainDisplayHomeComponent } from './Components/MainDisplay/main-display-
     EditDeckComponent,
     MainDisplayComponent,
     MainDisplayHomeComponent,
+    MainDisplayRootsComponent,
   ],
   imports: [
     BrowserModule,
