@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { FormBuilder } from '@angular/forms';
 import { Deck, IDeck } from 'src/app/Models/deck.model';
@@ -11,6 +11,9 @@ import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
   styleUrls: ['./create-deck.component.scss']
 })
 export class CreateDeckComponent implements OnInit {
+
+
+  @Input('deckId') deckId: string;
 
   parentId:string;
 
@@ -35,7 +38,7 @@ export class CreateDeckComponent implements OnInit {
       this.explainsInChapter = explainsInChapter;
     });
 
-    console.log(id);
+    // console.log(id);
 
     this.parentId = id;
   }

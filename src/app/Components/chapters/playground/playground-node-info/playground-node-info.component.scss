@@ -1,0 +1,11 @@
+.node-info{
+  padding: 15px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+
+  &__title{
+    grid-column: 1/4;
+  }
+}

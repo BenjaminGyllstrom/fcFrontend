@@ -20,6 +20,7 @@ import { ExplainOverviewComponent } from './Components/Explains/explain-overview
 import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
 import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.component';
+import { ChapterContentPlaygroundComponent } from './Components/chapters/playground/chapter-content-playground/chapter-content-playground.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'createChapter/:id', component:CreateChapterComponent},
   {path: 'chapterOverview/:id', component:ChapterOverviewComponent},
   {path: 'chapterStudy/:id', component:ChapterStudyComponent},
+  {path: 'chapterPlayground/:id', component:ChapterContentPlaygroundComponent},
   {path: 'createDeck', component:CreateDeckComponent},
   {path: 'editDeck/:id', component:EditDeckComponent},
   {path: 'createExplain/:id', component:CreateExplainComponent},

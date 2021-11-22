@@ -46,6 +46,12 @@ import { MainDisplayComponent } from './Components/MainDisplay/main-display/main
 import { MainDisplayHomeComponent } from './Components/MainDisplay/main-display-home/main-display-home.component';
 import { MainDisplayRootsComponent } from './Components/MainDisplay/main-display-roots/main-display-roots.component';
 import { MainDisplayChaptersComponent } from './Components/MainDisplay/main-display-chapters/main-display-chapters.component';
+import { ChapterContentPlaygroundComponent } from './Components/chapters/playground/chapter-content-playground/chapter-content-playground.component';
+import { PlaygroundTemplatesComponent } from './Components/chapters/playground/playground-templates/playground-templates.component';
+import { PlaygroundNodesComponent } from './Components/chapters/playground/playground-nodes/playground-nodes.component';
+import { PlaygroundNodeInfoComponent } from './Components/chapters/playground/playground-node-info/playground-node-info.component';
+import { CreateDeckPlaygroundComponent } from './Components/chapters/playground/create-deck-playground/create-deck-playground.component';
+import { PlaygroundCreateComponent } from './Components/chapters/playground/playground-create/playground-create.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +88,12 @@ import { MainDisplayChaptersComponent } from './Components/MainDisplay/main-disp
     MainDisplayHomeComponent,
     MainDisplayRootsComponent,
     MainDisplayChaptersComponent,
+    ChapterContentPlaygroundComponent,
+    PlaygroundTemplatesComponent,
+    PlaygroundNodesComponent,
+    PlaygroundNodeInfoComponent,
+    CreateDeckPlaygroundComponent,
+    PlaygroundCreateComponent,
   ],
   imports: [
     BrowserModule,

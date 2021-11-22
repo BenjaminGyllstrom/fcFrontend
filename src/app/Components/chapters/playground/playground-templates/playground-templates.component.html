@@ -1,0 +1,12 @@
+<div class="playground-templates">
+
+  <li class="templates not-select">
+    <ul
+    *ngFor="let template of templates"
+    class="template"
+    (click)="onClick(template)"
+    [ngStyle]="{'background-color': selectedTemplate == template ?  '#00B2FF' : '#ffffff'}">
+      Create {{template}}
+    </ul>
+  </li>
+</div>

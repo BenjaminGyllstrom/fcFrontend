@@ -1,0 +1,3 @@
+<div *ngIf="nodes" class="nodes">
+  <div *ngFor="let node of nodes" (click)="onClick(node)" class="node not-select" [ngStyle]="{'border-color': selectedNode === node ?  '#00B2FF' : '#4E4E4E'}"> {{node.type}}</div>
+</div>
