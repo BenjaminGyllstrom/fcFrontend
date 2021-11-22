@@ -1,4 +1,31 @@
-<div *ngIf="root" class="root-overview-container">
+<app-main-display page="chapters"></app-main-display>
+
+<div class="sevenColLayout">
+  <div class="root-overview-container">
+    <h1>{{root.title}}</h1>
+    <div class="action-buttons">
+      <button class="action-buttons__edit" (click)="onEdit()">Edit</button>
+      <button class="action-buttons__delete" (click)="onDelete()">Delete</button>
+    </div>
+
+    <div class="root-content">
+      <div class="root-info">
+        <p class="root-info__id">id: {{root.id}}</p>
+      </div>
+      <a class="button" (click)="onCreateChapter()">Create Chapter</a>
+
+      <h2 class="chapters-title">Chapters</h2>
+
+      <div class="chapter-list">
+        <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of chapters" (onDelete)="onChapterDelete($event)"></app-chapter-list-item>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- <div *ngIf="root" class="root-overview-container">
   <h1>{{root.title}}</h1>
   <div class="action-buttons">
     <button class="action-buttons__edit" (click)="onEdit()">Edit</button>
@@ -18,4 +45,4 @@
     </div>
 
   </div>
-</div>
+</div> -->

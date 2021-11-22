@@ -45,6 +45,7 @@ import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.compon
 import { MainDisplayComponent } from './Components/MainDisplay/main-display/main-display.component';
 import { MainDisplayHomeComponent } from './Components/MainDisplay/main-display-home/main-display-home.component';
 import { MainDisplayRootsComponent } from './Components/MainDisplay/main-display-roots/main-display-roots.component';
+import { MainDisplayChaptersComponent } from './Components/MainDisplay/main-display-chapters/main-display-chapters.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { MainDisplayRootsComponent } from './Components/MainDisplay/main-display
     MainDisplayComponent,
     MainDisplayHomeComponent,
     MainDisplayRootsComponent,
+    MainDisplayChaptersComponent,
   ],
   imports: [
     BrowserModule,
