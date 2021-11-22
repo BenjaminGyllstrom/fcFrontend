@@ -12,9 +12,6 @@ import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 })
 export class CreateDeckComponent implements OnInit {
 
-
-  @Input('deckId') deckId: string;
-
   parentId:string;
 
   explainsInChapter: any[]
@@ -37,8 +34,6 @@ export class CreateDeckComponent implements OnInit {
     this.explainHttpService.getTitlesInChapter(id).subscribe((explainsInChapter: {title:string, _id:string}[]) => {
       this.explainsInChapter = explainsInChapter;
     });
-
-    // console.log(id);
 
     this.parentId = id;
   }

@@ -35,11 +35,7 @@ export class PlaygroundTemplatesComponent implements OnInit {
     }
 
     this.playgroundService.setTemplate(template);
-    if(template === this.selectedTemplate){
-      this.selectedTemplate = 'none';
-    }else{
-      this.selectedTemplate = template;
-    }
+    this.selectedTemplate = this.playgroundService.selectedTemplate;
   }
 
   setTemplates(){

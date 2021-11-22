@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PlaygroundService } from 'src/app/Services/playground.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { PlaygroundService } from 'src/app/Services/playground.service';
 export class PlaygroundCreateComponent implements OnInit {
 
   selectedTemplate:string;
+  @Input('chapterId') chapterId:string;
 
   constructor(private playgroundService: PlaygroundService) { }
 

@@ -50,7 +50,7 @@ import { ChapterContentPlaygroundComponent } from './Components/chapters/playgro
 import { PlaygroundTemplatesComponent } from './Components/chapters/playground/playground-templates/playground-templates.component';
 import { PlaygroundNodesComponent } from './Components/chapters/playground/playground-nodes/playground-nodes.component';
 import { PlaygroundNodeInfoComponent } from './Components/chapters/playground/playground-node-info/playground-node-info.component';
-import { CreateDeckPlaygroundComponent } from './Components/chapters/playground/create-deck-playground/create-deck-playground.component';
+import { CreateDeckPlaygroundComponent } from './Components/Decks/create-deck-playground/create-deck-playground.component';
 import { PlaygroundCreateComponent } from './Components/chapters/playground/playground-create/playground-create.component';
 
 @NgModule({

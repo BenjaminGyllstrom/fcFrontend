@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { Card } from "../Models/card.model";
+import { Deck } from "../Models/deck.model";
+import { Explain } from "../Models/explain.model";
 
 
 
@@ -16,6 +19,10 @@ export class PlaygroundService{
   selectedNode: any;
   selectedNodeType:string = 'none';
 
+  createdDeck = new Subject<Deck>();
+  createdExplain = new Subject<Explain>();
+  createdCard = new Subject<Card>();
+
   setSelectedNode(node: any){
     if(this.selectedNode === node){
       this.selectedNodeType = 'none'
@@ -29,7 +36,11 @@ export class PlaygroundService{
   }
 
   setTemplate(template: string){
-    this.selectedTemplate = template;
+    if(template === this.selectedTemplate){
+      this.selectedTemplate = 'none';
+    }else{
+      this.selectedTemplate = template;
+    }
     this.selectedTemplateChange.next();
   }
 

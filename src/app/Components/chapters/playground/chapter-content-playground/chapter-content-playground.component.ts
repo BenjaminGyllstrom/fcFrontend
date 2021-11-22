@@ -11,15 +11,15 @@ import { ChapterHttpService } from 'src/app/Services/Http/ChapterHttp.service';
 export class ChapterContentPlaygroundComponent implements OnInit {
 
   chapter: Chapter
-
+  chapterId: string;
   nodes: any[]
 
   constructor(private route: ActivatedRoute, private router: Router, private chapterHttpService: ChapterHttpService) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+    this.chapterId = this.route.snapshot.params['id'];
 
-    this.chapterHttpService.getById(id).subscribe((collectedChapter: IChapter) => {
+    this.chapterHttpService.getById(this.chapterId).subscribe((collectedChapter: IChapter) => {
       this.chapter = this.chapterHttpService.parseToChapter(collectedChapter);
       this.nodes = this.chapter.nodes;
     });
