@@ -5,13 +5,10 @@
 }
 
 .explain-container{
-  flex: 0 0 30%;
+  flex: 0 0 40%;
   display: grid;
-  // grid-template-columns: repeat(5, 1fr);
-  // flex-grow: 1;
+  grid-template-columns: repeat(5, 1fr);
   margin-top: 100px;
-  // justify-items: center;
-  // align-items: center;
   justify-content: center;
 }
 .quill-explain{
@@ -50,7 +47,7 @@
 
 .editor{
   margin-bottom: 5px;
-  height: 400px;
+  height: 300px;
 }
 
 .actions{

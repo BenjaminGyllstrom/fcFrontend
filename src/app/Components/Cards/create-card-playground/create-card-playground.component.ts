@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Quill, { RangeStatic } from 'quill';
 import { Card } from 'src/app/Models/card.model';
+import { Deck } from 'src/app/Models/deck.model';
 import { Explain, IExplain } from 'src/app/Models/explain.model';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
@@ -9,11 +10,13 @@ import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 import { QuillService } from 'src/app/Services/quill.service';
 
 @Component({
-  selector: 'app-create-card',
-  templateUrl: './create-card.component.html',
-  styleUrls: ['./create-card.component.scss']
+  selector: 'app-create-card-playground',
+  templateUrl: './create-card-playground.component.html',
+  styleUrls: ['./create-card-playground.component.scss']
 })
-export class CreateCardComponent implements OnInit, AfterViewInit  {
+export class CreateCardPlaygroundComponent implements OnInit {
+
+  @Input('deck') deck: Deck;
 
   deckId:string;
   explain:Explain;
@@ -27,7 +30,6 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
   answer:string= '';
   quillContent:string = ''
 
-
   @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
   quill:Quill;
 
@@ -38,7 +40,8 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
     private explainHttpService: ExplainHttpService,
     private quillService: QuillService) { }
 
-  @HostListener('window:keydown', ['$event'])
+
+    @HostListener('window:keydown', ['$event'])
     keyEvent(event: KeyboardEvent) {
     if(event.key == "Tab"){
       this.onToggle();
@@ -49,14 +52,13 @@ export class CreateCardComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['deckId'];
-    this.deckId = id;
 
-    this.deckHttpService.getAssociatedExplain(id).subscribe((collectedExplain: IExplain) => {
+    this.deckId = this.deck.id;
+
+    this.deckHttpService.getAssociatedExplain(this.deckId).subscribe((collectedExplain: IExplain) => {
       if(collectedExplain){
         this.explain = this.explainHttpService.parseToExplain(collectedExplain);
         console.log(this.explain);
-
       }
     });
 

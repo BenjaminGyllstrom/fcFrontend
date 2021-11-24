@@ -1,5 +1,11 @@
 .playground-templates{
-  padding: 30px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // align-content: center;
+  // justify-items: center;
+  // height: 100%;
 }
 .templates{
   display: flex;
@@ -7,8 +13,8 @@
   gap: 30px;
 }
 .template{
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   // border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;

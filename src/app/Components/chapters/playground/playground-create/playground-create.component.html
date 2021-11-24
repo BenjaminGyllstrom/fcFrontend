@@ -1,6 +1,4 @@
-    <app-create-card *ngIf="selectedTemplate === 'card'"></app-create-card>
-    <!-- <app-create-deck *ngIf="selectedTemplate === 'deck'"></app-create-deck> -->
-    <app-create-explain *ngIf="selectedTemplate === 'explain'"></app-create-explain>
+    <app-create-card-playground *ngIf="selectedTemplate === 'card'" [deck]="selectedNode"></app-create-card-playground>
+    <app-create-explain-playground *ngIf="selectedTemplate === 'explain'" [chapterId]="chapterId"></app-create-explain-playground>
     <div *ngIf="selectedTemplate === 'test'">Coming soon</div>
-
-    <app-create-deck-playground *ngIf="selectedTemplate === 'deck'" [chapterid]="chapterId"></app-create-deck-playground>
+    <app-create-deck-playground *ngIf="selectedTemplate === 'deck'" [chapterId]="chapterId"></app-create-deck-playground>

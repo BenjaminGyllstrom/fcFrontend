@@ -13,7 +13,7 @@ import { PlaygroundService } from 'src/app/Services/playground.service';
 })
 export class CreateDeckPlaygroundComponent implements OnInit {
 
-  @Input('chapterid') chapterid: string;
+  @Input('chapterId') chapterid: string;
 
   parentId:string;
   explainsInChapter: any[]

@@ -52,6 +52,8 @@ import { PlaygroundNodesComponent } from './Components/chapters/playground/playg
 import { PlaygroundNodeInfoComponent } from './Components/chapters/playground/playground-node-info/playground-node-info.component';
 import { CreateDeckPlaygroundComponent } from './Components/Decks/create-deck-playground/create-deck-playground.component';
 import { PlaygroundCreateComponent } from './Components/chapters/playground/playground-create/playground-create.component';
+import { CreateCardPlaygroundComponent } from './Components/Cards/create-card-playground/create-card-playground.component';
+import { CreateExplainPlaygroundComponent } from './Components/Explains/create-explain-playground/create-explain-playground.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { PlaygroundCreateComponent } from './Components/chapters/playground/play
     PlaygroundNodeInfoComponent,
     CreateDeckPlaygroundComponent,
     PlaygroundCreateComponent,
+    CreateCardPlaygroundComponent,
+    CreateExplainPlaygroundComponent,
   ],
   imports: [
     BrowserModule,

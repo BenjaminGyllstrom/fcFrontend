@@ -1,0 +1,26 @@
+
+  <div *ngIf="showExplain && explain" class="explain-container">
+    <quill-view [content]="explain.text" class="quill-explain"></quill-view>
+  </div>
+
+  <div class="create-card-container">
+
+
+    <div class="card-input">
+      <h1 class="page-title">Create Card</h1>
+      <div class="form-container">
+        <h2 *ngIf="showQuestion">Question</h2>
+        <h2 *ngIf="!showQuestion">Answer</h2>
+        <div #editor class="editor"></div>
+
+        <div class="actions">
+          <button *ngIf="showQuestion" type="button" class="button" (click)="onToggle()">Answer</button>
+          <button *ngIf="!showQuestion" type="button" class="button" (click)="onToggle()">question</button>
+          <button type="button" class="button" (click)="showExplain = !showExplain">show explain</button>
+          <button type="button" class="button" (click)="onSubmit()">Submit</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
