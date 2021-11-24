@@ -22,6 +22,8 @@ export class PlaygroundTemplatesComponent implements OnInit {
     this.selectedTemplate = this.playgroundService.selectedTemplate;
     this.playgroundService.selectedNodeChange.subscribe(() => {
       this.selectedNodeType = this.playgroundService.selectedNodeType;
+      this.selectedTemplate = 'none';
+      this.playgroundService.setTemplate(this.selectedTemplate);
       this.setTemplates();
     });
 

@@ -1,4 +1,12 @@
+
+    <!-- Create -->
     <app-create-card-playground *ngIf="selectedTemplate === 'card'" [deck]="selectedNode"></app-create-card-playground>
     <app-create-explain-playground *ngIf="selectedTemplate === 'explain'" [chapterId]="chapterId"></app-create-explain-playground>
-    <div *ngIf="selectedTemplate === 'test'">Coming soon</div>
     <app-create-deck-playground *ngIf="selectedTemplate === 'deck'" [chapterId]="chapterId"></app-create-deck-playground>
+
+    <!-- Coming soon -->
+    <div *ngIf="selectedTemplate === 'test'">Coming soon</div>
+
+    <!-- Edit -->
+    <app-edit-deck-playground *ngIf="selectedTemplate === 'none' && selectedNodeType === 'deck'" [deck]="selectedNode"></app-edit-deck-playground>
+    <app-edit-explain-playground *ngIf="selectedTemplate === 'none' && selectedNodeType === 'explain'" [explain]="selectedNode"></app-edit-explain-playground>
