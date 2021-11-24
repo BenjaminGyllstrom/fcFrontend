@@ -12,16 +12,22 @@ import { Explain } from "../Models/explain.model";
 
 export class PlaygroundService{
 
+  private startTemplate = 'explain';
+  private startNodeType = 'none';
+
   selectedTemplateChange = new Subject<void>();
-  selectedTemplate = 'explain';
+  selectedTemplate = this.startTemplate;
 
   selectedNodeChange = new Subject<void>();
   selectedNode: any;
-  selectedNodeType:string = 'none';
+  selectedNodeType:string = this.startNodeType;
 
   createdDeck = new Subject<Deck>();
   createdExplain = new Subject<Explain>();
   createdCard = new Subject<Card>();
+
+
+  constructor() {}
 
   setSelectedNode(node: any){
     if(this.selectedNode === node){
@@ -44,6 +50,9 @@ export class PlaygroundService{
     this.selectedTemplateChange.next();
   }
 
-  constructor() {}
-
+  resetPlayground(){
+    this.selectedTemplate = this.startTemplate;
+    this.selectedNodeType = this.startNodeType;
+    this.selectedNode = null;
+  }
 }
