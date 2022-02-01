@@ -1,12 +1,15 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthGuardService } from '../AuthGuard.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private auth: AuthGuardService) { }
 
   private baseUrl: string = "http://localhost:3000";
 
@@ -15,11 +18,19 @@ export class HttpService {
     headers: new HttpHeaders()
   }
 
+  idToken:string;
+
   get(uri: string, params?: any) {
     this.options.params = new HttpParams();
+
+    if(this.idToken && !this.options.headers.has("idToken")){
+      this.options.headers = this.options.headers.append("idToken", this.idToken);
+    }
+
     if(params){
       this.options.params = new HttpParams({fromObject: params});
     }
+
     return this.httpClient.get(`${this.baseUrl}/${uri}`, this.options);
   }
 

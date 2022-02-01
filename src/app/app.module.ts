@@ -56,7 +56,9 @@ import { CreateCardPlaygroundComponent } from './Components/Cards/create-card-pl
 import { CreateExplainPlaygroundComponent } from './Components/Explains/create-explain-playground/create-explain-playground.component';
 import { EditDeckPlaygroundComponent } from './Components/Decks/edit-deck-playground/edit-deck-playground.component';
 import { EditExplainPlaygroundComponent } from './Components/Explains/edit-explain-playground/edit-explain-playground.component';
-
+import { LogInComponent } from './Components/Profile/log-in/log-in.component';
+import { GoogleLoginProvider, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
+import {AuthGuardService} from './Services/AuthGuard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +104,7 @@ import { EditExplainPlaygroundComponent } from './Components/Explains/edit-expla
     CreateExplainPlaygroundComponent,
     EditDeckPlaygroundComponent,
     EditExplainPlaygroundComponent,
+    LogInComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,9 +116,25 @@ import { EditExplainPlaygroundComponent } from './Components/Explains/edit-expla
     MatSelectModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    // SocialAuthService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true, //keeps the user signed in
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('658846696658-qio83qm2tc6q7sm856fu1igd6bingpv7.apps.googleusercontent.com') // your client id
+          }
+        ]
+      }
+    },
+    AuthGuardService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

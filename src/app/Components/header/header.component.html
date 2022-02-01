@@ -8,7 +8,10 @@
     <a class="header-button__action" routerLink="/createDeck">New Deck</a>
   </div>
   <div class="user-field">
-    <a class="header-button__log-in" routerLink="/">Log In</a>
-    <a class="header-button__sign-up" routerLink="/">Sign Up</a>
+    <a class="header-button__log-in" *ngIf="auth == null" routerLink="/login">Log In</a>
+
+    <div class="user-name" *ngIf="auth != null">Welcome {{auth.name}}</div>
+
+    <a class="header-button__log-out" *ngIf="auth != null" (click)="logout()" >Log Out</a>
   </div>
 </div>

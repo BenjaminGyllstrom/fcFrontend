@@ -21,12 +21,14 @@ import { EditExplainComponent } from './Components/Explains/edit-explain/edit-ex
 import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.component';
 import { ChapterContentPlaygroundComponent } from './Components/chapters/playground/chapter-content-playground/chapter-content-playground.component';
+import { LogInComponent } from './Components/Profile/log-in/log-in.component';
+import { AuthGuardService } from './Services/AuthGuard.service';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'home', component:HomeComponent},
   {path: 'myDecks', component:MyDecksComponent},
-  {path: 'myRoots', component:MyRootsComponent},
+  {path: 'myRoots', component:MyRootsComponent, canActivate: [AuthGuardService]},
   {path: 'createRoot', component:CreateRootComponent},
   {path: 'rootOverview/:id', component:RootOverviewComponent},
   {path: 'createChapter/:id', component:CreateChapterComponent},
@@ -47,6 +49,7 @@ const routes: Routes = [
   {path: 'editCard/:cardId', component:EditCardComponent},
   {path: 'deck/study/:deckId', component:StudyComponent},
   {path: 'studyExplain/:id', component:StudyExplainComponent},
+  {path: 'login', component:LogInComponent},
 ];
 
 @NgModule({

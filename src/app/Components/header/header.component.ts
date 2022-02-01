@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SocialAuthService } from 'angularx-social-login';
+import { HttpService } from 'src/app/Services/Http/http.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  auth: any
+
+  constructor(
+    public socialAuthService: SocialAuthService,
+    private httpService: HttpService) { }
 
   ngOnInit(): void {
+    this.socialAuthService.authState.subscribe((auth: any) => {
+      this.auth = auth
+      this.httpService.idToken = auth.idToken
+    })
   }
 
+
+  logout(): void {
+    this.socialAuthService.signOut().then(() => {
+      console.log('logged out');
+    }) ;
+  }
 }
