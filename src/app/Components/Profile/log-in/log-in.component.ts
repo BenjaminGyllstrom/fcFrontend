@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { HttpService } from 'src/app/Services/Http/http.service';
 import { LoginHttpService } from 'src/app/Services/Http/LoginHttp.service';
 
 @Component({
@@ -11,12 +12,14 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private socialAuthService: SocialAuthService,
-    private loginHttpService: LoginHttpService
+    private loginHttpService: LoginHttpService,
+    private httpService: HttpService
   ) {}
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((res: any) => {
       console.log(res);
+      this.httpService.idToken = res.idToken;
     })
   }
 
