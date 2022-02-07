@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit {
     this.socialAuthService.authState.subscribe((auth: any) => {
       this.auth = auth
       if(auth){
+        console.log('setting token in header');
+        
         this.auth = auth
         this.httpService.idToken = auth.idToken
       }

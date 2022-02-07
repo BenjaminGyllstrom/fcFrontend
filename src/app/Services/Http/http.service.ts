@@ -56,6 +56,9 @@ export class HttpService {
   setIdToken(){
     if(this.idToken && !this.options.headers.has("idToken")){
       this.options.headers = this.options.headers.append("idToken", this.idToken);
+    }else{
+      this.options.headers = this.options.headers.set("idToken", this.idToken);
+
     }
   }
 }

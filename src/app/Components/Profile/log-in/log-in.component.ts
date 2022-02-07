@@ -19,13 +19,6 @@ export class LogInComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.socialAuthService.authState.subscribe((res: any) => {
-      console.log(res);
-      if(res?.idToken){       
-        //todo: collect token from cookie instead. This code might set idToken to something even if auth fails 
-        this.httpService.idToken = res.idToken;
-      }
-    })
   }
 
   loginWithGoogle(){
@@ -40,11 +33,21 @@ export class LogInComponent implements OnInit {
         }else{
           console.log('auth failed');
           
-          this.socialAuthService.signOut().then(()=>
-          {
-            console.log('logging out');
-            this.httpService.idToken = ""
-          });
+          this.loginHttpService.register({token: user.idToken}).subscribe((response)=>{
+            console.log("Register: "+response);
+            
+            this.socialAuthService.signOut().then(()=>
+            {
+              console.log('logging out');
+              this.httpService.idToken = ""
+            });
+
+            if(response.success){
+              console.log('You are now Registered');
+            }else{
+              console.log('Register failed');
+            }
+          })
         }
       });
     })

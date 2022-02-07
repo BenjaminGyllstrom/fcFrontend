@@ -14,5 +14,7 @@ export class LoginHttpService {
   login(token: any) : Observable<any> {
     return this.httpService.post(`users/login`, token);
   }
-
+  register(token: any) : Observable<any> {
+    return this.httpService.post(`users/register`, token);
+  }
 }
