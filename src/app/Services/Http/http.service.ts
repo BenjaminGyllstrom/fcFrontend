@@ -23,13 +23,10 @@ export class HttpService {
   get(uri: string, params?: any) {
     this.options.params = new HttpParams();
 
-    if(this.idToken && !this.options.headers.has("idToken")){
-      this.options.headers = this.options.headers.append("idToken", this.idToken);
-    }
-
     if(params){
       this.options.params = new HttpParams({fromObject: params});
     }
+    this.setIdToken();
 
     return this.httpClient.get(`${this.baseUrl}/${uri}`, this.options);
   }
@@ -39,16 +36,26 @@ export class HttpService {
     if(params){
       this.options.params = new HttpParams({fromObject: params});
     }
+    this.setIdToken();
+
     return this.httpClient.post(`${this.baseUrl}/${uri}`, payload, this.options);
   }
 
   patch(uri: string, payload: any){
     this.options.params = new HttpParams();
+    this.setIdToken();
     return this.httpClient.patch(`${this.baseUrl}/${uri}`, payload, this.options);
   }
 
   delete(uri: string){
     this.options.params = new HttpParams();
+    this.setIdToken();
     return this.httpClient.delete(`${this.baseUrl}/${uri}`);
+  }
+
+  setIdToken(){
+    if(this.idToken && !this.options.headers.has("idToken")){
+      this.options.headers = this.options.headers.append("idToken", this.idToken);
+    }
   }
 }

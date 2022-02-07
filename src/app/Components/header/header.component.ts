@@ -18,13 +18,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((auth: any) => {
       this.auth = auth
-      this.httpService.idToken = auth.idToken
+      if(auth){
+        this.auth = auth
+        this.httpService.idToken = auth.idToken
+      }
     })
   }
 
 
   logout(): void {
     this.socialAuthService.signOut().then(() => {
+      this.httpService.idToken = "";
       console.log('logged out');
     }) ;
   }

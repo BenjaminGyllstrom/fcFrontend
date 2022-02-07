@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Deck, IDeck } from 'src/app/Models/deck.model';
-import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +7,9 @@ import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 })
 export class HomeComponent implements OnInit {
 
-  // decks:Deck[] = []
-
   constructor() { }
 
   ngOnInit(): void {
-    // this.deckHttpService.get().subscribe((collectedDecks: IDeck[]) => {
-    //   this.decks = this.deckHttpService.parseToDecks(collectedDecks);
-    // });
   }
 
 }
