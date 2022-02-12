@@ -49,10 +49,12 @@ export class PlaygroundTemplatesComponent implements OnInit {
       ];
     }else if(this.selectedNodeType === 'explain'){
       this.templates = [
-        {template: 'nothing', text: 'Nothing'}
+        {template: 'none', text: 'Edit Explain'},
+        // {template: 'nothing', text: 'Nothing'}
       ]
     }else if(this.selectedNodeType === 'deck'){
       this.templates = [
+        {template: 'none', text: 'View Cards'},
         {template: 'card', text: 'Create Card'},
         {template: 'edit', text: 'Edit Deck'}
       ]
