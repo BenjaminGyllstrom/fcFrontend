@@ -59,6 +59,7 @@ import { EditExplainPlaygroundComponent } from './Components/Explains/edit-expla
 import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { GoogleLoginProvider, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
 import {AuthGuardService} from './Services/AuthGuard.service';
+import { ViewCardsPlaygroundComponent } from './Components/Cards/view-cards-playground/view-cards-playground.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,6 +106,7 @@ import {AuthGuardService} from './Services/AuthGuard.service';
     EditDeckPlaygroundComponent,
     EditExplainPlaygroundComponent,
     LogInComponent,
+    ViewCardsPlaygroundComponent,
   ],
   imports: [
     BrowserModule,

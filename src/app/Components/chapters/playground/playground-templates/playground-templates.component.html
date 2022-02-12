@@ -6,7 +6,7 @@
     class="template"
     (click)="onClick(template)"
     [ngStyle]="{'background-color': selectedTemplate == template ?  '#00B2FF' : '#ffffff'}">
-      Create {{template}}
+      {{template.text}}
     </ul>
   </li>
 </div>

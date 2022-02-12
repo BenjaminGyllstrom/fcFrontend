@@ -11,8 +11,8 @@ export class PlaygroundTemplatesComponent implements OnInit {
   selectedNodeType: string;
   selectedTemplate:string;
 
-  templates: string[]
-
+  templates: any[];
+  templateTexts: string[];
 
   constructor(private playgroundService: PlaygroundService) { }
 
@@ -30,23 +30,32 @@ export class PlaygroundTemplatesComponent implements OnInit {
     this.setTemplates();
   }
 
-  onClick(template: string){
+  onClick(template: any){
 
-    if(template == 'test' || template == 'nothing'){
+    if(template.template == 'test' || template.template == 'nothing'){
       return;
     }
 
-    this.playgroundService.setTemplate(template);
+    this.playgroundService.setTemplate(template.template);
     this.selectedTemplate = this.playgroundService.selectedTemplate;
   }
 
   setTemplates(){
     if(this.selectedNodeType === 'none'){
-      this.templates = ['explain', 'deck', 'test']
+      this.templates = [
+        {template: 'explain', text: 'Create Explain'},
+        {template: 'deck', text: 'Create Deck'},
+        {template: 'test', text: 'Create Test'}
+      ];
     }else if(this.selectedNodeType === 'explain'){
-      this.templates = ['nothing']
+      this.templates = [
+        {template: 'nothing', text: 'Nothing'}
+      ]
     }else if(this.selectedNodeType === 'deck'){
-      this.templates = ['card']
+      this.templates = [
+        {template: 'card', text: 'Create Card'},
+        {template: 'edit', text: 'Edit Deck'}
+      ]
     }
   }
 }

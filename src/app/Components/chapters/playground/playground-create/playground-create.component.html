@@ -8,5 +8,6 @@
     <div *ngIf="selectedTemplate === 'test'">Coming soon</div>
 
     <!-- Edit -->
-    <app-edit-deck-playground *ngIf="selectedTemplate === 'none' && selectedNodeType === 'deck'" [deck]="selectedNode"></app-edit-deck-playground>
+    <app-view-cards-playground *ngIf="selectedTemplate === 'none' && selectedNodeType === 'deck'" [deck]="selectedNode"></app-view-cards-playground>
+    <app-edit-deck-playground *ngIf="selectedTemplate === 'edit' && selectedNodeType === 'deck'" [deck]="selectedNode"></app-edit-deck-playground>
     <app-edit-explain-playground *ngIf="selectedTemplate === 'none' && selectedNodeType === 'explain'" [explain]="selectedNode"></app-edit-explain-playground>
