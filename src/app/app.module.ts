@@ -8,6 +8,7 @@ import { QuillModule } from 'ngx-quill'
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 // import {  } from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -119,7 +120,8 @@ import { ViewCardsPlaygroundComponent } from './Components/Cards/view-cards-play
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatDialogModule
   ],
   providers: [
     // SocialAuthService,

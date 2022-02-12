@@ -1,9 +1,22 @@
 <!-- <p>log-in works!</p> -->
 <!-- <div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true"></div> -->
 
-<button (click)="loginWithGoogle()" mat-raised-button class="google-login-btn">
-  Google
-</button>
+<div class="login-text">
+  <p>Sign in to</p>
+  <h1>Flard</h1>
+</div>
+<div class="provider-buttons">
+  <button (click)="loginWithGoogle()" class="login-btn">
+    Google
+  </button>
+  <button (click)="loginWithGoogle()" class="login-btn">
+    Facebook
+  </button>
+  <button (click)="loginWithGoogle()" class="login-btn">
+    LinkedIn
+  </button>
+</div>
+
 
 <!-- socialAuthServive.auth
 <div *ngIf="socialAuthServive.authState | async as socialUser">

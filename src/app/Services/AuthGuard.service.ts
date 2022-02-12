@@ -1,3 +1,5 @@
+import { LogInComponent } from './../Components/Profile/log-in/log-in.component';
+import { MatDialog } from '@angular/material/dialog';
 import {Injectable} from '@angular/core';
 import {SocialAuthService, SocialUser} from 'angularx-social-login';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
@@ -10,7 +12,8 @@ import {map, tap} from 'rxjs/operators';
 export class AuthGuardService implements CanActivate {
 
   constructor(private router: Router,
-              private socialAuthService: SocialAuthService) {
+              private socialAuthService: SocialAuthService,
+              public dialog: MatDialog) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
@@ -18,7 +21,11 @@ export class AuthGuardService implements CanActivate {
       map((socialUser: SocialUser) => !!socialUser),
       tap((isLoggedIn: boolean) => {
         if (!isLoggedIn) {
-          this.router.navigate(['login']);
+          const dialogRef = this.dialog.open(LogInComponent);
+
+          dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+          });
         }
       })
     );
