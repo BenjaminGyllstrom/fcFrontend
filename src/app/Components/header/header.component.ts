@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LogInComponent } from './../Profile/log-in/log-in.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public socialAuthService: SocialAuthService,
     private httpService: HttpService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((auth: any) => {
@@ -42,6 +44,7 @@ export class HeaderComponent implements OnInit {
     this.socialAuthService.signOut().then(() => {
       this.httpService.idToken = "";
       console.log('logged out');
+      this.router.navigate(['/home'])
     }) ;
   }
 }
