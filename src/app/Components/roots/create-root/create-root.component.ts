@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { IRoot } from './../../../Models/root.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Root } from 'src/app/Models/root.model';
@@ -10,7 +12,10 @@ import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
 })
 export class CreateRootComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private rootHttpService: RootHttpService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private rootHttpService: RootHttpService,
+    private router: Router) { }
 
   rootForm = this.formBuilder.group({
     title:''
@@ -26,7 +31,9 @@ export class CreateRootComponent implements OnInit {
     root.title = title;
 
     this.rootForm.reset();
-    this.rootHttpService.post(root).subscribe()
+    this.rootHttpService.post(root).subscribe((collectedRoot: IRoot) => {
+      this.router.navigate(['/rootOverview', collectedRoot._id])
+    })
   }
 
 }
