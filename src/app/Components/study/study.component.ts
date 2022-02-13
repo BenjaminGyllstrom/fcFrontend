@@ -71,7 +71,7 @@ export class StudyComponent implements OnInit, OnDestroy {
     })
 
 
-    this.chapterHttpService.getDueCardsByDeckId(deckId).subscribe((collectedCards: ICard[]) => {
+    this.deckHttpService.getDueCards(deckId).subscribe((collectedCards: ICard[]) => {
       const cards = this.cardHttpService.parseToCards(collectedCards);
 
       const dueCards: Card[] = [];
