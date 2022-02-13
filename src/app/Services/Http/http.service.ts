@@ -50,7 +50,7 @@ export class HttpService {
   delete(uri: string){
     this.options.params = new HttpParams();
     this.setIdToken();
-    return this.httpClient.delete(`${this.baseUrl}/${uri}`);
+    return this.httpClient.delete(`${this.baseUrl}/${uri}`, this.options);
   }
 
   setIdToken(){
