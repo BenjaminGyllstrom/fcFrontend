@@ -4,12 +4,13 @@ import { StudyService } from './../../Services/Study.service';
 import { DueService } from './../../Services/Due.service';
 import { Card, ICard } from './../../Models/card.model';
 import { Component, Input, OnInit, HostListener, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { DueTimerService } from 'src/app/Services/dueTimer.service';
 
 @Component({
   selector: 'app-study2',
   templateUrl: './study2.component.html',
   styleUrls: ['./study2.component.scss'],
-  providers:[DueService]
+  providers:[DueService, DueTimerService]
 })
 export class Study2Component implements OnInit, OnDestroy {
 
@@ -33,14 +34,13 @@ export class Study2Component implements OnInit, OnDestroy {
   showAnswer:boolean = false;
   showAnswerButtons:boolean = false;
 
-  dueTimerTime: number;
-
   sub:Subscription;
 
   constructor(
     private studyService: StudyService,
     private cardHttpService: CardHttpService,
-    private dueService: DueService) { }
+    private dueService: DueService,
+    private dueTimerService: DueTimerService) { }
 
   ngOnDestroy(){
     this.sub.unsubscribe();
@@ -86,10 +86,10 @@ export class Study2Component implements OnInit, OnDestroy {
       this.currentCard = dueCard;
       this.nextRecurrenceText = this.studyService.calculateRecurrenceTimes(this.currentCard);
       this.dueCardAvailable = true;
-      if(this.timerIsActive()) this.stopTimer();
+      if(this.dueTimerService.timerIsActive()) this.dueTimerService.stopTimer();
     }else{
       this.dueCardAvailable = false;
-      if(this.timerIsActive() == false) this.setTimer();
+      if(this.dueTimerService.timerIsActive() == false) this.setTimer();
     }
   }
 
@@ -97,6 +97,14 @@ export class Study2Component implements OnInit, OnDestroy {
     this.studyService.setNextRecurrence(card, nextRecurrence).subscribe((collectedCard: ICard) => {
       const updatedCard = this.cardHttpService.parseToCard(collectedCard);
       this.dueService.AddCard(updatedCard);
+
+      if(this.dueTimerService.timerIsActive()){
+        const nextDueTime = this.dueService.nextDueAvailable()?.getTime();
+        if(nextDueTime && this.dueTimerService.isLessThanCurrentTimer(nextDueTime))
+        {
+          this.dueTimerService.setTimer(nextDueTime);
+        }
+      }
     });
   }
 
@@ -109,13 +117,7 @@ export class Study2Component implements OnInit, OnDestroy {
   setTimer(){
     const nextDueDate = this.dueService.nextDueAvailable()
     if(nextDueDate != null){
-      this.dueTimerTime = nextDueDate.getTime();
+      this.dueTimerService.setTimer(nextDueDate.getTime())
     }
-  }
-  stopTimer(){
-    this.dueTimerTime = 0;
-  }
-  timerIsActive(){
-    return this.dueTimerTime > 0;
   }
 }

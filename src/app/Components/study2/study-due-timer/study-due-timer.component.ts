@@ -1,3 +1,4 @@
+import { DueTimerService } from 'src/app/Services/dueTimer.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,17 +8,24 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StudyDueTimerComponent implements OnInit {
 
-  @Input() dueTime: number;
+  dueTime: number;
 
   minutes: number;
   seconds: number;
   interval: any;
 
-  constructor() { }
+  constructor(private dueTimerService: DueTimerService) { }
 
   ngOnInit(): void {
-    console.log(this.dueTime);
-    this.setTimer();
+
+    if(this.dueTimerService.timerIsActive()){
+      this.dueTime = this.dueTimerService.timer;
+      this.setTimer();
+    }
+    this.dueTimerService.timeUpdated.subscribe(() => {
+      this.dueTime = this.dueTimerService.timer;
+      this.setTimer();
+    })
   }
 
   setTimer(){
