@@ -1,0 +1,21 @@
+<h1 class="page-title">Study</h1>
+
+<div *ngIf="dueCardAvailable" class="card-container">
+
+  <app-card-study
+  [showAnswer]="showAnswer"
+  [card]="currentCard"
+  [showAnswerButtons]="showAnswerButtons"
+  (showAnswerChange)="onShowAnswerChange($event)"></app-card-study>
+</div>
+
+<div *ngIf="showAnswerButtons && dueCardAvailable" class="answer-buttons">
+  <button  class="button button__next" (click)="onNext('button-a')">{{nextRecurrenceText[0]}}</button>
+  <button  class="button button__next" (click)="onNext('button-b')">{{nextRecurrenceText[1]}}</button>
+  <button  class="button button__next" (click)="onNext('button-c')">{{nextRecurrenceText[2]}}</button>
+</div>
+
+<div *ngIf="dueCardAvailable == false" class="no-due">
+  <p>No new cards available</p>
+  <app-study-due-timer [dueTime]="dueTimerTime"></app-study-due-timer>
+</div>

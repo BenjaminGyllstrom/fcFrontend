@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Card, ICard } from "src/app/Models/card.model";
 import { CardHttpService } from "./Http/CardHttp.service";
 
@@ -8,8 +8,22 @@ import { CardHttpService } from "./Http/CardHttp.service";
 })
 export class StudyService {
 
+  newDue = new Subject<Card>();
+  cardUsed = new Subject<Card>();
+
 
   constructor(private cardHttpService: CardHttpService){}
+
+  getNewCardCount(cards:Card[]){
+    let newCardCount = 0;
+    cards.forEach(card => {
+      if(card.new)
+      {
+        newCardCount++;
+      }
+    });
+    return newCardCount;
+  }
 
   setNextRecurrence(card: Card, answerOption: string) : Observable<any>{
     return this.cardHttpService.updateDueDate(card, card.id, answerOption);

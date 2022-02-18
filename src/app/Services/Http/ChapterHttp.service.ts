@@ -33,6 +33,9 @@ export class ChapterHttpService {
   getDueCardsByDeckId(deckId:string) : Observable<any> {
     return this.httpService.get(`chapters/Due/deck/${deckId}`);
   }
+  getDueCards(chapterId:string) : Observable<any>{
+    return this.httpService.get(`chapters/Due/${chapterId}`);
+  }
 
   parseToChapter(collectedChapter: IChapter) : Chapter {
 

@@ -14,260 +14,33 @@ import { ChapterHttpService } from 'src/app/Services/Http/ChapterHttp.service';
   templateUrl: './study.component.html',
   styleUrls: ['./study.component.scss']
 })
-export class StudyComponent implements OnInit, OnDestroy {
+export class StudyComponent implements OnInit {
 
-  deckId: string;
-  deck: Deck;
   cards: Card[];
-  currentCard: Card;
-  dueCardsAvailable: boolean = false;
-  skipTimer = false;
 
-  sub:Subscription;
-
-  notDueCards: Card[];
-
-  showAnswer:boolean = false;
-  showAnswerButtons:boolean = false;
-
-  nextRecurrence : string[]
-
-  minutes: number;
-  seconds: number;
-  interval: any;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private deckHttpService: DeckHttpService,
     private cardHttpService: CardHttpService,
-    private chapterHttpService: ChapterHttpService,
-    private studyService: StudyService) { }
-
-  @HostListener('window:keydown', ['$event'])
-  keyEvent(event: KeyboardEvent) {
-  if(event.key == "Tab"){
-    this.onToggle();
-  }
-  if(event.key == "1"){
-    this.onNext('button-a')
-  }else if(event.key == "2"){
-    this.onNext('button-b')
-  }else if(event.key == "3"){
-    this.onNext('button-c')
-  }
-}
-
-  ngOnDestroy(){
-    this.sub.unsubscribe();
-  }
+    private chapterHttpService: ChapterHttpService) { }
 
   ngOnInit(): void {
-    const deckId = this.route.snapshot.params['deckId'];
-    this.deckId = deckId;
+    const type = this.route.snapshot.params['type'];
+    const id = this.route.snapshot.params['id'];
 
-    this.deckHttpService.getById(deckId).subscribe((collectedDeck: IDeck) => {
-      this.deck = this.deckHttpService.parseToDeck(collectedDeck);
-    })
-
-
-    this.deckHttpService.getDueCards(deckId).subscribe((collectedCards: ICard[]) => {
-      const cards = this.cardHttpService.parseToCards(collectedCards);
-
-      const dueCards: Card[] = [];
-      const notDueCards: Card[] = [];
-      cards.forEach(card => {
-        if(this.studyService.isDue(card)){
-          console.log('due');
-          dueCards.push(card);
-        }else if(this.studyService.lastStudiedToday(card)){
-          console.log('not yet due, but studied today');
-
-          notDueCards.push(card);
-        }else{
-          console.log('not yet due');
-          dueCards.push(card);
-        }
-      });
-
-      this.cards = dueCards;
-      this.notDueCards = notDueCards;
-
-      this.setCurrentCard();
-    })
-
-    this.notDueCards = [];
-
-    this.sub = interval(3000).subscribe((val) => { this.checkDueCards(); });
-  }
-
-  onToggle(){
-    this.showAnswer = !this.showAnswer;
-    this.showAnswerButtons = true
-  }
-
-
-  setTimer(){
-
-    if(this.notDueCards.length < 1){
-      return;
-    }
-
-    clearInterval(this.interval)
-
-    const dateNow = new Date();
-    const nextCard = this.notDueCards[0]
-
-    let timeDifference = nextCard.dueDate.getTime() - dateNow.getTime();
-    timeDifference = timeDifference / 1000
-    this.minutes = Math.floor(timeDifference / 60);
-    this.seconds = Math.round(timeDifference - this.minutes * 60);
-
-    this.interval = setInterval(() => {
-      if(this.seconds > 0) {
-        this.seconds--;
-      } else {
-        if(this.minutes > 0){
-          this.minutes--;
-          this.seconds = 59;
-        }else{
-          clearInterval(this.interval)
-        }
-      }
-    },1000)
-  }
-
-  sortNotDue(){
-    const sorted = this.notDueCards.sort((a,b) => a.dueDate.getTime() - b.dueDate.getTime());
-  }
-
-  onSkipTimer(){
-    this.skipTimer = true;
-    const cardsDue: Card[] = [];
-
-    this.notDueCards.forEach(card => {
-      cardsDue.push(card);
-    });
-
-    this.notDueCards = [];
-
-    cardsDue.forEach(card => {
-      if(this.cards.length < 1){
-        this.cards.push(card);
-        this.setCurrentCard()
-      }else{
-        this.cards.push(card);
-      }
-    });
-  }
-
-  checkDueCards(){
-
-    const cardsDue: Card[] = [];
-
-    this.notDueCards.forEach(card => {
-      if(this.studyService.isDue(card)){
-        cardsDue.push(card);
-      }
-    });
-
-    cardsDue.forEach(card => {
-
-      console.log('new due');
-      this.notDueCards.splice(this.notDueCards.indexOf(card), 1)
-
-      if(this.cards.length < 1){
-        this.cards.push(card);
-        this.setCurrentCard()
-      }else{
-        this.cards.push(card);
-      }
-    });
-  }
-
-
-  onNext(option: string){
-    const currentCard = this.currentCard;
-    this.showAnswerButtons = false;
-    this.removeCurrentCardFromDue();
-    this.setNumNewCardsOnDeck(currentCard);
-    this.setCurrentCard();
-
-    if(option == "button-a"){
-      this.studyService.setNextRecurrence(currentCard, '1').subscribe((collectedCard: ICard) => {
-        const updatedCard = this.cardHttpService.parseToCard(collectedCard);
-        if(this.studyService.isDue(updatedCard)){
-          this.cards.push(updatedCard);
-        }
-        else if(this.studyService.isDueToday(updatedCard)){
-          this.notDueCards.push(updatedCard)
-          this.sortNotDue();
-          if(this.notDueCards[0] == updatedCard){
-            this.setTimer();
-          }
-        }
-      });
-
-    }else if(option == "button-b"){
-      this.studyService.setNextRecurrence(currentCard, '2').subscribe((collectedCard: ICard) => {
-        const updatedCard = this.cardHttpService.parseToCard(collectedCard);
-        if(this.studyService.isDue(updatedCard)){
-          this.cards.push(updatedCard);
-        }
-        else if(this.studyService.isDueToday(updatedCard)){
-
-          this.notDueCards.push(updatedCard)
-          this.sortNotDue();
-          if(this.notDueCards[0] == updatedCard){
-            this.setTimer();
-          }
-        }
-      });
-
-    }else if(option == "button-c"){
-      this.studyService.setNextRecurrence(currentCard, '3').subscribe((collectedCard: ICard) => {
-        const updatedCard = this.cardHttpService.parseToCard(collectedCard);
-        if(this.studyService.isDue(updatedCard)){
-          this.cards.push(updatedCard);
-        }
-        else if(this.studyService.isDueToday(updatedCard)){
-          this.notDueCards.push(updatedCard)
-          this.sortNotDue();
-          if(this.notDueCards[0] == updatedCard){
-            this.setTimer();
-          }
-        }
-      });
-
-    }else{
+    if(type=='deck'){
+      this.deckHttpService.getById(id).subscribe((collectedDeck: IDeck) => {
+        const deck = this.deckHttpService.parseToDeck(collectedDeck);
+        this.cards = deck.cards;
+      })
+    }else if(type=='chapter'){
+      console.log('study chapter');
+      this.chapterHttpService.getDueCards(id).subscribe((collectedCards:ICard[]) => {
+        this.cards = this.cardHttpService.parseToCards(collectedCards);
+      })
+    }else if(type=='root'){
 
     }
-  }
-
-  removeCurrentCardFromDue(){
-    this.cards.splice(this.cards.indexOf(this.currentCard), 1);
-  }
-  setNumNewCardsOnDeck(card: Card){
-    if(card.new){
-      this.deck.newCards -= 1;
-    }
-  }
-  setCurrentCard(){
-    this.showAnswer = false;
-
-    if(this.cards.length > 0){
-      this.currentCard = this.cards[0];
-      this.dueCardsAvailable = true;
-      this.nextRecurrence = this.studyService.calculateRecurrenceTimes(this.currentCard);
-    }
-    else{
-      this.sortNotDue();
-      this.setTimer();
-      this.dueCardsAvailable = false;
-    }
-  }
-
-  onContinueStudy(){
-    this.router.navigate(['/chapterStudy', this.deck.parentId])
   }
 }

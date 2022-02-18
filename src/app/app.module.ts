@@ -61,6 +61,9 @@ import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { GoogleLoginProvider, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
 import {AuthGuardService} from './Services/AuthGuard.service';
 import { ViewCardsPlaygroundComponent } from './Components/Cards/view-cards-playground/view-cards-playground.component';
+import { Study2Component } from './Components/study2/study2.component';
+import { StudyDueTimerComponent } from './Components/study2/study-due-timer/study-due-timer.component';
+import { CardStudyComponent } from './Components/study2/card-study/card-study.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +111,9 @@ import { ViewCardsPlaygroundComponent } from './Components/Cards/view-cards-play
     EditExplainPlaygroundComponent,
     LogInComponent,
     ViewCardsPlaygroundComponent,
+    Study2Component,
+    StudyDueTimerComponent,
+    CardStudyComponent,
   ],
   imports: [
     BrowserModule,

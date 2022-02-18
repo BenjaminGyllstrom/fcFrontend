@@ -44,4 +44,7 @@ export class ChapterListItemComponent implements OnInit {
   onPlayground(){
     this.router.navigate(['/chapterPlayground', this.chapter.id])
   }
+  onStudyDue(){
+    this.router.navigate(['/study', 'chapter', this.chapter.id])
+  }
 }

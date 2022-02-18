@@ -47,7 +47,7 @@ const routes: Routes = [
   {path: 'deckOverview/viewCards/:deckId', component:ViewCardsComponent, canActivate: [AuthGuardService]},
   {path: 'cardOverview/:id', component:CardOverviewComponent, canActivate: [AuthGuardService]},
   {path: 'editCard/:cardId', component:EditCardComponent, canActivate: [AuthGuardService]},
-  {path: 'deck/study/:deckId', component:StudyComponent, canActivate: [AuthGuardService]},
+  {path: 'study/:type/:id', component:StudyComponent, canActivate: [AuthGuardService]},
   {path: 'studyExplain/:id', component:StudyExplainComponent, canActivate: [AuthGuardService]},
   {path: 'login', component:LogInComponent},
 ];

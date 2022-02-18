@@ -110,8 +110,11 @@ export class CreateCardPlaygroundComponent implements OnInit {
       return;
     }
 
-    this.cardHttpService.post(card, this.deckId).subscribe((card) => {
-      console.log(card);
+    this.cardHttpService.post(card, this.deckId).subscribe((collectedCard) => {
+      const card = this.cardHttpService.parseToCard(collectedCard);
+
+      if(this.deck.cards == null) this.deck.cards = [];
+      this.deck.cards.push(card);
     });
 
     this.resetQuill();
