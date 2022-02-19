@@ -21,15 +21,14 @@ $main-color: #021E39;
 
 .action-field{
   display: flex;
-  grid-column: 3/6;
-
+  grid-column: 3/5;
 }
 
 .user-field{
   // margin-right: 40px;
-  grid-column: 6;
+  grid-column: 5/7;
   justify-self: end;
-
+  display: flex;
 }
 .user-name{
   color: white;
