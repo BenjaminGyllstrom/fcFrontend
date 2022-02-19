@@ -2,7 +2,29 @@
   cursor: pointer;
   padding: 10px;
   height: 100%;
+
+  display: flex;
+  justify-content: space-between;
   &__title{
 
+  }
+}
+
+.userData{
+
+  margin-right: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 7px;
+  &__name{
+
+  }
+  &__photo{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
   }
 }

@@ -37,12 +37,17 @@ export class ChapterHttpService {
     return this.httpService.get(`chapters/Due/${chapterId}`);
   }
 
+  getCardData(chapterId:string) : Observable<any>{
+    return this.httpService.get(`chapters/data/${chapterId}`);
+  }
+
   parseToChapter(collectedChapter: IChapter) : Chapter {
 
     const newChapter = new Chapter();
     newChapter.id = collectedChapter._id;
     newChapter.title = collectedChapter.title;
-    newChapter.nodes = this.getListOfNodes(collectedChapter.nodes)
+    newChapter.nodes = this.getListOfNodes(collectedChapter.nodes);
+    newChapter.data = collectedChapter.data;
     return newChapter;
   }
 

@@ -5,9 +5,11 @@
 <div *ngIf="chapter && expand" class="chapter-conatiner-expanded" (click)="expand = !expand">
     <h1>{{chapter.title}}</h1>
     <div class="chapter-content">
-      <p>id: {{chapter.id}}</p>
-      <p>due: 0</p>
-      <p>new: 3</p>
+      <p>total cards: {{chapter.data.totalCards}}</p>
+      <p>new: {{chapter.data.numNewCards}}</p>
+      <p>due: {{chapter.data.numDueCards}}</p>
+      <p>nodes: {{chapter.data.numNodes}}</p>
+
     </div>
     <div class="action-buttons">
       <a class="button chapter-button" (click)="onDelete()">Delete</a>

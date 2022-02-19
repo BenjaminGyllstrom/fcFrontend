@@ -5,6 +5,7 @@ export class Chapter{
   title: string;
   rootId: string
   nodes: any[]
+  data: any
 }
 
 export interface IChapter{
@@ -12,4 +13,5 @@ export interface IChapter{
   title: string
   rootId: string
   nodes: any[]
+  data: any
 }

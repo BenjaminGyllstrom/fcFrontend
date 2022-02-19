@@ -11,9 +11,17 @@ export class RootListOverviewComponent implements OnInit {
 
   @Input() root: Root
 
+  userData: {
+    name:string,
+    photoUrl:string
+  }
+
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.root.userData){
+      this.userData = this.root.userData
+    }
   }
 
   onClick(){

@@ -47,8 +47,7 @@ export class Study2Component implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.cards);
-
+    console.log("Cards to study: " + this.cards.length);
 
     this.dueService.addCards(this.cards);
     this.setCurrentCard();

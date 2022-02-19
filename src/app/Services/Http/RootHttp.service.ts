@@ -35,6 +35,14 @@ export class RootHttpService {
     newRoot.id = collectedRoot._id;
     newRoot.title = collectedRoot.title;
     newRoot.chapters = this.chapterHttpService.parseToChapters(collectedRoot.chapters);
+
+    if(collectedRoot.userData != null){
+      newRoot.userData = {
+        name: collectedRoot.userData.name,
+        photoUrl: collectedRoot.userData.photoUrl,
+
+      }
+    }
     return newRoot;
   }
 
