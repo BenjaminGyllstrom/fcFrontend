@@ -5,3 +5,52 @@
   justify-content: center;
   align-items: center;
 }
+
+
+:host{
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  justify-items: center;
+  // align-items: center;
+  gap: 10px;
+}
+
+.home-text{
+  grid-column: 1/5;
+  color: white;
+
+  h1{
+    font-size: 48px;
+    margin-bottom: 25px;
+  }
+
+  p{
+    font-weight: 100;
+    font-size: 24px;
+  }
+  button{
+    cursor: pointer;
+
+    margin-top: 20px;
+    padding: 10px;
+
+    border-radius: 10px;
+    border: none;
+
+    color: white;
+    background-color: #535DC5;
+
+    font-weight: 100;
+    font-size: 24px;
+  }
+}
+
+.home-image{
+  background-color: white;
+  grid-column: 5/7;
+  width: 330px;
+  height: 215px;
+  border-radius: 30px;
+}
