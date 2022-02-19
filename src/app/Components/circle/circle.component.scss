@@ -1,0 +1,28 @@
+.circle-wrapper {
+  border-radius:50%;
+  background:Chartreuse;
+  // background: radial-gradient(520px, #f08f538c, transparent 50%);
+
+  position:relative;
+}
+
+.node {
+  display:block;
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:50px;
+  height:50px;
+  margin:-25px;
+  background:red;
+  border-radius:50%;
+  text-align:center;
+  // line-height:100px;
+
+  //byter ut line height mot flex
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}

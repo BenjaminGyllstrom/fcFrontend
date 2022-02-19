@@ -1,0 +1,9 @@
+<div class="circle-wrapper" [ngStyle]="{'height': diameter +'px' , 'width': diameter+'px'}">
+
+  <div *ngFor="let node of nodes"
+  class="node"
+  [ngStyle]="{'transform': calculateDeg(node)}"
+  (click)="onClick(node)">
+    {{node}}
+  </div>
+</div>

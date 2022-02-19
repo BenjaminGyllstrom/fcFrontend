@@ -64,6 +64,7 @@ import { ViewCardsPlaygroundComponent } from './Components/Cards/view-cards-play
 import { Study2Component } from './Components/study2/study2.component';
 import { StudyDueTimerComponent } from './Components/study2/study-due-timer/study-due-timer.component';
 import { CardStudyComponent } from './Components/study2/card-study/card-study.component';
+import { CircleComponent } from './Components/circle/circle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,6 +115,7 @@ import { CardStudyComponent } from './Components/study2/card-study/card-study.co
     Study2Component,
     StudyDueTimerComponent,
     CardStudyComponent,
+    CircleComponent,
   ],
   imports: [
     BrowserModule,
