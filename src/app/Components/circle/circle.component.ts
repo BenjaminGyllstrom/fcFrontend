@@ -26,7 +26,7 @@ export class CircleComponent implements OnInit {
     const degree = index * this.degreeMultiplier;
 
     // return `rotate(${degree}deg) translate(250px) rotate(-${degree}deg)`;
-    return `rotate(${degree}deg) translate(${this.diameter/2}px) rotate(-${degree}deg)`;
+    return `rotate(${degree}deg) translate(${this.diameter/2 - 25}px) rotate(-${degree}deg)`;
   }
 
   getHeight(){

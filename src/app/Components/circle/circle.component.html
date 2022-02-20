@@ -11,10 +11,11 @@
   </div>
 
   <div *ngFor="let node of nodes">
-    <div class="node"
+    <div class="circle-element"
     [ngStyle]="{'transform': calculateDeg(node)}"
     (click)="onClick(node)">
-      {{node}}
+      <app-explain-node class="node-element" *ngIf="node.type == 'explain'" [explain]="node"></app-explain-node>
+      <app-deck-node class="node-element" *ngIf="node.type == 'deck'" [deck]="node"></app-deck-node>
     </div>
   </div>
 </div>

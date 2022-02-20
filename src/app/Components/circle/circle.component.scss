@@ -2,7 +2,7 @@
   border-radius:50%;
   // background:Chartreuse;
   // background: radial-gradient(500px, #f08f538c, transparent 50%);
-
+  transform: rotate(-90deg);
   position:relative;
 }
 
@@ -13,21 +13,23 @@
   transform: translate(-50%, -50%);
 }
 
-.node {
+
+.circle-element {
   display:block;
   position:absolute;
   top:50%;
   left:50%;
-  width:50px;
-  height:50px;
+
+  // width:50px;
+  // height:50px;
   margin:-25px;
   // background:red;
   // border: 1px solid black;
-  border-radius:50%;
-  text-align:center;
+  // border-radius:50%;
+  // text-align:center;
   // line-height:100px;
 
-  background: radial-gradient(65px, #535DC5, transparent 50%);
+  // background: radial-gradient(65px, #535DC5, transparent 50%);
 
   //byter ut line height mot flex
   display: flex;
@@ -35,4 +37,8 @@
   align-items: center;
 
   cursor: pointer;
+}
+
+.node-element{
+  transform: rotate(90deg);
 }
