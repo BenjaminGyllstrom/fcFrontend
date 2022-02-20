@@ -13,6 +13,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
+  img{
+    width: 200px;
+    cursor: pointer;
+  }
 }
 
 .nodes{
@@ -21,7 +26,7 @@
 }
 @keyframes rotation{
   100%{
-    transform: rotate(260deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -38,7 +43,7 @@
   text-align:center;
   // line-height:100px;
 
-  // background: radial-gradient(92px, red, transparent 50%);
+  // background: radial-gradient(100px, #535DC5, transparent 50%);
 
   //byter ut line height mot flex
   display: flex;
@@ -46,4 +51,15 @@
   align-items: center;
 
   cursor: pointer;
+  img{
+    width: 80px;
+    animation: rotation2 60s linear infinite;
+  }
+
+}
+
+@keyframes rotation2{
+  100%{
+    transform: rotate(-360deg);
+  }
 }

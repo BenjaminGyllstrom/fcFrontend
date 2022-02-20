@@ -6,24 +6,25 @@
   <!-- <fa name="cog" animation="spin"></fa> -->
 
 
-  <div class="middle-container">
+  <div (click)="onMiddleClicked()" class="middle-container">
+    <img [src]="middleSource" alt="">
   </div>
 
   <div class="nodes">
-    <div class="node" [ngStyle]="{'transform': calculateDeg(1)}">
-      <img src="../../../../assets/images/social-icon1.png" alt="">
+    <div (click)="onClick(1)" class="node" [ngStyle]="{'transform': calculateDeg(1)}">
+      <img [ngStyle]="{'background':getBackground(1)}" src="../../../../assets/icons/Deck-orange.svg" alt="">
     </div>
-    <div class="node" [ngStyle]="{'transform': calculateDeg(2)}">
-      <img src="../../../../assets/images/social-icon2.png" alt="">
+    <div (click)="onClick(2)" class="node" [ngStyle]="{'transform': calculateDeg(2)}">
+      <img [ngStyle]="{'background':getBackground(2)}" src="../../../../assets/icons/Explain-orange.svg" alt="">
     </div>
-    <div class="node" [ngStyle]="{'transform': calculateDeg(3)}">
-      <img src="../../../../assets/images/social-icon3.png" alt="">
+    <div (click)="onClick(3)" class="node" [ngStyle]="{'transform': calculateDeg(3)}">
+      <img [ngStyle]="{'background':getBackground(3)}" src="../../../../assets/icons/Deck-orange.svg" alt="">
     </div>
-    <div class="node" [ngStyle]="{'transform': calculateDeg(4)}">
-      <img src="../../../../assets/images/social-icon4.png" alt="">
+    <div (click)="onClick(4)" class="node" [ngStyle]="{'transform': calculateDeg(4)}">
+      <img [ngStyle]="{'background':getBackground(4)}" src="../../../../assets/icons/Explain-orange.svg" alt="">
     </div>
-    <div class="node" [ngStyle]="{'transform': calculateDeg(5)}">
-      <img src="../../../../assets/images/social-icon5.png" alt="">
+    <div (click)="onClick(5)" class="node" [ngStyle]="{'transform': calculateDeg(5)}">
+      <img [ngStyle]="{'background':getBackground(5)}" src="../../../../assets/icons/Deck-orange.svg" alt="">
     </div>
   </div>
 
