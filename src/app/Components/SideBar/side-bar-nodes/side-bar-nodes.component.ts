@@ -11,6 +11,7 @@ export class SideBarNodesComponent implements OnInit {
   editMode:boolean = true;
   nodes: any[]
   selectedNode:any|null;
+  addIsClicked:boolean
 
   constructor(private sideBarService: SideBarService) { }
 
@@ -28,6 +29,7 @@ export class SideBarNodesComponent implements OnInit {
       this.selectedNode = null
     }else{
       this.selectedNode = node;
+      this.addIsClicked = false;
     }
     this.sideBarService.setNode(this.selectedNode);
   }
@@ -37,7 +39,9 @@ export class SideBarNodesComponent implements OnInit {
   }
 
   onAdd(){
-
+    this.addIsClicked = !this.addIsClicked;
+    this.selectedNode = null;
+    this.sideBarService.setNode(this.selectedNode);
   }
 
 }
