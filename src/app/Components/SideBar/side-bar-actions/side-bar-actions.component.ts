@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { SideBarService, State } from 'src/app/Services/sideBar.service';
+import { Action, SideBarService, State } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-actions',
@@ -10,13 +10,18 @@ import { SideBarService, State } from 'src/app/Services/sideBar.service';
 export class SideBarActionsComponent implements OnInit {
 
   state:State
+  selectedAction:Action|null;
   constructor(private sideBarService: SideBarService) { }
 
   ngOnInit(): void {
     this.state = this.sideBarService.state;
     this.sideBarService.stateChange.subscribe((state:State) => {
       this.state = state;
+      this.selectedAction = null;
     });
+    this.sideBarService.actionChange.subscribe((action:Action) => {
+      this.selectedAction = action;
+    })
   }
 
   isRootsState(){return this.state == State.Roots}
@@ -25,4 +30,17 @@ export class SideBarActionsComponent implements OnInit {
   isDeckState(){return this.state == State.Deck}
   isExplainState(){return this.state == State.Explain}
 
+  onClick(action: Action){
+    this.sideBarService.setAction(action);
+  }
+
+  backgroundActive(actionString:string){
+    const action = this.sideBarService.getAction(actionString);
+    return this.selectedAction == action;
+  }
+
+  setAction(actionString:string){
+    const action = this.sideBarService.getAction(actionString);
+    this.sideBarService.setAction(action)
+  }
 }

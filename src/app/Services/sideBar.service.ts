@@ -12,6 +12,20 @@ export enum State {
   Deck,
   Explain
 }
+export enum Action {
+  Default,
+  MyContentOverview,
+  RootIntroduction,
+  Chapters,
+  Nodes,
+  ExplainOverview,
+  DeckOverview,
+  Cards,
+  AddRoot,
+  AddChapter,
+  AddNode,
+  AddCard,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +41,10 @@ export class SideBarService {
 
   state:State = State.Roots;
   stateChange:Subject<State> = new Subject<State>();
+
+  action: Action;
+  actionChange:Subject<Action> = new Subject<Action>();
+
   constructor() {
   }
 
@@ -36,6 +54,13 @@ export class SideBarService {
     if(this.editMode != edit){
       this.editMode = edit;
       this.editModeChange.next(this.editMode);
+    }
+  }
+
+  setAction(action:Action){
+    if(this.action != action){
+      this.action = action;
+      this.actionChange.next(this.action);
     }
   }
 
@@ -117,5 +142,35 @@ export class SideBarService {
       node2,
       node3
     ]
+  }
+
+  getAction(actionString: string) : Action{
+    switch(actionString){
+      case('MyContentOverview'):{
+        return Action.MyContentOverview
+      }
+      case('RootIntroduction'):{
+        return Action.RootIntroduction
+      }
+      case('Chapters'):{
+        return Action.Chapters
+      }
+      case('Nodes'):{
+        return Action.Nodes
+      }
+      case('ExplainOverview'):{
+        return Action.ExplainOverview
+      }
+      case('DeckOverview'):{
+        return Action.DeckOverview
+      }
+      case('Cards'):{
+        return Action.Cards
+      }
+      case('AddCard'):{
+        return Action.AddCard
+      }
+    }
+    return Action.Default;
   }
 }

@@ -1,27 +1,35 @@
 <div *ngIf="isRootsState()">
   <p>My Content Actions</p>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('MyContentOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('MyContentOverview')"></app-side-bar-item>
 </div>
 
 <div *ngIf="isChaptersState()">
   <p>Root Actions</p>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Introduction'}" [showActive]="true"></app-side-bar-item>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Chapters'}" [showActive]="true"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('RootIntroduction')" [item]="{icon:'Explain-black.svg', name:'Introduction'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('RootIntroduction')"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('Chapters')" [item]="{icon:'Explain-black.svg', name:'Chapters'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('Chapters')"></app-side-bar-item>
 </div>
 
 <div *ngIf="isNodesState()">
   <p>Chapter Actions</p>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Nodes'}" [showActive]="true"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('Nodes')" [item]="{icon:'Explain-black.svg', name:'Nodes'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('Nodes')"></app-side-bar-item>
 </div>
 
 <div *ngIf="isExplainState()">
   <p>Explain Actions</p>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('ExplainOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('ExplainOverview')"></app-side-bar-item>
 </div>
 
 <div *ngIf="isDeckState()">
   <p>Deck Actions</p>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"></app-side-bar-item>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Cards'}" [showActive]="true"></app-side-bar-item>
-  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Add Card'}" [showActive]="true"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('DeckOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('DeckOverview')"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('Cards')" [item]="{icon:'Explain-black.svg', name:'Cards'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('Cards')"></app-side-bar-item>
+  <app-side-bar-item (click)="setAction('AddCard')" [item]="{icon:'Explain-black.svg', name:'Add Card'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('AddCard')"></app-side-bar-item>
 </div>
