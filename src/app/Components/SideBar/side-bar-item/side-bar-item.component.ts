@@ -10,12 +10,10 @@ export class SideBarItemComponent implements OnInit {
 
   @Input() item: ISideBarItem;
   @Input() backgroundActive: boolean;
-
+  @Input() showActive:boolean = false;
 
   icon:string;
   name:string;
-
-
 
   constructor() { }
 

@@ -1,5 +1,5 @@
 
-<p>Root</p>
+<p [ngStyle]="{'margin-bottom': showAll? '12px':'1px'}">Root</p>
 <div *ngFor="let root of roots">
   <app-side-bar-item [item]="getSideBarItem(root)" *ngIf="shouldShow(root)" (click)="onClick(root)"></app-side-bar-item>
 </div>

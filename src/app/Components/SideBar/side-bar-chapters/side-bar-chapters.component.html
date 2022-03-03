@@ -1,5 +1,5 @@
 
-<p>Chapter</p>
+<p [ngStyle]="{'margin-bottom': showAll? '12px':'1px'}">Chapter</p>
 <div *ngFor="let chapter of chapters">
   <app-side-bar-item [item]="getSideBarItem(chapter)" *ngIf="shouldShow(chapter)" (click)="onClick(chapter)"></app-side-bar-item>
 </div>

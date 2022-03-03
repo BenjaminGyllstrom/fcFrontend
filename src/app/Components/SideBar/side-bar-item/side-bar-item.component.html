@@ -1,5 +1,5 @@
 
-<div (click)="onClick()" class="side-bar-item not-select" [ngStyle]="{background: getBackground()}">
+<div (click)="onClick()" class="side-bar-item not-select" [ngStyle]="{background: showActive? getBackground() : 'none'}">
   <div class="icon">
     <img [src]="icon" alt="">
   </div>

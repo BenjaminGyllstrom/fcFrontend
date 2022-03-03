@@ -1,5 +1,5 @@
 
-<p>Node</p>
+<p [ngStyle]="{'margin-bottom': showAll? '12px':'1px'}">Node</p>
 <div *ngFor="let node of nodes">
   <app-side-bar-item [item]="getSideBarItem(node)" *ngIf="shouldShow(node)" (click)="onClick(node)"></app-side-bar-item>
 </div>
