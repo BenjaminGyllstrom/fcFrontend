@@ -66,6 +66,15 @@ import { StudyDueTimerComponent } from './Components/study2/study-due-timer/stud
 import { CardStudyComponent } from './Components/study2/card-study/card-study.component';
 import { CircleComponent } from './Components/circle/circle.component';
 import { HomeCircleComponent } from './Components/home/home-circle/home-circle.component';
+import { SideBarComponent } from './Components/SideBar/side-bar/side-bar.component';
+import { SideBarRootsComponent } from './Components/SideBar/side-bar-roots/side-bar-roots.component';
+import { SideBarItemComponent } from './Components/SideBar/side-bar-item/side-bar-item.component';
+import { StudyToogleComponent } from './Components/SideBar/study-toogle/study-toogle.component';
+import { SideBarActionsComponent } from './Components/SideBar/side-bar-actions/side-bar-actions.component';
+import { SideBarInfoComponent } from './Components/SideBar/side-bar-info/side-bar-info.component';
+import { SideBarChaptersComponent } from './Components/SideBar/side-bar-chapters/side-bar-chapters.component';
+import { SideBarNodesComponent } from './Components/SideBar/side-bar-nodes/side-bar-nodes.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +126,15 @@ import { HomeCircleComponent } from './Components/home/home-circle/home-circle.c
     StudyDueTimerComponent,
     CardStudyComponent,
     CircleComponent,
-    HomeCircleComponent
+    HomeCircleComponent,
+    SideBarComponent,
+    SideBarRootsComponent,
+    SideBarItemComponent,
+    StudyToogleComponent,
+    SideBarActionsComponent,
+    SideBarInfoComponent,
+    SideBarChaptersComponent,
+    SideBarNodesComponent,
   ],
   imports: [
     BrowserModule,

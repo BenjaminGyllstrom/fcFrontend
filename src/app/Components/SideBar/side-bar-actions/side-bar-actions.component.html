@@ -1,0 +1,27 @@
+<div *ngIf="isRootsState()">
+  <p>My Content Actions</p>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Overview'}"></app-side-bar-item>
+</div>
+
+<div *ngIf="isChaptersState()">
+  <p>Root Actions</p>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Introduction'}"></app-side-bar-item>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Chapters'}"></app-side-bar-item>
+</div>
+
+<div *ngIf="isNodesState()">
+  <p>Chapter Actions</p>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Nodes'}"></app-side-bar-item>
+</div>
+
+<div *ngIf="isExplainState()">
+  <p>Explain Actions</p>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Overview'}"></app-side-bar-item>
+</div>
+
+<div *ngIf="isDeckState()">
+  <p>Deck Actions</p>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Overview'}"></app-side-bar-item>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Cards'}"></app-side-bar-item>
+  <app-side-bar-item [item]="{icon:'Explain-black.svg', name:'Add Card'}"></app-side-bar-item>
+</div>

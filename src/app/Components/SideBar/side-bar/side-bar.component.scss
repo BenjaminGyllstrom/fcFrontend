@@ -1,0 +1,47 @@
+:host{
+  background-color: white;
+}
+
+.side-bar{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+hr{
+  margin: 5px 23px 23px 23px;
+  background-color: #969696;
+  opacity:0.5;
+}
+
+.toogle{
+  align-self: center;
+  margin: 17px;
+}
+
+.roots{
+  margin-left: 30px;
+}
+
+.chapters{
+  margin-left: 30px;
+}
+.nodes{
+  margin-left: 30px;
+}
+
+hr.actions {
+  margin-top: auto;
+}
+div.actions{
+  height: 180px;
+  margin-left: 30px;
+}
+
+hr.info{
+
+}
+div.info{
+  height: 150px;
+  margin-left: 30px;
+}

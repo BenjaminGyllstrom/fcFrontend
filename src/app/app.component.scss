@@ -1,4 +1,11 @@
-.content{
-  // margin-top: 10px;
+.header{
+  height: 65px;
 }
 
+.side-bar {
+  position: inherit;
+  height: calc(100% - 65px);
+  width: 277px;
+  display: inherit;
+  border-radius: 5px;
+}

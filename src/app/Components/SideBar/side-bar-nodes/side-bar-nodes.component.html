@@ -1,0 +1,12 @@
+
+<p>Node</p>
+<div *ngFor="let node of nodes">
+  <app-side-bar-item [item]="getSideBarItem(node)" *ngIf="shouldShow(node)" (click)="onClick(node)"></app-side-bar-item>
+</div>
+
+<div *ngIf="editMode" class="node add-node">
+  <app-side-bar-item
+  [item]="{icon:'Add-item.svg', name:'Add new Node'}"
+  *ngIf="showAll"
+  (click)="onAdd()"></app-side-bar-item>
+</div>

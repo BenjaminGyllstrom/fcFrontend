@@ -10,7 +10,7 @@ body{
   // background-color: red;
   display: flex;
   overflow-y: overlay;
-
+  background-color: #F9F5EC;
 }
 
 
@@ -44,7 +44,7 @@ a{
   }
 }
 
-// html, body { height: 100%; width: 100vw;}
+html, body { height: 100%; width: 100vw;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
@@ -72,3 +72,4 @@ $main-color: #021E39;
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
 }
+

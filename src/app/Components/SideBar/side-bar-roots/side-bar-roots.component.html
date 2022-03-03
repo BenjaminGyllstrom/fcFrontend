@@ -1,0 +1,12 @@
+
+<p>Root</p>
+<div *ngFor="let root of roots">
+  <app-side-bar-item [item]="getSideBarItem(root)" *ngIf="shouldShow(root)" (click)="onClick(root)"></app-side-bar-item>
+</div>
+
+<div *ngIf="editMode" class="root add-root">
+  <app-side-bar-item
+  [item]="{icon:'Add-item.svg', name:'Add new Root'}"
+  *ngIf="showAll"
+  (click)="onAdd()"></app-side-bar-item>
+</div>

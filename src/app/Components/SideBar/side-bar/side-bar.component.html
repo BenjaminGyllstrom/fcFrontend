@@ -1,0 +1,29 @@
+<div class="side-bar">
+  <div class="toogle">
+    <app-study-toogle></app-study-toogle>
+  </div>
+
+  <div class="roots" *ngIf="state >= 0">
+    <app-side-bar-roots></app-side-bar-roots>
+  </div>
+
+  <hr class="chapters" [ngStyle]="{'margin-bottom': state > 1? '5px':'23px'}" *ngIf="state >= 1">
+  <div class="chapters" *ngIf="state >= 1">
+    <app-side-bar-chapters></app-side-bar-chapters>
+  </div>
+
+  <hr class="nodes" [ngStyle]="{'margin-bottom': state > 2? '5px':'23px'}" *ngIf="state >= 2">
+  <div class="nodes" *ngIf="state >= 2">
+    <app-side-bar-nodes></app-side-bar-nodes>
+  </div>
+
+  <hr class="actions">
+  <div class="actions">
+    <app-side-bar-actions></app-side-bar-actions>
+  </div>
+
+  <hr class="info">
+  <div class="info">
+    info
+  </div>
+</div>
