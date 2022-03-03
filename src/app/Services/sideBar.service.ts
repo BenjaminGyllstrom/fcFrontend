@@ -58,6 +58,8 @@ export class SideBarService {
   }
 
   setAction(action:Action){
+    console.log(Action[action].toString());
+
     if(this.action != action){
       this.action = action;
       this.actionChange.next(this.action);
@@ -69,15 +71,21 @@ export class SideBarService {
     this.selectedChapter = null;
     this.selectedNode = null;
     this.setState();
+
+    this.setAction(Action.Default);
   }
   setChapter(chapter:Chapter|null){
     this.selectedChapter = chapter;
     this.selectedNode = null;
     this.setState();
+
+    this.setAction(Action.Default);
   }
   setNode(node:Node|null){
     this.selectedNode = node;
     this.setState();
+
+    this.setAction(Action.Default);
   }
 
   private setState(){
