@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
-import { SideBarService } from 'src/app/Services/sideBar.service';
+import { Action, SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-nodes',
@@ -41,7 +41,13 @@ export class SideBarNodesComponent implements OnInit {
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
     this.selectedNode = null;
-    this.sideBarService.setNode(this.selectedNode);
+
+    const setAction = !this.addIsClicked
+    this.sideBarService.setNode(this.selectedNode, setAction);
+
+    if(this.addIsClicked){
+      this.sideBarService.setAction(Action.AddNode);
+    }
   }
 
 }

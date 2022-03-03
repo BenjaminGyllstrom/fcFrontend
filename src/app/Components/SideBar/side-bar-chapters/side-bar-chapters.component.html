@@ -8,5 +8,7 @@
   <app-side-bar-item
   [item]="{icon:'Add-item.svg', name:'Add new Chapter'}"
   *ngIf="showAll"
-  (click)="onAdd()"></app-side-bar-item>
+  (click)="onAdd()"
+  [showActive]="true"
+  [backgroundActive]="addIsClicked"></app-side-bar-item>
 </div>

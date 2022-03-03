@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
-import { SideBarService } from 'src/app/Services/sideBar.service';
+import { Action, SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-roots',
@@ -14,6 +14,7 @@ export class SideBarRootsComponent implements OnInit {
   roots: Root[]
   selectedRoot:Root|null;
   showAll:boolean = true;
+  addIsClicked:boolean
 
   constructor(private sideBarService: SideBarService) { }
 
@@ -33,6 +34,7 @@ export class SideBarRootsComponent implements OnInit {
     }else{
       this.selectedRoot = root;
       this.showAll = false;
+      this.addIsClicked = false;
     }
     this.sideBarService.setRoot(this.selectedRoot);
   }
@@ -48,6 +50,14 @@ export class SideBarRootsComponent implements OnInit {
   }
 
   onAdd(){
+    this.addIsClicked = !this.addIsClicked;
+    this.selectedRoot = null;
 
+    const setAction = !this.addIsClicked
+    this.sideBarService.setChapter(this.selectedRoot, setAction);
+
+    if(this.addIsClicked){
+      this.sideBarService.setAction(Action.AddRoot);
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
-import { SideBarService } from 'src/app/Services/sideBar.service';
+import { Action, SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-chapters',
@@ -14,6 +14,7 @@ export class SideBarChaptersComponent implements OnInit {
   chapters: Chapter[]
   selectedChapter:Chapter|null;
   showAll:boolean = true;
+  addIsClicked:boolean
 
 
   constructor(private sideBarService: SideBarService) { }
@@ -34,6 +35,7 @@ export class SideBarChaptersComponent implements OnInit {
     }else{
       this.selectedChapter = chapter;
       this.showAll = false;
+      this.addIsClicked = false;
     }
     this.sideBarService.setChapter(this.selectedChapter);
   }
@@ -49,7 +51,15 @@ export class SideBarChaptersComponent implements OnInit {
   }
 
   onAdd(){
+    this.addIsClicked = !this.addIsClicked;
+    this.selectedChapter = null;
 
+    const setAction = !this.addIsClicked
+    this.sideBarService.setChapter(this.selectedChapter, setAction);
+
+    if(this.addIsClicked){
+      this.sideBarService.setAction(Action.AddChapter);
+    }
   }
 
 }

@@ -66,26 +66,32 @@ export class SideBarService {
     }
   }
 
-  setRoot(root:Root|null){
+  setRoot(root:Root|null, setAction:boolean = true){
     this.selectedRoot = root;
     this.selectedChapter = null;
     this.selectedNode = null;
     this.setState();
 
-    this.setAction(Action.Default);
+    if(setAction){
+      this.setAction(Action.Default);
+    }
   }
-  setChapter(chapter:Chapter|null){
+  setChapter(chapter:Chapter|null, setAction:boolean = true){
     this.selectedChapter = chapter;
     this.selectedNode = null;
     this.setState();
 
+    if(setAction){
     this.setAction(Action.Default);
+    }
   }
-  setNode(node:Node|null){
+  setNode(node:Node|null, setAction:boolean = true){
     this.selectedNode = node;
     this.setState();
 
-    this.setAction(Action.Default);
+    if(setAction){
+      this.setAction(Action.Default);
+    }
   }
 
   private setState(){
