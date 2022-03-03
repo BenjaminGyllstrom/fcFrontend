@@ -12,7 +12,7 @@
     <app-side-bar-chapters></app-side-bar-chapters>
   </div>
 
-  <hr class="nodes" [ngStyle]="{'margin-bottom': state > 2? '5px':'23px'}" *ngIf="state >= 2">
+  <hr class="nodes" *ngIf="state >= 2">
   <div class="nodes" *ngIf="state >= 2">
     <app-side-bar-nodes></app-side-bar-nodes>
   </div>

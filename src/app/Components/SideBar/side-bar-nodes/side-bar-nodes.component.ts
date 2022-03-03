@@ -11,8 +11,6 @@ export class SideBarNodesComponent implements OnInit {
   editMode:boolean = true;
   nodes: any[]
   selectedNode:any|null;
-  showAll:boolean = true;
-
 
   constructor(private sideBarService: SideBarService) { }
 
@@ -28,22 +26,14 @@ export class SideBarNodesComponent implements OnInit {
   onClick(node:any){
     if(this.selectedNode == node){
       this.selectedNode = null
-      this.showAll = true;
     }else{
       this.selectedNode = node;
-      this.showAll = false;
     }
     this.sideBarService.setNode(this.selectedNode);
   }
 
   getSideBarItem(root:any) : ISideBarItem{
     return {icon: 'Explain-black.svg', name: root.title}
-  }
-
-  shouldShow(node:any){
-    if(this.showAll) return true;
-    if(this.selectedNode === node) return true;
-    return false;
   }
 
   onAdd(){
