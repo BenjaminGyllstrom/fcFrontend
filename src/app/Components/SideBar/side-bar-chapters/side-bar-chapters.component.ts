@@ -36,12 +36,16 @@ export class SideBarChaptersComponent implements OnInit {
       this.chapters = this.sideBarService.chapters;
     })
 
+    this.sideBarService.selectedChapterChange.subscribe((chapter:Chapter|null)=>{
+      this.selectChapter(chapter);
+    })
+
     this.sideBarService.requestChapters();
 
   }
 
-  onClick(chapter:Chapter){
-    if(this.selectedChapter == chapter){
+  selectChapter(chapter: Chapter|null){
+    if(chapter == null || this.selectedChapter == chapter){
       this.selectedChapter = null
       this.showAll = true;
     }else{
@@ -49,6 +53,10 @@ export class SideBarChaptersComponent implements OnInit {
       this.showAll = false;
       this.addIsClicked = false;
     }
+  }
+
+  onClick(chapter:Chapter){
+    this.selectChapter(chapter);
     this.sideBarService.setChapter(this.selectedChapter);
   }
 

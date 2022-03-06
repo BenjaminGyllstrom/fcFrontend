@@ -1,0 +1,21 @@
+.show-chapters{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1{
+  align-self: center;
+
+  margin-top: 80px;
+  margin-bottom: 110px;
+}
+
+.chapters{
+  &__list{
+
+  }
+  &__list-item{
+
+  }
+}

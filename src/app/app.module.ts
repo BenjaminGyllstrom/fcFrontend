@@ -29,7 +29,8 @@ import { RootListOverviewComponent } from './Components/roots/root-list-overview
 import { MyRootsComponent } from './Components/roots/my-roots/my-roots.component';
 import { CreateRootComponent } from './Components/roots/create-root/create-root.component';
 import { RootOverviewComponent } from './Components/roots/root-overview/root-overview.component';
-import { ChapterListItemComponent } from './Components/chapters/chapter-list-item/chapter-list-item.component';
+// import { ChapterListItemComponent } from './Components/chapters/chapter-list-item/chapter-list-item.component';
+import { ChapterListItemComponent } from './Components/Actions/show-chapters/chapter-list-item/chapter-list-item.component';
 import { ChapterOverviewComponent } from './Components/chapters/chapter-overview/chapter-overview.component';
 import { CreateChapterComponent } from './Components/chapters/create-chapter/create-chapter.component';
 import { ChapterStudyComponent } from './Components/chapters/chapter-study/chapter-study.component';
@@ -78,6 +79,7 @@ import { MyContentComponent } from './Components/my-content/my-content.component
 import { ActionContentComponent } from './Components/action-content/action-content.component';
 import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
 import { RootListItemComponent } from './Components/Actions/show-roots/root-list-item/root-list-item.component';
+import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';
 
 @NgModule({
   declarations: [
@@ -143,6 +145,7 @@ import { RootListItemComponent } from './Components/Actions/show-roots/root-list
     ActionContentComponent,
     ShowRootsComponent,
     RootListItemComponent,
+    ShowChaptersComponent,
   ],
   imports: [
     BrowserModule,

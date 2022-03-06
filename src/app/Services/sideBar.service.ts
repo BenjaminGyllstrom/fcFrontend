@@ -88,14 +88,16 @@ export class SideBarService {
     this.selectedNode = null;
     this.setState();
     this.selectedRootChange.next(root);
+
     if(setAction){
-      this.setAction(Action.Default);
+      this.setAction(Action.Chapters);
     }
   }
   setChapter(chapter:Chapter|null, setAction:boolean = true){
     this.selectedChapter = chapter;
     this.selectedNode = null;
     this.setState();
+    this.selectedChapterChange.next(chapter);
 
     if(setAction){
     this.setAction(Action.Default);
@@ -104,6 +106,7 @@ export class SideBarService {
   setNode(node:Node|null, setAction:boolean = true){
     this.selectedNode = node;
     this.setState();
+    this.selectedNodeChange.next(node);
 
     if(setAction){
       this.setAction(Action.Default);
