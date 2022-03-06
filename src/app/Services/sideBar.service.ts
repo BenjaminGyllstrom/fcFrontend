@@ -151,6 +151,10 @@ export class SideBarService {
       this.rootsUpdated.next();
     });
   }
+  addRoot(root:Root){
+    this.roots.push(root)
+    this.rootsUpdated.next();
+  }
   requestChapters(){
     const rootId = this.selectedRoot?.id
     if(rootId == null) {
