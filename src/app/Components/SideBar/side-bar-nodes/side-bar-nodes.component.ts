@@ -22,24 +22,15 @@ export class SideBarNodesComponent implements OnInit {
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
     // this.nodes = this.sideBarService.getNodes();
-
-    this.setNodes();
     this.sideBarService.editModeChange.subscribe((isEditMode) => {
       this.editMode = isEditMode;
     })
-  }
 
-  setNodes(){
-    const chapterId = this.sideBarService.selectedChapter?.id;
-    if(chapterId == null){
-      this.nodes = []
-      return;
-    }
+    this.sideBarService.nodesUpdated.subscribe(()=>{
+      this.nodes = this.sideBarService.nodes;
+    })
 
-    this.chapterHttpService.getById(chapterId).subscribe((collectedChapter: IChapter) => {
-      const newChapter = this.chapterHttpService.parseToChapter(collectedChapter);
-      this.nodes = newChapter.nodes;
-    });
+    this.sideBarService.requestNodes();
   }
 
   onClick(node:any){

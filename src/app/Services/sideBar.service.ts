@@ -1,3 +1,7 @@
+import { IChapter } from './../Models/chapter.model';
+import { IRoot } from './../Models/root.model';
+import { ChapterHttpService } from './Http/ChapterHttp.service';
+import { RootHttpService } from './Http/RootHttp.service';
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { Chapter } from "../Models/chapter.model";
@@ -36,21 +40,29 @@ export class SideBarService {
   selectedChapter:Chapter|null;
   selectedNode:any|null;
 
+  roots:Root[] = [];
+  chapters:Chapter[] = [];
+  nodes:any[] = [];
+  rootsUpdated: Subject<void> = new Subject<void>();
+  chaptersUpdated: Subject<void> = new Subject<void>();
+  nodesUpdated: Subject<void> = new Subject<void>();
+
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();
 
   state:State = State.Roots;
   stateChange:Subject<State> = new Subject<State>();
 
-  action: Action;
+  action: Action = Action.Default;
   actionChange:Subject<Action> = new Subject<Action>();
 
-  constructor() {
+  constructor(
+    private rootHttpService: RootHttpService,
+    private chapterHttpService: ChapterHttpService,
+    ) {
   }
 
   changeEditMode(edit:boolean){
-    console.log(edit);
-
     if(this.editMode != edit){
       this.editMode = edit;
       this.editModeChange.next(this.editMode);
@@ -116,46 +128,39 @@ export class SideBarService {
     }
   }
 
-  getRoots(){
-    const root1 = new Root();
-    root1.title = 'Energy'
-    const root2 = new Root();
-    root2.title = 'Drivers License'
-    const root3 = new Root();
-    root3.title = 'German'
-
-    return [
-      root1,
-      root2,
-      root3
-    ]
+  requestRoots(){
+    this.rootHttpService.get().subscribe((collectedRoots: IRoot[]) => {
+      const roots = this.rootHttpService.parseToRoots(collectedRoots);
+      this.roots = roots;
+      this.rootsUpdated.next();
+    });
   }
-  getChapters(){
-    const chap1 = new Chapter();
-    chap1.title = 'Chapter 1'
-    const chap2 = new Chapter();
-    chap2.title = 'Chapter 2'
-    const chap3 = new Chapter();
-    chap3.title = 'Chapter 3'
+  requestChapters(){
+    const rootId = this.selectedRoot?.id
+    if(rootId == null) {
+      this.chapters = [];
+      return;
+    };
 
-    return [
-      chap1,
-      chap2,
-      chap3
-    ]
+    this.rootHttpService.getById(rootId).subscribe((collectedRoot: IRoot)=> {
+      const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
+      this.chapters = newRoot.chapters;
+      this.chaptersUpdated.next();
+    });
   }
 
-  getNodes() : any[]{
-    const node1 = new Explain();
-    node1.title = 'node 1'
-    const node2 = new Deck('node 2');
-    const node3 = new Deck('node 3');
+  requestNodes(){
+    const chapterId = this.selectedChapter?.id;
+    if(chapterId == null){
+      this.nodes = []
+      return;
+    }
 
-    return [
-      node1,
-      node2,
-      node3
-    ]
+    this.chapterHttpService.getById(chapterId).subscribe((collectedChapter: IChapter) => {
+      const newChapter = this.chapterHttpService.parseToChapter(collectedChapter);
+      this.nodes = newChapter.nodes;
+      this.nodesUpdated.next();
+    });
   }
 
   getAction(actionString: string) : Action{

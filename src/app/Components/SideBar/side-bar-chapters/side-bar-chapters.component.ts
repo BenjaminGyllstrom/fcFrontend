@@ -27,26 +27,17 @@ export class SideBarChaptersComponent implements OnInit {
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-    // this.chapters = this.sideBarService.getChapters();
-
-    this.setChapters();
 
     this.sideBarService.editModeChange.subscribe((isEditMode) => {
       this.editMode = isEditMode;
     })
-  }
 
-  setChapters(){
-    const rootId = this.sideBarService.selectedRoot?.id
-    if(rootId == null) {
-      this.chapters = [];
-      return;
-    };
+    this.sideBarService.chaptersUpdated.subscribe(()=>{
+      this.chapters = this.sideBarService.chapters;
+    })
 
-    this.rootHttpService.getById(rootId).subscribe((collectedRoot: IRoot)=> {
-      const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
-      this.chapters = newRoot.chapters;
-    });
+    this.sideBarService.requestChapters();
+
   }
 
   onClick(chapter:Chapter){

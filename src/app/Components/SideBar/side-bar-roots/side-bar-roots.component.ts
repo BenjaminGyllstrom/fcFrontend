@@ -29,10 +29,11 @@ export class SideBarRootsComponent implements OnInit {
       this.editMode = isEditMode;
     })
 
-    this.rootHttpService.get().subscribe((collectedRoots: IRoot[]) => {
-      const roots = this.rootHttpService.parseToRoots(collectedRoots);
-      this.roots = roots
-    });
+    this.sideBarService.rootsUpdated.subscribe(()=>{
+      this.roots = this.sideBarService.roots;
+    })
+
+    this.sideBarService.requestRoots();
   }
 
   onClick(root:Root){

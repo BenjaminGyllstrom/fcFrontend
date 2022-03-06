@@ -3,6 +3,7 @@
   width: 100%;
   height: calc(100% - 65px);
   background-color: #F9F5EC;
+  display: flex;
 
 }
 
@@ -14,4 +15,8 @@
   width: 277px;
   display: inherit;
   border-radius: 5px;
+}
+
+.content{
+  width: 100%;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { SideBarService, State } from 'src/app/Services/sideBar.service';
+import { Action, SideBarService, State } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -17,6 +17,8 @@ export class SideBarComponent implements OnInit {
     this.sideBarService.stateChange.subscribe((state:State) => {
       this.state = state;
     });
+
+    this.sideBarService.setAction(Action.MyContentOverview)
   }
 
 }
