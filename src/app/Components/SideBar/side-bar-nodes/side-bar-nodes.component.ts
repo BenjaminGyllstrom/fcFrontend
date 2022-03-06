@@ -50,8 +50,11 @@ export class SideBarNodesComponent implements OnInit {
     this.sideBarService.setNode(this.selectedNode);
   }
 
-  getSideBarItem(root:any) : ISideBarItem{
-    return {icon: 'Explain-black.svg', name: root.title}
+  getSideBarItem(node:any) : ISideBarItem{
+
+    const icon = node.type == 'deck'? 'Deck-black.svg' : 'Explain-black.svg'
+
+    return {icon: icon, name: node.title}
   }
 
   onAdd(){
