@@ -75,6 +75,8 @@ import { SideBarInfoComponent } from './Components/SideBar/side-bar-info/side-ba
 import { SideBarChaptersComponent } from './Components/SideBar/side-bar-chapters/side-bar-chapters.component';
 import { SideBarNodesComponent } from './Components/SideBar/side-bar-nodes/side-bar-nodes.component';
 import { MyContentComponent } from './Components/my-content/my-content.component';
+import { ActionContentComponent } from './Components/action-content/action-content.component';
+import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +139,8 @@ import { MyContentComponent } from './Components/my-content/my-content.component
     SideBarChaptersComponent,
     SideBarNodesComponent,
     MyContentComponent,
+    ActionContentComponent,
+    ShowRootsComponent,
   ],
   imports: [
     BrowserModule,
