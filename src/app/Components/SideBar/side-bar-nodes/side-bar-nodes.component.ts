@@ -21,7 +21,6 @@ export class SideBarNodesComponent implements OnInit {
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-    // this.nodes = this.sideBarService.getNodes();
     this.sideBarService.editModeChange.subscribe((isEditMode) => {
       this.editMode = isEditMode;
     })
@@ -30,16 +29,24 @@ export class SideBarNodesComponent implements OnInit {
       this.nodes = this.sideBarService.nodes;
     })
 
+    this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
+      this.selectNode(node);
+    })
+
     this.sideBarService.requestNodes();
   }
 
-  onClick(node:any){
-    if(this.selectedNode == node){
+  selectNode(node:any){
+    if(node == null || this.selectedNode == node){
       this.selectedNode = null
     }else{
       this.selectedNode = node;
       this.addIsClicked = false;
     }
+  }
+
+  onClick(node:any){
+    this.selectNode(node);
     this.sideBarService.setNode(this.selectedNode);
   }
 
