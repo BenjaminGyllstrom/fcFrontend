@@ -171,6 +171,7 @@ export class SideBarService {
 
   addChapter(chapter:Chapter){
     this.chapters.push(chapter)
+    this.selectedRoot?.chapters.push(chapter)
     this.chaptersUpdated.next();
   }
 

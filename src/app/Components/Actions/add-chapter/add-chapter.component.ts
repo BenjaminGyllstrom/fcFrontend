@@ -28,6 +28,10 @@ export class AddChapterComponent implements OnInit {
     const chapter = new Chapter();
     chapter.title = title;
 
+    if(this.sideBarService.selectedRoot?.id == null)  return
+
+    chapter.rootId = this.sideBarService.selectedRoot?.id;
+
     this.chapterForm.reset();
     this.chapterHttpService.post(chapter).subscribe((collectedChapter: IChapter) => {
       const newChapter = this.chapterHttpService.parseToChapter(collectedChapter);
