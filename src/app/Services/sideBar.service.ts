@@ -32,9 +32,9 @@ export enum Action {
 })
 export class SideBarService {
 
-  private selectedRoot:Root|null;
-  private selectedChapter:Chapter|null;
-  private selectedNode:any|null;
+  selectedRoot:Root|null;
+  selectedChapter:Chapter|null;
+  selectedNode:any|null;
 
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();

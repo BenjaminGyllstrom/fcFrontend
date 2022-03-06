@@ -1,3 +1,4 @@
+import { MyContentComponent } from './Components/my-content/my-content.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardOverviewComponent } from './Components/Cards/card-overview/card-overview.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'myDecks', component:MyDecksComponent, canActivate: [AuthGuardService]},
   {path: 'myRoots', component:MyRootsComponent, canActivate: [AuthGuardService]},
+  {path: 'myContent', component:MyContentComponent, canActivate: [AuthGuardService]},
   {path: 'createRoot', component:CreateRootComponent, canActivate: [AuthGuardService]},
   {path: 'rootOverview/:id', component:RootOverviewComponent, canActivate: [AuthGuardService]},
   {path: 'createChapter/:id', component:CreateChapterComponent, canActivate: [AuthGuardService]},

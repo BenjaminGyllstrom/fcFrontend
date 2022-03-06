@@ -1,3 +1,5 @@
+import { IRoot } from './../../../Models/root.model';
+import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
@@ -16,15 +18,21 @@ export class SideBarRootsComponent implements OnInit {
   showAll:boolean = true;
   addIsClicked:boolean
 
-  constructor(private sideBarService: SideBarService) { }
+  constructor(
+    private sideBarService: SideBarService,
+    private rootHttpService: RootHttpService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-    this.roots = this.sideBarService.getRoots();
 
     this.sideBarService.editModeChange.subscribe((isEditMode) => {
       this.editMode = isEditMode;
     })
+
+    this.rootHttpService.get().subscribe((collectedRoots: IRoot[]) => {
+      const roots = this.rootHttpService.parseToRoots(collectedRoots);
+      this.roots = roots
+    });
   }
 
   onClick(root:Root){

@@ -1,3 +1,6 @@
+import { IRoot } from './../../../Models/root.model';
+import { RootHttpService } from './../../../Services/Http/RootHttp.service';
+import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
 import { Component, OnInit } from '@angular/core';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
@@ -17,15 +20,33 @@ export class SideBarChaptersComponent implements OnInit {
   addIsClicked:boolean
 
 
-  constructor(private sideBarService: SideBarService) { }
+  constructor(
+    private sideBarService: SideBarService,
+    private chapterHttpService: ChapterHttpService,
+    private rootHttpService: RootHttpService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-    this.chapters = this.sideBarService.getChapters();
+    // this.chapters = this.sideBarService.getChapters();
+
+    this.setChapters();
 
     this.sideBarService.editModeChange.subscribe((isEditMode) => {
       this.editMode = isEditMode;
     })
+  }
+
+  setChapters(){
+    const rootId = this.sideBarService.selectedRoot?.id
+    if(rootId == null) {
+      this.chapters = [];
+      return;
+    };
+
+    this.rootHttpService.getById(rootId).subscribe((collectedRoot: IRoot)=> {
+      const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
+      this.chapters = newRoot.chapters;
+    });
   }
 
   onClick(chapter:Chapter){
