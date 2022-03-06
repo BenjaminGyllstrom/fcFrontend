@@ -31,9 +31,7 @@ export enum Action {
   AddCard,
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SideBarService {
 
   selectedRoot:Root|null;
@@ -73,7 +71,11 @@ export class SideBarService {
     }
   }
 
-  setAction(action:Action){
+  setAction(action:Action|null){
+
+    if(action == null) action = Action.Default
+
+
     console.log(Action[action].toString());
 
     if(this.action != action){
@@ -82,34 +84,41 @@ export class SideBarService {
     }
   }
 
-  setRoot(root:Root|null, setAction:boolean = true){
+  setRoot(root:Root|null, setAction:boolean = true, notifyRootChange = false){
     this.selectedRoot = root;
     this.selectedChapter = null;
     this.selectedNode = null;
     this.setState();
-    this.selectedRootChange.next(root);
+
+    if(notifyRootChange) this.selectedRootChange.next(root);
 
     if(setAction){
-      this.setAction(Action.Chapters);
+      this.setAction(root != null? Action.Chapters : Action.MyContentOverview);
     }
   }
-  setChapter(chapter:Chapter|null, setAction:boolean = true){
+  setChapter(chapter:Chapter|null, setAction:boolean = true, notifyChapterChange = false){
     this.selectedChapter = chapter;
     this.selectedNode = null;
     this.setState();
-    this.selectedChapterChange.next(chapter);
+
+    if(notifyChapterChange) this.selectedChapterChange.next(chapter);
 
     if(setAction){
-    this.setAction(Action.Default);
+    this.setAction(chapter != null? Action.Nodes : Action.Chapters);
     }
   }
-  setNode(node:Node|null, setAction:boolean = true){
+  setNode(node:any|null, setAction:boolean = true, notifyNodeChange = false){
     this.selectedNode = node;
     this.setState();
-    this.selectedNodeChange.next(node);
+
+    if(notifyNodeChange) this.selectedNodeChange.next(node);
 
     if(setAction){
-      this.setAction(Action.Default);
+      let action = Action.Default;
+      if(node == null) action = Action.Nodes;
+      else if (node.type == 'deck') action = Action.DeckOverview
+      else if (node.type == 'explain') action = Action.ExplainOverview
+      this.setAction(action);
     }
   }
 

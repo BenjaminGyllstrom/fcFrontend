@@ -2,13 +2,8 @@
   <div *ngIf="showDefault()">
     showDefault
   </div>
-  <div *ngIf="showMyContentOverview()">
-    <app-show-roots></app-show-roots>
-  </div>
-  <div *ngIf="showRootIntroduction()">
-    showRootIntroduction
-  </div>
-  <div *ngIf="showChapters()">
-    <app-show-chapters></app-show-chapters>
-  </div>
+
+  <app-show-roots *ngIf="showMyContentOverview()"></app-show-roots>
+  <app-show-chapters *ngIf="showChapters()"></app-show-chapters>
+  <app-show-nodes *ngIf="showNodes()"></app-show-nodes>
 </div>

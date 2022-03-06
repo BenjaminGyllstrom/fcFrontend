@@ -24,7 +24,7 @@ export class ShowRootsComponent implements OnInit {
   }
 
   onClick(root:Root){
-    this.sideBarService.setRoot(root);
+    this.sideBarService.setRoot(root, true, true);
   }
 
 }

@@ -40,7 +40,10 @@ export class SideBarActionsComponent implements OnInit {
   }
 
   setAction(actionString:string){
+
     const action = this.sideBarService.getAction(actionString);
-    this.sideBarService.setAction(action)
+    if(this.selectedAction == action) this.sideBarService.setAction(null)
+    else this.sideBarService.setAction(action)
+
   }
 }

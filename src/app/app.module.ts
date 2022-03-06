@@ -80,6 +80,7 @@ import { ActionContentComponent } from './Components/action-content/action-conte
 import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
 import { RootListItemComponent } from './Components/Actions/show-roots/root-list-item/root-list-item.component';
 import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';
+import { ShowNodesComponent } from './Components/Actions/show-nodes/show-nodes.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +147,7 @@ import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-c
     ShowRootsComponent,
     RootListItemComponent,
     ShowChaptersComponent,
+    ShowNodesComponent,
   ],
   imports: [
     BrowserModule,
