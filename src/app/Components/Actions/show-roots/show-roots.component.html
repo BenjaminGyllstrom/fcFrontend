@@ -1,1 +1,9 @@
-<p>show-roots works!</p>
+<div class="show-roots">
+  <h1>Roots</h1>
+
+  <div class="roots__list">
+      <app-root-list-item *ngFor="let root of roots" [root]="root"
+      (click)="onClick(root)" class="roots__list-item"></app-root-list-item>
+  </div>
+
+</div>

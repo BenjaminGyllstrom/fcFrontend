@@ -33,11 +33,15 @@ export class SideBarRootsComponent implements OnInit {
       this.roots = this.sideBarService.roots;
     })
 
+    this.sideBarService.selectedRootChange.subscribe((root:Root|null)=>{
+      this.selectRoot(root);
+    })
+
     this.sideBarService.requestRoots();
   }
 
-  onClick(root:Root){
-    if(this.selectedRoot == root){
+  selectRoot(root: Root|null){
+    if(root == null || this.selectedRoot == root){
       this.selectedRoot = null
       this.showAll = true;
     }else{
@@ -45,6 +49,10 @@ export class SideBarRootsComponent implements OnInit {
       this.showAll = false;
       this.addIsClicked = false;
     }
+  }
+
+  onClick(root:Root){
+    this.selectRoot(root);
     this.sideBarService.setRoot(this.selectedRoot);
   }
 

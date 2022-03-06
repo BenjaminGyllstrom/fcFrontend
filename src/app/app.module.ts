@@ -77,6 +77,7 @@ import { SideBarNodesComponent } from './Components/SideBar/side-bar-nodes/side-
 import { MyContentComponent } from './Components/my-content/my-content.component';
 import { ActionContentComponent } from './Components/action-content/action-content.component';
 import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
+import { RootListItemComponent } from './Components/Actions/show-roots/root-list-item/root-list-item.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +142,7 @@ import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.c
     MyContentComponent,
     ActionContentComponent,
     ShowRootsComponent,
+    RootListItemComponent,
   ],
   imports: [
     BrowserModule,

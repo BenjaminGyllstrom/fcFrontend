@@ -40,6 +40,10 @@ export class SideBarService {
   selectedChapter:Chapter|null;
   selectedNode:any|null;
 
+  selectedRootChange: Subject<Root|null> = new Subject<Root|null>();
+  selectedChapterChange: Subject<Chapter|null> = new Subject<Chapter|null>();
+  selectedNodeChange: Subject<any> = new Subject<any>();
+
   roots:Root[] = [];
   chapters:Chapter[] = [];
   nodes:any[] = [];
@@ -83,7 +87,7 @@ export class SideBarService {
     this.selectedChapter = null;
     this.selectedNode = null;
     this.setState();
-
+    this.selectedRootChange.next(root);
     if(setAction){
       this.setAction(Action.Default);
     }

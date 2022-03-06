@@ -1,3 +1,5 @@
+import { Root } from './../../../Models/root.model';
+import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowRootsComponent implements OnInit {
 
-  constructor() { }
+  roots:Root[]
+
+  constructor(
+    private sideBarService: SideBarService
+  ) { }
 
   ngOnInit(): void {
+    this.sideBarService.rootsUpdated.subscribe(()=>{
+      this.roots = this.sideBarService.roots;
+    })
+
+    this.roots = this.sideBarService.roots;
+  }
+
+  onClick(root:Root){
+    this.sideBarService.setRoot(root);
   }
 
 }
