@@ -1,0 +1,15 @@
+
+<div class="add-chapter">
+
+  <h1>Add New Chapter</h1>
+
+  <form [formGroup]="chapterForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inputField">
+      <p>Title:</p>
+      <input type="text" id="title" formControlName="title">
+    </div>
+
+    <button type="submit" class="button add-chapter-button">Add</button>
+  </form>
+
+</div>

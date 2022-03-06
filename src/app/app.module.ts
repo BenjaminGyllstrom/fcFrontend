@@ -84,6 +84,7 @@ import { ShowNodesComponent } from './Components/Actions/show-nodes/show-nodes.c
 import { ShowCardsComponent } from './Components/Actions/show-cards/show-cards.component';
 import { CardComponent } from './Components/Actions/show-cards/card/card.component';
 import { AddRootComponent } from './Components/Actions/add-root/add-root.component';
+import { AddChapterComponent } from './Components/Actions/add-chapter/add-chapter.component';
 
 @NgModule({
   declarations: [
@@ -154,6 +155,7 @@ import { AddRootComponent } from './Components/Actions/add-root/add-root.compone
     ShowCardsComponent,
     CardComponent,
     AddRootComponent,
+    AddChapterComponent,
   ],
   imports: [
     BrowserModule,

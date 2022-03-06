@@ -169,6 +169,11 @@ export class SideBarService {
     });
   }
 
+  addChapter(chapter:Chapter){
+    this.chapters.push(chapter)
+    this.chaptersUpdated.next();
+  }
+
   requestNodes(){
     const chapterId = this.selectedChapter?.id;
     if(chapterId == null){
