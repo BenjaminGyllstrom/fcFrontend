@@ -116,7 +116,7 @@ export class SideBarService {
     if(setAction){
       let action = Action.Default;
       if(node == null) action = Action.Nodes;
-      else if (node.type == 'deck') action = Action.DeckOverview
+      else if (node.type == 'deck') action = Action.Cards
       else if (node.type == 'explain') action = Action.ExplainOverview
       this.setAction(action);
     }

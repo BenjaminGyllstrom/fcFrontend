@@ -1,0 +1,33 @@
+.card{
+  height: 100%;
+  width: 100%;
+  border: 1px solid #876E2B;
+  border-radius: 30px;
+  background-color: white;
+  // display: flex;
+  // flex-direction: column;
+
+  display: grid;
+  grid-template-rows: calc(100% - 55px) 55px;
+
+  overflow: hidden;
+}
+
+.card-content{
+  padding: 10px;
+  cursor: pointer;
+}
+
+.question-answer-switch{
+  height: 55px;
+  width: 100%;
+  background-color: #876E2B;
+  color: white;
+  font-size: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
