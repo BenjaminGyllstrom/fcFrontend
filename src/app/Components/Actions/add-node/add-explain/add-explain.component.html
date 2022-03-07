@@ -6,9 +6,7 @@
       <input type="text" id="title" formControlName="title">
     </div>
 
-    <div class="quill">
-      <div #editor class="editor"></div>
-    </div>
+    <app-quill-edit (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
 
     <button type="submit" class="button add-explain-button">Add</button>
   </form>

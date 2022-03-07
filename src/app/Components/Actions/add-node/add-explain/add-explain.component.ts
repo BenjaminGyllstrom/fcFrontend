@@ -15,6 +15,7 @@ export class AddExplainComponent implements OnInit {
 
 
   chapterId:string;
+  quillContent:string = '';
 
   constructor(
     private explainHttpService: ExplainHttpService,
@@ -26,7 +27,6 @@ export class AddExplainComponent implements OnInit {
     title:'',
   });
 
-
   @HostListener('window:keyup', ['$event'])
     keyEvent(event: KeyboardEvent) {
     if(event.shiftKey && event.key == 'Enter'){
@@ -34,21 +34,18 @@ export class AddExplainComponent implements OnInit {
     }
   }
 
-  @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
-  quill:Quill;
-
-  ngAfterViewInit(){
-    this.quill = this.quillService.createQuill(this.editor);
-  }
-
   ngOnInit(): void {
     if(this.sideBarService.selectedChapter == null) return;
     this.chapterId = this.sideBarService.selectedChapter.id;
   }
 
+  onContentChange(content:string){
+    this.quillContent = content;
+  }
+
   onSubmit(){
     const title = this.explainForm.value.title;
-    const text = this.quill.root.innerHTML;
+    const text = this.quillContent;
     const explain = new Explain();
     explain.title = title;
     explain.text = text;
