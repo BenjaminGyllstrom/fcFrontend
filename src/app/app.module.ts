@@ -1,3 +1,4 @@
+import { Action } from 'src/app/Services/sideBar.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -38,7 +39,8 @@ import { DeckNodeComponent } from './Components/Nodes/deck-node/deck-node.compon
 import { ExplainNodeComponent } from './Components/Nodes/explain-node/explain-node.component';
 import { ExplainListOverviewComponent } from './Components/Explains/explain-list-overview/explain-list-overview.component';
 import { CreateExplainComponent } from './Components/Explains/create-explain/create-explain.component';
-import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
+// import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
+import { ExplainOverviewComponent } from './Components/Actions/explain-overview/explain-overview.component';
 import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
 import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
