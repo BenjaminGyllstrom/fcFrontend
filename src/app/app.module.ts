@@ -91,6 +91,7 @@ import { AddNodeComponent } from './Components/Actions/add-node/add-node.compone
 import { NodeTypeSwitchComponent } from './Components/Actions/add-node/node-type-switch/node-type-switch.component';
 import { AddDeckComponent } from './Components/Actions/add-node/add-deck/add-deck.component';
 import { AddExplainComponent } from './Components/Actions/add-node/add-explain/add-explain.component';
+import { QuillShowComponent } from './Components/Quill/quill-show/quill-show.component';
 
 @NgModule({
   declarations: [
@@ -166,6 +167,7 @@ import { AddExplainComponent } from './Components/Actions/add-node/add-explain/a
     NodeTypeSwitchComponent,
     AddDeckComponent,
     AddExplainComponent,
+    QuillShowComponent,
   ],
   imports: [
     BrowserModule,
