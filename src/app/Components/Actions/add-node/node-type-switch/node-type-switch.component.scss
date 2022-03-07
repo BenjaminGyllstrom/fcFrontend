@@ -1,0 +1,20 @@
+.node-type-switch{
+  display: flex;
+  width: 235px;
+  height: 55px;
+  border: 1px solid #876E2B;
+  border-radius: 35px;
+  overflow: hidden;
+  cursor: pointer;
+
+  div{
+    font-size: 24px;
+    width: 50%;
+    height: 100%;
+    background-color: #D4BB79 ;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

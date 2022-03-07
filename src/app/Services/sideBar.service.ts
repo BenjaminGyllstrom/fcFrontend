@@ -189,6 +189,12 @@ export class SideBarService {
     });
   }
 
+  addNode(node: any){
+    this.selectedChapter?.nodes.push(node);
+    this.nodes.push(node);
+    this.nodesUpdated.next();
+  }
+
   getAction(actionString: string) : Action{
     switch(actionString){
       case('MyContentOverview'):{

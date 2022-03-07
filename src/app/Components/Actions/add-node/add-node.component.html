@@ -1,0 +1,7 @@
+<div class="add-node">
+
+  <app-node-type-switch (nodeTypeChange)="onNodeChange($event)" class="switch"></app-node-type-switch>
+  <app-add-deck *ngIf="nodeType == 'deck'"></app-add-deck>
+  <app-add-explain *ngIf="nodeType == 'explain'"></app-add-explain>
+</div>
+

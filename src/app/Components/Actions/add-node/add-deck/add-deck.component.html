@@ -1,0 +1,20 @@
+
+<div class="add-deck">
+  <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="inputField">
+      <p>Title:</p>
+      <input type="text" id="title" formControlName="title">
+    </div>
+
+    <mat-form-field>
+      <mat-label>Associated Explain</mat-label>
+      <mat-select [(value)]="selectedExplain">
+        <mat-option *ngFor="let explain of explainsInChapter" [value]="explain">
+          {{explain.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button type="submit" class="button add-deck-button">Add</button>
+  </form>
+</div>
+

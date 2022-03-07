@@ -85,6 +85,10 @@ import { ShowCardsComponent } from './Components/Actions/show-cards/show-cards.c
 import { CardComponent } from './Components/Actions/show-cards/card/card.component';
 import { AddRootComponent } from './Components/Actions/add-root/add-root.component';
 import { AddChapterComponent } from './Components/Actions/add-chapter/add-chapter.component';
+import { AddNodeComponent } from './Components/Actions/add-node/add-node.component';
+import { NodeTypeSwitchComponent } from './Components/Actions/add-node/node-type-switch/node-type-switch.component';
+import { AddDeckComponent } from './Components/Actions/add-node/add-deck/add-deck.component';
+import { AddExplainComponent } from './Components/Actions/add-node/add-explain/add-explain.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +160,10 @@ import { AddChapterComponent } from './Components/Actions/add-chapter/add-chapte
     CardComponent,
     AddRootComponent,
     AddChapterComponent,
+    AddNodeComponent,
+    NodeTypeSwitchComponent,
+    AddDeckComponent,
+    AddExplainComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,62 @@
+.add-explain{
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputField{
+  height: 55px;
+  width: 370px;
+  border: 1px solid #876E2B;
+  background-color: white;
+  border-radius: 100px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 35px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+
+  p{
+    margin: 0;
+    margin-left: 15px;
+    font-size: 24px;
+  }
+  input{
+    margin-left: 10px;
+    font-size: 24px;
+    width: 90%;
+    border: none;
+  }
+}
+
+
+.quill{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 980px;
+  border: 1px solid #876E2B;
+  border-radius: 35px;
+  overflow: hidden;
+  background-color: white;
+}
+.editor{
+  margin-bottom: 5px;
+  height: 300px;
+  align-self: stretch;
+  border: none;
+}
+
+
+.add-explain-button{
+  margin-top: 30px;
+  width: min-content;
+  height: 45px;
+  width: 100px;
+  border: 1px solid #876E2B;
+  font-size: 24px;
+}
