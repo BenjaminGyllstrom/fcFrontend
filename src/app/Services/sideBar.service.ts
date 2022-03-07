@@ -174,6 +174,9 @@ export class SideBarService {
     this.selectedRoot?.chapters.push(chapter)
     this.chaptersUpdated.next();
   }
+  // updateExplain(chapter:Chapter){
+  //   const listIndex = this.nodes.indexOf()
+  // }
 
   requestNodes(){
     const chapterId = this.selectedChapter?.id;

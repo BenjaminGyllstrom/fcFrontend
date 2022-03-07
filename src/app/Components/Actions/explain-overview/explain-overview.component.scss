@@ -10,3 +10,20 @@
   height: 300px;
 }
 
+.explain-save-button{
+  margin-top: 100px;
+  width: min-content;
+  height: 45px;
+  width: 100px;
+  border: 1px solid #876E2B;
+  font-size: 24px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.buttons{
+  margin-top: 60px;
+  display: flex;
+  gap: 15px;
+}
