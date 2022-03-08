@@ -40,8 +40,15 @@ export class SideBarChaptersComponent implements OnInit {
       this.selectChapter(chapter);
     })
 
-    this.sideBarService.requestChapters();
 
+    if(this.sideBarService.selectedChapter != null){
+      this.selectChapter(this.sideBarService.selectedChapter)
+    }
+    if(this.sideBarService.chapters.length == 0) {
+      this.sideBarService.requestChapters();
+    }else{
+      this.chapters = this.sideBarService.chapters
+    }
   }
 
   selectChapter(chapter: Chapter|null){

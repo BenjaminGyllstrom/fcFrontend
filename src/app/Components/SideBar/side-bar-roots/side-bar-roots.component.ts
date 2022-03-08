@@ -37,7 +37,14 @@ export class SideBarRootsComponent implements OnInit {
       this.selectRoot(root);
     })
 
-    this.sideBarService.requestRoots();
+    if(this.sideBarService.selectedRoot != null){
+      this.selectRoot(this.sideBarService.selectedRoot)
+    }
+    if(this.sideBarService.roots.length == 0) {
+      this.sideBarService.requestRoots();
+    }else{
+      this.roots = this.sideBarService.roots
+    }
   }
 
   selectRoot(root: Root|null){

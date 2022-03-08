@@ -1,3 +1,4 @@
+import { Card } from 'src/app/Models/card.model';
 import { IChapter } from './../Models/chapter.model';
 import { IRoot } from './../Models/root.model';
 import { ChapterHttpService } from './Http/ChapterHttp.service';
@@ -31,17 +32,19 @@ export enum Action {
   AddCard,
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SideBarService {
 
   selectedRoot:Root|null;
   selectedChapter:Chapter|null;
   selectedNode:any|null;
+  selectedCard:Card|null;
 
   selectedRootChange: Subject<Root|null> = new Subject<Root|null>();
   selectedChapterChange: Subject<Chapter|null> = new Subject<Chapter|null>();
   selectedNodeChange: Subject<any> = new Subject<any>();
-
   roots:Root[] = [];
   chapters:Chapter[] = [];
   nodes:any[] = [];
@@ -124,6 +127,28 @@ export class SideBarService {
       else if (node.type == 'deck') action = Action.Cards
       else if (node.type == 'explain') action = Action.ExplainOverview
       this.setAction(action);
+    }
+  }
+
+  initAction(){
+    const startAction = this.action
+    if (this.selectedNode == null && this.selectedChapter == null && this.selectedRoot == null) {
+      this.action = Action.MyContentOverview;
+    }else if (this.selectedNode == null && this.selectedChapter == null){
+      this.action = Action.Chapters;
+    }
+    else if (this.selectedNode == null){
+      this.action = Action.Nodes;
+    }
+    else if (this.selectedNode.type == "deck"){
+      this.action = Action.Cards;
+    }
+    else if (this.selectedNode.type == "explain"){
+      this.action = Action.ExplainOverview;
+    }
+
+    if(startAction != this.action){
+      this.actionChange.next(this.action);
     }
   }
 

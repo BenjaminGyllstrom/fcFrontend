@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-my-content',
   templateUrl: './my-content.component.html',
   styleUrls: ['./my-content.component.scss'],
-  providers: [SideBarService]
+  // providers: [SideBarService]
 })
 export class MyContentComponent implements OnInit {
 

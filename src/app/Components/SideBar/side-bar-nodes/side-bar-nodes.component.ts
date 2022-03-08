@@ -33,7 +33,15 @@ export class SideBarNodesComponent implements OnInit {
       this.selectNode(node);
     })
 
-    this.sideBarService.requestNodes();
+    if(this.sideBarService.selectedNode != null){
+      this.selectNode(this.sideBarService.selectedNode)
+    }
+    if(this.sideBarService.nodes.length == 0) {
+      this.sideBarService.requestNodes();
+    }else{
+      this.nodes = this.sideBarService.nodes
+    }
+    // this.sideBarService.requestNodes();
   }
 
   selectNode(node:any){

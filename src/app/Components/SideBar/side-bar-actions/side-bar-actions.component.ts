@@ -15,6 +15,7 @@ export class SideBarActionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.state = this.sideBarService.state;
+    this.selectedAction = this.sideBarService.action;
     this.sideBarService.stateChange.subscribe((state:State) => {
       this.state = state;
       this.selectedAction = null;

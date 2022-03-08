@@ -18,7 +18,7 @@ export class SideBarComponent implements OnInit {
       this.state = state;
     });
 
-    this.sideBarService.setAction(Action.MyContentOverview)
+    this.sideBarService.initAction();
   }
 
 }
