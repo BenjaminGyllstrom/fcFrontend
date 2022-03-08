@@ -90,6 +90,9 @@ export class SideBarService {
     this.selectedNode = null;
     this.setState();
 
+    this.chapters = [];
+    this.nodes = []
+
     if(notifyRootChange) this.selectedRootChange.next(root);
 
     if(setAction){
@@ -100,6 +103,8 @@ export class SideBarService {
     this.selectedChapter = chapter;
     this.selectedNode = null;
     this.setState();
+
+    this.nodes = []
 
     if(notifyChapterChange) this.selectedChapterChange.next(chapter);
 
