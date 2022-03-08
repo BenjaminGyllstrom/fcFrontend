@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-content" (click)="onContentClick()">
-    <quill-view *ngIf="showQuestion" [content]="question" format="html"></quill-view>
-    <quill-view *ngIf="!showQuestion && answer" [content]="answer" format="html"></quill-view>
+    <app-quill-show *ngIf="showQuestion" [content]="question"></app-quill-show>
+    <app-quill-show *ngIf="!showQuestion && answer" [content]="answer"></app-quill-show>
   </div>
   <div *ngIf="showQuestion" class="question-answer-switch not-select" (click)="switchContent()"> Show Answer</div>
   <div *ngIf="!showQuestion" class="question-answer-switch not-select" (click)="switchContent()"> Show Question</div>

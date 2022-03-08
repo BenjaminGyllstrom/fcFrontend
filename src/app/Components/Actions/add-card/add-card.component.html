@@ -1,9 +1,19 @@
 <div class="add-card">
-  <app-quill-edit *ngIf="showQuestion" [content]="question" (onContentChange)="onContentChange($event)" class="card"></app-quill-edit>
-  <app-quill-edit *ngIf="!showQuestion" [content]="answer" (onContentChange)="onContentChange($event)" class="card"></app-quill-edit>
+  <div class="card">
+    <div class="card__content">
+      <app-quill-edit *ngIf="showQuestion" [content]="question" (onContentChange)="onContentChange($event)"></app-quill-edit>
+      <app-quill-edit *ngIf="!showQuestion" [content]="answer" (onContentChange)="onContentChange($event)"></app-quill-edit>
+    </div>
+    <div *ngIf="showQuestion" class="card__switch not-select" (click)="onChangeContent()"> Show Answer</div>
+    <div *ngIf="!showQuestion" class="card__switch not-select" (click)="onChangeContent()"> Show Question</div>
+  </div>
+
+  <!-- <div *ngIf="showQuestion" class="question-answer-switch not-select" (click)="onChangeContent()"> Show Answer</div>
+  <div *ngIf="!showQuestion" class="question-answer-switch not-select" (click)="onChangeContent()"> Show Question</div> -->
+
 
   <!-- <button>Show Explain</button> -->
   <button type="submit" class="button add-card-button" (click)="onSave()">Add</button>
-  <button type="submit" class="button add-card-button" (click)="onChangeContent()">Question/Answer</button>
+  <!-- <button type="submit" class="button add-card-button" (click)="onChangeContent()">Question/Answer</button> -->
 
 </div>
