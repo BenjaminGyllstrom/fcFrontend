@@ -93,6 +93,7 @@ import { AddDeckComponent } from './Components/Actions/add-node/add-deck/add-dec
 import { AddExplainComponent } from './Components/Actions/add-node/add-explain/add-explain.component';
 import { QuillShowComponent } from './Components/Quill/quill-show/quill-show.component';
 import { QuillEditComponent } from './Components/Quill/quill-edit/quill-edit.component';
+import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
 
 @NgModule({
   declarations: [
@@ -170,6 +171,7 @@ import { QuillEditComponent } from './Components/Quill/quill-edit/quill-edit.com
     AddExplainComponent,
     QuillShowComponent,
     QuillEditComponent,
+    AddCardComponent,
   ],
   imports: [
     BrowserModule,

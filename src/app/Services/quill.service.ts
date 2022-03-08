@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { ElementRef, Injectable } from "@angular/core";
 import Quill from "quill";
 
@@ -10,6 +11,18 @@ import Quill from "quill";
 export class QuillService{
 
   constructor() {}
+
+  onReset:Subject<void> = new Subject<void>();
+  // onContentChange:Subject<{text:string, cursorPosition:number}> = new Subject<{text:string, cursorPosition:number}>();
+  // content:{text:string, cursorPosition:number};
+
+  // updateContent(content:{text:string, cursorPosition:number}){
+  //   this.content = content;
+  //   this.onContentChange.next(content)
+  // }
+  // changeContent(content:{text:string, cursorPosition:number}){
+
+  // }
 
   toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons

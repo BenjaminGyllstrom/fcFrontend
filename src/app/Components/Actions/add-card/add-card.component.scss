@@ -1,0 +1,22 @@
+.add-card{
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
+
+}
+
+.card{
+  height: 400px;
+  width: 800px;
+}
+
+.add-card-button{
+  margin-top: 70px;
+  width: min-content;
+  height: 45px;
+  width: 100px;
+  border: 1px solid #876E2B;
+  font-size: 24px;
+}

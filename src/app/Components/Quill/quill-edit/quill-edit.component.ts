@@ -31,7 +31,9 @@ export class QuillEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.quillService.onReset.subscribe(()=>{
+      this.quill.root.innerHTML = '';
+    })
   }
 
 }
