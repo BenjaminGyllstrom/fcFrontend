@@ -18,7 +18,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { DeckListOverviewComponent } from './Components/Decks/deck-list-overview/deck-list-overview.component';
 import { CreateDeckComponent } from './Components/Decks/create-deck/create-deck.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { DeckOverviewComponent } from './Components/Decks/deck-overview/deck-overview.component';
+import { DeckOverviewComponent } from './Components/Actions/deck-overview/deck-overview.component';
 import { CreateCardComponent } from './Components/Cards/create-card/create-card.component';
 import { ViewCardsComponent } from './Components/Cards/view-cards/view-cards.component';
 import { CardListOverviewComponent } from './Components/Cards/card-list-overview/card-list-overview.component';

@@ -1,0 +1,23 @@
+<div class="deck-overview">
+  <form [formGroup]="deckForm" (ngSubmit)="onSave()" class="form">
+    <div class="inputField">
+      <p>Title:</p>
+      <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+    </div>
+
+    <mat-form-field>
+      <mat-label>Associated Explain</mat-label>
+      <mat-select (selectionChange)="onExplainChange()" [(value)]="selectedExplain">
+        <mat-option *ngFor="let explain of explainsInChapter" [value]="explain">
+          {{explain.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <div *ngIf="edit" class="buttons">
+      <button type="submit" class="button deck-overview-button" (click)="onSave()">Save</button>
+      <button type="submit" class="button deck-overview-button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>
