@@ -10,6 +10,12 @@
 .card{
   height: 400px;
   width: 800px;
+
+  border: 1px solid #876E2B;
+  border-radius: 35px;
+  overflow: hidden;
+  background-color: white;
+
 }
 
 .add-card-button{
@@ -20,3 +26,18 @@
   border: 1px solid #876E2B;
   font-size: 24px;
 }
+
+
+// .quill-edit{
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+
+//   width: 100%;
+//   height: 100%;
+
+//   border: 1px solid #876E2B;
+//   border-radius: 35px;
+//   overflow: hidden;
+//   background-color: white;
+// }
