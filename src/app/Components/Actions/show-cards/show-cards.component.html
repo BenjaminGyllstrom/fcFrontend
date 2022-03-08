@@ -1,8 +1,8 @@
 
 <div class="show-cards">
 
-  <div *ngFor="let card of cards" class="card">
-    <app-card [card]="card"></app-card>
+  <div *ngFor="let card of cards" class="card" >
+    <app-card [card]="card" (onClick)="onClick(card)"></app-card>
   </div>
 </div>
 

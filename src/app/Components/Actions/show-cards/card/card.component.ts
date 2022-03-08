@@ -1,5 +1,5 @@
 import { Card } from './../../../../Models/card.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -9,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardComponent implements OnInit {
 
   @Input() card: Card
+  @Output('onClick') onClickEmitter = new EventEmitter<void>();
   question:string
   answer:string
 
@@ -22,8 +23,7 @@ export class CardComponent implements OnInit {
   }
 
   onContentClick(){
-    console.log('card clicked');
-
+    this.onClickEmitter.emit();
   }
   switchContent(){
     this.showQuestion = !this.showQuestion;

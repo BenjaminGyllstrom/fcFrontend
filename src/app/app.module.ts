@@ -23,7 +23,7 @@ import { CreateCardComponent } from './Components/Cards/create-card/create-card.
 import { ViewCardsComponent } from './Components/Cards/view-cards/view-cards.component';
 import { CardListOverviewComponent } from './Components/Cards/card-list-overview/card-list-overview.component';
 import { CardOverviewComponent } from './Components/Cards/card-overview/card-overview.component';
-import { EditCardComponent } from './Components/Cards/edit-card/edit-card.component';
+import { EditCardComponent } from './Components/Actions/show-cards/edit-card/edit-card.component';
 import { StudyComponent } from './Components/study/study.component';
 import { MyDecksComponent } from './Components/Decks/my-decks/my-decks.component';
 import { RootListOverviewComponent } from './Components/roots/root-list-overview/root-list-overview.component';
