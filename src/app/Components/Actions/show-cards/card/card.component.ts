@@ -1,3 +1,4 @@
+import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Card } from './../../../../Models/card.model';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
@@ -15,11 +16,18 @@ export class CardComponent implements OnInit {
 
   showQuestion:boolean = true;
 
-  constructor() { }
+  constructor(private sideBarService: SideBarService) { }
 
   ngOnInit(): void {
     this.question = this.card.question
     this.answer = this.card.answer
+
+    this.sideBarService.cardEdited.subscribe((updatedCard:Card)=>{
+      if(this.card.id == updatedCard.id){
+        this.question = updatedCard.question;
+        this.answer = updatedCard.answer;
+      }
+    })
   }
 
   onContentClick(){

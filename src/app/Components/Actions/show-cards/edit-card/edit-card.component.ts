@@ -1,3 +1,4 @@
+import { ICard } from './../../../../Models/card.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 import { QuillService } from 'src/app/Services/quill.service';
@@ -34,6 +35,7 @@ export class EditCardComponent implements OnInit {
     this.card = this.sideBarService.selectedCard;
     this.question = this.card.question;
     this.answer = this.card.answer;
+    this.deck = this.sideBarService.selectedNode;
   }
   onContentChange(content:string){
     if(this.showQuestion){
@@ -54,8 +56,10 @@ export class EditCardComponent implements OnInit {
     this.card.question = card.question;
     this.card.answer = card.answer;
 
-    this.cardHttpService.edit(card, this.deck.id).subscribe((card) => {
-      // this.deck.cards.push(card);
+
+    this.cardHttpService.edit(card, this.card.id).subscribe((collectedCard: ICard) => {
+      const updatedCard = this.cardHttpService.parseToCard(collectedCard);
+      this.sideBarService.cardEdited.next(updatedCard);
     });
 
     this.showQuestion = true;

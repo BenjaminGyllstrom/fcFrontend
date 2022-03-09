@@ -51,6 +51,7 @@ export class SideBarService {
   rootsUpdated: Subject<void> = new Subject<void>();
   chaptersUpdated: Subject<void> = new Subject<void>();
   nodesUpdated: Subject<void> = new Subject<void>();
+  cardEdited: Subject<Card> = new Subject<Card>();
 
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();
