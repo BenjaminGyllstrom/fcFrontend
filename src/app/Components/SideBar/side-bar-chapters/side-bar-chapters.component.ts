@@ -1,10 +1,11 @@
+import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
 import { Component, OnInit } from '@angular/core';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
-import { Action, SideBarService } from 'src/app/Services/sideBar.service';
+import { SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-chapters',
@@ -23,7 +24,8 @@ export class SideBarChaptersComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private chapterHttpService: ChapterHttpService,
-    private rootHttpService: RootHttpService) { }
+    private rootHttpService: RootHttpService,
+    private actionService: ActionService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -85,7 +87,7 @@ export class SideBarChaptersComponent implements OnInit {
     this.sideBarService.setChapter(this.selectedChapter, setAction);
 
     if(this.addIsClicked){
-      this.sideBarService.setAction(Action.AddChapter);
+      this.actionService.setAction(Action.AddChapter);
     }
   }
 

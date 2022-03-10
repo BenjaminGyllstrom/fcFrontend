@@ -1,3 +1,4 @@
+import { ActionService, Action } from './action.service';
 import { Card } from 'src/app/Models/card.model';
 import { IChapter } from './../Models/chapter.model';
 import { IRoot } from './../Models/root.model';
@@ -16,21 +17,6 @@ export enum State {
   Nodes,
   Deck,
   Explain
-}
-export enum Action {
-  Default,
-  MyContentOverview,
-  RootIntroduction,
-  Chapters,
-  Nodes,
-  ExplainOverview,
-  DeckOverview,
-  Cards,
-  AddRoot,
-  AddChapter,
-  AddNode,
-  AddCard,
-  Study
 }
 
 @Injectable({
@@ -60,12 +46,10 @@ export class SideBarService {
   state:State = State.Roots;
   stateChange:Subject<State> = new Subject<State>();
 
-  action: Action = Action.Default;
-  actionChange:Subject<Action> = new Subject<Action>();
-
   constructor(
     private rootHttpService: RootHttpService,
     private chapterHttpService: ChapterHttpService,
+    private actionService: ActionService
     ) {
   }
 
@@ -73,19 +57,6 @@ export class SideBarService {
     if(this.editMode != edit){
       this.editMode = edit;
       this.editModeChange.next(this.editMode);
-    }
-  }
-
-  setAction(action:Action|null){
-
-    if(action == null) action = Action.Default
-
-
-    console.log(Action[action].toString());
-
-    if(this.action != action){
-      this.action = action;
-      this.actionChange.next(this.action);
     }
   }
 
@@ -101,7 +72,7 @@ export class SideBarService {
     if(notifyRootChange) this.selectedRootChange.next(root);
 
     if(setAction){
-      this.setAction(root != null? Action.Chapters : Action.MyContentOverview);
+      this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
     }
   }
   setChapter(chapter:Chapter|null, setAction:boolean = true, notifyChapterChange = false){
@@ -114,7 +85,7 @@ export class SideBarService {
     if(notifyChapterChange) this.selectedChapterChange.next(chapter);
 
     if(setAction){
-    this.setAction(chapter != null? Action.Nodes : Action.Chapters);
+      this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
     }
   }
   setNode(node:any|null, setAction:boolean = true, notifyNodeChange = false){
@@ -134,30 +105,28 @@ export class SideBarService {
         if(this.editMode) action = Action.ExplainOverview
         else action = Action.Study
       }
-      this.setAction(action);
+      this.actionService.setAction(action);
     }
   }
 
   initAction(){
-    const startAction = this.action
+    let action: Action = Action.Default;
     if (this.selectedNode == null && this.selectedChapter == null && this.selectedRoot == null) {
-      this.action = Action.MyContentOverview;
+      action = Action.MyContentOverview;
     }else if (this.selectedNode == null && this.selectedChapter == null){
-      this.action = Action.Chapters;
+      action = Action.Chapters;
     }
     else if (this.selectedNode == null){
-      this.action = Action.Nodes;
+      action = Action.Nodes;
     }
     else if (this.selectedNode.type == "deck"){
-      this.action = Action.Cards;
+      action = Action.Cards;
     }
     else if (this.selectedNode.type == "explain"){
-      this.action = Action.ExplainOverview;
+      action = Action.ExplainOverview;
     }
 
-    if(startAction != this.action){
-      this.actionChange.next(this.action);
-    }
+    this.actionService.setAction(action)
   }
 
   private setState(){
@@ -234,38 +203,5 @@ export class SideBarService {
     this.selectedChapter?.nodes.push(node);
     this.nodes.push(node);
     this.nodesUpdated.next();
-  }
-
-  getAction(actionString: string) : Action{
-    switch(actionString){
-      case('MyContentOverview'):{
-        return Action.MyContentOverview
-      }
-      case('RootIntroduction'):{
-        return Action.RootIntroduction
-      }
-      case('Chapters'):{
-        return Action.Chapters
-      }
-      case('Nodes'):{
-        return Action.Nodes
-      }
-      case('ExplainOverview'):{
-        return Action.ExplainOverview
-      }
-      case('DeckOverview'):{
-        return Action.DeckOverview
-      }
-      case('Cards'):{
-        return Action.Cards
-      }
-      case('AddCard'):{
-        return Action.AddCard
-      }
-      case('Study'):{
-        return Action.Study
-      }
-    }
-    return Action.Default;
   }
 }

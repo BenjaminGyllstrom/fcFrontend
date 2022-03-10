@@ -1,6 +1,7 @@
+import { ActionService } from './../../../Services/action.service';
 import { Component, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { Action, SideBarService, State } from 'src/app/Services/sideBar.service';
+import { SideBarService, State } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -10,7 +11,8 @@ import { Action, SideBarService, State } from 'src/app/Services/sideBar.service'
 export class SideBarComponent implements OnInit {
 
   state:State
-  constructor(private sideBarService: SideBarService) { }
+  constructor(private sideBarService: SideBarService,
+    private actionService: ActionService) { }
 
   ngOnInit(): void {
     this.state = this.sideBarService.state;

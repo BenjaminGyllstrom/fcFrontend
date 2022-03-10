@@ -1,9 +1,10 @@
+import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
-import { Action, SideBarService } from 'src/app/Services/sideBar.service';
+import { SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-roots',
@@ -20,7 +21,8 @@ export class SideBarRootsComponent implements OnInit {
 
   constructor(
     private sideBarService: SideBarService,
-    private rootHttpService: RootHttpService) { }
+    private rootHttpService: RootHttpService,
+    private actionService: ActionService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -81,7 +83,7 @@ export class SideBarRootsComponent implements OnInit {
     this.sideBarService.setChapter(this.selectedRoot, setAction);
 
     if(this.addIsClicked){
-      this.sideBarService.setAction(Action.AddRoot);
+      this.actionService.setAction(Action.AddRoot);
     }
   }
 }

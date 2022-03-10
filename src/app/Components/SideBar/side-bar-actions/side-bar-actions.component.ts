@@ -1,6 +1,7 @@
+import { ActionService, Action } from './../../../Services/action.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { Action, SideBarService, State } from 'src/app/Services/sideBar.service';
+import { SideBarService, State } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-actions',
@@ -12,16 +13,19 @@ export class SideBarActionsComponent implements OnInit {
   state:State
   selectedAction:Action|null;
   isEdit:boolean = true;
-  constructor(private sideBarService: SideBarService) { }
+  constructor(
+    private sideBarService: SideBarService,
+    private actionService: ActionService
+    ) { }
 
   ngOnInit(): void {
     this.state = this.sideBarService.state;
-    this.selectedAction = this.sideBarService.action;
+    this.selectedAction = this.actionService.action;
     this.sideBarService.stateChange.subscribe((state:State) => {
       this.state = state;
       this.selectedAction = null;
     });
-    this.sideBarService.actionChange.subscribe((action:Action) => {
+    this.actionService.actionChange.subscribe((action:Action) => {
       this.selectedAction = action;
     })
 
@@ -39,19 +43,19 @@ export class SideBarActionsComponent implements OnInit {
 
 
   onClick(action: Action){
-    this.sideBarService.setAction(action);
+    this.actionService.setAction(action);
   }
 
   backgroundActive(actionString:string){
-    const action = this.sideBarService.getAction(actionString);
+    const action = this.actionService.getAction(actionString);
     return this.selectedAction == action;
   }
 
   setAction(actionString:string){
 
-    const action = this.sideBarService.getAction(actionString);
-    if(this.selectedAction == action) this.sideBarService.setAction(null)
-    else this.sideBarService.setAction(action)
+    const action = this.actionService.getAction(actionString);
+    if(this.selectedAction == action) this.actionService.setAction(null)
+    else this.actionService.setAction(action)
 
   }
 }

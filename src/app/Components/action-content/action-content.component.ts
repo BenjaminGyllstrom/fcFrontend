@@ -1,4 +1,5 @@
-import { Action, SideBarService } from 'src/app/Services/sideBar.service';
+import { Action, ActionService } from './../../Services/action.service';
+import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,15 +12,16 @@ export class ActionContentComponent implements OnInit {
   action: Action
 
   constructor(
-    private sideBarService: SideBarService
+    private sideBarService: SideBarService,
+    private actionService: ActionService
   ) { }
 
   ngOnInit(): void {
-    this.sideBarService.actionChange.subscribe((action: Action)=>{
+    this.actionService.actionChange.subscribe((action: Action)=>{
       this.action = action;
     })
 
-    this.action = this.sideBarService.action;
+    this.action = this.actionService.action;
   }
 
   showDefault() {return this.action === Action.Default}
