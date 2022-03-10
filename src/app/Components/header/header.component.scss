@@ -1,52 +1,49 @@
-// .header-container{
-//   // background-color: grey;
-//   width: 100vw;
-//   height: 50px;
-//   margin-bottom: 20px;
-//   padding: 5px;
 
-
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-// }
 $main-color: #D4BB79;
 
-.sevenColLayout{
+.header{
   height: 64px;
   width: 100vw;
   background-color: $main-color;
   font: white;
+
+  display: grid;
+  grid-template-columns: min-content 1fr 1fr;
+  align-items: center;
 }
 
-.action-field{
+.logo{
   display: flex;
-  grid-column: 3/5;
-}
-
-.user-field{
-  // margin-right: 40px;
-  grid-column: 5/7;
-  justify-self: end;
-  display: flex;
-}
-.user-name{
-  color: white;
-
-}
-.header-button{
-  // margin-left: 20px;
-  color: white;
-  &__logo{
+  align-items: center;
+  img{
+    width: 50px;
+    justify-self: start;
+    margin-left: 40px;
+  }
+  a{
+    margin-left: 20px;
     color: white;
     font-size: 36px;
-    grid-column: 2;
-    justify-self: start;
   }
-  &__action{
+}
+
+.actions{
+  justify-self: start;
+  display: flex;
+  a{
     color: white;
     margin-left: 30px;
     font-size: 20px;
+  }
+}
+
+.user{
+  margin-right: 70px;
+  justify-self: end;
+  display: flex;
+
+  &__name{
+    color: white;
   }
   &__log-in{
     cursor: pointer;
@@ -60,4 +57,5 @@ $main-color: #D4BB79;
     font-size: 20px;
   }
 }
+
 
