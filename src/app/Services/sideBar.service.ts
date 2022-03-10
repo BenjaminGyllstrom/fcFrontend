@@ -30,6 +30,7 @@ export enum Action {
   AddChapter,
   AddNode,
   AddCard,
+  Study
 }
 
 @Injectable({
@@ -125,8 +126,14 @@ export class SideBarService {
     if(setAction){
       let action = Action.Default;
       if(node == null) action = Action.Nodes;
-      else if (node.type == 'deck') action = Action.Cards
-      else if (node.type == 'explain') action = Action.ExplainOverview
+      else if (node.type == 'deck') {
+        if(this.editMode) action = Action.Cards
+        else action = Action.Study
+      }
+      else if (node.type == 'explain') {
+        if(this.editMode) action = Action.ExplainOverview
+        else action = Action.Study
+      }
       this.setAction(action);
     }
   }
@@ -254,6 +261,9 @@ export class SideBarService {
       }
       case('AddCard'):{
         return Action.AddCard
+      }
+      case('Study'):{
+        return Action.Study
       }
     }
     return Action.Default;

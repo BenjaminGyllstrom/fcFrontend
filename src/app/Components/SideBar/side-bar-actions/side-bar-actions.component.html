@@ -20,16 +20,30 @@
 
 <div *ngIf="isExplainState()">
   <p>Explain Actions</p>
-  <app-side-bar-item (click)="setAction('ExplainOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
-  [backgroundActive]="backgroundActive('ExplainOverview')"></app-side-bar-item>
+  <div *ngIf="isEdit">
+    <app-side-bar-item (click)="setAction('ExplainOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
+    [backgroundActive]="backgroundActive('ExplainOverview')"></app-side-bar-item>
+  </div>
+
+  <div *ngIf="!isEdit">
+    <app-side-bar-item (click)="setAction('Study')" [item]="{icon:'Explain-black.svg', name:'Study'}" [showActive]="true"
+    [backgroundActive]="backgroundActive('Study')"></app-side-bar-item>
+  </div>
 </div>
 
 <div *ngIf="isDeckState()">
   <p>Deck Actions</p>
-  <app-side-bar-item (click)="setAction('DeckOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
-  [backgroundActive]="backgroundActive('DeckOverview')"></app-side-bar-item>
-  <app-side-bar-item (click)="setAction('Cards')" [item]="{icon:'Explain-black.svg', name:'Cards'}" [showActive]="true"
-  [backgroundActive]="backgroundActive('Cards')"></app-side-bar-item>
-  <app-side-bar-item (click)="setAction('AddCard')" [item]="{icon:'Explain-black.svg', name:'Add Card'}" [showActive]="true"
-  [backgroundActive]="backgroundActive('AddCard')"></app-side-bar-item>
+  <div *ngIf="isEdit">
+    <app-side-bar-item (click)="setAction('DeckOverview')" [item]="{icon:'Explain-black.svg', name:'Overview'}" [showActive]="true"
+    [backgroundActive]="backgroundActive('DeckOverview')"></app-side-bar-item>
+    <app-side-bar-item (click)="setAction('Cards')" [item]="{icon:'Explain-black.svg', name:'Cards'}" [showActive]="true"
+    [backgroundActive]="backgroundActive('Cards')"></app-side-bar-item>
+    <app-side-bar-item (click)="setAction('AddCard')" [item]="{icon:'Explain-black.svg', name:'Add Card'}" [showActive]="true"
+    [backgroundActive]="backgroundActive('AddCard')"></app-side-bar-item>
+  </div>
+
+  <div *ngIf="!isEdit">
+    <app-side-bar-item (click)="setAction('Study')" [item]="{icon:'Explain-black.svg', name:'Study'}" [showActive]="true"
+    [backgroundActive]="backgroundActive('Study')"></app-side-bar-item>
+  </div>
 </div>

@@ -11,6 +11,7 @@ export class SideBarActionsComponent implements OnInit {
 
   state:State
   selectedAction:Action|null;
+  isEdit:boolean = true;
   constructor(private sideBarService: SideBarService) { }
 
   ngOnInit(): void {
@@ -23,6 +24,11 @@ export class SideBarActionsComponent implements OnInit {
     this.sideBarService.actionChange.subscribe((action:Action) => {
       this.selectedAction = action;
     })
+
+    this.isEdit = this.sideBarService.editMode;
+    this.sideBarService.editModeChange.subscribe((isEdit:boolean)=>{
+      this.isEdit = isEdit;
+    })
   }
 
   isRootsState(){return this.state == State.Roots}
@@ -30,6 +36,7 @@ export class SideBarActionsComponent implements OnInit {
   isNodesState(){return this.state == State.Nodes}
   isDeckState(){return this.state == State.Deck}
   isExplainState(){return this.state == State.Explain}
+
 
   onClick(action: Action){
     this.sideBarService.setAction(action);
