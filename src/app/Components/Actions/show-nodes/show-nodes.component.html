@@ -1,35 +1,31 @@
 
 <div class="show-nodes">
 
-  <!-- <div *ngFor="let node of nodes" class="line"
-  [ngStyle]="{
-    'grid-column': getLineColumn(node),
-    'grid-row': getLineRow(node)}"></div> -->
+  <div class="nodes">
+    <div *ngFor="let node of nodes" class="line"
+    [ngStyle]="{
+      'grid-column': getLineColumn(node),
+      'grid-row': getLineRow(node),
+      'height': getLineHeight(node),
+      'width': getLineWidth(node)}"></div>
 
-  <div *ngFor="let node of nodes"
-  class="circle-element"
-  (click)="onClick(node)"
-  [ngStyle]="{'grid-column': getColumn(node), 'grid-row': getRow(node)}">
+    <div *ngFor="let node of nodes"
+    class="circle-element"
+    (click)="onClick(node)"
+    [ngStyle]="{'grid-column': getColumn(node), 'grid-row': getRow(node)}">
 
-    <app-explain-node
-    class="node-element"
-    *ngIf="node.type == 'explain'"
-    [explain]="node"
-    ></app-explain-node>
+      <app-explain-node
+      class="node-element"
+      *ngIf="node.type == 'explain'"
+      [explain]="node"
+      ></app-explain-node>
 
-    <app-deck-node
-    class="node-element"
-    *ngIf="node.type == 'deck'"
-    [deck]="node"
-    ></app-deck-node>
-  </div>
-
-
-  <!-- <div *ngFor="let node of nodes">
-    <div class="circle-element"
-    (click)="onClick(node)">
-      <app-explain-node class="node-element" *ngIf="node.type == 'explain'" [explain]="node"></app-explain-node>
-      <app-deck-node class="node-element" *ngIf="node.type == 'deck'" [deck]="node"></app-deck-node>
+      <app-deck-node
+      class="node-element"
+      *ngIf="node.type == 'deck'"
+      [deck]="node"
+      ></app-deck-node>
     </div>
-  </div> -->
+
+  </div>
 </div>

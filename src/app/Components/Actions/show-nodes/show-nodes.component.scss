@@ -1,4 +1,10 @@
 .show-nodes{
+  display: flex;
+  justify-content: center;
+
+}
+.nodes{
+  margin-top: 100px;
 
   width: 250px;
   // background-color: red;
@@ -8,7 +14,11 @@
 }
 
 .line{
-  background-color: green;
+  margin-top: 20px;
+  margin-left: 32px;
+  // align-self: center;
+  // justify-self: center;
+  background-color: #D7D7D7;
 }
 
 .circle-element{
