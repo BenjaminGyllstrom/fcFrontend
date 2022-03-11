@@ -1,3 +1,7 @@
+import { IExplain } from 'src/app/Models/explain.model';
+import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
+import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
+import { Explain } from 'src/app/Models/explain.model';
 import { QuillService } from 'src/app/Services/quill.service';
 import { Card } from 'src/app/Models/card.model';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
@@ -16,17 +20,33 @@ export class AddCardComponent implements OnInit {
   question:string = ''
   answer:string = ''
   showQuestion:boolean = true;
-
   content:string = '';
+
+  explain:Explain
+  showExplain:boolean;
 
   constructor(
     private sideBarService: SideBarService,
     private cardHttpService: CardHttpService,
-    private quillService: QuillService
+    private quillService: QuillService,
+    private deckHttpService: DeckHttpService,
+    private explainHttpService: ExplainHttpService
   ) { }
 
   ngOnInit(): void {
     this.deck = this.sideBarService.selectedNode;
+
+    this.deckHttpService.getAssociatedExplain(this.deck.id).subscribe((collectedExplain: IExplain) => {
+      if(collectedExplain){
+        this.explain = this.explainHttpService.parseToExplain(collectedExplain);
+        console.log(this.explain.text);
+
+      }
+    });
+  }
+
+  onShowExplain(){
+    this.showExplain = !this.showExplain;
   }
 
   onContentChange(content:string){

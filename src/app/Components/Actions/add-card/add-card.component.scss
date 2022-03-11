@@ -7,6 +7,24 @@
 
 }
 
+.explain-card{
+  display: flex;
+  gap: 80px;
+}
+
+.explain{
+  border: 1px solid #876E2B;
+  border-radius: 35px;
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  padding: 10px;
+}
+
+.card-container{
+  display: flex;
+  flex-direction: column;
+}
 .card{
   border: 1px solid #876E2B;
   border-radius: 35px;
@@ -32,6 +50,18 @@
 
     cursor: pointer;
   }
+}
+
+.show-explain-button{
+  margin-top: 10px;
+  margin-left: 30px;
+  border: none;
+  background-color: #F9F5EC;
+  color: #606060;
+  font-size: 14px;
+  align-self: start;
+
+  cursor: pointer;
 }
 
 .add-card-button{
