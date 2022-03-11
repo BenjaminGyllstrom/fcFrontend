@@ -11,6 +11,8 @@ export class DisplayTreeService {
     const startColumn = this.getStartColumn(node);
     const endColumn = this.getEndColumn(node);
 
+    if(this.isLastNode(node)) return '0px'
+
     //one column width
     if(startColumn == endColumn || startColumn + 1 == endColumn){
       return '10px';
@@ -21,6 +23,8 @@ export class DisplayTreeService {
   getLineHeight(node:any){
     const startRow = this.getStartRow(node);
     const endRow = this.getEndRow(node);
+
+    if(this.isLastNode(node)) return '0px'
 
     //one column width
     if(startRow == endRow || startRow + 1 == endRow){
@@ -62,7 +66,21 @@ export class DisplayTreeService {
 
   isLastNode(node:any){
     const index = this.nodes.indexOf(node);
-    return index + 1 == this.nodes.length
+    const numRows = Math.floor( this.nodes.length / 3 )
+    const lastRowIsEven = numRows % 2 == 1
+
+    if(lastRowIsEven){
+      return index + 1 == this.nodes.length
+    }else{
+      if(this.nodes.length % 3 == 0){
+        return index + 1 == this.nodes.length - 2
+      }else if (this.nodes.length % 3 == 1){
+        return index + 1 == this.nodes.length - 1
+      }
+      else{
+        return index + 1 == this.nodes.length
+      }
+    }
   }
 
   isEvenRow(node:any){
