@@ -2,7 +2,9 @@
 
 <div class="explain-node">
   <div class="node" (click)="onClick()"
-  [ngStyle]="{'background-color': getBackgroundColor()}">
+  [ngStyle]="{
+    'background-color': getBackgroundColor(),
+    'border': getBorder()}">
     <img src="../../../../assets/icons/Explain-black.svg" alt="">
   </div>
   <p>{{explain.title}}</p>

@@ -45,6 +45,7 @@ export class ShowNodesComponent implements OnInit {
     return this.displayTreeService.getLineWidth(node);
   }
   getLineBackground(node:any){
+    if(this.sideBarService.editMode) return 'linear-gradient(to right, #BCBCBC, #BCBCBC)'
     return this.displayTreeService.getLineColor(node);
   }
 

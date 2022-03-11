@@ -2,7 +2,9 @@
 
 <div class="deck-node">
   <div class="node" (click)="onClick()"
-    [ngStyle]="{'background-color': getBackgroundColor()}">
+    [ngStyle]="{
+      'background-color': getBackgroundColor(),
+      'border': getBorder()}">
     <img src="../../../../assets/icons/Deck-black.svg" alt="">
   </div>
 
