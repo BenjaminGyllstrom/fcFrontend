@@ -159,4 +159,52 @@ export class DisplayTreeService {
   getLineRow(node:any){
     return `${this.getStartRow(node)}/${this.getEndRow(node)}`
   }
+
+  // getPreviousNode(node:any){
+  //   if(this.isEvenRow(node)){
+  //     return this.nodes.indexOf(node) > 0 ?  this.nodes[this.nodes.indexOf(node) - 1] : null
+  //   }
+  //   else{
+  //     return this.nodes.length > this.nodes.indexOf(node) + 1 ? this.nodes[this.nodes.indexOf(node) + 1] : null
+  //   }
+  // }
+  getNextNode(node:any){
+    if(this.isEvenRow(node)){
+      return this.nodes.length > this.nodes.indexOf(node) + 1 ? this.nodes[this.nodes.indexOf(node) + 1] : null
+    }
+    else{
+      return this.nodes.indexOf(node) > 0 ?  this.nodes[this.nodes.indexOf(node) - 1] : null
+    }
+  }
+
+  getLineColor(node:any){
+    const nextNode = this.getNextNode(node);
+    const nextNodeState = this.getState(nextNode);
+    const nodeState = this.getState(node);
+
+    const lockedColor = '#BCBCBC'
+    const finnishedColor = '#BEDB81'
+    const inProgressColor = 'white'
+
+    if(nodeState == 'locked') return `linear-gradient(to right, ${lockedColor}, ${lockedColor})`
+    if(nodeState == 'inProgress') return `linear-gradient(to right, ${inProgressColor}, ${lockedColor})`
+    if(nextNodeState == null) return `linear-gradient(to right, white, white)`;
+    if(nodeState == 'finnished' && nextNodeState == 'inProgress') return `linear-gradient(to right, ${finnishedColor}, ${inProgressColor})`
+    if(nodeState == 'finnished' && nextNodeState == 'finnished') return `linear-gradient(to right, ${finnishedColor}, ${finnishedColor})`
+    return `linear-gradient(to right, white, white)`;
+  }
+
+  getState(node:any){
+    if(node == null) return null
+
+    if(node.type == 'deck'){
+      if(node.finnished) return 'finnished'
+      else if (node.locked) return 'locked'
+      else return 'inProgress'
+    }else{
+      if(node.locked) return 'locked'
+      else if (node.new) return 'inProgress'
+      else return 'finnished'
+    }
+  }
 }

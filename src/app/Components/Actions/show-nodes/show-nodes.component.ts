@@ -44,6 +44,9 @@ export class ShowNodesComponent implements OnInit {
   getLineWidth(node:any){
     return this.displayTreeService.getLineWidth(node);
   }
+  getLineBackground(node:any){
+    return this.displayTreeService.getLineColor(node);
+  }
 
   onClick(node:any){
 
