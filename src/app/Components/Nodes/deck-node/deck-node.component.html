@@ -1,7 +1,8 @@
 <!-- <div class="node" (click)="onClick()" [ngStyle]="{'background-color': (deck.locked) ? 'grey' : deck.finnished? 'green':'#ffffff'}"> -->
 
 <div class="deck-node">
-  <div class="node" (click)="onClick()">
+  <div class="node" (click)="onClick()"
+    [ngStyle]="{'background-color': getBackgroundColor()}">
     <img src="../../../../assets/icons/Deck-black.svg" alt="">
   </div>
 

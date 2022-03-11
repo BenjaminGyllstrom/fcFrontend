@@ -11,12 +11,22 @@ export class DeckNodeComponent implements OnInit {
 
   @Input() deck: Deck;
 
+  isLocked:boolean;
+  finnished:boolean;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.isLocked = this.deck.locked;
+    this.finnished = this.deck.finnished;
   }
 
   onClick(){
     this.router.navigate(['/study/', 'deck', this.deck.id])
+  }
+  getBackgroundColor():string{
+    if(this.isLocked) return '#BCBCBC'
+    if(this.finnished) return '#BEDB81'
+    return 'white';
   }
 }

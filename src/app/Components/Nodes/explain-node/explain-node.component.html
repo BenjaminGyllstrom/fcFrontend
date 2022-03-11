@@ -1,7 +1,8 @@
 <!-- <div class="node" (click)="onClick()" [ngStyle]="{'background-color': (explain.locked) ? 'grey' : explain.new? '#ffffff':'green'}"> -->
 
 <div class="explain-node">
-  <div class="node" (click)="onClick()">
+  <div class="node" (click)="onClick()"
+  [ngStyle]="{'background-color': getBackgroundColor()}">
     <img src="../../../../assets/icons/Explain-black.svg" alt="">
   </div>
   <p>{{explain.title}}</p>
