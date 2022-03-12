@@ -217,16 +217,6 @@ export class SideBarService {
       }
     })
 
-    if(deletedChapter.rootId == this.selectedRoot?.id && this.selectedRoot?.chapters){
-
-      this.selectedRoot?.chapters.forEach((chapter, index) => {
-        if(chapter.id == deletedChapter._id){
-          this.selectedRoot?.chapters.splice(index, 1);
-          chaptersUpdated = true;
-        }
-      })
-    }
-
     if(chaptersUpdated) {
 
       let stateChanged = false
@@ -237,7 +227,7 @@ export class SideBarService {
         stateChanged = true;
       }
 
-      if(this.selectedNode.parentId == deletedChapter._id){
+      if(this.selectedNode?.parentId == deletedChapter._id){
         this.selectedNode = null;
         this.selectedNodeChange.next();
         stateChanged = true;
