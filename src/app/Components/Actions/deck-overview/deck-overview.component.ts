@@ -64,10 +64,10 @@ export class DeckOverviewComponent implements OnInit {
 
   onSave(){
     const title = this.deckForm.value.title;
-    const associatedExplain = this.selectedExplain._id;
+    const associatedExplain = this.selectedExplain?._id;
 
     this.deck.title = this.deckForm.value.title;
-    this.deck.associatedExplain = associatedExplain._id;
+    this.deck.associatedExplain = this.selectedExplain?._id;
     this.deckHttpService.edit(this.deck, this.deck.id).subscribe((updatedDeck: IDeck)=> {
       this.edit = false;
     })
