@@ -206,9 +206,43 @@ export class SideBarService {
     this.nodesUpdated.next();
   }
 
+  deleteRoot(deletedRoot: IRoot){
+    let rootsUpdated = false;
+    this.roots.forEach((root, index) => {
+      if(root.id == deletedRoot._id){
+        this.roots.splice(index, 1);
+        rootsUpdated = true;
+      }
+    })
+
+    if(rootsUpdated) {
+      let stateChanged = false
+
+      if(this.selectedChapter?.rootId == deletedRoot._id) {
+        if(this.selectedNode?.parentId == this.selectedChapter?.id){
+          this.selectedNode = null;
+          this.selectedNodeChange.next();
+          stateChanged = true;
+        }
+
+        this.selectedChapter = null;
+        this.selectedChapterChange.next();
+        stateChanged = true;
+      }
+
+      if(this.selectedRoot?.id == deletedRoot._id){
+        this.selectedRoot = null;
+        this.selectedRootChange.next();
+        stateChanged = true;
+      }
+
+      if(stateChanged) this.setState();
+      this.rootsUpdated.next();
+    }
+  }
+
   deleteChapter(deletedChapter: IChapter){
     let chaptersUpdated = false;
-    console.log(deletedChapter);
 
     this.chapters.forEach((chapter, index) => {
       if(chapter.id == deletedChapter._id){

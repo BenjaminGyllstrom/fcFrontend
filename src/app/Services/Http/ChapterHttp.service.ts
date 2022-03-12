@@ -48,6 +48,7 @@ export class ChapterHttpService {
     newChapter.title = collectedChapter.title;
     newChapter.nodes = this.getListOfNodes(collectedChapter.nodes);
     newChapter.data = collectedChapter.data;
+    newChapter.rootId = collectedChapter.rootId;
     return newChapter;
   }
 

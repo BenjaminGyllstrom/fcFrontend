@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
@@ -5,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
+import { DeleteItemComponent } from '../delete-item/delete-item.component';
 
 @Component({
   selector: 'app-side-bar-roots',
@@ -22,7 +24,8 @@ export class SideBarRootsComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private rootHttpService: RootHttpService,
-    private actionService: ActionService) { }
+    private actionService: ActionService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -85,5 +88,19 @@ export class SideBarRootsComponent implements OnInit {
     if(this.addIsClicked){
       this.actionService.setAction(Action.AddRoot);
     }
+  }
+
+  onDelete(root:Root){
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: {name: root.title, type: 'chapter'},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'Delete'){
+        this.rootHttpService.delete(root.id).subscribe((deletedIRoot:IRoot)=>{
+          this.sideBarService.deleteRoot(deletedIRoot);
+        })
+      }
+    });
   }
 }
