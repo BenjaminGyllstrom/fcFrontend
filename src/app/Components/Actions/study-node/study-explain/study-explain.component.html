@@ -1,0 +1,7 @@
+<div *ngIf="explain" class="study-expalin">
+  <h1>{{explain.title}}</h1>
+
+  <app-quill-show [content]="explain.text"></app-quill-show>
+
+  <button (click)="onContinueStudy()" class="button">Next</button>
+</div>

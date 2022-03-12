@@ -43,7 +43,8 @@ import { CreateExplainComponent } from './Components/Explains/create-explain/cre
 // import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
 import { ExplainOverviewComponent } from './Components/Actions/explain-overview/explain-overview.component';
 import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
-import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
+import { StudyExplainComponent } from './Components/Actions/study-node/study-explain/study-explain.component';
+// import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.component';
@@ -96,6 +97,7 @@ import { QuillShowComponent } from './Components/Quill/quill-show/quill-show.com
 import { QuillEditComponent } from './Components/Quill/quill-edit/quill-edit.component';
 import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
 import { DeleteItemComponent } from './Components/SideBar/delete-item/delete-item.component';
+import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
 
 @NgModule({
   declarations: [
@@ -175,6 +177,7 @@ import { DeleteItemComponent } from './Components/SideBar/delete-item/delete-ite
     QuillEditComponent,
     AddCardComponent,
     DeleteItemComponent,
+    StudyNodeComponent,
   ],
   imports: [
     BrowserModule,

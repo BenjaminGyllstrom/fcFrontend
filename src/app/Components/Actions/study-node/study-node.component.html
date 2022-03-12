@@ -1,0 +1,6 @@
+<div *ngIf="deck">
+  <app-study2 style="width: 100%;" *ngIf="cards" [cards]="cards" ></app-study2>
+</div>
+<div *ngIf="explain">
+  <app-study-explain [explain]="explain"></app-study-explain>
+</div>

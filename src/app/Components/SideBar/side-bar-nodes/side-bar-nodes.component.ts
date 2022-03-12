@@ -57,7 +57,7 @@ export class SideBarNodesComponent implements OnInit {
   }
 
   selectNode(node:any){
-    if(node == null || this.selectedNode == node){
+    if(node == null){
       this.selectedNode = null
     }else{
       this.selectedNode = node;
@@ -66,8 +66,11 @@ export class SideBarNodesComponent implements OnInit {
   }
 
   onClick(node:any){
-    this.selectNode(node);
-    this.sideBarService.setNode(this.selectedNode);
+    if(this.selectedNode == node) node = null
+
+    // this.selectNode(node);
+    // this.sideBarService.setNode(this.selectedNode, true, true);
+    this.sideBarService.setNode(node);
   }
 
   getSideBarItem(node:any) : ISideBarItem{
