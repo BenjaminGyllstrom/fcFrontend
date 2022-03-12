@@ -205,6 +205,50 @@ export class SideBarService {
     this.nodes.push(node);
     this.nodesUpdated.next();
   }
+
+  deleteChapter(deletedChapter: IChapter){
+    let chaptersUpdated = false;
+    console.log(deletedChapter);
+
+    this.chapters.forEach((chapter, index) => {
+      if(chapter.id == deletedChapter._id){
+        this.chapters.splice(index, 1);
+        chaptersUpdated = true;
+      }
+    })
+
+    if(deletedChapter.rootId == this.selectedRoot?.id && this.selectedRoot?.chapters){
+
+      this.selectedRoot?.chapters.forEach((chapter, index) => {
+        if(chapter.id == deletedChapter._id){
+          this.selectedRoot?.chapters.splice(index, 1);
+          chaptersUpdated = true;
+        }
+      })
+    }
+
+    if(chaptersUpdated) {
+
+      let stateChanged = false
+
+      if(this.selectedChapter?.id == deletedChapter._id) {
+        this.selectedChapter = null;
+        this.selectedChapterChange.next();
+        stateChanged = true;
+      }
+
+      if(this.selectedNode.parentId == deletedChapter._id){
+        this.selectedNode = null;
+        this.selectedNodeChange.next();
+        stateChanged = true;
+      }
+
+      if(stateChanged) this.setState();
+      this.chaptersUpdated.next();
+
+    }
+  }
+
   deleteNode(deletedNode: any){
     let nodesUpdate = false;
     this.nodes.forEach((node,index) =>{
@@ -213,6 +257,15 @@ export class SideBarService {
         nodesUpdate = true;
       }
     })
+
+    if(this.selectedChapter?.nodes){
+      this.selectedChapter?.nodes.forEach((node,index)=>{
+        if(node.id == deletedNode.id) {
+          this.selectedChapter?.nodes.splice(index, 1);
+        }
+      })
+    }
+
     if(nodesUpdate) this.nodesUpdated.next();
   }
 }

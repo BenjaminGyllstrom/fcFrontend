@@ -1,7 +1,8 @@
 
 <p [ngStyle]="{'margin-bottom': showAll? '12px':'1px'}">Chapter</p>
 <div *ngFor="let chapter of chapters">
-  <app-side-bar-item [item]="getSideBarItem(chapter)" *ngIf="shouldShow(chapter)" (onClick)="onClick(chapter)"></app-side-bar-item>
+  <app-side-bar-item [item]="getSideBarItem(chapter)" *ngIf="shouldShow(chapter)"
+  (onClick)="onClick(chapter)" (onDelete)="onDelete(chapter)"></app-side-bar-item>
 </div>
 
 <div *ngIf="editMode" class="chapter add-chapter">
@@ -10,5 +11,5 @@
   *ngIf="showAll"
   (click)="onAdd()"
   [showActive]="true"
-  [backgroundActive]="addIsClicked"></app-side-bar-item>
+  [backgroundActive]="addIsClicked" [optionsAvailable]="false"></app-side-bar-item>
 </div>
