@@ -9,6 +9,16 @@
   border-radius: 5px;
   width: 176px;
   cursor: pointer;
+
+  &:hover{
+    background-color: #dadada !important;
+    opacity: 50%;
+  }
+}
+.content{
+  display: flex;
+  align-content: center;
+  align-items: center;
 }
 
 
@@ -23,9 +33,32 @@
   }
 }
 .name{
-  width: 142px;
+  width: 117px;
   p{
     font-size: 14px;
     margin: 0;
+  }
+}
+
+.options{
+
+  margin-right: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  img{
+    width: 15px;
+  }
+  button{
+    background-color: #dadada;
+    border: none;
+  }
+  &:hover{
+    background-color: #c5c5c5 !important;
   }
 }

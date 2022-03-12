@@ -1,9 +1,16 @@
+import { IExplain } from './../../../Models/explain.model';
+import { IDeck } from './../../../Models/deck.model';
+import { ExplainHttpService } from './../../../Services/Http/ExplainHttp.service';
+import { DeckHttpService } from './../../../Services/Http/DeckHttp.service';
+
+import { MatDialog } from '@angular/material/dialog';
 import { ActionService, Action } from './../../../Services/action.service';
 import { IChapter } from './../../../Models/chapter.model';
 import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
+import { DeleteItemComponent } from '../delete-item/delete-item.component';
 
 @Component({
   selector: 'app-side-bar-nodes',
@@ -19,7 +26,10 @@ export class SideBarNodesComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private chapterHttpService: ChapterHttpService,
-    private actionService: ActionService) { }
+    private actionService: ActionService,
+    private dialog: MatDialog,
+    private deckHttpService: DeckHttpService,
+    private explainHttpService: ExplainHttpService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -77,6 +87,28 @@ export class SideBarNodesComponent implements OnInit {
     if(this.addIsClicked){
       this.actionService.setAction(Action.AddNode);
     }
+  }
+
+  onDelete(node:any){
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: {name: node.title, type: 'node'},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'Delete'){
+        if(node.type == 'deck'){
+          this.deckHttpService.delete(node.id).subscribe((deletedDeck:IDeck)=>{
+            const deck = this.deckHttpService.parseToDeck(deletedDeck);
+            this.sideBarService.deleteNode(deck);
+          })
+        }else if (node.type == 'explain'){
+          this.explainHttpService.delete(node.id).subscribe((deletedExplain:IExplain)=>{
+            const explain = this.explainHttpService.parseToExplain(deletedExplain);
+            this.sideBarService.deleteNode(explain);
+          })
+        }
+      }
+    });
   }
 
 }

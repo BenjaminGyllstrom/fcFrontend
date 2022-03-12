@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 
 @Component({
@@ -11,9 +11,13 @@ export class SideBarItemComponent implements OnInit {
   @Input() item: ISideBarItem;
   @Input() backgroundActive: boolean;
   @Input() showActive:boolean = false;
-
+  @Output('onClick') onClickEmitter = new EventEmitter<void>();
+  @Output('onDelete') onDeleteEmitter = new EventEmitter<void>();
   icon:string;
   name:string;
+
+  @Input() optionsAvailable:boolean = true;
+  showOptions:boolean
 
   constructor() { }
 
@@ -28,5 +32,15 @@ export class SideBarItemComponent implements OnInit {
 
   onClick(){
     this.backgroundActive = !this.backgroundActive
+    this.onClickEmitter.emit();
+  }
+  onDelete(){
+    this.onDeleteEmitter.emit();
+  }
+  onMouseOver(){
+    this.showOptions = true;
+  }
+  onMouseLeave(){
+    this.showOptions = false;
   }
 }

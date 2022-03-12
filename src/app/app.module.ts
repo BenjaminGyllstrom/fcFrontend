@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 // import {  } from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -94,6 +95,7 @@ import { AddExplainComponent } from './Components/Actions/add-node/add-explain/a
 import { QuillShowComponent } from './Components/Quill/quill-show/quill-show.component';
 import { QuillEditComponent } from './Components/Quill/quill-edit/quill-edit.component';
 import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
+import { DeleteItemComponent } from './Components/SideBar/delete-item/delete-item.component';
 
 @NgModule({
   declarations: [
@@ -172,6 +174,7 @@ import { AddCardComponent } from './Components/Actions/add-card/add-card.compone
     QuillShowComponent,
     QuillEditComponent,
     AddCardComponent,
+    DeleteItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -185,7 +188,8 @@ import { AddCardComponent } from './Components/Actions/add-card/add-card.compone
     FormsModule,
     MatInputModule,
     SocialLoginModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [
     // SocialAuthService,

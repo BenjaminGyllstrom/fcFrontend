@@ -1,12 +1,27 @@
 
-<div (click)="onClick()" class="side-bar-item not-select" [ngStyle]="{background: showActive? getBackground() : 'none'}">
-  <div class="icon">
-    <img [src]="icon" alt="">
-  </div>
-  <div class="name">
-    <p>{{name}}</p>
+<div class="side-bar-item not-select"
+  [ngStyle]="{background: showActive? getBackground() : 'none'}"
+  (mouseover)="onMouseOver()"
+  (mouseleave)="onMouseLeave()">
+
+  <div (click)="onClick()" class="content">
+    <div class="icon">
+      <img [src]="icon" alt="">
+    </div>
+    <div class="name">
+      <p>{{name}}</p>
+    </div>
   </div>
 
+
+  <div *ngIf="optionsAvailable">
+    <div class="options" [matMenuTriggerFor]="menu">
+      <img [src]="'../../../../assets/icons/Options.svg'" alt="">
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onDelete()">Delete</button>
+    </mat-menu>
+  </div>
 </div>
 
 

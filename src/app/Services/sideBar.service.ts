@@ -77,6 +77,7 @@ export class SideBarService {
   }
   setChapter(chapter:Chapter|null, setAction:boolean = true, notifyChapterChange = false){
     this.selectedChapter = chapter;
+
     this.selectedNode = null;
     this.setState();
 
@@ -203,5 +204,15 @@ export class SideBarService {
     this.selectedChapter?.nodes.push(node);
     this.nodes.push(node);
     this.nodesUpdated.next();
+  }
+  deleteNode(deletedNode: any){
+    let nodesUpdate = false;
+    this.nodes.forEach((node,index) =>{
+      if(node.id == deletedNode.id) {
+        this.nodes.splice(index, 1);
+        nodesUpdate = true;
+      }
+    })
+    if(nodesUpdate) this.nodesUpdated.next();
   }
 }
