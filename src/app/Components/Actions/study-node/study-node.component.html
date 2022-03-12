@@ -1,6 +1,8 @@
 <div *ngIf="deck">
-  <app-study2 style="width: 100%;" *ngIf="cards" [cards]="cards" ></app-study2>
+  <app-study2 style="width: 100%;" *ngIf="cards" [cards]="cards" (updatedRecurrence)="onCardUpdated($event)"></app-study2>
 </div>
 <div *ngIf="explain">
-  <app-study-explain [explain]="explain"></app-study-explain>
+  <app-study-explain [explain]="explain" (finnished)="onExplainFinnished()"></app-study-explain>
 </div>
+
+is finnished: {{finnished}}

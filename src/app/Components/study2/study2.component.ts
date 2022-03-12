@@ -26,6 +26,7 @@ export class Study2Component implements OnInit, OnDestroy {
   }
 
   @Input() cards: Card[]
+  @Output('updatedRecurrence') updatedRecurrenceEmitter = new EventEmitter<Card>();
 
   currentCard: Card;
   dueCardAvailable: boolean = false;
@@ -96,6 +97,7 @@ export class Study2Component implements OnInit, OnDestroy {
     this.studyService.setNextRecurrence(card, nextRecurrence).subscribe((collectedCard: ICard) => {
       const updatedCard = this.cardHttpService.parseToCard(collectedCard);
       this.dueService.AddCard(updatedCard);
+      this.updatedRecurrenceEmitter.emit(updatedCard);
 
       if(this.dueTimerService.timerIsActive()){
         const nextDueTime = this.dueService.nextDueAvailable()?.getTime();

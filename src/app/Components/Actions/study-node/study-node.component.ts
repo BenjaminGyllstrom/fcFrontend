@@ -16,20 +16,22 @@ export class StudyNodeComponent implements OnInit {
 
   explain:Explain|undefined
 
+  finnished:boolean;
+
   constructor(private sideBarService: SideBarService) { }
 
   ngOnInit(): void {
     const node = this.sideBarService.selectedNode;
     this.setData(node);
-
+    this.checkFinnished(node)
     this.sideBarService.selectedNodeChange.subscribe(()=>{
       const node = this.sideBarService.selectedNode;
 
       if(node){
         this.setData(node)
+        this.checkFinnished(node)
       }
     })
-
   }
 
   setData(node:any){
@@ -44,4 +46,30 @@ export class StudyNodeComponent implements OnInit {
     }
   }
 
+  checkFinnished(node:any){
+    if(node.type == 'deck') {
+      this.finnished = node.finnished
+    }
+    else if(node.type == 'explain') {
+      this.finnished =  !node.new
+    }
+  }
+
+  onExplainFinnished(){
+    this.finnished = true;
+  }
+
+  onCardUpdated(updatedCard: Card){
+    this.deck?.cards.forEach((card, index) => {
+      if(card.id == updatedCard.id){
+        this.deck?.cards.splice(index, 1, updatedCard)
+      }
+    });
+
+    this.cards?.forEach((card, index) => {
+      if(card.id == updatedCard.id){
+        this.cards?.splice(index, 1, updatedCard)
+      }
+    });
+  }
 }
