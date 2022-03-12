@@ -89,11 +89,11 @@ export class SideBarService {
       this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
     }
   }
-  setNode(node:any|null, setAction:boolean = true, notifyNodeChange = false){
+  setNode(node:any|null, setAction:boolean = true){
     this.selectedNode = node;
     this.setState();
 
-    if(notifyNodeChange) this.selectedNodeChange.next(node);
+    this.selectedNodeChange.next(node);
 
     if(setAction){
       let action = Action.Default;

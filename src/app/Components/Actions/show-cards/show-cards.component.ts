@@ -20,6 +20,8 @@ export class ShowCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
+      if(node == null) return
+
       if(node.type == 'deck'){
         this.cards = node.cards;
       }
