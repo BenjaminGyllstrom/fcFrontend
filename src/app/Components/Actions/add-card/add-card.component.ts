@@ -1,3 +1,4 @@
+import { ICard } from './../../../Models/card.model';
 import { IExplain } from 'src/app/Models/explain.model';
 import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
@@ -64,7 +65,9 @@ export class AddCardComponent implements OnInit {
     card.answer = this.answer
     card.deckId = this.deck.id;
 
-    this.cardHttpService.post(card, this.deck.id).subscribe((card) => {
+    this.cardHttpService.post(card, this.deck.id).subscribe((iCard: ICard) => {
+      const card = this.cardHttpService.parseToCard(iCard);
+      if(this.deck.cards == null) this.deck.cards = [];
       this.deck.cards.push(card);
     });
 
