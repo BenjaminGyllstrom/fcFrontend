@@ -23,7 +23,7 @@ export class SideBarActionsComponent implements OnInit {
     this.selectedAction = this.actionService.action;
     this.sideBarService.stateChange.subscribe((state:State) => {
       this.state = state;
-      this.selectedAction = null;
+      this.selectedAction = this.actionService.action;
     });
     this.actionService.actionChange.subscribe((action:Action) => {
       this.selectedAction = action;

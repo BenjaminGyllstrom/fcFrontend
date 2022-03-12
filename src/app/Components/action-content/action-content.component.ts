@@ -36,4 +36,5 @@ export class ActionContentComponent implements OnInit {
   showAddChapter() {return this.action === Action.AddChapter}
   showAddNode() {return this.action === Action.AddNode}
   showAddCard() {return this.action === Action.AddCard}
+  showStudy() {return this.action === Action.Study}
 }

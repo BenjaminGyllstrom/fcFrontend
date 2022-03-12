@@ -39,8 +39,6 @@ export class AddCardComponent implements OnInit {
     this.deckHttpService.getAssociatedExplain(this.deck.id).subscribe((collectedExplain: IExplain) => {
       if(collectedExplain){
         this.explain = this.explainHttpService.parseToExplain(collectedExplain);
-        console.log(this.explain.text);
-
       }
     });
   }
