@@ -42,10 +42,16 @@ export class AddDeckComponent implements OnInit {
     const deck = new Deck(title);
     deck.parentId = this.chapterId;
     deck.associatedExplain = this.selectedExplain?._id
-    this.deckForm.reset();
     this.deckHttpService.post(deck).subscribe((collectedDeck: IDeck) => {
       const newDeck = this.deckHttpService.parseToDeck(collectedDeck);
       this.sideBarService.addNode(newDeck);
     });
+
+    this.reset();
+  }
+
+  reset(){
+    this.deckForm.reset();
+    this.selectedExplain = null;
   }
 }

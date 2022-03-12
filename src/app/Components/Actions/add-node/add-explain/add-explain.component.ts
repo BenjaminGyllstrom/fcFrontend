@@ -50,13 +50,16 @@ export class AddExplainComponent implements OnInit {
     explain.title = title;
     explain.text = text;
     explain.parentId = this.chapterId;
-    this.explainForm.reset();
+    this.reset();
     this.explainHttpService.post(explain).subscribe((eollctedExplain: IExplain) => {
       const newExplain = this.explainHttpService.parseToExplain(eollctedExplain)
       this.sideBarService.addNode(newExplain);
 
     });
   }
-
+  reset(){
+    this.explainForm.reset();
+    this.quillService.onReset.next();
+  }
 
 }
