@@ -290,6 +290,11 @@ export class SideBarService {
       })
     }
 
-    if(nodesUpdate) this.nodesUpdated.next();
+    if(nodesUpdate) {
+      this.nodesUpdated.next();
+    }
+    if(this.selectedNode.id == deletedNode.id){
+      this.setNode(null);
+    }
   }
 }
