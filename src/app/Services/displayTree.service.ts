@@ -66,21 +66,7 @@ export class DisplayTreeService {
 
   isLastNode(node:any){
     const index = this.nodes.indexOf(node);
-    const numRows = Math.floor( this.nodes.length / 3 )
-    const lastRowIsEven = numRows % 2 == 1
-
-    if(lastRowIsEven){
-      return index + 1 == this.nodes.length
-    }else{
-      if(this.nodes.length % 3 == 0){
-        return index + 1 == this.nodes.length - 2
-      }else if (this.nodes.length % 3 == 1){
-        return index + 1 == this.nodes.length - 1
-      }
-      else{
-        return index + 1 == this.nodes.length
-      }
-    }
+    return index + 1 == this.nodes.length
   }
 
   isEvenRow(node:any){
@@ -97,6 +83,13 @@ export class DisplayTreeService {
 
   getColumnIndex(node:any){
     const index = this.nodes.indexOf(node);
+
+    if(!this.isEvenRow(node)){
+      if(index % 3 == 0) return 3;
+      if(index % 3 == 1) return 2;
+      if(index % 3 == 2) return 1;
+    }
+
     return index % 3 + 1;
   }
 
