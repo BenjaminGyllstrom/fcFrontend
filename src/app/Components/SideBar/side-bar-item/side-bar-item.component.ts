@@ -11,6 +11,7 @@ export class SideBarItemComponent implements OnInit {
   @Input() item: ISideBarItem;
   @Input() backgroundActive: boolean;
   @Input() showActive:boolean = false;
+  @Input() iconWidth = '20px'
   @Output('onClick') onClickEmitter = new EventEmitter<void>();
   @Output('onDelete') onDeleteEmitter = new EventEmitter<void>();
   icon:string;

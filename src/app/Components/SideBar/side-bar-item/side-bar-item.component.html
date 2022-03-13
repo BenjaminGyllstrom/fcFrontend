@@ -6,7 +6,7 @@
 
   <div (click)="onClick()" class="content">
     <div class="icon">
-      <img [src]="icon" alt="">
+      <img [src]="icon" alt="" [ngStyle]="{width: iconWidth}">
     </div>
     <div class="name">
       <p>{{name}}</p>

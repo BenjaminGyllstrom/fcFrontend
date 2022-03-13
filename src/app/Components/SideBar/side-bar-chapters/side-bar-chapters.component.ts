@@ -75,7 +75,7 @@ export class SideBarChaptersComponent implements OnInit {
   }
 
   getSideBarItem(chapter:Chapter) : ISideBarItem{
-    return {icon: 'Explain-black.svg', name: chapter.title}
+    return {icon: 'Chapter-black2.svg', name: chapter.title}
   }
 
   shouldShow(chapter:Chapter){

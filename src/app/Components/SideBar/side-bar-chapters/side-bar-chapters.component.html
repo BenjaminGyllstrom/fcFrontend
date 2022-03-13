@@ -2,7 +2,7 @@
 <p [ngStyle]="{'margin-bottom': showAll? '12px':'1px'}">Chapter</p>
 <div *ngFor="let chapter of chapters">
   <app-side-bar-item [item]="getSideBarItem(chapter)" *ngIf="shouldShow(chapter)"
-  (onClick)="onClick(chapter)" (onDelete)="onDelete(chapter)"></app-side-bar-item>
+  (onClick)="onClick(chapter)" (onDelete)="onDelete(chapter)" [iconWidth]="'15px'"></app-side-bar-item>
 </div>
 
 <div *ngIf="editMode" class="chapter add-chapter">
