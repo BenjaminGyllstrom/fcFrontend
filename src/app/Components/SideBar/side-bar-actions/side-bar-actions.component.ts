@@ -1,7 +1,8 @@
+import { StateService, State } from './../../../Services/state.service';
 import { ActionService, Action } from './../../../Services/action.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { SideBarService, State } from 'src/app/Services/sideBar.service';
+import { SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
   selector: 'app-side-bar-actions',
@@ -15,13 +16,14 @@ export class SideBarActionsComponent implements OnInit {
   isEdit:boolean = true;
   constructor(
     private sideBarService: SideBarService,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private stateService: StateService
     ) { }
 
   ngOnInit(): void {
-    this.state = this.sideBarService.state;
+    this.state = this.stateService.state;
     this.selectedAction = this.actionService.action;
-    this.sideBarService.stateChange.subscribe((state:State) => {
+    this.stateService.stateChange.subscribe((state:State) => {
       this.state = state;
       this.selectedAction = this.actionService.action;
     });

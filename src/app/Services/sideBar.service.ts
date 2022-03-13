@@ -1,3 +1,4 @@
+import { StateService } from './state.service';
 import { ActionService, Action } from './action.service';
 import { Card } from 'src/app/Models/card.model';
 import { IChapter } from './../Models/chapter.model';
@@ -10,14 +11,6 @@ import { Chapter } from "../Models/chapter.model";
 import { Deck } from "../Models/deck.model";
 import { Explain } from "../Models/explain.model";
 import { Root } from "../Models/root.model";
-
-export enum State {
-  Roots,
-  Chapters,
-  Nodes,
-  Deck,
-  Explain
-}
 
 @Injectable({
   providedIn: 'root'
@@ -43,13 +36,14 @@ export class SideBarService {
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();
 
-  state:State = State.Roots;
-  stateChange:Subject<State> = new Subject<State>();
+  // state:State = State.Roots;
+  // stateChange:Subject<State> = new Subject<State>();
 
   constructor(
     private rootHttpService: RootHttpService,
     private chapterHttpService: ChapterHttpService,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private stateService: StateService
     ) {
   }
 
@@ -128,28 +122,6 @@ export class SideBarService {
     }
 
     this.actionService.setAction(action)
-  }
-
-  private setState(){
-    const startState = this.state
-    if (this.selectedNode == null && this.selectedChapter == null && this.selectedRoot == null) {
-      this.state = State.Roots;
-    }else if (this.selectedNode == null && this.selectedChapter == null){
-      this.state = State.Chapters;
-    }
-    else if (this.selectedNode == null){
-      this.state = State.Nodes;
-    }
-    else if (this.selectedNode.type == "deck"){
-      this.state = State.Deck;
-    }
-    else if (this.selectedNode.type == "explain"){
-      this.state = State.Explain;
-    }
-
-    if(startState != this.state){
-      this.stateChange.next(this.state);
-    }
   }
 
   requestRoots(){
@@ -296,5 +268,9 @@ export class SideBarService {
     if(this.selectedNode.id == deletedNode.id){
       this.setNode(null);
     }
+  }
+
+  private setState(){
+    this.stateService.setState(this.selectedRoot, this.selectedChapter, this.selectedNode);
   }
 }
