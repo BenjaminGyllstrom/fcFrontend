@@ -69,7 +69,7 @@ export class SideBarRootsComponent implements OnInit {
   }
 
   getSideBarItem(root:Root) : ISideBarItem{
-    return {icon: 'Explain-black.svg', name: root.title}
+    return {icon: 'Root-black.svg', name: root.title}
   }
 
   shouldShow(root:Root){
