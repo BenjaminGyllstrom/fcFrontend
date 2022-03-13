@@ -1,32 +1,32 @@
 <div *ngIf="isRootsState()">
   <p>My Content Actions</p>
-  <app-side-bar-item (click)="setAction('MyContentOverview')" [item]="{icon:'Action-black.svg', name:'Overview'}" [showActive]="true"
+  <app-side-bar-item (click)="setAction('MyContentOverview')" [item]="{icon:'Action2-black.svg', name:'Overview'}" [showActive]="true"
   [backgroundActive]="backgroundActive('MyContentOverview')" [optionsAvailable]="false"></app-side-bar-item>
 </div>
 
 <div *ngIf="isChaptersState()">
   <p>Root Actions</p>
-  <app-side-bar-item (click)="setAction('RootIntroduction')" [item]="{icon:'Action-black.svg', name:'Introduction'}" [showActive]="true"
+  <app-side-bar-item (click)="setAction('RootIntroduction')" [item]="{icon:'Action2-black.svg', name:'Introduction'}" [showActive]="true"
   [backgroundActive]="backgroundActive('RootIntroduction')" [optionsAvailable]="false"></app-side-bar-item>
-  <app-side-bar-item (click)="setAction('Chapters')" [item]="{icon:'Action-black.svg', name:'Chapters'}" [showActive]="true"
+  <app-side-bar-item (click)="setAction('Chapters')" [item]="{icon:'Action2-black.svg', name:'Chapters'}" [showActive]="true"
   [backgroundActive]="backgroundActive('Chapters')" [optionsAvailable]="false"></app-side-bar-item>
 </div>
 
 <div *ngIf="isNodesState()">
   <p>Chapter Actions</p>
-  <app-side-bar-item (click)="setAction('Nodes')" [item]="{icon:'Action-black.svg', name:'Nodes'}" [showActive]="true"
+  <app-side-bar-item (click)="setAction('Nodes')" [item]="{icon:'Action2-black.svg', name:'Nodes'}" [showActive]="true"
   [backgroundActive]="backgroundActive('Nodes')" [optionsAvailable]="false"></app-side-bar-item>
 </div>
 
 <div *ngIf="isExplainState()">
   <p>Explain Actions</p>
   <div *ngIf="isEdit">
-    <app-side-bar-item (click)="setAction('ExplainOverview')" [item]="{icon:'Action-black.svg', name:'Overview'}" [showActive]="true"
+    <app-side-bar-item (click)="setAction('ExplainOverview')" [item]="{icon:'Action2-black.svg', name:'Overview'}" [showActive]="true"
     [backgroundActive]="backgroundActive('ExplainOverview')" [optionsAvailable]="false"></app-side-bar-item>
   </div>
 
   <div *ngIf="!isEdit">
-    <app-side-bar-item (click)="setAction('Study')" [item]="{icon:'Action-black.svg', name:'Study'}" [showActive]="true"
+    <app-side-bar-item (click)="setAction('Study')" [item]="{icon:'Action2-black.svg', name:'Study'}" [showActive]="true"
     [backgroundActive]="backgroundActive('Study')" [optionsAvailable]="false"></app-side-bar-item>
   </div>
 </div>
@@ -34,16 +34,16 @@
 <div *ngIf="isDeckState()">
   <p>Deck Actions</p>
   <div *ngIf="isEdit">
-    <app-side-bar-item (click)="setAction('DeckOverview')" [item]="{icon:'Action-black.svg', name:'Overview'}" [showActive]="true"
+    <app-side-bar-item (click)="setAction('DeckOverview')" [item]="{icon:'Action2-black.svg', name:'Overview'}" [showActive]="true"
     [backgroundActive]="backgroundActive('DeckOverview')" [optionsAvailable]="false"></app-side-bar-item>
-    <app-side-bar-item (click)="setAction('Cards')" [item]="{icon:'Action-black.svg', name:'Cards'}" [showActive]="true"
+    <app-side-bar-item (click)="setAction('Cards')" [item]="{icon:'Action2-black.svg', name:'Cards'}" [showActive]="true"
     [backgroundActive]="backgroundActive('Cards')" [optionsAvailable]="false"></app-side-bar-item>
-    <app-side-bar-item (click)="setAction('AddCard')" [item]="{icon:'Action-black.svg', name:'Add Card'}" [showActive]="true"
+    <app-side-bar-item (click)="setAction('AddCard')" [item]="{icon:'Action2-black.svg', name:'Add Card'}" [showActive]="true"
     [backgroundActive]="backgroundActive('AddCard')" [optionsAvailable]="false"></app-side-bar-item>
   </div>
 
   <div *ngIf="!isEdit">
-    <app-side-bar-item (click)="setAction('Study')" [item]="{icon:'Action-black.svg', name:'Study'}" [showActive]="true"
+    <app-side-bar-item (click)="setAction('Study')" [item]="{icon:'Action2-black.svg', name:'Study'}" [showActive]="true"
     [backgroundActive]="backgroundActive('Study')" [optionsAvailable]="false"></app-side-bar-item>
   </div>
 </div>
