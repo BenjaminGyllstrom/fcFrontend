@@ -98,6 +98,7 @@ import { QuillEditComponent } from './Components/Quill/quill-edit/quill-edit.com
 import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
 import { DeleteItemComponent } from './Components/SideBar/delete-item/delete-item.component';
 import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
+import { StudyDeckComponent } from './Components/Actions/study-node/study-deck/study-deck.component';
 
 @NgModule({
   declarations: [
@@ -178,6 +179,7 @@ import { StudyNodeComponent } from './Components/Actions/study-node/study-node.c
     AddCardComponent,
     DeleteItemComponent,
     StudyNodeComponent,
+    StudyDeckComponent,
   ],
   imports: [
     BrowserModule,
