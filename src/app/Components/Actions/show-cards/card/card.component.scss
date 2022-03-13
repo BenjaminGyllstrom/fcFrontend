@@ -11,10 +11,11 @@
   grid-template-rows: calc(100% - 55px) 55px;
 
   overflow: hidden;
+  position: relative;
 }
 
 .card-content{
-  padding: 10px;
+  // padding: 0 10px 10px 10px;
   cursor: pointer;
 }
 
@@ -30,4 +31,34 @@
   align-items: center;
 
   cursor: pointer;
+}
+
+
+.options{
+  position: absolute;
+  right: 0;
+  top: 5px;
+  z-index: 10;
+  align-self: end;
+  justify-self: end;
+  margin-right: 20px;
+  height: 15px;
+  width: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  cursor: pointer;
+  img{
+    width: 20px;
+  }
+  button{
+    background-color: #dadada;
+    border: none;
+  }
+  &:hover{
+    background-color: #c5c5c5 !important;
+  }
 }

@@ -2,7 +2,7 @@
 <div class="show-cards">
 
   <div *ngFor="let card of cards" class="card" >
-    <app-card [card]="card" (onClick)="onClick(card)"></app-card>
+    <app-card [card]="card" (onClick)="onClick(card)" (onDelete)="onDelete(card)"></app-card>
   </div>
 </div>
 

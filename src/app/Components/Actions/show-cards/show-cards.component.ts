@@ -1,8 +1,11 @@
+import { CardHttpService } from './../../../Services/Http/CardHttp.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from './../../../Models/card.model';
+import { Card, ICard } from './../../../Models/card.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { EditCardComponent } from './edit-card/edit-card.component';
+import { DeleteItemComponent } from '../../SideBar/delete-item/delete-item.component';
+import { Deck } from 'src/app/Models/deck.model';
 
 @Component({
   selector: 'app-show-cards',
@@ -11,11 +14,13 @@ import { EditCardComponent } from './edit-card/edit-card.component';
 })
 export class ShowCardsComponent implements OnInit {
 
+  deck:Deck;
   cards: Card[] = []
 
   constructor(
     private sideBarService: SideBarService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cardHttpService: CardHttpService
   ) { }
 
   ngOnInit(): void {
@@ -23,12 +28,14 @@ export class ShowCardsComponent implements OnInit {
       if(node == null) return
 
       if(node.type == 'deck'){
+        this.deck = this.sideBarService.selectedNode;
         this.cards = node.cards;
       }
     })
     if(this.sideBarService.selectedNode?.type != null &&
       this.sideBarService.selectedNode.type == 'deck'){
       this.cards = this.sideBarService.selectedNode.cards;
+      this.deck = this.sideBarService.selectedNode;
     }
   }
 
@@ -43,4 +50,32 @@ export class ShowCardsComponent implements OnInit {
 
   }
 
+  onDelete(card: Card){
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: {name: card.question, type: 'card'},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == 'Delete'){
+        this.cardHttpService.delete(card.id).subscribe((deletedICard: ICard) => {
+          const deletedCard = this.cardHttpService.parseToCard(deletedICard);
+          this.removeCard(deletedCard);
+        })
+      }
+    });
+  }
+
+  removeCard(cardToRemove: Card){
+    this.cards.forEach((card, index)=>{
+      if(card.id == cardToRemove.id){
+        this.cards.splice(index, 1);
+      }
+    })
+
+    this.deck.cards.forEach((card, index)=>{
+      if(card.id == cardToRemove.id){
+        this.deck.cards.splice(index, 1);
+      }
+    })
+  }
 }

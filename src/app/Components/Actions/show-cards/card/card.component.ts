@@ -11,6 +11,7 @@ export class CardComponent implements OnInit {
 
   @Input() card: Card
   @Output('onClick') onClickEmitter = new EventEmitter<void>();
+  @Output('onDelete') onDeleteEmitter = new EventEmitter<void>();
   question:string
   answer:string
 
@@ -35,5 +36,9 @@ export class CardComponent implements OnInit {
   }
   switchContent(){
     this.showQuestion = !this.showQuestion;
+  }
+
+  onDelete(){
+    this.onDeleteEmitter.emit();
   }
 }

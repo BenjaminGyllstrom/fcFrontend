@@ -1,4 +1,8 @@
 <div class="card">
+  <div class="options" [matMenuTriggerFor]="menu">
+    <img [src]="'../../../../assets/icons/Options.svg'" alt="">
+  </div>
+
   <div class="card-content" (click)="onContentClick()">
     <app-quill-show *ngIf="showQuestion" [content]="question"></app-quill-show>
     <app-quill-show *ngIf="!showQuestion && answer" [content]="answer"></app-quill-show>
@@ -7,3 +11,6 @@
   <div *ngIf="!showQuestion" class="question-answer-switch not-select" (click)="switchContent()"> Show Question</div>
 </div>
 
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onDelete()">Delete</button>
+</mat-menu>
