@@ -25,6 +25,9 @@ export class QuillEditComponent implements OnInit {
       this.quill.root.innerHTML = this.content;
     }
 
+    this.quill.focus();
+    this.quill.setSelection(0, 1)
+
     this.quill.on('text-change', (delta, oldContents, source) => {
       this.contentChangeEmitter.emit(this.quill.root.innerHTML);
     })

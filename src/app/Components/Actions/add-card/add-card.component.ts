@@ -7,7 +7,7 @@ import { QuillService } from 'src/app/Services/quill.service';
 import { Card } from 'src/app/Models/card.model';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';
 
 @Component({
@@ -25,6 +25,16 @@ export class AddCardComponent implements OnInit {
 
   explain:Explain
   showExplain:boolean;
+
+  @HostListener('window:keydown', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+    if(event.key == "Tab"){
+      this.onChangeContent();
+    }
+    if(event.shiftKey && event.key == 'Enter'){
+        this.onSave();
+    }
+  }
 
   constructor(
     private sideBarService: SideBarService,
