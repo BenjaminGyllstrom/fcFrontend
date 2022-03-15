@@ -11,6 +11,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-side-bar-nodes',
@@ -63,6 +64,17 @@ export class SideBarNodesComponent implements OnInit {
       this.selectedNode = node;
       this.addIsClicked = false;
     }
+  }
+
+  drop(event: CdkDragDrop<any[]>){
+    moveItemInArray(this.nodes, event.previousIndex, event.currentIndex);
+
+    const chapter = this.sideBarService.selectedChapter
+    if(!chapter) return
+    this.chapterHttpService.updateListOrder(chapter.id, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
+      const nodes = this.chapterHttpService.getListOfNodes(updatedNodes);
+      this.sideBarService.setNodes(nodes)
+    });
   }
 
   onClick(node:any){

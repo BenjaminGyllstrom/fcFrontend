@@ -171,6 +171,10 @@ export class SideBarService {
       this.nodesUpdated.next();
     });
   }
+  setNodes(nodes:any[]){
+    this.nodes = nodes;
+    this.nodesUpdated.next();
+  }
 
   addNode(node: any){
     this.selectedChapter?.nodes.push(node);

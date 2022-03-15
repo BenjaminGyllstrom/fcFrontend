@@ -41,6 +41,10 @@ export class ChapterHttpService {
     return this.httpService.get(`chapters/data/${chapterId}`);
   }
 
+  updateListOrder(chapterId:string, fromIndex:number, toIndex:number){
+    return this.httpService.patch(`chapters/updateListOrder/${chapterId}`, {oldIndex:fromIndex, newIndex:toIndex});
+  }
+
   parseToChapter(collectedChapter: IChapter) : Chapter {
 
     const newChapter = new Chapter();

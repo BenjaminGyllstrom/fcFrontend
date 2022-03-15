@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 // import {  } from '@angular/material/';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -194,7 +195,8 @@ import { StudyDeckComponent } from './Components/Actions/study-node/study-deck/s
     MatInputModule,
     SocialLoginModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    DragDropModule
   ],
   providers: [
     // SocialAuthService,

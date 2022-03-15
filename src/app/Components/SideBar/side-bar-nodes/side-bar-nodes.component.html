@@ -1,11 +1,13 @@
 
 <p>Node</p>
-<div *ngFor="let node of nodes">
-  <app-side-bar-item
-  [item]="getSideBarItem(node)"
-  (onClick)="onClick(node)"
-  (onDelete)="onDelete(node)"
-  [showActive]="true" [backgroundActive]="node == selectedNode"></app-side-bar-item>
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+  <div *ngFor="let node of nodes" cdkDrag>
+    <app-side-bar-item
+    [item]="getSideBarItem(node)"
+    (onClick)="onClick(node)"
+    (onDelete)="onDelete(node)"
+    [showActive]="true" [backgroundActive]="node == selectedNode"></app-side-bar-item>
+  </div>
 </div>
 
 <div *ngIf="editMode" class="node add-node">
