@@ -20,11 +20,14 @@ export class ExplainOverviewComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.explain = this.sideBarService.selectedNode;
-    this.content = this.explain.text;
+    if(this.sideBarService.selectedNode){
+      this.explain = this.sideBarService.selectedNode;
+      this.content = this.explain.text;
+    }
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
       if(node && node.type == 'explain'){
-        this.explain = node;
+        this.explain = this.explainHttpService.parseToExplain(node);
+        this.content = this.explain.text;
       }
     })
   }
