@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { StateService } from './state.service';
 import { ActionService, Action } from './action.service';
 import { Card } from 'src/app/Models/card.model';
@@ -22,6 +23,10 @@ export class SideBarService {
   selectedNode:any|null;
   selectedCard:Card|null;
 
+  selectedRootParamId:string|null;
+  selectedChapterParamId:string|null;
+  selectedNodeParamId:string|null;
+
   selectedRootChange: Subject<Root|null> = new Subject<Root|null>();
   selectedChapterChange: Subject<Chapter|null> = new Subject<Chapter|null>();
   selectedNodeChange: Subject<any> = new Subject<any>();
@@ -43,7 +48,8 @@ export class SideBarService {
     private rootHttpService: RootHttpService,
     private chapterHttpService: ChapterHttpService,
     private actionService: ActionService,
-    private stateService: StateService
+    private stateService: StateService,
+    private router: Router
     ) {
   }
 
@@ -67,6 +73,9 @@ export class SideBarService {
 
     if(setAction){
       this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
+
+      // if(root == null) this.router.navigate(['MyContent/Roots'])
+      // else this.router.navigate(['MyContent/Roots/', root.id])
     }
   }
   setChapter(chapter:Chapter|null, setAction:boolean = true, notifyChapterChange = false){
@@ -128,7 +137,20 @@ export class SideBarService {
     this.rootHttpService.get().subscribe((collectedRoots: IRoot[]) => {
       const roots = this.rootHttpService.parseToRoots(collectedRoots);
       this.roots = roots;
+      this.setRootFromParam(roots);
       this.rootsUpdated.next();
+    });
+  }
+
+  setRootFromParam(roots:Root[]){
+    if(this.selectedRootParamId == null) return;
+
+    roots.forEach(root => {
+      if(root.id == this.selectedRootParamId){
+        this.selectedRoot = root;
+        this.selectedRootChange.next(root)
+        this.setState();
+      }
     });
   }
   addRoot(root:Root){
@@ -145,10 +167,22 @@ export class SideBarService {
     this.rootHttpService.getById(rootId).subscribe((collectedRoot: IRoot)=> {
       const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
       this.chapters = newRoot.chapters;
+      this.setChapterFromParam(newRoot.chapters);
       this.chaptersUpdated.next();
     });
   }
 
+  setChapterFromParam(chapters:Chapter[]){
+    if(this.selectedChapterParamId == null) return;
+
+    chapters.forEach(chapter => {
+      if(chapter.id == this.selectedChapterParamId){
+        this.selectedChapter = chapter;
+        this.selectedChapterChange.next(chapter)
+        this.setState();
+      }
+    });
+  }
   addChapter(chapter:Chapter){
     this.chapters.push(chapter)
     this.selectedRoot?.chapters.push(chapter)
@@ -168,7 +202,19 @@ export class SideBarService {
     this.chapterHttpService.getById(chapterId).subscribe((collectedChapter: IChapter) => {
       const newChapter = this.chapterHttpService.parseToChapter(collectedChapter);
       this.nodes = newChapter.nodes;
+      this.setNodeFromParam(newChapter.nodes)
       this.nodesUpdated.next();
+    });
+  }
+  setNodeFromParam(nodes:any[]){
+    if(this.selectedNodeParamId == null) return;
+
+    nodes.forEach(node => {
+      if(node.id == this.selectedNodeParamId){
+        this.selectedNode = node;
+        this.selectedNodeChange.next(node)
+        this.setState();
+      }
     });
   }
   setNodes(nodes:any[]){

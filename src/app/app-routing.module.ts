@@ -1,3 +1,10 @@
+import { DeckOverviewComponent } from './Components/Actions/deck-overview/deck-overview.component';
+import { AddNodeComponent } from './Components/Actions/add-node/add-node.component';
+import { AddRootComponent } from './Components/Actions/add-root/add-root.component';
+import { AddChapterComponent } from './Components/Actions/add-chapter/add-chapter.component';
+import { ShowCardsComponent } from './Components/Actions/show-cards/show-cards.component';
+import { ShowNodesComponent } from './Components/Actions/show-nodes/show-nodes.component';
+import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
 import { MyContentComponent } from './Components/my-content/my-content.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -6,7 +13,7 @@ import { ChapterOverviewComponent } from './Components/chapters/chapter-overview
 import { CreateChapterComponent } from './Components/chapters/create-chapter/create-chapter.component';
 import { CreateCardComponent } from './Components/Cards/create-card/create-card.component';
 import { CreateDeckComponent } from './Components/Decks/create-deck/create-deck.component';
-import { DeckOverviewComponent } from './Components/Decks/deck-overview/deck-overview.component';
+// import { DeckOverviewComponent } from './Components/Decks/deck-overview/deck-overview.component';
 import { EditCardComponent } from './Components/Cards/edit-card/edit-card.component';
 import { HomeComponent } from './Components/home/home.component';
 import { MyDecksComponent } from './Components/Decks/my-decks/my-decks.component';
@@ -17,20 +24,35 @@ import { StudyComponent } from './Components/study/study.component';
 import { ViewCardsComponent } from './Components/Cards/view-cards/view-cards.component';
 import { ChapterStudyComponent } from './Components/chapters/chapter-study/chapter-study.component';
 import { CreateExplainComponent } from './Components/Explains/create-explain/create-explain.component';
-import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
+import { ExplainOverviewComponent } from './Components/Actions/explain-overview/explain-overview.component';
+// import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
 import { EditExplainComponent } from './Components/Explains/edit-explain/edit-explain.component';
 import { StudyExplainComponent } from './Components/Explains/study-explain/study-explain.component';
 import { EditDeckComponent } from './Components/Decks/edit-deck/edit-deck.component';
 import { ChapterContentPlaygroundComponent } from './Components/chapters/playground/chapter-content-playground/chapter-content-playground.component';
 import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { AuthGuardService } from './Services/AuthGuard.service';
+import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';
+import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'home', component:HomeComponent},
   {path: 'myDecks', component:MyDecksComponent, canActivate: [AuthGuardService]},
   {path: 'myRoots', component:MyRootsComponent, canActivate: [AuthGuardService]},
-  {path: 'myContent', component:MyContentComponent, canActivate: [AuthGuardService]},
+  {path: 'myContent', component:MyContentComponent, canActivate: [AuthGuardService], children:[
+    {path: 'Roots', component:ShowRootsComponent},
+    {path: 'Roots/AddRoot', component:AddRootComponent},
+    // {path:'Roots/:rootId/Introduction', component: RootOverviewComponent},
+    {path:'Roots/:rootId/Chapters', component: ShowChaptersComponent},
+    {path:'Roots/:rootId/Chapters/AddChapter', component: AddChapterComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes', component: ShowNodesComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/AddNode', component: AddNodeComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Overview', component: DeckOverviewComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Explain/:nodeId/Overview', component: ExplainOverviewComponent},
+  ]},
   {path: 'createRoot', component:CreateRootComponent, canActivate: [AuthGuardService]},
   {path: 'rootOverview/:id', component:RootOverviewComponent, canActivate: [AuthGuardService]},
   {path: 'createChapter/:id', component:CreateChapterComponent, canActivate: [AuthGuardService]},

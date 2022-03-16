@@ -1,6 +1,6 @@
 <div class="explain-overview">
-  <app-quill-show *ngIf="!edit" [content]="explain.text" class="quill" (click)="onQuillClick()"></app-quill-show>
-  <app-quill-edit *ngIf="edit" [content]="explain.text" (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
+  <app-quill-show *ngIf="!edit" [content]="content" class="quill" (click)="onQuillClick()"></app-quill-show>
+  <app-quill-edit *ngIf="edit" [content]="content" (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
 
   <div class="buttons">
     <button *ngIf="edit" class="button explain-save-button" (click)="onSave()">Save</button>
