@@ -225,27 +225,22 @@ export class SideBarService {
   }
 
   deleteNode(deletedNode: any){
+    if(this.removeNode(deletedNode, this.nodes)) this.nodesUpdated.next();
+    if(this.selectedChapter?.nodes) this.removeNode(deletedNode, this.selectedChapter?.nodes)
+
+    if(this.selectedNode?.id == deletedNode.id){
+      this.setNode(null);
+    }
+  }
+
+  removeNode(nodeToRemove:any, nodes:any[]){
     let nodesUpdate = false;
-    this.nodes.forEach((node,index) =>{
-      if(node.id == deletedNode.id) {
-        this.nodes.splice(index, 1);
+    nodes.forEach((node,index) =>{
+      if(node.id == nodeToRemove.id) {
+        nodes.splice(index, 1);
         nodesUpdate = true;
       }
     })
-
-    if(this.selectedChapter?.nodes){
-      this.selectedChapter?.nodes.forEach((node,index)=>{
-        if(node.id == deletedNode.id) {
-          this.selectedChapter?.nodes.splice(index, 1);
-        }
-      })
-    }
-
-    if(nodesUpdate) {
-      this.nodesUpdated.next();
-    }
-    if(this.selectedNode.id == deletedNode.id){
-      this.setNode(null);
-    }
+    return nodesUpdate;
   }
 }
