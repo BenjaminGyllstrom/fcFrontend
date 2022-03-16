@@ -23,7 +23,7 @@ export class ShowChaptersComponent implements OnInit {
   }
 
   onClick(chapter:Chapter){
-    this.sideBarService.setChapter(chapter, true, true);
+    this.sideBarService.setChapter(chapter);
   }
 
 

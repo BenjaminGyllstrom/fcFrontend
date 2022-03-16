@@ -1,5 +1,4 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { StateService } from './state.service';
 import { ActionService, Action } from './action.service';
 import { Card } from 'src/app/Models/card.model';
 import { IChapter } from './../Models/chapter.model';
@@ -41,14 +40,10 @@ export class SideBarService {
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();
 
-  // state:State = State.Roots;
-  // stateChange:Subject<State> = new Subject<State>();
-
   constructor(
     private rootHttpService: RootHttpService,
     private chapterHttpService: ChapterHttpService,
     private actionService: ActionService,
-    private stateService: StateService,
     private router: Router
     ) {
   }
@@ -60,16 +55,15 @@ export class SideBarService {
     }
   }
 
-  setRoot(root:Root|null, setAction:boolean = true, notifyRootChange = false){
+  setRoot(root:Root|null, setAction:boolean = true){
     this.selectedRoot = root;
     this.selectedChapter = null;
     this.selectedNode = null;
-    this.setState();
 
     this.chapters = [];
     this.nodes = []
 
-    if(notifyRootChange) this.selectedRootChange.next(root);
+    this.selectedRootChange.next(root);
 
     if(setAction){
       this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
@@ -78,15 +72,14 @@ export class SideBarService {
       // else this.router.navigate(['MyContent/Roots/', root.id])
     }
   }
-  setChapter(chapter:Chapter|null, setAction:boolean = true, notifyChapterChange = false){
+  setChapter(chapter:Chapter|null, setAction:boolean = true){
     this.selectedChapter = chapter;
 
     this.selectedNode = null;
-    this.setState();
 
     this.nodes = []
 
-    if(notifyChapterChange) this.selectedChapterChange.next(chapter);
+    this.selectedChapterChange.next(chapter);
 
     if(setAction){
       this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
@@ -94,7 +87,6 @@ export class SideBarService {
   }
   setNode(node:any|null, setAction:boolean = true){
     this.selectedNode = node;
-    this.setState();
 
     this.selectedNodeChange.next(node);
 
@@ -149,7 +141,6 @@ export class SideBarService {
       if(root.id == this.selectedRootParamId){
         this.selectedRoot = root;
         this.selectedRootChange.next(root)
-        this.setState();
       }
     });
   }
@@ -179,7 +170,6 @@ export class SideBarService {
       if(chapter.id == this.selectedChapterParamId){
         this.selectedChapter = chapter;
         this.selectedChapterChange.next(chapter)
-        this.setState();
       }
     });
   }
@@ -213,7 +203,6 @@ export class SideBarService {
       if(node.id == this.selectedNodeParamId){
         this.selectedNode = node;
         this.selectedNodeChange.next(node)
-        this.setState();
       }
     });
   }
@@ -238,27 +227,21 @@ export class SideBarService {
     })
 
     if(rootsUpdated) {
-      let stateChanged = false
-
       if(this.selectedChapter?.rootId == deletedRoot._id) {
         if(this.selectedNode?.parentId == this.selectedChapter?.id){
           this.selectedNode = null;
           this.selectedNodeChange.next();
-          stateChanged = true;
         }
 
         this.selectedChapter = null;
         this.selectedChapterChange.next();
-        stateChanged = true;
       }
 
       if(this.selectedRoot?.id == deletedRoot._id){
         this.selectedRoot = null;
         this.selectedRootChange.next();
-        stateChanged = true;
       }
 
-      if(stateChanged) this.setState();
       this.rootsUpdated.next();
     }
   }
@@ -274,22 +257,16 @@ export class SideBarService {
     })
 
     if(chaptersUpdated) {
-
-      let stateChanged = false
-
       if(this.selectedChapter?.id == deletedChapter._id) {
         this.selectedChapter = null;
         this.selectedChapterChange.next();
-        stateChanged = true;
       }
 
       if(this.selectedNode?.parentId == deletedChapter._id){
         this.selectedNode = null;
         this.selectedNodeChange.next();
-        stateChanged = true;
       }
 
-      if(stateChanged) this.setState();
       this.chaptersUpdated.next();
 
     }
@@ -318,9 +295,5 @@ export class SideBarService {
     if(this.selectedNode.id == deletedNode.id){
       this.setNode(null);
     }
-  }
-
-  private setState(){
-    this.stateService.setState(this.selectedRoot, this.selectedChapter, this.selectedNode);
   }
 }

@@ -63,9 +63,9 @@ export class SideBarRootsComponent implements OnInit {
     }
   }
 
-  onClick(root:Root){
-    this.selectRoot(root);
-    this.sideBarService.setRoot(this.selectedRoot);
+  onClick(root:Root|null){
+    if(this.selectedRoot == root) root = null;
+    this.sideBarService.setRoot(root, true);
   }
 
   getSideBarItem(root:Root) : ISideBarItem{

@@ -38,8 +38,9 @@ export class StateService {
     else if (node.type == "explain"){
       this.state = State.Explain;
     }
-
+    return this.state;
     if(startState != this.state){
+      return this.state;
       this.stateChange.next(this.state);
     }
   }

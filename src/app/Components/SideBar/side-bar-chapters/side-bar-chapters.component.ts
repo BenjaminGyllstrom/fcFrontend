@@ -69,9 +69,9 @@ export class SideBarChaptersComponent implements OnInit {
     }
   }
 
-  onClick(chapter:Chapter){
-    this.selectChapter(chapter);
-    this.sideBarService.setChapter(this.selectedChapter);
+  onClick(chapter:Chapter|null){
+    if(this.selectedChapter == chapter) chapter = null
+    this.sideBarService.setChapter(chapter);
   }
 
   getSideBarItem(chapter:Chapter) : ISideBarItem{
