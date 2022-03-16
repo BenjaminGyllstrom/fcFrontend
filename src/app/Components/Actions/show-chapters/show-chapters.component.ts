@@ -1,3 +1,4 @@
+import { ActionService, Action } from './../../../Services/action.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Chapter } from './../../../Models/chapter.model';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,8 @@ export class ShowChaptersComponent implements OnInit {
   chapters: Chapter[]
 
   constructor(
-    private sideBarService: SideBarService
+    private sideBarService: SideBarService,
+    private actionService: ActionService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +26,6 @@ export class ShowChaptersComponent implements OnInit {
 
   onClick(chapter:Chapter){
     this.sideBarService.setChapter(chapter);
+    this.actionService.setAction(Action.Nodes)
   }
-
-
 }

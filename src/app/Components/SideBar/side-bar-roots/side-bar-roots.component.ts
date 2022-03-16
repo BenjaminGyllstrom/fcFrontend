@@ -65,7 +65,8 @@ export class SideBarRootsComponent implements OnInit {
 
   onClick(root:Root|null){
     if(this.selectedRoot == root) root = null;
-    this.sideBarService.setRoot(root, true);
+    this.sideBarService.setRoot(root);
+    this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
   }
 
   getSideBarItem(root:Root) : ISideBarItem{
@@ -80,14 +81,13 @@ export class SideBarRootsComponent implements OnInit {
 
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
-    this.selectedRoot = null;
-
-    const setAction = !this.addIsClicked
-    this.sideBarService.setChapter(this.selectedRoot, setAction);
-
     if(this.addIsClicked){
+      this.sideBarService.setRoot(null);
       this.actionService.setAction(Action.AddRoot);
+    }else{
+      this.actionService.setAction(Action.MyContentOverview);
     }
+
   }
 
   onDelete(root:Root){

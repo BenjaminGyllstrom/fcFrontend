@@ -72,6 +72,7 @@ export class SideBarChaptersComponent implements OnInit {
   onClick(chapter:Chapter|null){
     if(this.selectedChapter == chapter) chapter = null
     this.sideBarService.setChapter(chapter);
+    this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
   }
 
   getSideBarItem(chapter:Chapter) : ISideBarItem{
@@ -86,13 +87,12 @@ export class SideBarChaptersComponent implements OnInit {
 
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
-    this.selectedChapter = null;
-
-    const setAction = !this.addIsClicked
-    this.sideBarService.setChapter(this.selectedChapter, setAction);
-
-    if(this.addIsClicked){
-      this.actionService.setAction(Action.AddChapter);
+    if(this.addIsClicked) {
+      this.sideBarService.setChapter(null);
+      this.actionService.setAction(Action.AddChapter)
+    }
+    else {
+      this.actionService.setAction(Action.Chapters)
     }
   }
 

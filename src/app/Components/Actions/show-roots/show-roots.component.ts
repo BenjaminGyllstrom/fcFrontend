@@ -1,3 +1,5 @@
+import { Chapter } from 'src/app/Models/chapter.model';
+import { ActionService, Action } from './../../../Services/action.service';
 import { Root } from './../../../Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +14,8 @@ export class ShowRootsComponent implements OnInit {
   roots:Root[]
 
   constructor(
-    private sideBarService: SideBarService
+    private sideBarService: SideBarService,
+    private actionService: ActionService
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +28,7 @@ export class ShowRootsComponent implements OnInit {
 
   onClick(root:Root){
     this.sideBarService.setRoot(root)
+    this.actionService.setAction(Action.Chapters)
   }
 
 }

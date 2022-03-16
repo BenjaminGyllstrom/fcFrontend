@@ -55,54 +55,29 @@ export class SideBarService {
     }
   }
 
-  setRoot(root:Root|null, setAction:boolean = true){
+  setRoot(root:Root|null){
     this.selectedRoot = root;
     this.selectedChapter = null;
     this.selectedNode = null;
-
     this.chapters = [];
     this.nodes = []
 
     this.selectedRootChange.next(root);
 
-    if(setAction){
-      this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
-
-      // if(root == null) this.router.navigate(['MyContent/Roots'])
-      // else this.router.navigate(['MyContent/Roots/', root.id])
-    }
+    // if(root == null) this.router.navigate(['MyContent/Roots'])
+    // else this.router.navigate(['MyContent/Roots/', root.id])
   }
-  setChapter(chapter:Chapter|null, setAction:boolean = true){
+
+  setChapter(chapter:Chapter|null){
     this.selectedChapter = chapter;
-
     this.selectedNode = null;
-
     this.nodes = []
-
     this.selectedChapterChange.next(chapter);
-
-    if(setAction){
-      this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
-    }
   }
-  setNode(node:any|null, setAction:boolean = true){
+
+  setNode(node:any|null){
     this.selectedNode = node;
-
     this.selectedNodeChange.next(node);
-
-    if(setAction){
-      let action = Action.Default;
-      if(node == null) action = Action.Nodes;
-      else if (node.type == 'deck') {
-        if(this.editMode) action = Action.Cards
-        else action = Action.Study
-      }
-      else if (node.type == 'explain') {
-        if(this.editMode) action = Action.ExplainOverview
-        else action = Action.Study
-      }
-      this.actionService.setAction(action);
-    }
   }
 
   initAction(){

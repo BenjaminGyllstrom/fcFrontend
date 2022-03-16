@@ -83,7 +83,16 @@ export class SideBarNodesComponent implements OnInit {
     // this.selectNode(node);
     // this.sideBarService.setNode(this.selectedNode, true, true);
     this.sideBarService.setNode(node);
+    this.setAction(node);
+
   }
+  setAction(node:any){
+    if(node == null) this.actionService.setAction(Action.Nodes);
+    else if(this.editMode) this.actionService.setAction(Action.Study);
+    else if(node.type == 'deck') this.actionService.setAction(Action.Cards);
+    else if(node.type == 'explain') this.actionService.setAction(Action.ExplainOverview);
+  }
+
 
   getSideBarItem(node:any) : ISideBarItem{
 
@@ -94,14 +103,10 @@ export class SideBarNodesComponent implements OnInit {
 
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
-    this.selectedNode = null;
+    if (this.addIsClicked) this.sideBarService.setNode(null);
 
-    const setAction = !this.addIsClicked
-    this.sideBarService.setNode(this.selectedNode, setAction);
-
-    if(this.addIsClicked){
-      this.actionService.setAction(Action.AddNode);
-    }
+    if(this.addIsClicked) this.actionService.setAction(Action.AddNode);
+    else this.actionService.setAction(Action.Nodes);
   }
 
   onDelete(node:any){
