@@ -42,10 +42,7 @@ export class SideBarService {
 
   constructor(
     private rootHttpService: RootHttpService,
-    private chapterHttpService: ChapterHttpService,
-    private actionService: ActionService,
-    private router: Router
-    ) {
+    private chapterHttpService: ChapterHttpService) {
   }
 
   changeEditMode(edit:boolean){
@@ -78,26 +75,6 @@ export class SideBarService {
   setNode(node:any|null){
     this.selectedNode = node;
     this.selectedNodeChange.next(node);
-  }
-
-  initAction(){
-    let action: Action = Action.Default;
-    if (this.selectedNode == null && this.selectedChapter == null && this.selectedRoot == null) {
-      action = Action.MyContentOverview;
-    }else if (this.selectedNode == null && this.selectedChapter == null){
-      action = Action.Chapters;
-    }
-    else if (this.selectedNode == null){
-      action = Action.Nodes;
-    }
-    else if (this.selectedNode.type == "deck"){
-      action = Action.Cards;
-    }
-    else if (this.selectedNode.type == "explain"){
-      action = Action.ExplainOverview;
-    }
-
-    this.actionService.setAction(action)
   }
 
   requestRoots(){

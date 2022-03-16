@@ -1,6 +1,6 @@
 import { Chapter } from 'src/app/Models/chapter.model';
 import { StateService, State } from './../../../Services/state.service';
-import { ActionService } from './../../../Services/action.service';
+import { ActionService, Action } from './../../../Services/action.service';
 import { Component, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
@@ -33,7 +33,27 @@ export class SideBarComponent implements OnInit {
       this.state = this.stateService.setState(this.sideBarService.selectedRoot, this.sideBarService.selectedChapter, this.sideBarService.selectedNode)
     })
 
-    this.sideBarService.initAction();
+    this.initAction();
+  }
+
+  initAction(){
+    let action: Action = Action.Default;
+    if (this.sideBarService.selectedNode == null && this.sideBarService.selectedChapter == null && this.sideBarService.selectedRoot == null) {
+      action = Action.MyContentOverview;
+    }else if (this.sideBarService.selectedNode == null && this.sideBarService.selectedChapter == null){
+      action = Action.Chapters;
+    }
+    else if (this.sideBarService.selectedNode == null){
+      action = Action.Nodes;
+    }
+    else if (this.sideBarService.selectedNode.type == "deck"){
+      action = Action.Cards;
+    }
+    else if (this.sideBarService.selectedNode.type == "explain"){
+      action = Action.ExplainOverview;
+    }
+
+    this.actionService.setAction(action)
   }
 
 
