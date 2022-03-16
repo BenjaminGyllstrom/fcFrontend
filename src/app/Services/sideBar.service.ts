@@ -170,58 +170,39 @@ export class SideBarService {
   }
 
   deleteRoot(deletedRoot: IRoot){
+    if(this.removeRoot(deletedRoot, this.roots)) this.rootsUpdated.next();
+    if(this.selectedRoot?.id == deletedRoot._id){
+      this.setRoot(null)
+    }
+  }
+  removeRoot(rootToRemove:IRoot, roots:Root[]){
     let rootsUpdated = false;
-    this.roots.forEach((root, index) => {
-      if(root.id == deletedRoot._id){
-        this.roots.splice(index, 1);
+    roots.forEach((root, index) => {
+      if(root.id == rootToRemove._id){
+        roots.splice(index, 1);
         rootsUpdated = true;
       }
     })
-
-    if(rootsUpdated) {
-      if(this.selectedChapter?.rootId == deletedRoot._id) {
-        if(this.selectedNode?.parentId == this.selectedChapter?.id){
-          this.selectedNode = null;
-          this.selectedNodeChange.next();
-        }
-
-        this.selectedChapter = null;
-        this.selectedChapterChange.next();
-      }
-
-      if(this.selectedRoot?.id == deletedRoot._id){
-        this.selectedRoot = null;
-        this.selectedRootChange.next();
-      }
-
-      this.rootsUpdated.next();
-    }
+    return rootsUpdated
   }
 
   deleteChapter(deletedChapter: IChapter){
-    let chaptersUpdated = false;
+    if(this.removeChapter(deletedChapter, this.chapters)) this.chaptersUpdated.next();
+    if(this.selectedChapter?.id == deletedChapter._id) {
+      this.setChapter(null)
+    }
+  }
 
-    this.chapters.forEach((chapter, index) => {
-      if(chapter.id == deletedChapter._id){
-        this.chapters.splice(index, 1);
+
+  removeChapter(chapterToRemove: IChapter, chapters: Chapter[]){
+    let chaptersUpdated = false;
+    chapters.forEach((chapter, index) => {
+      if(chapter.id == chapterToRemove._id){
+        chapters.splice(index, 1);
         chaptersUpdated = true;
       }
     })
-
-    if(chaptersUpdated) {
-      if(this.selectedChapter?.id == deletedChapter._id) {
-        this.selectedChapter = null;
-        this.selectedChapterChange.next();
-      }
-
-      if(this.selectedNode?.parentId == deletedChapter._id){
-        this.selectedNode = null;
-        this.selectedNodeChange.next();
-      }
-
-      this.chaptersUpdated.next();
-
-    }
+    return chaptersUpdated;
   }
 
   deleteNode(deletedNode: any){
