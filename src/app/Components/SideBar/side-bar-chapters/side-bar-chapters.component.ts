@@ -41,10 +41,6 @@ export class SideBarChaptersComponent implements OnInit {
       this.editMode = isEditMode;
     })
 
-    this.sideBarService.chaptersUpdated.subscribe(()=>{
-      this.chapters = this.sideBarService.chapters;
-    })
-
     this.sideBarService.selectedChapterChange.subscribe((chapter:Chapter|null)=>{
       this.selectChapter(chapter);
     })
@@ -56,8 +52,6 @@ export class SideBarChaptersComponent implements OnInit {
 
     this.itemService.getChapters(this.itemService.root).subscribe((chapters: Chapter[]) => {
       this.chapters = chapters
-      this.sideBarService.chapters = chapters;
-      this.sideBarService.chaptersUpdated.next()
     })
   }
 
@@ -107,9 +101,7 @@ export class SideBarChaptersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete'){
-        this.chapterHttpService.delete(chapter.id).subscribe((deletedIChapter:IChapter)=>{
-          this.sideBarService.deleteChapter(deletedIChapter);
-        })
+        this.itemService.deleteChapter(chapter).subscribe();
         // this.sideBarService.deleteChapter(chapter);
       }
     });

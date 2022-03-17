@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { ActionService, Action } from './../../../Services/action.service';
 import { Root } from './../../../Models/root.model';
@@ -15,15 +16,14 @@ export class ShowRootsComponent implements OnInit {
 
   constructor(
     private sideBarService: SideBarService,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private itemsService: ItemsService
   ) { }
 
   ngOnInit(): void {
-    this.sideBarService.rootsUpdated.subscribe(()=>{
-      this.roots = this.sideBarService.roots;
+    this.itemsService.getRoots().subscribe((roots:Root[])=>{
+      this.roots = roots;
     })
-
-    this.roots = this.sideBarService.roots;
   }
 
   onClick(root:Root){

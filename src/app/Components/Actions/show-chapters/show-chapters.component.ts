@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { ActionService, Action } from './../../../Services/action.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Chapter } from './../../../Models/chapter.model';
@@ -14,14 +15,14 @@ export class ShowChaptersComponent implements OnInit {
 
   constructor(
     private sideBarService: SideBarService,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private itemsService: ItemsService
   ) { }
 
   ngOnInit(): void {
-    this.sideBarService.chaptersUpdated.subscribe(()=>{
-      this.chapters = this.sideBarService.chapters;
-    })
-    this.chapters = this.sideBarService.chapters;
+    this.itemsService.getChapters(this.itemsService.root).subscribe((chapters: Chapter[])=>{
+      this.chapters = chapters;
+    });
   }
 
   onClick(chapter:Chapter){

@@ -40,10 +40,6 @@ export class SideBarNodesComponent implements OnInit {
       this.editMode = isEditMode;
     })
 
-    this.sideBarService.nodesUpdated.subscribe(()=>{
-      this.nodes = this.sideBarService.nodes;
-    })
-
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
       this.selectNode(node);
     })
@@ -54,8 +50,6 @@ export class SideBarNodesComponent implements OnInit {
 
     this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[]) => {
       this.nodes = nodes;
-      this.sideBarService.nodes = nodes;
-      this.sideBarService.nodesUpdated.next();
     })
   }
 
@@ -75,7 +69,7 @@ export class SideBarNodesComponent implements OnInit {
     if(!chapter) return
     this.chapterHttpService.updateListOrder(chapter.id, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
       const nodes = this.chapterHttpService.getListOfNodes(updatedNodes);
-      this.sideBarService.setNodes(nodes)
+      // this.sideBarService.setNodes(nodes)
     });
   }
 
@@ -119,15 +113,9 @@ export class SideBarNodesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete'){
         if(node.type == 'deck'){
-          this.deckHttpService.delete(node.id).subscribe((deletedDeck:IDeck)=>{
-            const deck = this.deckHttpService.parseToDeck(deletedDeck);
-            this.sideBarService.deleteNode(deck);
-          })
+          this.itemsService.deleteDeck(node).subscribe();
         }else if (node.type == 'explain'){
-          this.explainHttpService.delete(node.id).subscribe((deletedExplain:IExplain)=>{
-            const explain = this.explainHttpService.parseToExplain(deletedExplain);
-            this.sideBarService.deleteNode(explain);
-          })
+          this.itemsService.deleteExplain(node).subscribe();
         }
       }
     });

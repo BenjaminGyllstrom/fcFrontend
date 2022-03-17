@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,16 +15,15 @@ export class ShowNodesComponent implements OnInit {
 
   constructor(
     private sideBarService: SideBarService,
-    private displayTreeService: DisplayTreeService
+    private displayTreeService: DisplayTreeService,
+    private itemsService: ItemsService
   ) { }
 
   ngOnInit(): void {
-    this.sideBarService.nodesUpdated.subscribe(()=>{
-      this.nodes = this.sideBarService.nodes;
+    this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[])=>{
+      this.nodes = nodes;
       this.displayTreeService.nodes = this.nodes;
     })
-    this.nodes = this.sideBarService.nodes;
-    this.displayTreeService.nodes = this.nodes;
   }
 
   getColumn(node:any){
