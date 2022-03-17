@@ -41,6 +41,8 @@ export class SideBarNodesComponent implements OnInit {
     })
 
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
+      console.log('change');
+
       this.selectNode(node);
     })
 

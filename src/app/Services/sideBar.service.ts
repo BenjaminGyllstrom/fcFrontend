@@ -22,10 +22,6 @@ export class SideBarService {
   selectedNode:any|null;
   selectedCard:Card|null;
 
-  selectedRootParamId:string|null;
-  selectedChapterParamId:string|null;
-  selectedNodeParamId:string|null;
-
   selectedRootChange: Subject<Root|null> = new Subject<Root|null>();
   selectedChapterChange: Subject<Chapter|null> = new Subject<Chapter|null>();
   selectedNodeChange: Subject<any> = new Subject<any>();
@@ -34,9 +30,7 @@ export class SideBarService {
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();
 
-  constructor(
-    private rootHttpService: RootHttpService,
-    private chapterHttpService: ChapterHttpService) {
+  constructor() {
   }
 
   changeEditMode(edit:boolean){
