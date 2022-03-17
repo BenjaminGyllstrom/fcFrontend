@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 
 import { IChapter } from './../../../Models/chapter.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,7 +31,8 @@ export class SideBarChaptersComponent implements OnInit {
     private chapterHttpService: ChapterHttpService,
     private rootHttpService: RootHttpService,
     private actionService: ActionService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private itemService: ItemsService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -51,11 +53,12 @@ export class SideBarChaptersComponent implements OnInit {
     if(this.sideBarService.selectedChapter != null){
       this.selectChapter(this.sideBarService.selectedChapter)
     }
-    if(this.sideBarService.chapters.length == 0) {
-      this.sideBarService.requestChapters();
-    }else{
-      this.chapters = this.sideBarService.chapters
-    }
+
+    this.itemService.getChapters(this.itemService.root).subscribe((chapters: Chapter[]) => {
+      this.chapters = chapters
+      this.sideBarService.chapters = chapters;
+      this.sideBarService.chaptersUpdated.next()
+    })
   }
 
   selectChapter(chapter: Chapter|null){
@@ -72,6 +75,7 @@ export class SideBarChaptersComponent implements OnInit {
   onClick(chapter:Chapter|null){
     if(this.selectedChapter == chapter) chapter = null
     this.sideBarService.setChapter(chapter);
+    if(chapter) this.itemService.chapter = chapter;
     this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
   }
 

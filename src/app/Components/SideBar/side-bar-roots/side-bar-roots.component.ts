@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
@@ -25,7 +26,9 @@ export class SideBarRootsComponent implements OnInit {
     private sideBarService: SideBarService,
     private rootHttpService: RootHttpService,
     private actionService: ActionService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private itemsService: ItemsService
+    ) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -45,11 +48,12 @@ export class SideBarRootsComponent implements OnInit {
     if(this.sideBarService.selectedRoot != null){
       this.selectRoot(this.sideBarService.selectedRoot)
     }
-    if(this.sideBarService.roots.length == 0) {
-      this.sideBarService.requestRoots();
-    }else{
-      this.roots = this.sideBarService.roots
-    }
+
+    this.itemsService.getRoots().subscribe((roots:Root[]) => {
+      this.roots = roots;
+      this.sideBarService.roots = roots;
+      this.sideBarService.rootsUpdated.next();
+    })
   }
 
   selectRoot(root: Root|null){
@@ -66,6 +70,7 @@ export class SideBarRootsComponent implements OnInit {
   onClick(root:Root|null){
     if(this.selectedRoot == root) root = null;
     this.sideBarService.setRoot(root);
+    if(root)this.itemsService.root = root;
     this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
   }
 

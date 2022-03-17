@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Root, IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
@@ -14,7 +15,8 @@ export class AddRootComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private rootHttpService: RootHttpService,
-    private sideBarService: SideBarService) { }
+    private sideBarService: SideBarService,
+    private itemsService: ItemsService) { }
 
   rootForm = this.formBuilder.group({
     title:''
@@ -29,11 +31,8 @@ export class AddRootComponent implements OnInit {
     root.title = title;
 
     this.rootForm.reset();
-    this.rootHttpService.post(root).subscribe((collectedRoot: IRoot) => {
-      const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
-      this.sideBarService.addRoot(newRoot);
-      // this.router.navigate(['/rootOverview', collectedRoot._id])
-    })
+
+    this.itemsService.postRoot(root).subscribe()
   }
 
 }

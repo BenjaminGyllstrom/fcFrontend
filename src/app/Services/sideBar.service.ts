@@ -77,14 +77,7 @@ export class SideBarService {
     this.selectedNodeChange.next(node);
   }
 
-  requestRoots(){
-    this.rootHttpService.get().subscribe((collectedRoots: IRoot[]) => {
-      const roots = this.rootHttpService.parseToRoots(collectedRoots);
-      this.roots = roots;
-      this.setRootFromParam(roots);
-      this.rootsUpdated.next();
-    });
-  }
+
 
   setRootFromParam(roots:Root[]){
     if(this.selectedRootParamId == null) return;
@@ -99,20 +92,6 @@ export class SideBarService {
   addRoot(root:Root){
     this.roots.push(root)
     this.rootsUpdated.next();
-  }
-  requestChapters(){
-    const rootId = this.selectedRoot?.id
-    if(rootId == null) {
-      this.chapters = [];
-      return;
-    };
-
-    this.rootHttpService.getById(rootId).subscribe((collectedRoot: IRoot)=> {
-      const newRoot = this.rootHttpService.parseToRoot(collectedRoot);
-      this.chapters = newRoot.chapters;
-      this.setChapterFromParam(newRoot.chapters);
-      this.chaptersUpdated.next();
-    });
   }
 
   setChapterFromParam(chapters:Chapter[]){
@@ -134,20 +113,6 @@ export class SideBarService {
   //   const listIndex = this.nodes.indexOf()
   // }
 
-  requestNodes(){
-    const chapterId = this.selectedChapter?.id;
-    if(chapterId == null){
-      this.nodes = []
-      return;
-    }
-
-    this.chapterHttpService.getById(chapterId).subscribe((collectedChapter: IChapter) => {
-      const newChapter = this.chapterHttpService.parseToChapter(collectedChapter);
-      this.nodes = newChapter.nodes;
-      this.setNodeFromParam(newChapter.nodes)
-      this.nodesUpdated.next();
-    });
-  }
   setNodeFromParam(nodes:any[]){
     if(this.selectedNodeParamId == null) return;
 

@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { Chapter, IChapter } from './../../../Models/chapter.model';
 import { FormBuilder } from '@angular/forms';
 import { SideBarService } from 'src/app/Services/sideBar.service';
@@ -13,7 +14,8 @@ export class AddChapterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private chapterHttpService: ChapterHttpService,
-    private sideBarService: SideBarService) { }
+    private sideBarService: SideBarService,
+    private itemsService: ItemsService) { }
 
     chapterForm = this.formBuilder.group({
       title:''
@@ -33,10 +35,8 @@ export class AddChapterComponent implements OnInit {
     chapter.rootId = this.sideBarService.selectedRoot?.id;
 
     this.chapterForm.reset();
-    this.chapterHttpService.post(chapter).subscribe((collectedChapter: IChapter) => {
-      const newChapter = this.chapterHttpService.parseToChapter(collectedChapter);
-      this.sideBarService.addChapter(newChapter);
-    })
+
+    this.itemsService.postChapter(chapter).subscribe()
   }
 
 }

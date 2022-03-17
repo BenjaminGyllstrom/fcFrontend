@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../../Services/items.service';
 import { SideBarService } from './../../../../Services/sideBar.service';
 import { ExplainHttpService } from './../../../../Services/Http/ExplainHttp.service';
 import { QuillService } from './../../../../Services/quill.service';
@@ -21,7 +22,8 @@ export class AddExplainComponent implements OnInit {
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
     private quillService: QuillService,
-    private sideBarService: SideBarService) { }
+    private sideBarService: SideBarService,
+    private itemsService: ItemsService) { }
 
   explainForm = this.formBuilder.group({
     title:'',
@@ -51,11 +53,8 @@ export class AddExplainComponent implements OnInit {
     explain.text = text;
     explain.parentId = this.chapterId;
     this.reset();
-    this.explainHttpService.post(explain).subscribe((eollctedExplain: IExplain) => {
-      const newExplain = this.explainHttpService.parseToExplain(eollctedExplain)
-      this.sideBarService.addNode(newExplain);
 
-    });
+    this.itemsService.postExplain(explain).subscribe();
   }
   reset(){
     this.explainForm.reset();

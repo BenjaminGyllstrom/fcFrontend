@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { IExplain } from './../../../Models/explain.model';
 import { IDeck } from './../../../Models/deck.model';
 import { ExplainHttpService } from './../../../Services/Http/ExplainHttp.service';
@@ -30,7 +31,8 @@ export class SideBarNodesComponent implements OnInit {
     private actionService: ActionService,
     private dialog: MatDialog,
     private deckHttpService: DeckHttpService,
-    private explainHttpService: ExplainHttpService) { }
+    private explainHttpService: ExplainHttpService,
+    private itemsService: ItemsService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -49,12 +51,12 @@ export class SideBarNodesComponent implements OnInit {
     if(this.sideBarService.selectedNode != null){
       this.selectNode(this.sideBarService.selectedNode)
     }
-    if(this.sideBarService.nodes.length == 0) {
-      this.sideBarService.requestNodes();
-    }else{
-      this.nodes = this.sideBarService.nodes
-    }
-    // this.sideBarService.requestNodes();
+
+    this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[]) => {
+      this.nodes = nodes;
+      this.sideBarService.nodes = nodes;
+      this.sideBarService.nodesUpdated.next();
+    })
   }
 
   selectNode(node:any){
@@ -88,7 +90,7 @@ export class SideBarNodesComponent implements OnInit {
   }
   setAction(node:any){
     if(node == null) this.actionService.setAction(Action.Nodes);
-    else if(this.editMode) this.actionService.setAction(Action.Study);
+    else if(!this.editMode) this.actionService.setAction(Action.Study);
     else if(node.type == 'deck') this.actionService.setAction(Action.Cards);
     else if(node.type == 'explain') this.actionService.setAction(Action.ExplainOverview);
   }
