@@ -19,7 +19,6 @@ export class SideBarRootsComponent implements OnInit {
   editMode:boolean = true;
   roots: Root[]
   selectedRoot:Root|null;
-  showAll:boolean = true;
   addIsClicked:boolean
 
   constructor(
@@ -41,25 +40,18 @@ export class SideBarRootsComponent implements OnInit {
       this.selectRoot(root);
     })
 
-    if(this.sideBarService.selectedRoot != null){
-      this.selectRoot(this.sideBarService.selectedRoot)
-    }
-
     this.itemsService.getRoots().subscribe((roots:Root[]) => {
       this.roots = roots;
     })
+
+    this.selectRoot(this.sideBarService.selectedRoot)
   }
 
   selectRoot(root: Root|null){
-    if(root == null || this.selectedRoot == root){
-      this.selectedRoot = null
-      this.showAll = true;
-    }else{
-      this.selectedRoot = root;
-      this.showAll = false;
-      this.addIsClicked = false;
-    }
+    this.selectedRoot = this.selectedRoot == root? null: root;
+    this.addIsClicked = false;
   }
+
 
   onClick(root:Root|null){
     if(this.selectedRoot == root) root = null;
@@ -70,12 +62,6 @@ export class SideBarRootsComponent implements OnInit {
 
   getSideBarItem(root:Root) : ISideBarItem{
     return {icon: 'Root-black.svg', name: root.title}
-  }
-
-  shouldShow(root:Root){
-    if(this.showAll) return true;
-    if(this.selectedRoot === root) return true;
-    return false;
   }
 
   onAdd(){

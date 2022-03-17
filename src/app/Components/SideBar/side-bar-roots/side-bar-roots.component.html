@@ -1,14 +1,14 @@
 
-<p [ngStyle]="{'margin-bottom': showAll? '12px':'1px'}">Root</p>
+<p [ngStyle]="{'margin-bottom': this.selectedRoot? '1px':'12px'}">Root</p>
 <div *ngFor="let root of roots">
-  <app-side-bar-item [item]="getSideBarItem(root)" *ngIf="shouldShow(root)"
+  <app-side-bar-item [item]="getSideBarItem(root)" *ngIf="!this.selectedRoot || root == this.selectedRoot "
   (onClick)="onClick(root)" (onDelete)="onDelete(root)"></app-side-bar-item>
 </div>
 
 <div *ngIf="editMode" class="root add-root">
   <app-side-bar-item
   [item]="{icon:'Add-item.svg', name:'Add new Root'}"
-  *ngIf="showAll"
+  *ngIf="!this.selectedRoot"
   (click)="onAdd()"
   [showActive]="true"
   [backgroundActive]="addIsClicked" [optionsAvailable]="false"></app-side-bar-item>
