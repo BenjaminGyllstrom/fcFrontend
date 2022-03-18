@@ -49,8 +49,10 @@ export class SideBarChaptersComponent implements OnInit {
     }
 
     this.itemService.getChapters(this.itemService.root).subscribe((chapters: Chapter[]) => {
-      this.chapters = chapters
+      this.sideBarService.setChapters(chapters);
     })
+
+    this.sideBarService.chaptersChange.subscribe(() => this.chapters = this.sideBarService.chapters)
   }
 
   selectChapter(chapter: Chapter|null){

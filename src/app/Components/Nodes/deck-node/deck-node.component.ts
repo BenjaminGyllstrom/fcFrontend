@@ -25,7 +25,7 @@ export class DeckNodeComponent implements OnInit {
   }
 
   onClick(){
-    this.router.navigate(['/study/', 'deck', this.deck.id])
+    // this.router.navigate(['/study/', 'deck', this.deck.id])
   }
   getBackgroundColor():string{
 

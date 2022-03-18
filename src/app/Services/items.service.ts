@@ -82,6 +82,14 @@ export class ItemsService {
       tap((updatedExplain:Explain) => {this.replaceExplain(updatedExplain);}),
     )
   }
+
+  updateNodeOrder(chapterId: string, previousIndex:number, currentIndex:number){
+    return this.chapterHttpService.updateListOrder(chapterId, previousIndex, currentIndex).pipe(
+      map((updatedNodes: any)=>{return this.chapterHttpService.getListOfNodes(updatedNodes)}),
+      tap((updatedNodes:any) => {this.chapter.nodes = updatedNodes;})
+    )
+  }
+
   private replaceRoot(replacementRoot:Root){
     this.roots.forEach(root => {
       if(root.id === replacementRoot.id)

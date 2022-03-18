@@ -49,13 +49,17 @@ export class SideBarNodesComponent implements OnInit {
       this.selectNode(this.sideBarService.selectedNode)
     }
 
+    this.sideBarService.nodesChange.subscribe(()=>this.nodes = this.sideBarService.nodes)
+
     this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[]) => {
-      this.nodes = nodes;
+      console.log(nodes);
+
+      this.sideBarService.setNodes(nodes);
     })
   }
 
   selectNode(node:any){
-    this.selectedNode = this.selectNode == node? null : node
+    this.selectedNode = this.selectedNode == node? null : node
     this.addIsClicked = false;
   }
 
@@ -64,10 +68,10 @@ export class SideBarNodesComponent implements OnInit {
 
     const chapter = this.sideBarService.selectedChapter
     if(!chapter) return
-    this.chapterHttpService.updateListOrder(chapter.id, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
-      const nodes = this.chapterHttpService.getListOfNodes(updatedNodes);
-      this.nodes = nodes;
-    });
+
+    this.itemsService.updateNodeOrder(chapter.id, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
+      this.sideBarService.setNodes(updatedNodes);
+    })
   }
 
   onClick(node:any){

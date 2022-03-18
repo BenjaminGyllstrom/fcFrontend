@@ -20,8 +20,8 @@ export class ShowNodesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[])=>{
-      this.nodes = nodes;
+    this.sideBarService.nodesChange.subscribe(()=> {
+      this.nodes = this.sideBarService.nodes
       this.displayTreeService.nodes = this.nodes;
     })
   }
@@ -50,6 +50,8 @@ export class ShowNodesComponent implements OnInit {
   }
 
   onClick(node:any){
+    console.log(node);
 
+    this.sideBarService.setNode(node);
   }
 }

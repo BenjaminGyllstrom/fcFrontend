@@ -1,5 +1,5 @@
 
-<div class="show-nodes">
+<div class="show-nodes" *ngIf="nodes && nodes.length > 0">
 
   <div class="nodes">
     <div *ngFor="let node of nodes" class="line"

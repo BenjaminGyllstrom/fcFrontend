@@ -25,7 +25,7 @@ export class ExplainNodeComponent implements OnInit {
   }
 
   onClick(){
-    this.router.navigate(['/studyExplain', this.explain.id])
+    // this.router.navigate(['/studyExplain', this.explain.id])
   }
 
   getBackgroundColor():string{

@@ -21,14 +21,13 @@ export class ShowRootsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.itemsService.getRoots().subscribe((roots:Root[])=>{
-      this.roots = roots;
-    })
+
+    this.sideBarService.rootsChange.subscribe(()=>this.roots = this.sideBarService.roots)
   }
 
   onClick(root:Root){
+    this.itemsService.root = root;
     this.sideBarService.setRoot(root)
     this.actionService.setAction(Action.Chapters)
   }
-
 }

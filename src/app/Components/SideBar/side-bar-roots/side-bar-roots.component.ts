@@ -35,7 +35,10 @@ export class SideBarRootsComponent implements OnInit {
 
     this.sideBarService.editModeChange.subscribe((isEditMode) => this.editMode = isEditMode)
     this.sideBarService.selectedRootChange.subscribe((root:Root|null)=> this.selectRoot(root))
-    this.itemsService.getRoots().subscribe((roots:Root[]) => this.roots = roots)
+    this.itemsService.getRoots().subscribe((roots:Root[]) => {
+      this.sideBarService.setRoots(roots);
+    })
+    this.sideBarService.rootsChange.subscribe(() => this.roots = this.sideBarService.roots)
   }
 
   selectRoot(root: Root|null){

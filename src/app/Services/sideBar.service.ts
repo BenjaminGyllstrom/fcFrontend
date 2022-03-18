@@ -21,11 +21,18 @@ export class SideBarService {
   selectedChapter:Chapter|null;
   selectedNode:any|null;
   selectedCard:Card|null;
-
   selectedRootChange: Subject<Root|null> = new Subject<Root|null>();
   selectedChapterChange: Subject<Chapter|null> = new Subject<Chapter|null>();
   selectedNodeChange: Subject<any> = new Subject<any>();
   cardEdited: Subject<Card> = new Subject<Card>();
+
+  roots:Root[] = []
+  chapters:Chapter[] = []
+  nodes:any[] = []
+  rootsChange: Subject<void> = new Subject<void>();
+  chaptersChange: Subject<void> = new Subject<void>();
+  nodesChange: Subject<void> = new Subject<void>();
+
 
   editMode:boolean = true;
   editModeChange:Subject<boolean> = new Subject<boolean>();
@@ -42,19 +49,32 @@ export class SideBarService {
 
   setRoot(root:Root|null){
     this.selectedRoot = root;
-    this.selectedChapter = null;
-    this.selectedNode = null;
+    this.setChapter(null);
+    this.setNode(null);
     this.selectedRootChange.next(root);
   }
 
   setChapter(chapter:Chapter|null){
     this.selectedChapter = chapter;
-    this.selectedNode = null;
+    this.setNode(null);
     this.selectedChapterChange.next(chapter);
   }
 
   setNode(node:any|null){
     this.selectedNode = node;
     this.selectedNodeChange.next(node);
+  }
+
+  setRoots(roots: Root[]){
+    this.roots = roots;
+    this.rootsChange.next();
+  }
+  setChapters(chapters: Chapter[]){
+    this.chapters = chapters;
+    this.chaptersChange.next();
+  }
+  setNodes(nodes: any[]){
+    this.nodes = nodes;
+    this.nodesChange.next();
   }
 }

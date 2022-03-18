@@ -16,16 +16,15 @@ export class ShowChaptersComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private actionService: ActionService,
-    private itemsService: ItemsService
+    private itemService: ItemsService
   ) { }
 
   ngOnInit(): void {
-    this.itemsService.getChapters(this.itemsService.root).subscribe((chapters: Chapter[])=>{
-      this.chapters = chapters;
-    });
+    this.sideBarService.chaptersChange.subscribe(()=>this.chapters = this.sideBarService.chapters)
   }
 
   onClick(chapter:Chapter){
+    this.itemService.chapter = chapter;
     this.sideBarService.setChapter(chapter);
     this.actionService.setAction(Action.Nodes)
   }
