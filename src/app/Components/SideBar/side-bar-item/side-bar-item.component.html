@@ -1,8 +1,6 @@
 
 <div class="side-bar-item not-select"
-  [ngStyle]="{background: showActive? getBackground() : 'none'}"
-  (mouseover)="onMouseOver()"
-  (mouseleave)="onMouseLeave()">
+  [ngStyle]="{background: showActive? getBackground() : 'none'}">
 
   <div (click)="onClick()" class="content">
     <div class="icon">

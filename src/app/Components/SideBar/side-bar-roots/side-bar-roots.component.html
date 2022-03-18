@@ -1,7 +1,7 @@
 
 <p [ngStyle]="{'margin-bottom': this.selectedRoot? '1px':'12px'}">Root</p>
 <div *ngFor="let root of roots">
-  <app-side-bar-item [item]="getSideBarItem(root)" *ngIf="!this.selectedRoot || root == this.selectedRoot "
+  <app-side-bar-item [item]="getSideBarItem(root)" *ngIf="!this.selectedRoot || root == this.selectedRoot"
   (onClick)="onClick(root)" (onDelete)="onDelete(root)"></app-side-bar-item>
 </div>
 

@@ -18,7 +18,6 @@ export class SideBarItemComponent implements OnInit {
   name:string;
 
   @Input() optionsAvailable:boolean = true;
-  showOptions:boolean
 
   constructor() { }
 
@@ -32,16 +31,9 @@ export class SideBarItemComponent implements OnInit {
   }
 
   onClick(){
-    this.backgroundActive = !this.backgroundActive
     this.onClickEmitter.emit();
   }
   onDelete(){
     this.onDeleteEmitter.emit();
-  }
-  onMouseOver(){
-    this.showOptions = true;
-  }
-  onMouseLeave(){
-    this.showOptions = false;
   }
 }

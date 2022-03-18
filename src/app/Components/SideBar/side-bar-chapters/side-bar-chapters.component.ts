@@ -22,14 +22,12 @@ export class SideBarChaptersComponent implements OnInit {
   editMode:boolean = true;
   chapters: Chapter[]
   selectedChapter:Chapter|null;
-  showAll:boolean = true;
+  // showAll:boolean = true;
   addIsClicked:boolean
 
 
   constructor(
     private sideBarService: SideBarService,
-    private chapterHttpService: ChapterHttpService,
-    private rootHttpService: RootHttpService,
     private actionService: ActionService,
     private dialog: MatDialog,
     private itemService: ItemsService) { }
@@ -56,14 +54,8 @@ export class SideBarChaptersComponent implements OnInit {
   }
 
   selectChapter(chapter: Chapter|null){
-    if(chapter == null || this.selectedChapter == chapter){
-      this.selectedChapter = null
-      this.showAll = true;
-    }else{
-      this.selectedChapter = chapter;
-      this.showAll = false;
-      this.addIsClicked = false;
-    }
+    this.selectedChapter = this.selectedChapter == chapter? null : chapter
+    this.addIsClicked = false;
   }
 
   onClick(chapter:Chapter|null){
@@ -77,21 +69,16 @@ export class SideBarChaptersComponent implements OnInit {
     return {icon: 'Chapter-black2.svg', name: chapter.title}
   }
 
-  shouldShow(chapter:Chapter){
-    if(this.showAll) return true;
-    if(this.selectedChapter === chapter) return true;
-    return false;
-  }
-
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
+
     if(this.addIsClicked) {
       this.sideBarService.setChapter(null);
       this.actionService.setAction(Action.AddChapter)
+      return
     }
-    else {
-      this.actionService.setAction(Action.Chapters)
-    }
+
+    this.actionService.setAction(Action.Chapters)
   }
 
   onDelete(chapter:Chapter){
@@ -102,7 +89,6 @@ export class SideBarChaptersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete'){
         this.itemService.deleteChapter(chapter).subscribe();
-        // this.sideBarService.deleteChapter(chapter);
       }
     });
   }

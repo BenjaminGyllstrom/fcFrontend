@@ -31,20 +31,11 @@ export class SideBarRootsComponent implements OnInit {
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-
-    this.sideBarService.editModeChange.subscribe((isEditMode) => {
-      this.editMode = isEditMode;
-    })
-
-    this.sideBarService.selectedRootChange.subscribe((root:Root|null)=>{
-      this.selectRoot(root);
-    })
-
-    this.itemsService.getRoots().subscribe((roots:Root[]) => {
-      this.roots = roots;
-    })
-
     this.selectRoot(this.sideBarService.selectedRoot)
+
+    this.sideBarService.editModeChange.subscribe((isEditMode) => this.editMode = isEditMode)
+    this.sideBarService.selectedRootChange.subscribe((root:Root|null)=> this.selectRoot(root))
+    this.itemsService.getRoots().subscribe((roots:Root[]) => this.roots = roots)
   }
 
   selectRoot(root: Root|null){
@@ -69,10 +60,9 @@ export class SideBarRootsComponent implements OnInit {
     if(this.addIsClicked){
       this.sideBarService.setRoot(null);
       this.actionService.setAction(Action.AddRoot);
-    }else{
-      this.actionService.setAction(Action.MyContentOverview);
+      return
     }
-
+    this.actionService.setAction(Action.MyContentOverview);
   }
 
   onDelete(root:Root){

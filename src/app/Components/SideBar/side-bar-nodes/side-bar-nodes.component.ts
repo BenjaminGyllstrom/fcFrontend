@@ -13,6 +13,7 @@ import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-side-bar-nodes',
@@ -41,8 +42,6 @@ export class SideBarNodesComponent implements OnInit {
     })
 
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
-      console.log('change');
-
       this.selectNode(node);
     })
 
@@ -56,12 +55,8 @@ export class SideBarNodesComponent implements OnInit {
   }
 
   selectNode(node:any){
-    if(node == null){
-      this.selectedNode = null
-    }else{
-      this.selectedNode = node;
-      this.addIsClicked = false;
-    }
+    this.selectedNode = this.selectNode == node? null : node
+    this.addIsClicked = false;
   }
 
   drop(event: CdkDragDrop<any[]>){
@@ -71,7 +66,7 @@ export class SideBarNodesComponent implements OnInit {
     if(!chapter) return
     this.chapterHttpService.updateListOrder(chapter.id, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
       const nodes = this.chapterHttpService.getListOfNodes(updatedNodes);
-      // this.sideBarService.setNodes(nodes)
+      this.nodes = nodes;
     });
   }
 
@@ -79,7 +74,6 @@ export class SideBarNodesComponent implements OnInit {
     if(this.selectedNode == node) node = null
 
     // this.selectNode(node);
-    // this.sideBarService.setNode(this.selectedNode, true, true);
     this.sideBarService.setNode(node);
     this.setAction(node);
 
