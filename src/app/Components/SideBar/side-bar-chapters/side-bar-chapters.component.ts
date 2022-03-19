@@ -1,3 +1,4 @@
+import { UrlService } from './../../../Services/url.service';
 import { ItemsService } from './../../../Services/items.service';
 
 import { IChapter } from './../../../Models/chapter.model';
@@ -31,7 +32,8 @@ export class SideBarChaptersComponent implements OnInit {
     private sideBarService: SideBarService,
     private actionService: ActionService,
     private dialog: MatDialog,
-    private itemService: ItemsService) { }
+    private itemService: ItemsService,
+    private urlService: UrlService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -50,6 +52,10 @@ export class SideBarChaptersComponent implements OnInit {
       this.itemService.getChapters(this.sideBarService.selectedRoot).subscribe((chapters: Chapter[]) => {
         this.chapters = chapters;
         this.sideBarService.setChapters(chapters);
+
+        if(this.urlService.chapterId){
+          this.itemService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>this.sideBarService.setChapter(chapter))
+        }
       })
     }
   }

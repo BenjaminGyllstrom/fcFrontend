@@ -1,3 +1,5 @@
+import { UrlService } from './../../../Services/url.service';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ItemsService } from './../../../Services/items.service';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
@@ -17,7 +19,9 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
   constructor(
     private sideBarService: SideBarService,
     private displayTreeService: DisplayTreeService,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute
   ) { }
 
   sub:Subscription
@@ -34,6 +38,8 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
       this.nodes = this.sideBarService.nodes
       this.displayTreeService.nodes = this.nodes;
     })
+
+    this.urlService.handleParams(this.route.snapshot.params);
   }
 
   getColumn(node:any){

@@ -1,3 +1,4 @@
+import { NavigationEnd, Router } from '@angular/router';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { StateService, State } from './../../../Services/state.service';
 import { ActionService, Action } from './../../../Services/action.service';
@@ -15,7 +16,8 @@ export class SideBarComponent implements OnInit {
   state:State
   constructor(private sideBarService: SideBarService,
     private actionService: ActionService,
-    private stateService: StateService) { }
+    private stateService: StateService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.state = this.stateService.setState(this.sideBarService.selectedRoot, this.sideBarService.selectedChapter, this.sideBarService.selectedNode)
@@ -29,7 +31,7 @@ export class SideBarComponent implements OnInit {
       this.state = this.stateService.setState(this.sideBarService.selectedRoot, this.sideBarService.selectedChapter, this.sideBarService.selectedNode)
     })
 
-    this.initAction();
+    // this.initAction();
   }
 
   initAction(){

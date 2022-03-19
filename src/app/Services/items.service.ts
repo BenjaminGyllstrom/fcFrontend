@@ -251,4 +251,67 @@ export class ItemsService {
   getCards(deck:Deck):Observable<any>{
     return new Observable(observer => observer.next(deck.cards))
   }
+
+  getRootById(id:string):Observable<any>{
+    const existingRoot = this.getExistingRootById(id);
+    if(existingRoot) return new Observable(observer => observer.next(existingRoot))
+
+    return this.rootHttpService.getById(id).pipe(
+      map((collectedRoots:IRoot)=> {
+        return this.rootHttpService.parseToRoot(collectedRoots);
+      })
+    )
+  }
+  getChapterById(chapters:Chapter[], id:string):Observable<any>{
+    const existingChapter = this.getExistingChapterById(chapters, id);
+    if(existingChapter) return new Observable(observer => observer.next(existingChapter))
+
+    return this.chapterHttpService.getById(id).pipe(
+      map((collectedChapter:IChapter) => {
+        return this.chapterHttpService.parseToChapter(collectedChapter)
+      })
+    )
+  }
+  getDeckById(nodes:any[], id:string){
+    const existingDeck = this.getExistingDeckById(nodes, id)
+    if(existingDeck) return new Observable(observer => observer.next(existingDeck))
+
+    return this.deckHttpService.getById(id).pipe(
+      map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)})
+    )
+  }
+  getExplainById(nodes:any[], id:string){
+    const existingExplain = this.getExistingExplainById(nodes, id)
+    if(existingExplain) return new Observable(observer => observer.next(existingExplain))
+
+    return this.explainHttpService.getById(id).pipe(
+      map((updatedExplain:IExplain)=>{return this.explainHttpService.parseToExplain(updatedExplain)})
+    )
+  }
+
+  private getExistingRootById(id:string){
+    for (const root of this.roots) {
+      if(root.id === id) return root;
+    }
+    return null;
+  }
+
+  private getExistingChapterById(chapters:Chapter[], id:string){
+    for (const chapter of chapters) {
+      if(chapter.id === id) return chapter;
+    }
+    return null;
+  }
+  private getExistingDeckById(nodes:any[], id:string){
+    for (const node of nodes) {
+      if(node.type == 'deck' && node.id === id) return node;
+    }
+    return null;
+  }
+  private getExistingExplainById(nodes:any[], id:string){
+    for (const node of nodes) {
+      if(node.type == 'explain' && node.id === id) return node;
+    }
+    return null;
+  }
 }

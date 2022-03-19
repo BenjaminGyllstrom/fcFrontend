@@ -1,3 +1,4 @@
+import { UrlService } from './../../../Services/url.service';
 import { ItemsService } from './../../../Services/items.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActionService, Action } from './../../../Services/action.service';
@@ -26,7 +27,8 @@ export class SideBarRootsComponent implements OnInit {
     private rootHttpService: RootHttpService,
     private actionService: ActionService,
     private dialog: MatDialog,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private urlService: UrlService
     ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class SideBarRootsComponent implements OnInit {
     this.itemsService.getRoots().subscribe((roots:Root[]) => {
       this.roots = roots
       this.sideBarService.setRoots(roots);
+
+      if(this.urlService.rootId) {
+        this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>this.sideBarService.setRoot(root))
+      }
     })
   }
 

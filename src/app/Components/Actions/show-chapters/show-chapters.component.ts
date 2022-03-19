@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { UrlService } from './../../../Services/url.service';
 import { ItemsService } from './../../../Services/items.service';
 import { ActionService, Action } from './../../../Services/action.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
@@ -17,7 +19,9 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
   constructor(
     private sideBarService: SideBarService,
     private actionService: ActionService,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute
   ) { }
   sub:Subscription
   ngOnDestroy(): void {
@@ -30,6 +34,8 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
     this.sub = this.sideBarService.chaptersChange.subscribe(()=>{
       this.chapters = this.sideBarService.chapters
     })
+
+    this.urlService.handleParams(this.route.snapshot.params);
   }
 
   onClick(chapter:Chapter){
