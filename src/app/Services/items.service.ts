@@ -182,17 +182,16 @@ export class ItemsService {
     return new Observable(observer => observer.next(this.roots))
   }
 
-  getChapters(root: Root):Observable<any>{
+  getChapters(root: Root):Observable<Chapter[]>{
     if(root.chapters == null || root.chapters.length == 0){
 
       return this.rootHttpService.getById(root.id).pipe(
         map((collectedRoot:IRoot) => {
           return this.chapterHttpService.parseToChapters(collectedRoot.chapters)
         }),
-        tap((collectedChapters:Chapter[]) => {this.root.chapters = collectedChapters})
+        tap((collectedChapters:Chapter[]) => {root.chapters = collectedChapters})
       )
     }
-    console.log('exists chaptesr already');
     return new Observable(observer => observer.next(root.chapters))
   }
 

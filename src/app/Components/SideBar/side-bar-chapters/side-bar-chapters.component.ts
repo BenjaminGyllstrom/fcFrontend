@@ -6,11 +6,12 @@ import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-side-bar-chapters',
@@ -34,7 +35,6 @@ export class SideBarChaptersComponent implements OnInit {
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-
     this.sideBarService.editModeChange.subscribe((isEditMode) => {
       this.editMode = isEditMode;
     })
@@ -49,10 +49,9 @@ export class SideBarChaptersComponent implements OnInit {
     }
 
     this.itemService.getChapters(this.itemService.root).subscribe((chapters: Chapter[]) => {
+      this.chapters = chapters;
       this.sideBarService.setChapters(chapters);
     })
-
-    this.sideBarService.chaptersChange.subscribe(() => this.chapters = this.sideBarService.chapters)
   }
 
   selectChapter(chapter: Chapter|null){

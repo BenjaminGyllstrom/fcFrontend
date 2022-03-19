@@ -21,7 +21,7 @@ export class ShowRootsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.roots = this.sideBarService.roots
     this.sideBarService.rootsChange.subscribe(()=>this.roots = this.sideBarService.roots)
   }
 

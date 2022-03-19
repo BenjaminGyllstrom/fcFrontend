@@ -29,9 +29,9 @@ export class SideBarService {
   roots:Root[] = []
   chapters:Chapter[] = []
   nodes:any[] = []
-  rootsChange: Subject<void> = new Subject<void>();
-  chaptersChange: Subject<void> = new Subject<void>();
-  nodesChange: Subject<void> = new Subject<void>();
+  rootsChange: Subject<Root[]> = new Subject<Root[]>();
+  chaptersChange: Subject<Chapter[]> = new Subject<Chapter[]>();
+  nodesChange: Subject<any[]> = new Subject<any[]>();
 
 
   editMode:boolean = true;
@@ -67,14 +67,14 @@ export class SideBarService {
 
   setRoots(roots: Root[]){
     this.roots = roots;
-    this.rootsChange.next();
+    this.rootsChange.next(roots);
   }
   setChapters(chapters: Chapter[]){
     this.chapters = chapters;
-    this.chaptersChange.next();
+    this.chaptersChange.next(chapters);
   }
   setNodes(nodes: any[]){
     this.nodes = nodes;
-    this.nodesChange.next();
+    this.nodesChange.next(nodes);
   }
 }

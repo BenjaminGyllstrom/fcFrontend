@@ -49,11 +49,9 @@ export class SideBarNodesComponent implements OnInit {
       this.selectNode(this.sideBarService.selectedNode)
     }
 
-    this.sideBarService.nodesChange.subscribe(()=>this.nodes = this.sideBarService.nodes)
 
     this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[]) => {
-      console.log(nodes);
-
+      this.nodes = nodes
       this.sideBarService.setNodes(nodes);
     })
   }

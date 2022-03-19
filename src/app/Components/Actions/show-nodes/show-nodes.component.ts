@@ -20,6 +20,9 @@ export class ShowNodesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.nodes = this.sideBarService.nodes
+    this.displayTreeService.nodes = this.nodes;
+
     this.sideBarService.nodesChange.subscribe(()=> {
       this.nodes = this.sideBarService.nodes
       this.displayTreeService.nodes = this.nodes;
