@@ -1,6 +1,5 @@
 import { Chapter } from './../Models/chapter.model';
 import { Root } from './../Models/root.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 

@@ -12,9 +12,7 @@ import { Deck } from "../Models/deck.model";
 import { Explain } from "../Models/explain.model";
 import { Root } from "../Models/root.model";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SideBarService {
 
   selectedRoot:Root|null;

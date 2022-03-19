@@ -5,9 +5,7 @@ import { StateService } from './state.service';
 import { Injectable } from '@angular/core';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UrlService {
   constructor(
     private stateService:StateService,
