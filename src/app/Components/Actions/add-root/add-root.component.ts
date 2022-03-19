@@ -14,8 +14,6 @@ export class AddRootComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private rootHttpService: RootHttpService,
-    private sideBarService: SideBarService,
     private itemsService: ItemsService) { }
 
   rootForm = this.formBuilder.group({

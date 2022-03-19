@@ -19,7 +19,6 @@ export class AddDeckComponent implements OnInit {
   selectedExplain:any;
 
   constructor(
-    private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
     private sideBarService: SideBarService,

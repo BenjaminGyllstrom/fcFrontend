@@ -17,10 +17,6 @@ export class SideBarComponent implements OnInit {
     private actionService: ActionService,
     private stateService: StateService) { }
 
-    root:Root|null
-    chapter:Chapter|null
-    node:any
-
   ngOnInit(): void {
     this.state = this.stateService.setState(this.sideBarService.selectedRoot, this.sideBarService.selectedChapter, this.sideBarService.selectedNode)
     this.sideBarService.selectedRootChange.subscribe((root: Root|null)=>{

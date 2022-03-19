@@ -45,9 +45,9 @@ export class SideBarNodesComponent implements OnInit {
       this.selectNode(node);
     })
 
-    if(this.sideBarService.selectedNode != null){
-      this.selectNode(this.sideBarService.selectedNode)
-    }
+
+    this.selectNode(this.sideBarService.selectedNode)
+
 
     if(this.sideBarService.selectedChapter)
     {

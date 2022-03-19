@@ -19,7 +19,6 @@ export class AddExplainComponent implements OnInit {
   quillContent:string = '';
 
   constructor(
-    private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
     private quillService: QuillService,
     private sideBarService: SideBarService,

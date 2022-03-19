@@ -43,10 +43,7 @@ export class SideBarChaptersComponent implements OnInit {
       this.selectChapter(chapter);
     })
 
-
-    if(this.sideBarService.selectedChapter != null){
-      this.selectChapter(this.sideBarService.selectedChapter)
-    }
+    this.selectChapter(this.sideBarService.selectedChapter)
 
     if(this.sideBarService.selectedRoot){
       this.itemService.getChapters(this.sideBarService.selectedRoot).subscribe((chapters: Chapter[]) => {

@@ -13,7 +13,6 @@ import { Component, OnInit } from '@angular/core';
 export class AddChapterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-    private chapterHttpService: ChapterHttpService,
     private sideBarService: SideBarService,
     private itemsService: ItemsService) { }
 
