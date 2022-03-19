@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { CardHttpService } from './../../../Services/Http/CardHttp.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Card, ICard } from './../../../Models/card.model';
@@ -20,7 +21,8 @@ export class ShowCardsComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     public dialog: MatDialog,
-    private cardHttpService: CardHttpService
+    private cardHttpService: CardHttpService,
+    private itemService: ItemsService
   ) { }
 
   ngOnInit(): void {
@@ -29,13 +31,17 @@ export class ShowCardsComponent implements OnInit {
 
       if(node.type == 'deck'){
         this.deck = this.sideBarService.selectedNode;
-        this.cards = node.cards;
+        this.itemService.getCards(node).subscribe((cards: Card[])=>{
+          this.cards = cards
+        });
       }
     })
     if(this.sideBarService.selectedNode?.type != null &&
       this.sideBarService.selectedNode.type == 'deck'){
-      this.cards = this.sideBarService.selectedNode.cards;
-      this.deck = this.sideBarService.selectedNode;
+        this.deck = this.sideBarService.selectedNode;
+        this.itemService.getCards(this.deck).subscribe((cards: Card[])=>{
+          this.cards = cards
+        });
     }
   }
 
@@ -57,25 +63,8 @@ export class ShowCardsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete'){
-        this.cardHttpService.delete(card.id).subscribe((deletedICard: ICard) => {
-          const deletedCard = this.cardHttpService.parseToCard(deletedICard);
-          this.removeCard(deletedCard);
-        })
+        this.itemService.deleteCard(this.deck, card).subscribe();
       }
     });
-  }
-
-  removeCard(cardToRemove: Card){
-    this.cards.forEach((card, index)=>{
-      if(card.id == cardToRemove.id){
-        this.cards.splice(index, 1);
-      }
-    })
-
-    this.deck.cards.forEach((card, index)=>{
-      if(card.id == cardToRemove.id){
-        this.deck.cards.splice(index, 1);
-      }
-    })
   }
 }

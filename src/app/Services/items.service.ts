@@ -1,3 +1,4 @@
+import { CardHttpService } from './Http/CardHttp.service';
 import { IExplain } from 'src/app/Models/explain.model';
 import { IDeck } from 'src/app/Models/deck.model';
 import { Explain } from 'src/app/Models/explain.model';
@@ -13,6 +14,7 @@ import { Chapter } from 'src/app/Models/chapter.model';
 import { Root } from 'src/app/Models/root.model';
 import { Injectable } from '@angular/core';
 import { Deck } from '../Models/deck.model';
+import { Card, ICard } from '../Models/card.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class ItemsService {
     private rootHttpService: RootHttpService,
     private chapterHttpService: ChapterHttpService,
     private deckHttpService: DeckHttpService,
-    private explainHttpService: ExplainHttpService
+    private explainHttpService: ExplainHttpService,
+    private cardHttpService: CardHttpService
   ){}
 
   roots:Root[]
@@ -54,6 +57,15 @@ export class ItemsService {
     return this.explainHttpService.post(explain).pipe(
       map((createdExplain:IExplain) => {return this.explainHttpService.parseToExplain(createdExplain)}),
       tap((createdExplain:Explain) => {chapter.nodes.push(createdExplain);})
+    )
+  }
+  postCard(deck:Deck, card:Card){
+    return this.cardHttpService.post(card, deck.id).pipe(
+      map((addedCard:ICard)=>{return this.cardHttpService.parseToCard(addedCard)}),
+      tap((addedCard:Card)=>{
+        if(deck.cards == null) deck.cards = [];
+        deck.cards.push(addedCard);
+      })
     )
   }
 
@@ -90,6 +102,13 @@ export class ItemsService {
     )
   }
 
+  updateCard(deck:Deck, card:Card){
+    return this.cardHttpService.edit(card, card.id).pipe(
+      map((updatedCard:ICard)=>{return this.cardHttpService.parseToCard(updatedCard)}),
+      tap((updatedCard:Card) => {this.replaceCard(deck, updatedCard)})
+    )
+  }
+
   private replaceRoot(replacementRoot:Root){
     this.roots.forEach(root => {
       if(root.id === replacementRoot.id)
@@ -114,6 +133,13 @@ export class ItemsService {
       if( node.type == 'explain' && node.id === replacementExplain.id)
       chapter.nodes.splice(chapter.nodes.indexOf(node), 1, replacementExplain)
     });
+  }
+  private replaceCard(deck:Deck, replacementCard:Card){
+    deck.cards.forEach(card => {
+      if(card.id == replacementCard.id){
+        deck.cards.splice(deck.cards.indexOf(card), 1 , replacementCard);
+      }
+    })
   }
 
   deleteRoot(root:Root){
@@ -141,6 +167,12 @@ export class ItemsService {
       tap((updatedExplain:Explain) => {this.removeExplain(chapter.nodes, updatedExplain);}),
     )
   }
+  deleteCard(deck:Deck, card:Card){
+    return this.cardHttpService.delete(card.id).pipe(
+      map((deletedCard:ICard)=>{return this.cardHttpService.parseToCard(deletedCard)}),
+      tap((deletedCard:Card) => {this.removeCard(deck.cards, deletedCard)})
+    )
+  }
 
   private removeRoot(rootToRemove:Root){
     this.roots.forEach(root => {
@@ -165,6 +197,14 @@ export class ItemsService {
       if( node.type == 'explain' && node.id === explainToRemove.id)
       nodes.splice(nodes.indexOf(node), 1)
     });
+  }
+
+  private removeCard(cards:Card[], cardToRemove:Card){
+    cards.forEach(card => {
+      if(card.id == cardToRemove.id){
+        cards.splice(cards.indexOf(card), 1);
+      }
+    })
   }
 
   getRoots():Observable<any>{
@@ -206,5 +246,9 @@ export class ItemsService {
     }
 
     return new Observable(observer => observer.next(chapter.nodes))
+  }
+
+  getCards(deck:Deck):Observable<any>{
+    return new Observable(observer => observer.next(deck.cards))
   }
 }

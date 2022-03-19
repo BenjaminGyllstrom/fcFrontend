@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { ICard } from './../../../Models/card.model';
 import { IExplain } from 'src/app/Models/explain.model';
 import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
@@ -38,10 +39,10 @@ export class AddCardComponent implements OnInit {
 
   constructor(
     private sideBarService: SideBarService,
-    private cardHttpService: CardHttpService,
     private quillService: QuillService,
     private deckHttpService: DeckHttpService,
-    private explainHttpService: ExplainHttpService
+    private explainHttpService: ExplainHttpService,
+    private itemService: ItemsService
   ) { }
 
   ngOnInit(): void {
@@ -75,11 +76,7 @@ export class AddCardComponent implements OnInit {
     card.answer = this.answer
     card.deckId = this.deck.id;
 
-    this.cardHttpService.post(card, this.deck.id).subscribe((iCard: ICard) => {
-      const card = this.cardHttpService.parseToCard(iCard);
-      if(this.deck.cards == null) this.deck.cards = [];
-      this.deck.cards.push(card);
-    });
+    this.itemService.postCard(this.deck, card).subscribe();
 
     this.question = '';
     this.answer = '';

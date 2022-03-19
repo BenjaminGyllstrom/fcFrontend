@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../../Services/items.service';
 import { ICard } from './../../../../Models/card.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
@@ -25,9 +26,8 @@ export class EditCardComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private cardHttpService: CardHttpService,
-    private quillService: QuillService,
-    private dialogRef: MatDialogRef<EditCardComponent>
-
+    private dialogRef: MatDialogRef<EditCardComponent>,
+    private itemService: ItemsService
   ) { }
 
   ngOnInit(): void {
@@ -52,15 +52,12 @@ export class EditCardComponent implements OnInit {
     const card = new Card();
     card.question = this.question
     card.answer = this.answer
+    card.id = this.card.id;
 
     this.card.question = card.question;
     this.card.answer = card.answer;
 
-
-    this.cardHttpService.edit(card, this.card.id).subscribe((collectedCard: ICard) => {
-      const updatedCard = this.cardHttpService.parseToCard(collectedCard);
-      this.sideBarService.cardEdited.next(updatedCard);
-    });
+    this.itemService.updateCard(this.deck, card).subscribe(()=>{})
 
     this.showQuestion = true;
   }
