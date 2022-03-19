@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { IDeck } from 'src/app/Models/deck.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { FormBuilder } from '@angular/forms';
@@ -30,7 +31,8 @@ export class DeckOverviewComponent implements OnInit {
     private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
-    private sideBarService: SideBarService) { }
+    private sideBarService: SideBarService,
+    private itemService: ItemsService) { }
 
   ngOnInit(): void {
     if(this.sideBarService.selectedChapter == null) return;
@@ -68,9 +70,9 @@ export class DeckOverviewComponent implements OnInit {
 
     this.deck.title = this.deckForm.value.title;
     this.deck.associatedExplain = this.selectedExplain?._id;
-    this.deckHttpService.edit(this.deck, this.deck.id).subscribe((updatedDeck: IDeck)=> {
-      this.edit = false;
-    })
+
+    if(this.sideBarService.selectedChapter)
+    this.itemService.updateDeck(this.sideBarService.selectedChapter, this.deck).subscribe(()=> this.edit=false )
   }
   onCancel(){
     this.edit = false;

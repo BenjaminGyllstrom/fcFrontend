@@ -1,3 +1,4 @@
+import { ItemsService } from './../../../Services/items.service';
 import { ExplainHttpService } from './../../../Services/Http/ExplainHttp.service';
 import { Explain, IExplain } from './../../../Models/explain.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
@@ -16,7 +17,8 @@ export class ExplainOverviewComponent implements OnInit {
 
   constructor(
     private sideBarService: SideBarService,
-    private explainHttpService: ExplainHttpService
+    private explainHttpService: ExplainHttpService,
+    private itemService: ItemsService
     ) { }
 
   ngOnInit(): void {
@@ -42,10 +44,9 @@ export class ExplainOverviewComponent implements OnInit {
 
   onSave(){
     this.explain.text = this.content;
-    this.explainHttpService.edit(this.explain, this.explain.id).subscribe((collectedExplain:IExplain)=>{
-      const updatedExplain = this.explainHttpService.parseToExplain(collectedExplain);
-      this.edit = false;
-    });
+
+    if(this.sideBarService.selectedChapter)
+    this.itemService.updateExplain(this.sideBarService.selectedChapter, this.explain).subscribe(()=>this.edit = false)
   }
   onCancel(){
     this.edit = false;
