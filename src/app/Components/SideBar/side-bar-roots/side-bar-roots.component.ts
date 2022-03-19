@@ -42,9 +42,6 @@ export class SideBarRootsComponent implements OnInit {
       this.roots = roots
       this.sideBarService.setRoots(roots);
 
-      console.log('got roots');
-      console.log(this.urlService.rootId);
-
       if(this.urlService.rootId) {
         this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>this.sideBarService.setRoot(root))
       }
@@ -84,7 +81,10 @@ export class SideBarRootsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete'){
-        this.itemsService.deleteRoot(root).subscribe();
+        this.itemsService.deleteRoot(root).subscribe((deletedRoot: Root)=>{
+          if(this.sideBarService.selectedRoot?.id == deletedRoot.id)
+          this.sideBarService.setRoot(null);
+        });
       }
     });
   }

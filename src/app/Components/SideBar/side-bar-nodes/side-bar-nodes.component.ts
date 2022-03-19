@@ -126,9 +126,15 @@ export class SideBarNodesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete' && this.sideBarService.selectedChapter){
         if(node.type == 'deck'){
-          this.itemsService.deleteDeck(this.sideBarService.selectedChapter, node).subscribe();
+          this.itemsService.deleteDeck(this.sideBarService.selectedChapter, node).subscribe((deletedNode:any)=>{
+            if(this.sideBarService.selectedNode?.type == 'deck' && this.sideBarService.selectedNode.id == deletedNode.id)
+            this.sideBarService.setNode(null)
+          });
         }else if (node.type == 'explain'){
-          this.itemsService.deleteExplain(this.sideBarService.selectedChapter, node).subscribe();
+          this.itemsService.deleteExplain(this.sideBarService.selectedChapter, node).subscribe((deletedNode:any)=>{
+            if(this.sideBarService.selectedNode?.type == 'explain' && this.sideBarService.selectedNode.id == deletedNode.id)
+            this.sideBarService.setNode(null)
+          });
         }
       }
     });

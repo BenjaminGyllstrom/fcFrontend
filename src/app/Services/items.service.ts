@@ -157,9 +157,7 @@ export class ItemsService {
 
   deleteDeck(chapter:Chapter, deck:Deck){
     return this.deckHttpService.delete(deck.id).pipe(
-      map((updatedDeck:IDeck)=>{console.log(updatedDeck);
-
-        return this.deckHttpService.parseToDeck(updatedDeck)}),
+      map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)}),
       tap((updatedDeck:Deck) => {this.removeDeck(chapter.nodes, updatedDeck);}),
     )
   }

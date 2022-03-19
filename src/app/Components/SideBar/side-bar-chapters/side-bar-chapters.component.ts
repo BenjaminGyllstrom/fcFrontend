@@ -94,7 +94,11 @@ export class SideBarChaptersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'Delete' && this.sideBarService.selectedRoot){
-        this.itemService.deleteChapter(this.sideBarService.selectedRoot, chapter).subscribe();
+        this.itemService.deleteChapter(this.sideBarService.selectedRoot, chapter).subscribe((deletedChapter)=>{
+          if(deletedChapter.id == this.sideBarService.selectedChapter?.id){
+            this.sideBarService.setChapter(null)
+          }
+        });
       }
     });
   }
