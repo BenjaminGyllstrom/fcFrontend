@@ -54,7 +54,8 @@ export class AddExplainComponent implements OnInit {
     explain.parentId = this.chapterId;
     this.reset();
 
-    this.itemsService.postExplain(explain).subscribe();
+    if(this.sideBarService.selectedChapter)
+      this.itemsService.postExplain(this.sideBarService.selectedChapter, explain).subscribe();
   }
   reset(){
     this.explainForm.reset();

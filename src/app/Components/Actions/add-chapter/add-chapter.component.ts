@@ -36,7 +36,7 @@ export class AddChapterComponent implements OnInit {
 
     this.chapterForm.reset();
 
-    this.itemsService.postChapter(chapter).subscribe()
+    this.itemsService.postChapter(this.sideBarService.selectedRoot, chapter).subscribe()
   }
 
 }

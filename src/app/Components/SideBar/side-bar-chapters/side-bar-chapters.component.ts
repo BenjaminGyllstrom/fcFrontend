@@ -48,21 +48,22 @@ export class SideBarChaptersComponent implements OnInit {
       this.selectChapter(this.sideBarService.selectedChapter)
     }
 
-    this.itemService.getChapters(this.itemService.root).subscribe((chapters: Chapter[]) => {
-      this.chapters = chapters;
-      this.sideBarService.setChapters(chapters);
-    })
+    if(this.sideBarService.selectedRoot){
+      this.itemService.getChapters(this.sideBarService.selectedRoot).subscribe((chapters: Chapter[]) => {
+        this.chapters = chapters;
+        this.sideBarService.setChapters(chapters);
+      })
+    }
   }
 
   selectChapter(chapter: Chapter|null){
     this.selectedChapter = this.selectedChapter == chapter? null : chapter
-    this.addIsClicked = false;
+    if(this.selectedChapter) this.addIsClicked = false;
   }
 
   onClick(chapter:Chapter|null){
     if(this.selectedChapter == chapter) chapter = null
     this.sideBarService.setChapter(chapter);
-    if(chapter) this.itemService.chapter = chapter;
     this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
   }
 
@@ -88,8 +89,8 @@ export class SideBarChaptersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == 'Delete'){
-        this.itemService.deleteChapter(chapter).subscribe();
+      if(result == 'Delete' && this.sideBarService.selectedRoot){
+        this.itemService.deleteChapter(this.sideBarService.selectedRoot, chapter).subscribe();
       }
     });
   }

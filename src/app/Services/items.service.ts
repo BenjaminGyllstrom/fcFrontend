@@ -28,9 +28,9 @@ export class ItemsService {
 
   roots:Root[]
 
-  root:Root;
-  chapter:Chapter;
-  node:any;
+  // root:Root;
+  // chapter:Chapter;
+  // node:any;
 
   postRoot(root:Root):Observable<any>{
     return this.rootHttpService.post(root).pipe(
@@ -38,22 +38,22 @@ export class ItemsService {
       tap((createdRoot:Root) => {this.roots.push(createdRoot);}),
     )
   }
-  postChapter(chapter:Chapter){
+  postChapter(root:Root, chapter:Chapter){
     return this.chapterHttpService.post(chapter).pipe(
       map((createdChapter:IChapter) => {return this.chapterHttpService.parseToChapter(createdChapter)}),
-      tap((createdChapter:Chapter) => {this.root.chapters.push(createdChapter);})
+      tap((createdChapter:Chapter) => {root.chapters.push(createdChapter);})
     )
   }
-  postDeck(deck:Deck){
+  postDeck(chapter:Chapter, deck:Deck){
     return this.deckHttpService.post(deck).pipe(
       map((createdDeck:IDeck) => {return this.deckHttpService.parseToDeck(createdDeck)}),
-      tap((createdDeck:Deck) => {this.chapter.nodes.push(createdDeck);}),
+      tap((createdDeck:Deck) => {chapter.nodes.push(createdDeck);}),
     )
   }
-  postExplain(explain: Explain){
+  postExplain(chapter:Chapter, explain: Explain){
     return this.explainHttpService.post(explain).pipe(
       map((createdExplain:IExplain) => {return this.explainHttpService.parseToExplain(createdExplain)}),
-      tap((createdExplain:Explain) => {this.chapter.nodes.push(createdExplain);})
+      tap((createdExplain:Explain) => {chapter.nodes.push(createdExplain);})
     )
   }
 
@@ -63,30 +63,30 @@ export class ItemsService {
       tap((updatedRoot:Root) => {this.replaceRoot(updatedRoot);}),
     )
   }
-  updateChapter(chapter:Chapter){
+  updateChapter(root:Root, chapter:Chapter){
     return this.chapterHttpService.edit(chapter, chapter.id).pipe(
       map((updatedChapter:IChapter)=>{return this.chapterHttpService.parseToChapter(updatedChapter)}),
-      tap((updatedChapter:Chapter) => {this.replaceChapter(updatedChapter);}),
+      tap((updatedChapter:Chapter) => {this.replaceChapter(root, updatedChapter);}),
     )
   }
 
-  updateDeck(deck:Deck){
+  updateDeck(chapter:Chapter, deck:Deck){
     return this.deckHttpService.edit(deck, deck.id).pipe(
       map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)}),
-      tap((updatedDeck:Deck) => {this.replaceDeck(updatedDeck);}),
+      tap((updatedDeck:Deck) => {this.replaceDeck(chapter, updatedDeck);}),
     )
   }
-  updateExplain(explain:Explain){
+  updateExplain(chapter:Chapter, explain:Explain){
     return this.explainHttpService.edit(explain, explain.id).pipe(
       map((updatedExplain:IExplain)=>{return this.explainHttpService.parseToExplain(updatedExplain)}),
-      tap((updatedExplain:Explain) => {this.replaceExplain(updatedExplain);}),
+      tap((updatedExplain:Explain) => {this.replaceExplain(chapter, updatedExplain);}),
     )
   }
 
-  updateNodeOrder(chapterId: string, previousIndex:number, currentIndex:number){
-    return this.chapterHttpService.updateListOrder(chapterId, previousIndex, currentIndex).pipe(
+  updateNodeOrder(chapter: Chapter, previousIndex:number, currentIndex:number){
+    return this.chapterHttpService.updateListOrder(chapter.id, previousIndex, currentIndex).pipe(
       map((updatedNodes: any)=>{return this.chapterHttpService.getListOfNodes(updatedNodes)}),
-      tap((updatedNodes:any) => {this.chapter.nodes = updatedNodes;})
+      tap((updatedNodes:any) => {chapter.nodes = updatedNodes;})
     )
   }
 
@@ -97,22 +97,22 @@ export class ItemsService {
     });
   }
 
-  private replaceChapter(replacementChapter:Chapter){
-    this.root.chapters.forEach(chapter => {
+  private replaceChapter(root:Root, replacementChapter:Chapter){
+    root.chapters.forEach(chapter => {
       if(chapter.id === replacementChapter.id)
-      this.root.chapters.splice(this.root.chapters.indexOf(chapter), 1, replacementChapter)
+      root.chapters.splice(root.chapters.indexOf(chapter), 1, replacementChapter)
     });
   }
-  private replaceDeck(replacementDeck:Deck){
-    this.chapter.nodes.forEach(node => {
+  private replaceDeck(chapter:Chapter, replacementDeck:Deck){
+    chapter.nodes.forEach(node => {
       if( node.type == 'deck' && node.id === replacementDeck.id)
-      this.chapter.nodes.splice(this.root.chapters.indexOf(node), 1, replacementDeck)
+      chapter.nodes.splice(chapter.nodes.indexOf(node), 1, replacementDeck)
     });
   }
-  private replaceExplain(replacementExplain:Explain){
-    this.chapter.nodes.forEach(node => {
+  private replaceExplain(chapter:Chapter, replacementExplain:Explain){
+    chapter.nodes.forEach(node => {
       if( node.type == 'explain' && node.id === replacementExplain.id)
-      this.chapter.nodes.splice(this.root.chapters.indexOf(node), 1, replacementExplain)
+      chapter.nodes.splice(chapter.nodes.indexOf(node), 1, replacementExplain)
     });
   }
 
@@ -122,23 +122,23 @@ export class ItemsService {
       tap((updatedRoot:Root) => {this.removeRoot(updatedRoot);}),
     )
   }
-  deleteChapter(chapter:Chapter){
+  deleteChapter(root:Root, chapter:Chapter){
     return this.chapterHttpService.delete(chapter.id).pipe(
       map((updatedChapter:IChapter)=>{return this.chapterHttpService.parseToChapter(updatedChapter)}),
-      tap((updatedChapter:Chapter) => {this.removeChapter(updatedChapter);}),
+      tap((updatedChapter:Chapter) => {this.removeChapter(root.chapters, updatedChapter);}),
     )
   }
 
-  deleteDeck(deck:Deck){
+  deleteDeck(chapter:Chapter, deck:Deck){
     return this.deckHttpService.delete(deck.id).pipe(
       map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)}),
-      tap((updatedDeck:Deck) => {this.removeDeck(updatedDeck);}),
+      tap((updatedDeck:Deck) => {this.removeDeck(chapter.nodes, updatedDeck);}),
     )
   }
-  deleteExplain(explain:Explain){
+  deleteExplain(chapter:Chapter, explain:Explain){
     return this.explainHttpService.delete(explain.id).pipe(
       map((updatedExplain:IExplain)=>{return this.explainHttpService.parseToExplain(updatedExplain)}),
-      tap((updatedExplain:Explain) => {this.removeExplain(updatedExplain);}),
+      tap((updatedExplain:Explain) => {this.removeExplain(chapter.nodes, updatedExplain);}),
     )
   }
 
@@ -148,22 +148,22 @@ export class ItemsService {
       this.roots.splice(this.roots.indexOf(root), 1)
     });
   }
-  private removeChapter(chapterToRemove:Chapter){
-    this.root.chapters.forEach(chapter => {
+  private removeChapter(chapters:Chapter[], chapterToRemove:Chapter){
+    chapters.forEach(chapter => {
       if(chapter.id === chapterToRemove.id)
-      this.root.chapters.splice(this.root.chapters.indexOf(chapter), 1)
+      chapters.splice(chapters.indexOf(chapter), 1)
     });
   }
-  private removeDeck(deckToRemove:Deck){
-    this.chapter.nodes.forEach(node => {
+  private removeDeck(nodes:any[], deckToRemove:Deck){
+    nodes.forEach(node => {
       if( node.type == 'deck' && node.id === deckToRemove.id)
-      this.chapter.nodes.splice(this.root.chapters.indexOf(node), 1)
+      nodes.splice(nodes.indexOf(node), 1)
     });
   }
-  private removeExplain(explainToRemove:Explain){
-    this.chapter.nodes.forEach(node => {
+  private removeExplain(nodes:any[], explainToRemove:Explain){
+    nodes.forEach(node => {
       if( node.type == 'explain' && node.id === explainToRemove.id)
-      this.chapter.nodes.splice(this.root.chapters.indexOf(node), 1)
+      nodes.splice(nodes.indexOf(node), 1)
     });
   }
 
@@ -201,7 +201,7 @@ export class ItemsService {
         map((collectedChapter:IChapter)=> {
           return this.chapterHttpService.getListOfNodes(collectedChapter.nodes)
         }),
-        tap((collectedNodes: any[]) => {this.chapter.nodes = collectedNodes})
+        tap((collectedNodes: any[]) => {chapter.nodes = collectedNodes})
       )
     }
 

@@ -45,7 +45,8 @@ export class AddDeckComponent implements OnInit {
     deck.parentId = this.chapterId;
     deck.associatedExplain = this.selectedExplain?._id
 
-    this.itemsService.postDeck(deck).subscribe();
+    if(this.sideBarService.selectedChapter)
+      this.itemsService.postDeck(this.sideBarService.selectedChapter, deck).subscribe();
     this.reset();
   }
 

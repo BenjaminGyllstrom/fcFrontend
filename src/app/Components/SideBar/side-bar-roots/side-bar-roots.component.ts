@@ -44,14 +44,13 @@ export class SideBarRootsComponent implements OnInit {
 
   selectRoot(root: Root|null){
     this.selectedRoot = this.selectedRoot == root? null: root;
-    this.addIsClicked = false;
+    if(this.selectedRoot) this.addIsClicked = false;
   }
 
 
   onClick(root:Root|null){
     if(this.selectedRoot == root) root = null;
     this.sideBarService.setRoot(root);
-    if(root)this.itemsService.root = root;
     this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
   }
 

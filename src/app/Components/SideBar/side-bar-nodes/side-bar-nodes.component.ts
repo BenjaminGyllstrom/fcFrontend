@@ -49,16 +49,18 @@ export class SideBarNodesComponent implements OnInit {
       this.selectNode(this.sideBarService.selectedNode)
     }
 
-
-    this.itemsService.getNodes(this.itemsService.chapter).subscribe((nodes:any[]) => {
-      this.nodes = nodes
-      this.sideBarService.setNodes(nodes);
-    })
+    if(this.sideBarService.selectedChapter)
+    {
+      this.itemsService.getNodes(this.sideBarService.selectedChapter).subscribe((nodes:any[]) => {
+        this.nodes = nodes
+        this.sideBarService.setNodes(nodes);
+      })
+    }
   }
 
   selectNode(node:any){
     this.selectedNode = this.selectedNode == node? null : node
-    this.addIsClicked = false;
+    if(this.selectedNode) this.addIsClicked = false
   }
 
   drop(event: CdkDragDrop<any[]>){
@@ -67,7 +69,7 @@ export class SideBarNodesComponent implements OnInit {
     const chapter = this.sideBarService.selectedChapter
     if(!chapter) return
 
-    this.itemsService.updateNodeOrder(chapter.id, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
+    this.itemsService.updateNodeOrder(chapter, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
       this.sideBarService.setNodes(updatedNodes);
     })
   }
@@ -109,11 +111,11 @@ export class SideBarNodesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == 'Delete'){
+      if(result == 'Delete' && this.sideBarService.selectedChapter){
         if(node.type == 'deck'){
-          this.itemsService.deleteDeck(node).subscribe();
+          this.itemsService.deleteDeck(this.sideBarService.selectedChapter, node).subscribe();
         }else if (node.type == 'explain'){
-          this.itemsService.deleteExplain(node).subscribe();
+          this.itemsService.deleteExplain(this.sideBarService.selectedChapter, node).subscribe();
         }
       }
     });
