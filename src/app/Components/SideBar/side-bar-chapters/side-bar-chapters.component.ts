@@ -39,6 +39,7 @@ export class SideBarChaptersComponent implements OnInit {
       this.editMode = isEditMode;
     })
 
+    //to setChapter if chapter is clicked in showChapters
     this.sideBarService.selectedChapterChange.subscribe((chapter:Chapter|null)=>{
       this.selectChapter(chapter);
     })
