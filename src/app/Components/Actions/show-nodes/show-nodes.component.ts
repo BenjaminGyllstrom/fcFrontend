@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { ItemsService } from './../../../Services/items.service';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-show-nodes',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./show-nodes.component.scss'],
   providers: [DisplayTreeService]
 })
-export class ShowNodesComponent implements OnInit {
+export class ShowNodesComponent implements OnInit, OnDestroy {
 
   nodes: any[]
 
@@ -19,11 +20,17 @@ export class ShowNodesComponent implements OnInit {
     private itemsService: ItemsService
   ) { }
 
+  sub:Subscription
+  ngOnDestroy(): void {
+    if(this.sub)
+      this.sub.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.nodes = this.sideBarService.nodes
     this.displayTreeService.nodes = this.nodes;
 
-    this.sideBarService.nodesChange.subscribe(()=> {
+    this.sub = this.sideBarService.nodesChange.subscribe(()=> {
       this.nodes = this.sideBarService.nodes
       this.displayTreeService.nodes = this.nodes;
     })

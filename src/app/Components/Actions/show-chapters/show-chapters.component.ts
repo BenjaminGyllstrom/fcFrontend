@@ -21,7 +21,8 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
   ) { }
   sub:Subscription
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if(this.sub)
+      this.sub.unsubscribe();
   }
 
   ngOnInit(): void {
