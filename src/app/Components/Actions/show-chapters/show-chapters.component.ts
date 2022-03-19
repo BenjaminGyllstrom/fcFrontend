@@ -30,12 +30,13 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params);
+
     this.chapters = this.sideBarService.chapters;
     this.sub = this.sideBarService.chaptersChange.subscribe(()=>{
       this.chapters = this.sideBarService.chapters
     })
 
-    this.urlService.handleParams(this.route.snapshot.params);
   }
 
   onClick(chapter:Chapter){

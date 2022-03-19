@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { UrlService } from './../../../Services/url.service';
 import { ItemsService } from './../../../Services/items.service';
 import { ExplainHttpService } from './../../../Services/Http/ExplainHttp.service';
 import { Explain, IExplain } from './../../../Models/explain.model';
@@ -18,10 +20,14 @@ export class ExplainOverviewComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private explainHttpService: ExplainHttpService,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params, 'explain');
+
     if(this.sideBarService.selectedNode){
       this.explain = this.sideBarService.selectedNode;
       this.content = this.explain.text;

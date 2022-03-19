@@ -1,3 +1,5 @@
+import { UrlService } from './../../../Services/url.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from './../../../Services/items.service';
 import { ICard } from './../../../Models/card.model';
 import { IExplain } from 'src/app/Models/explain.model';
@@ -42,17 +44,35 @@ export class AddCardComponent implements OnInit {
     private quillService: QuillService,
     private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.deck = this.sideBarService.selectedNode;
+    this.urlService.handleParams(this.route.snapshot.params, 'deck');
 
-    this.deckHttpService.getAssociatedExplain(this.deck.id).subscribe((collectedExplain: IExplain) => {
-      if(collectedExplain){
-        this.explain = this.explainHttpService.parseToExplain(collectedExplain);
-      }
-    });
+    this.sideBarService.selectedNodeChange.subscribe((node)=>{
+      if(!node || node.type != 'deck') return
+
+      this.deck = node;
+
+      this.deckHttpService.getAssociatedExplain(node.id).subscribe((collectedExplain: IExplain) => {
+        if(collectedExplain){
+          this.explain = this.explainHttpService.parseToExplain(collectedExplain);
+        }
+      });
+    })
+
+    if(this.sideBarService.selectedNode){
+      this.deck = this.sideBarService.selectedNode;
+
+      this.deckHttpService.getAssociatedExplain(this.deck.id).subscribe((collectedExplain: IExplain) => {
+        if(collectedExplain){
+          this.explain = this.explainHttpService.parseToExplain(collectedExplain);
+        }
+      });
+    }
   }
 
   onShowExplain(){

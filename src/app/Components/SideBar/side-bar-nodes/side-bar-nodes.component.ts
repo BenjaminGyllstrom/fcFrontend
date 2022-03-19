@@ -1,3 +1,4 @@
+import { UrlService } from './../../../Services/url.service';
 import { ItemsService } from './../../../Services/items.service';
 import { IExplain } from './../../../Models/explain.model';
 import { IDeck } from './../../../Models/deck.model';
@@ -13,7 +14,7 @@ import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { ThrowStmt } from '@angular/compiler';
+import { Identifiers, ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-side-bar-nodes',
@@ -33,7 +34,8 @@ export class SideBarNodesComponent implements OnInit {
     private dialog: MatDialog,
     private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
-    private itemsService: ItemsService) { }
+    private itemsService: ItemsService,
+    private urlService: UrlService) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -54,6 +56,17 @@ export class SideBarNodesComponent implements OnInit {
       this.itemsService.getNodes(this.sideBarService.selectedChapter).subscribe((nodes:any[]) => {
         this.nodes = nodes
         this.sideBarService.setNodes(nodes);
+
+        if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
+          this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
+            this.sideBarService.setNode(deck);
+          })
+        }
+        else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
+          this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
+            this.sideBarService.setNode(explain);
+          })
+        }
       })
     }
   }

@@ -1,3 +1,5 @@
+import { UrlService } from './../../../Services/url.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from './../../../Services/items.service';
 import { CardHttpService } from './../../../Services/Http/CardHttp.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,10 +24,14 @@ export class ShowCardsComponent implements OnInit {
     private sideBarService: SideBarService,
     public dialog: MatDialog,
     private cardHttpService: CardHttpService,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params, 'deck');
+
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
       if(node == null) return
 

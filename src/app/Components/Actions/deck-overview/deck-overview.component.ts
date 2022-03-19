@@ -1,3 +1,5 @@
+import { UrlService } from './../../../Services/url.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from './../../../Services/items.service';
 import { IDeck } from 'src/app/Models/deck.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
@@ -32,9 +34,13 @@ export class DeckOverviewComponent implements OnInit {
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
     private sideBarService: SideBarService,
-    private itemService: ItemsService) { }
+    private itemService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params, 'deck');
+
     if(this.sideBarService.selectedChapter == null) return;
 
     this.deck = this.sideBarService.selectedNode;

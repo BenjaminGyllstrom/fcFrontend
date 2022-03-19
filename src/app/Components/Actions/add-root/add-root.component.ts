@@ -1,3 +1,5 @@
+import { UrlService } from './../../../Services/url.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from './../../../Services/items.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Root, IRoot } from './../../../Models/root.model';
@@ -14,13 +16,16 @@ export class AddRootComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private itemsService: ItemsService) { }
+    private itemsService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute) { }
 
   rootForm = this.formBuilder.group({
     title:''
   });
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params);
   }
 
   onSubmit(){

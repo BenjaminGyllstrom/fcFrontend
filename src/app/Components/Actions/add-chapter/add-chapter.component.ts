@@ -1,3 +1,5 @@
+import { UrlService } from './../../../Services/url.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from './../../../Services/items.service';
 import { Chapter, IChapter } from './../../../Models/chapter.model';
 import { FormBuilder } from '@angular/forms';
@@ -14,13 +16,16 @@ export class AddChapterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private sideBarService: SideBarService,
-    private itemsService: ItemsService) { }
+    private itemsService: ItemsService,
+    private urlService: UrlService,
+    private route: ActivatedRoute) { }
 
     chapterForm = this.formBuilder.group({
       title:''
     });
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params);
   }
 
 

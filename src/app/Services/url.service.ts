@@ -19,16 +19,19 @@ export class UrlService {
   rootId:any;
   chapterId:any
   nodeId:any
+  nodeType:any
 
 
-
-  handleParams(params: Params){
+  handleParams(params: Params, nodetype:string|null = null){
     const rootId = params['rootId'];
     const chapterId = params['chapterId'];
     const nodeId = params['nodeId'];
+    const nodeType = nodetype
+
     this.rootId = rootId;
     this.chapterId = chapterId;
     this.nodeId = nodeId;
+    this.nodeType = nodeType;
 
     // if(rootId)  {
     //   this.sideBarService.selectedRootParamId = rootId

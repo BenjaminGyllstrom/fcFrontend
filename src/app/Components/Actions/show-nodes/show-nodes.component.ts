@@ -31,6 +31,8 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.urlService.handleParams(this.route.snapshot.params);
+
     this.nodes = this.sideBarService.nodes
     this.displayTreeService.nodes = this.nodes;
 
@@ -39,7 +41,6 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
       this.displayTreeService.nodes = this.nodes;
     })
 
-    this.urlService.handleParams(this.route.snapshot.params);
   }
 
   getColumn(node:any){

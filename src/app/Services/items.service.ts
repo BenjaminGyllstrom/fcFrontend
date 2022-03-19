@@ -157,7 +157,9 @@ export class ItemsService {
 
   deleteDeck(chapter:Chapter, deck:Deck){
     return this.deckHttpService.delete(deck.id).pipe(
-      map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)}),
+      map((updatedDeck:IDeck)=>{console.log(updatedDeck);
+
+        return this.deckHttpService.parseToDeck(updatedDeck)}),
       tap((updatedDeck:Deck) => {this.removeDeck(chapter.nodes, updatedDeck);}),
     )
   }
@@ -272,7 +274,7 @@ export class ItemsService {
       })
     )
   }
-  getDeckById(nodes:any[], id:string){
+  getDeckById(nodes:any[], id:string):Observable<Deck>{
     const existingDeck = this.getExistingDeckById(nodes, id)
     if(existingDeck) return new Observable(observer => observer.next(existingDeck))
 
@@ -280,7 +282,7 @@ export class ItemsService {
       map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)})
     )
   }
-  getExplainById(nodes:any[], id:string){
+  getExplainById(nodes:any[], id:string):Observable<Explain>{
     const existingExplain = this.getExistingExplainById(nodes, id)
     if(existingExplain) return new Observable(observer => observer.next(existingExplain))
 

@@ -42,6 +42,9 @@ export class SideBarRootsComponent implements OnInit {
       this.roots = roots
       this.sideBarService.setRoots(roots);
 
+      console.log('got roots');
+      console.log(this.urlService.rootId);
+
       if(this.urlService.rootId) {
         this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>this.sideBarService.setRoot(root))
       }
