@@ -16,9 +16,7 @@ import { Injectable } from '@angular/core';
 import { Deck } from '../Models/deck.model';
 import { Card, ICard } from '../Models/card.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ItemsService {
 
   constructor(
@@ -256,6 +254,8 @@ export class ItemsService {
     const existingRoot = this.getExistingRootById(id);
     if(existingRoot) return new Observable(observer => observer.next(existingRoot))
 
+    return new Observable(observer => observer.next(null))
+
     return this.rootHttpService.getById(id).pipe(
       map((collectedRoots:IRoot)=> {
         return this.rootHttpService.parseToRoot(collectedRoots);
@@ -266,23 +266,29 @@ export class ItemsService {
     const existingChapter = this.getExistingChapterById(chapters, id);
     if(existingChapter) return new Observable(observer => observer.next(existingChapter))
 
+    return new Observable(observer => observer.next(null))
+
     return this.chapterHttpService.getById(id).pipe(
       map((collectedChapter:IChapter) => {
         return this.chapterHttpService.parseToChapter(collectedChapter)
       })
     )
   }
-  getDeckById(nodes:any[], id:string):Observable<Deck>{
+  getDeckById(nodes:any[], id:string):Observable<any>{
     const existingDeck = this.getExistingDeckById(nodes, id)
     if(existingDeck) return new Observable(observer => observer.next(existingDeck))
+
+    return new Observable(observer => observer.next(null))
 
     return this.deckHttpService.getById(id).pipe(
       map((updatedDeck:IDeck)=>{return this.deckHttpService.parseToDeck(updatedDeck)})
     )
   }
-  getExplainById(nodes:any[], id:string):Observable<Explain>{
+  getExplainById(nodes:any[], id:string):Observable<any>{
     const existingExplain = this.getExistingExplainById(nodes, id)
     if(existingExplain) return new Observable(observer => observer.next(existingExplain))
+
+    return new Observable(observer => observer.next(null))
 
     return this.explainHttpService.getById(id).pipe(
       map((updatedExplain:IExplain)=>{return this.explainHttpService.parseToExplain(updatedExplain)})
