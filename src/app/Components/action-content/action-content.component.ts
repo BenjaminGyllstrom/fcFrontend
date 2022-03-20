@@ -27,7 +27,7 @@ export class ActionContentComponent implements OnInit {
     })
 
     this.action = this.actionService.action;
-    // this.navigate(this.action)
+    this.navigate(this.action)
   }
 
   showDefault() {return this.action === Action.Default}
