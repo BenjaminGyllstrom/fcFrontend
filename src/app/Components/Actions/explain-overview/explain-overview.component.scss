@@ -4,10 +4,42 @@
   align-items: center;
 }
 
+.form{
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.inputField{
+  height: 55px;
+  width: 370px;
+  border: 1px solid #876E2B;
+  background-color: white;
+  border-radius: 100px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+
+  p{
+    margin: 0;
+    margin-left: 15px;
+    font-size: 24px;
+  }
+  input{
+    margin-left: 10px;
+    font-size: 24px;
+    width: 90%;
+    border: none;
+  }
+}
+
 .quill{
-  margin-top: 150px;
   width: 980px;
-  height: 300px;
+  height: 60vh;
+  padding-bottom: 10px;
 
   border: 1px solid #876E2B;
   border-radius: 35px;
@@ -16,7 +48,6 @@
 }
 
 .explain-save-button{
-  margin-top: 70px;
   width: min-content;
   height: 45px;
   width: 100px;
@@ -28,7 +59,7 @@
 }
 
 .buttons{
-  margin-top: 60px;
+  margin-top: 30px;
   display: flex;
   gap: 15px;
 }

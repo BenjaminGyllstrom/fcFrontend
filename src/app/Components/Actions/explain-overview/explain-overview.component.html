@@ -1,4 +1,12 @@
 <div class="explain-overview">
+
+  <form [formGroup]="explainForm" (ngSubmit)="onSave()" class="form">
+    <div class="inputField">
+      <p>Title:</p>
+      <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+    </div>
+  </form>
+
   <app-quill-show *ngIf="!edit" [content]="content" class="quill" (click)="onQuillClick()"></app-quill-show>
   <app-quill-edit *ngIf="edit" [content]="content" (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
 
