@@ -10,6 +10,7 @@ import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar-roots',
@@ -29,7 +30,8 @@ export class SideBarRootsComponent implements OnInit, OnDestroy {
     private actionService: ActionService,
     private dialog: MatDialog,
     private itemsService: ItemsService,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private router: Router
     ) { }
 
   ngOnDestroy(): void {
@@ -71,7 +73,18 @@ export class SideBarRootsComponent implements OnInit, OnDestroy {
   onClick(root:Root|null){
     if(this.selectedRoot == root) root = null;
     this.sideBarService.setRoot(root);
-    this.actionService.setAction(root != null? Action.Chapters : Action.MyContentOverview);
+
+    if(root){
+      this.actionService.setAction(Action.Chapters);
+      this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
+        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+        return
+    }
+
+    this.actionService.setAction(Action.MyContentOverview);
+    this.router.navigate(this.urlService.getPath(Action.MyContentOverview, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+
   }
 
   getSideBarItem(root:Root) : ISideBarItem{
@@ -83,9 +96,14 @@ export class SideBarRootsComponent implements OnInit, OnDestroy {
     if(this.addIsClicked){
       this.sideBarService.setRoot(null);
       this.actionService.setAction(Action.AddRoot);
+      this.router.navigate(this.urlService.getPath(Action.AddRoot, this.sideBarService.selectedRoot?.id,
+        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+
       return
     }
     this.actionService.setAction(Action.MyContentOverview);
+    this.router.navigate(this.urlService.getPath(Action.MyContentOverview, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   onDelete(root:Root){

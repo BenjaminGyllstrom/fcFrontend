@@ -15,6 +15,7 @@ import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Identifiers, ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar-nodes',
@@ -35,7 +36,8 @@ export class SideBarNodesComponent implements OnInit {
     private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
     private itemsService: ItemsService,
-    private urlService: UrlService) { }
+    private urlService: UrlService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -91,15 +93,32 @@ export class SideBarNodesComponent implements OnInit {
     if(this.selectedNode == node) node = null
 
     // this.selectNode(node);
-    this.sideBarService.setNode(node);
-    this.setAction(node);
+    if(node){
+      this.sideBarService.setNode(node);
+      if(node.type == 'deck'){
+        this.actionService.setAction(Action.Cards)
+        this.router.navigate(this.urlService.getPath(Action.Cards, this.sideBarService.selectedRoot?.id,
+          this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+      }
+      else{
+        this.actionService.setAction(Action.ExplainOverview)
+        this.router.navigate(this.urlService.getPath(Action.ExplainOverview, this.sideBarService.selectedRoot?.id,
+          this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+      }
+      return
+    }
 
+    this.sideBarService.setNode(null);
+    this.actionService.setAction(this.getAction(node));
+    this.router.navigate(this.urlService.getPath(this.getAction(node), this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
-  setAction(node:any){
-    if(node == null) this.actionService.setAction(Action.Nodes);
-    else if(!this.editMode) this.actionService.setAction(Action.Study);
-    else if(node.type == 'deck') this.actionService.setAction(Action.Cards);
-    else if(node.type == 'explain') this.actionService.setAction(Action.ExplainOverview);
+  getAction(node:any){
+    if(node == null) return Action.Nodes
+    else if(!this.editMode) return Action.Study
+    else if(node.type == 'deck') return Action.Cards
+    else if(node.type == 'explain') return Action.ExplainOverview
+    else return Action.Default
   }
 
 
@@ -112,10 +131,18 @@ export class SideBarNodesComponent implements OnInit {
 
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
-    if (this.addIsClicked) this.sideBarService.setNode(null);
+    if (this.addIsClicked) {
+      this.sideBarService.setNode(null);
+      this.actionService.setAction(Action.AddNode)
+      this.router.navigate(this.urlService.getPath(Action.AddNode, this.sideBarService.selectedRoot?.id,
+        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+        return
+    }
 
-    if(this.addIsClicked) this.actionService.setAction(Action.AddNode);
-    else this.actionService.setAction(Action.Nodes);
+    // if(this.addIsClicked) this.actionService.setAction(Action.AddNode);
+    this.actionService.setAction(Action.Nodes);
+    this.router.navigate(this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   onDelete(node:any){

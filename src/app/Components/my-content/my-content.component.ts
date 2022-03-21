@@ -1,6 +1,3 @@
-import { ItemsService } from './../../Services/items.service';
-import { UrlService } from './../../Services/url.service';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,14 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyContentComponent implements OnInit {
 
-  constructor(private itemService: ItemsService,
-    private sideBarService:SideBarService,
-    private urlService: UrlService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    // this.itemService.roots = [];
-    // this.sideBarService.reset();
-    // this.urlService.reset();
   }
 
 }

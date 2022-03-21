@@ -21,13 +21,15 @@ export class ActionContentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.actionService.actionChange.subscribe((action: Action)=>{
-      this.action = action;
-      this.navigate(this.action)
-    })
+    // this.actionService.actionChange.subscribe((action: Action)=>{
+    //   this.action = action;
+    //   this.navigate(this.action)
+    // })
 
-    this.action = this.actionService.action;
-
+    // this.action = this.actionService.action;
+    // if(this.action > 0){
+    //   this.navigate(this.action)
+    // }
     // if this is added then navigation doesnt work on reload
     // this.navigate(this.action)
   }
@@ -46,12 +48,12 @@ export class ActionContentComponent implements OnInit {
   showAddCard() {return this.action === Action.AddCard}
   showStudy() {return this.action === Action.Study}
 
-  navigate(action:Action){
-    const rootId = this.sideBarService.selectedRoot?.id
-    const chapterId = this.sideBarService.selectedChapter?.id
-    const nodeId = this.sideBarService.selectedNode?.id
-    const getRoute = this.urlService.getPath(action, rootId, chapterId, nodeId);
+  // navigate(action:Action){
+  //   const rootId = this.sideBarService.selectedRoot?.id
+  //   const chapterId = this.sideBarService.selectedChapter?.id
+  //   const nodeId = this.sideBarService.selectedNode?.id
+  //   const getRoute = this.urlService.getPath(action, rootId, chapterId, nodeId);
 
-    this.router.navigate(getRoute)
-  }
+  //   this.router.navigate(getRoute)
+  // }
 }

@@ -2,18 +2,20 @@ import { UrlService } from './../../../Services/url.service';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from './../../../Services/items.service';
 import { CardHttpService } from './../../../Services/Http/CardHttp.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Card, ICard } from './../../../Models/card.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { DeleteItemComponent } from '../../SideBar/delete-item/delete-item.component';
 import { Deck } from 'src/app/Models/deck.model';
+import { ActionService } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-show-cards',
   templateUrl: './show-cards.component.html',
-  styleUrls: ['./show-cards.component.scss']
+  styleUrls: ['./show-cards.component.scss'],
+  providers:[]
 })
 export class ShowCardsComponent implements OnInit {
 
@@ -26,7 +28,8 @@ export class ShowCardsComponent implements OnInit {
     private cardHttpService: CardHttpService,
     private itemService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private actionService: ActionService
   ) { }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar-chapters',
@@ -33,7 +34,8 @@ export class SideBarChaptersComponent implements OnInit {
     private actionService: ActionService,
     private dialog: MatDialog,
     private itemService: ItemsService,
-    private urlService: UrlService) { }
+    private urlService: UrlService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
@@ -68,7 +70,17 @@ export class SideBarChaptersComponent implements OnInit {
   onClick(chapter:Chapter|null){
     if(this.selectedChapter == chapter) chapter = null
     this.sideBarService.setChapter(chapter);
-    this.actionService.setAction(chapter != null? Action.Nodes : Action.Chapters);
+
+    if(chapter){
+      this.actionService.setAction(Action.Nodes);
+      this.router.navigate(this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot?.id,
+        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+      return
+    }
+
+    this.actionService.setAction(Action.Chapters);
+    this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   getSideBarItem(chapter:Chapter) : ISideBarItem{
@@ -81,10 +93,14 @@ export class SideBarChaptersComponent implements OnInit {
     if(this.addIsClicked) {
       this.sideBarService.setChapter(null);
       this.actionService.setAction(Action.AddChapter)
+      this.router.navigate(this.urlService.getPath(Action.AddChapter, this.sideBarService.selectedRoot?.id,
+        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
       return
     }
 
     this.actionService.setAction(Action.Chapters)
+    this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   onDelete(chapter:Chapter){

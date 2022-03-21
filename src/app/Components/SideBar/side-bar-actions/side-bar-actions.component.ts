@@ -3,6 +3,8 @@ import { ActionService, Action } from './../../../Services/action.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
+import { Router } from '@angular/router';
+import { UrlService } from 'src/app/Services/url.service';
 
 @Component({
   selector: 'app-side-bar-actions',
@@ -17,7 +19,9 @@ export class SideBarActionsComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private actionService: ActionService,
-    private stateService: StateService
+    private stateService: StateService,
+    private router: Router,
+    private urlService: UrlService
     ) { }
 
   ngOnInit(): void {
@@ -54,10 +58,11 @@ export class SideBarActionsComponent implements OnInit {
   }
 
   setAction(actionString:string){
-
     const action = this.actionService.getAction(actionString);
-    if(this.selectedAction == action) this.actionService.setAction(null)
-    else this.actionService.setAction(action)
-
+    if(this.selectedAction != action){
+      this.actionService.setAction(action)
+      this.router.navigate(this.urlService.getPath(action, this.sideBarService.selectedRoot?.id,
+        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+    }
   }
 }
