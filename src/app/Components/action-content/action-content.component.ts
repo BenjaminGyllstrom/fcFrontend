@@ -27,7 +27,9 @@ export class ActionContentComponent implements OnInit {
     })
 
     this.action = this.actionService.action;
-    this.navigate(this.action)
+
+    // if this is added then navigation doesnt work on reload
+    // this.navigate(this.action)
   }
 
   showDefault() {return this.action === Action.Default}
