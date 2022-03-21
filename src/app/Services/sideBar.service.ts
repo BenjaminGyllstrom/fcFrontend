@@ -12,7 +12,7 @@ import { Deck } from "../Models/deck.model";
 import { Explain } from "../Models/explain.model";
 import { Root } from "../Models/root.model";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class SideBarService {
 
   selectedRoot:Root|null;
@@ -74,5 +74,15 @@ export class SideBarService {
   setNodes(nodes: any[]){
     this.nodes = nodes;
     this.nodesChange.next(nodes);
+  }
+
+  reset(){
+    this.selectedRoot = null
+    this.selectedChapter = null
+    this.selectedNode = null
+    this.selectedCard = null
+    this.roots = [];
+    this.chapters = []
+    this.nodes = []
   }
 }

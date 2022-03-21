@@ -7,13 +7,18 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-my-content',
   templateUrl: './my-content.component.html',
   styleUrls: ['./my-content.component.scss'],
-  providers: [SideBarService, UrlService, ItemsService]
+  providers: []
 })
 export class MyContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private itemService: ItemsService,
+    private sideBarService:SideBarService,
+    private urlService: UrlService) { }
 
   ngOnInit(): void {
+    // this.itemService.roots = [];
+    // this.sideBarService.reset();
+    // this.urlService.reset();
   }
 
 }

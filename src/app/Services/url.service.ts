@@ -5,7 +5,7 @@ import { StateService } from './state.service';
 import { Injectable } from '@angular/core';
 
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UrlService {
   constructor(
     private stateService:StateService,
@@ -46,6 +46,7 @@ export class UrlService {
     // }
   }
 
+
   getPath(action:Action, rootId:any, chapterId:any, nodeId:any):any[]{
     switch (action) {
       case Action.MyContentOverview:
@@ -55,35 +56,35 @@ export class UrlService {
         return ['/myContent/Roots/AddRoot']
         break;
       case Action.Chapters:
-        if(rootId == null) return ['/myContent/Roots'];
+        // if(rootId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters']
         break;
       case Action.AddChapter:
-        if(rootId == null) return ['/myContent/Roots'];
+        // if(rootId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', 'AddChapter']
         break;
       case Action.Nodes:
-        if(rootId == null || chapterId == null) return ['/myContent/Roots'];
+        // if(rootId == null || chapterId == null) return ['/myContent/Roots'];
         return['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes']
         break;
       case Action.AddNode:
-        if(rootId == null || chapterId == null) return ['/myContent/Roots'];
+        // if(rootId == null || chapterId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'AddNode'];
         break;
       case Action.ExplainOverview:
-        if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
+        // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Explain', nodeId, 'Overview'];
         break;
       case Action.DeckOverview:
-        if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
+        // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Deck', nodeId, 'Overview'];
         break;
       case Action.Cards:
-        if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
+        // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Deck', nodeId, 'Cards'];
         break;
       case Action.AddCard:
-        if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
+        // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Deck', nodeId, 'AddCard'];
         break;
       default:

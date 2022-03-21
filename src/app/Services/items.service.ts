@@ -16,7 +16,7 @@ import { Injectable } from '@angular/core';
 import { Deck } from '../Models/deck.model';
 import { Card, ICard } from '../Models/card.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ItemsService {
 
   constructor(
