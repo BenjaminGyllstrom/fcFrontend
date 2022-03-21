@@ -4,18 +4,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-side-bar-roots',
   templateUrl: './side-bar-roots.component.html',
   styleUrls: ['./side-bar-roots.component.scss']
 })
-export class SideBarRootsComponent implements OnInit {
+export class SideBarRootsComponent implements OnInit, OnDestroy {
 
   editMode:boolean = true;
   roots: Root[]
@@ -31,14 +32,26 @@ export class SideBarRootsComponent implements OnInit {
     private urlService: UrlService
     ) { }
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
+  subs : Subscription = new Subscription();
+
   ngOnInit(): void {
     this.editMode = this.sideBarService.editMode;
-    this.selectRoot(this.sideBarService.selectedRoot)
+    // this.selectRoot(this.sideBarService.selectedRoot)
 
-    this.sideBarService.editModeChange.subscribe((isEditMode) => this.editMode = isEditMode)
-    this.sideBarService.selectedRootChange.subscribe((root:Root|null)=> this.selectRoot(root))
 
-    this.itemsService.getRoots().subscribe((roots:Root[]) => {
+    const subEditMode = this.sideBarService.editModeChange.subscribe((isEditMode) => this.editMode = isEditMode)
+    this.subs.add(subEditMode);
+
+    const subRootChange = this.sideBarService.selectedRootChange.subscribe((root:Root|null)=> {
+      this.selectRoot(root)
+    })
+    this.subs.add(subRootChange);
+
+    const subGetRoots = this.itemsService.getRoots().subscribe((roots:Root[]) => {
       this.roots = roots
       this.sideBarService.setRoots(roots);
 
@@ -46,6 +59,7 @@ export class SideBarRootsComponent implements OnInit {
         this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>this.sideBarService.setRoot(root))
       }
     })
+    this.subs.add(subGetRoots);
   }
 
   selectRoot(root: Root|null){
