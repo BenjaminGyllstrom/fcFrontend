@@ -28,13 +28,6 @@ export class AddExplainComponent implements OnInit {
     title:'',
   });
 
-  @HostListener('window:keyup', ['$event'])
-    keyEvent(event: KeyboardEvent) {
-    if(event.shiftKey && event.key == 'Enter'){
-        this.onSubmit();
-    }
-  }
-
   ngOnInit(): void {
     if(this.sideBarService.selectedChapter == null) return;
     this.chapterId = this.sideBarService.selectedChapter.id;
