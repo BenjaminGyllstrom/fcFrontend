@@ -8,6 +8,7 @@ import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { Deck } from 'src/app/Models/deck.model';
 import { Component, OnInit } from '@angular/core';
+import { ActionService, Action } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-deck-overview',
@@ -36,9 +37,13 @@ export class DeckOverviewComponent implements OnInit {
     private sideBarService: SideBarService,
     private itemService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private actionService: ActionService) { }
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.DeckOverview)
+    }
     this.urlService.handleParams(this.route.snapshot.params, 'deck');
 
     if(this.sideBarService.selectedChapter == null) return;

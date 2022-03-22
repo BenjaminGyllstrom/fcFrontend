@@ -3,6 +3,7 @@ import { Explain } from './../../../Models/explain.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';
+import { ActionService } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-study-node',
@@ -18,7 +19,8 @@ export class StudyNodeComponent implements OnInit {
 
   finnished:boolean;
 
-  constructor(private sideBarService: SideBarService) { }
+  constructor(private sideBarService: SideBarService,
+    private actionService: ActionService) { }
 
   ngOnInit(): void {
     const node = this.sideBarService.selectedNode;

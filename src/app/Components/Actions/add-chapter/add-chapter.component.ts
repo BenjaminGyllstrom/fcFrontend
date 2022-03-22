@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
 import { Component, OnInit } from '@angular/core';
+import { ActionService, Action } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-add-chapter',
@@ -18,13 +19,17 @@ export class AddChapterComponent implements OnInit {
     private sideBarService: SideBarService,
     private itemsService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private actionService: ActionService) { }
 
     chapterForm = this.formBuilder.group({
       title:''
     });
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.AddChapter)
+    }
     this.urlService.handleParams(this.route.snapshot.params);
   }
 

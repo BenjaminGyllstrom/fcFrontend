@@ -5,6 +5,7 @@ import { ItemsService } from './../../../Services/items.service';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActionService, Action } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-show-nodes',
@@ -21,7 +22,8 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
     private displayTreeService: DisplayTreeService,
     private itemsService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private actionService: ActionService
   ) { }
 
   sub:Subscription
@@ -31,6 +33,9 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.Nodes)
+    }
     this.urlService.handleParams(this.route.snapshot.params);
 
     this.nodes = this.sideBarService.nodes

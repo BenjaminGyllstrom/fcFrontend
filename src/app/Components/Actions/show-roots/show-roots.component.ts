@@ -18,7 +18,7 @@ export class ShowRootsComponent implements OnInit, OnDestroy {
   constructor(
     private sideBarService: SideBarService,
     private actionService: ActionService,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
   ) { }
 
   sub:Subscription

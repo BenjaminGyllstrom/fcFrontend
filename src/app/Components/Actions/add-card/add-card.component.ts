@@ -12,6 +12,7 @@ import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';
+import { ActionService, Action } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-add-card',
@@ -46,10 +47,14 @@ export class AddCardComponent implements OnInit {
     private explainHttpService: ExplainHttpService,
     private itemService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private actionService: ActionService
   ) { }
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.AddCard)
+    }
     this.urlService.handleParams(this.route.snapshot.params, 'deck');
 
     this.sideBarService.selectedNodeChange.subscribe((node)=>{

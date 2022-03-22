@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { DeleteItemComponent } from '../../SideBar/delete-item/delete-item.component';
 import { Deck } from 'src/app/Models/deck.model';
-import { ActionService } from 'src/app/Services/action.service';
+import { Action, ActionService } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-show-cards',
@@ -33,6 +33,9 @@ export class ShowCardsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.Cards)
+    }
     this.urlService.handleParams(this.route.snapshot.params, 'deck');
 
     this.sideBarService.selectedNodeChange.subscribe((node:any)=>{

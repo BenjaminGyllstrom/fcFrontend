@@ -21,7 +21,7 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
     private actionService: ActionService,
     private itemService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
   sub:Subscription
   ngOnDestroy(): void {
@@ -30,6 +30,9 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.Chapters)
+    }
     this.urlService.handleParams(this.route.snapshot.params);
 
     this.chapters = this.sideBarService.chapters;

@@ -6,6 +6,7 @@ import { Root, IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ActionService, Action } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-add-root',
@@ -18,13 +19,17 @@ export class AddRootComponent implements OnInit {
     private formBuilder: FormBuilder,
     private itemsService: ItemsService,
     private urlService: UrlService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private actionService: ActionService) { }
 
   rootForm = this.formBuilder.group({
     title:''
   });
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.AddRoot)
+    }
     this.urlService.handleParams(this.route.snapshot.params);
   }
 

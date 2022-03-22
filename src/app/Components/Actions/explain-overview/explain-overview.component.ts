@@ -6,6 +6,7 @@ import { Explain, IExplain } from './../../../Models/explain.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActionService, Action } from 'src/app/Services/action.service';
 
 @Component({
   selector: 'app-explain-overview',
@@ -29,10 +30,14 @@ export class ExplainOverviewComponent implements OnInit {
     private itemService: ItemsService,
     private formBuilder: FormBuilder,
     private urlService: UrlService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private actionService: ActionService
     ) { }
 
   ngOnInit(): void {
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.DeckOverview)
+    }
     this.urlService.handleParams(this.route.snapshot.params, 'explain');
 
     if(this.sideBarService.selectedNode){
