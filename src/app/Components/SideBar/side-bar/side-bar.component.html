@@ -3,18 +3,24 @@
     <app-study-toogle></app-study-toogle>
   </div>
 
-  <div class="roots" *ngIf="state >= 0">
-    <app-side-bar-roots></app-side-bar-roots>
+  <div class="roots">
+    <app-side-bar-roots
+    [roots]="roots" [selectedRoot]="selectedRoot" [addIsClicked]="addRootIsClicked"
+    (onRootClicked)="onRootClicked($event)" (onDeleteRoot)="onDeleteRoot($event)" (onAddRoot)="onAddRoot($event)"></app-side-bar-roots>
   </div>
 
   <hr class="chapters" [ngStyle]="{'margin-bottom': state > 1? '5px':'23px'}" *ngIf="state >= 1">
-  <div class="chapters" *ngIf="state >= 1">
-    <app-side-bar-chapters></app-side-bar-chapters>
+  <div class="chapters" *ngIf="selectedRoot">
+    <app-side-bar-chapters
+    [chapters]="chapters" [selectedChapter]="selectedChapter" [addIsClicked]="addChapterIsClicked"
+    (onChapterClicked)="onChapterClicked($event)" (onDeleteChapter)="onDeleteChapter($event)" (onAddChapter)="onAddChapter($event)"></app-side-bar-chapters>
   </div>
 
   <hr class="nodes" *ngIf="state >= 2">
-  <div class="nodes" *ngIf="state >= 2">
-    <app-side-bar-nodes></app-side-bar-nodes>
+  <div class="nodes" *ngIf="selectedRoot && selectedChapter">
+    <app-side-bar-nodes
+    [nodes]="nodes" [selectedNode]="selectedNode" [addIsClicked]="addNodeIsClicked"
+    (onNodeClicked)="onNodeClicked($event)" (onDeleteNode)="onDeleteNode($event)" (onAddNode)="onAddNode($event)"></app-side-bar-nodes>
   </div>
 
   <hr class="actions">

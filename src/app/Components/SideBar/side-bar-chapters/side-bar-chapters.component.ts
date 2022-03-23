@@ -7,7 +7,7 @@ import { ActionService, Action } from './../../../Services/action.service';
 import { IRoot } from './../../../Models/root.model';
 import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { SideBarService } from 'src/app/Services/sideBar.service';
@@ -22,12 +22,13 @@ import { Router } from '@angular/router';
 })
 export class SideBarChaptersComponent implements OnInit {
 
-  editMode:boolean = true;
-  chapters: Chapter[]
-  selectedChapter:Chapter|null;
-  // showAll:boolean = true;
-  addIsClicked:boolean
-
+  @Input() editMode:boolean = true;
+  @Input() chapters: Chapter[]
+  @Input() selectedChapter:Chapter|null;
+  @Input() addIsClicked:boolean
+  @Output('onAddChapter') onAddChapterEmitter = new EventEmitter<boolean>();
+  @Output('onChapterClicked') onChapterlickedEmitter = new EventEmitter<Chapter>();
+  @Output('onDeleteChapter') onDeleteChapterEmitter = new EventEmitter<Chapter>();
 
   constructor(
     private sideBarService: SideBarService,
@@ -38,28 +39,28 @@ export class SideBarChaptersComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.editMode = this.sideBarService.editMode;
-    this.sideBarService.editModeChange.subscribe((isEditMode) => {
-      this.editMode = isEditMode;
-    })
+    // this.editMode = this.sideBarService.editMode;
+    // this.sideBarService.editModeChange.subscribe((isEditMode) => {
+    //   this.editMode = isEditMode;
+    // })
 
     //to setChapter if chapter is clicked in showChapters
-    this.sideBarService.selectedChapterChange.subscribe((chapter:Chapter|null)=>{
-      this.selectChapter(chapter);
-    })
+    // this.sideBarService.selectedChapterChange.subscribe((chapter:Chapter|null)=>{
+    //   this.selectChapter(chapter);
+    // })
 
-    this.selectChapter(this.sideBarService.selectedChapter)
+    // this.selectChapter(this.sideBarService.selectedChapter)
 
-    if(this.sideBarService.selectedRoot){
-      this.itemService.getChapters(this.sideBarService.selectedRoot).subscribe((chapters: Chapter[]) => {
-        this.chapters = chapters;
-        this.sideBarService.setChapters(chapters);
+    // if(this.sideBarService.selectedRoot){
+    //   this.itemService.getChapters(this.sideBarService.selectedRoot).subscribe((chapters: Chapter[]) => {
+    //     this.chapters = chapters;
+    //     this.sideBarService.setChapters(chapters);
 
-        if(this.urlService.chapterId){
-          this.itemService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>this.sideBarService.setChapter(chapter))
-        }
-      })
-    }
+    //     if(this.urlService.chapterId){
+    //       this.itemService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>this.sideBarService.setChapter(chapter))
+    //     }
+    //   })
+    // }
   }
 
   selectChapter(chapter: Chapter|null){
@@ -67,20 +68,23 @@ export class SideBarChaptersComponent implements OnInit {
     if(this.selectedChapter) this.addIsClicked = false;
   }
 
-  onClick(chapter:Chapter|null){
+  onClick(chapter:any){
+    this.onChapterlickedEmitter.emit(chapter)
+
     if(this.selectedChapter == chapter) chapter = null
-    this.sideBarService.setChapter(chapter);
+    this.selectChapter(chapter)
+    // this.sideBarService.setChapter(chapter);
 
-    if(chapter){
-      this.actionService.setAction(Action.Nodes);
-      this.router.navigate(this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot?.id,
-        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
-      return
-    }
+    // if(chapter){
+    //   this.actionService.setAction(Action.Nodes);
+    //   this.router.navigate(this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot?.id,
+    //     this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+    //   return
+    // }
 
-    this.actionService.setAction(Action.Chapters);
-    this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
-      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+    // this.actionService.setAction(Action.Chapters);
+    // this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
+    //   this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   getSideBarItem(chapter:Chapter) : ISideBarItem{
@@ -89,34 +93,37 @@ export class SideBarChaptersComponent implements OnInit {
 
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
+    this.onAddChapterEmitter.emit(this.addIsClicked)
 
-    if(this.addIsClicked) {
-      this.sideBarService.setChapter(null);
-      this.actionService.setAction(Action.AddChapter)
-      this.router.navigate(this.urlService.getPath(Action.AddChapter, this.sideBarService.selectedRoot?.id,
-        this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
-      return
-    }
+    // if(this.addIsClicked) {
+    //   this.sideBarService.setChapter(null);
+    //   this.actionService.setAction(Action.AddChapter)
+    //   this.router.navigate(this.urlService.getPath(Action.AddChapter, this.sideBarService.selectedRoot?.id,
+    //     this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+    //   return
+    // }
 
-    this.actionService.setAction(Action.Chapters)
-    this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
-      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+    // this.actionService.setAction(Action.Chapters)
+    // this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
+    //   this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   onDelete(chapter:Chapter){
-    const dialogRef = this.dialog.open(DeleteItemComponent, {
-      data: {name: chapter.title, type: 'chapter'},
-    });
+    this.onDeleteChapterEmitter.emit(chapter);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == 'Delete' && this.sideBarService.selectedRoot){
-        this.itemService.deleteChapter(this.sideBarService.selectedRoot, chapter).subscribe((deletedChapter)=>{
-          if(deletedChapter.id == this.sideBarService.selectedChapter?.id){
-            this.sideBarService.setChapter(null)
-          }
-        });
-      }
-    });
+    // const dialogRef = this.dialog.open(DeleteItemComponent, {
+    //   data: {name: chapter.title, type: 'chapter'},
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result == 'Delete' && this.sideBarService.selectedRoot){
+    //     this.itemService.deleteChapter(this.sideBarService.selectedRoot, chapter).subscribe((deletedChapter)=>{
+    //       if(deletedChapter.id == this.sideBarService.selectedChapter?.id){
+    //         this.sideBarService.setChapter(null)
+    //       }
+    //     });
+    //   }
+    // });
   }
 
 }

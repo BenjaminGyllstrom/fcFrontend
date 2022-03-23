@@ -13,8 +13,7 @@ import { UrlService } from 'src/app/Services/url.service';
 })
 export class SideBarActionsComponent implements OnInit {
 
-  state:State
-  selectedAction:Action|null;
+  @Input() selectedAction:Action|null;
   isEdit:boolean = true;
   constructor(
     private sideBarService: SideBarService,
@@ -25,12 +24,6 @@ export class SideBarActionsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.state = this.stateService.state;
-    this.selectedAction = this.actionService.action;
-    this.stateService.stateChange.subscribe((state:State) => {
-      this.state = state;
-      this.selectedAction = this.actionService.action;
-    });
     this.actionService.actionChange.subscribe((action:Action) => {
       this.selectedAction = action;
     })
@@ -41,11 +34,33 @@ export class SideBarActionsComponent implements OnInit {
     })
   }
 
-  isRootsState(){return this.state == State.Roots}
-  isChaptersState(){return this.state == State.Chapters}
-  isNodesState(){return this.state == State.Nodes}
-  isDeckState(){return this.state == State.Deck}
-  isExplainState(){return this.state == State.Explain}
+  isRootsState(){
+    return this.sideBarService.selectedRoot == null
+    && this.sideBarService.selectedChapter == null
+    && this.sideBarService.selectedNode == null
+  }
+  isChaptersState(){
+    return this.sideBarService.selectedRoot != null
+    && this.sideBarService.selectedChapter == null
+    && this.sideBarService.selectedNode == null
+  }
+  isNodesState(){
+    return this.sideBarService.selectedRoot != null
+    && this.sideBarService.selectedChapter != null
+    && this.sideBarService.selectedNode == null
+  }
+  isDeckState(){
+    return this.sideBarService.selectedRoot != null
+    && this.sideBarService.selectedChapter != null
+    && this.sideBarService.selectedNode != null
+    && this.sideBarService.selectedNode.type == 'deck'
+  }
+  isExplainState(){
+    return this.sideBarService.selectedRoot != null
+    && this.sideBarService.selectedChapter != null
+    && this.sideBarService.selectedNode != null
+    && this.sideBarService.selectedNode.type == 'explain'
+  }
 
 
   onClick(action: Action){
