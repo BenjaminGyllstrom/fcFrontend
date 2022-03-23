@@ -110,6 +110,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
     if(root == this.selectedRoot) root = null;
     this.selectedRoot = root;
     this.sideBarService.setRoot(root)
+    this.addRootIsClicked = false;
+    this.addChapterIsClicked = false;
+    this.addNodeIsClicked = false;
 
     const action = root? Action.Chapters : Action.MyContentOverview
 
@@ -137,6 +140,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
     if(this.selectedChapter == chapter) chapter = null
     this.selectedChapter = chapter;
     this.sideBarService.setChapter(chapter);
+    this.addChapterIsClicked = false;
+    this.addNodeIsClicked = false;
 
     if(chapter)
     {
@@ -167,6 +172,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.selectedNode = node;
     this.sideBarService.setNode(node);
     let action = Action.Nodes
+    this.addNodeIsClicked = false;
 
     if(node){
       action = node.type == 'deck'? Action.Cards : Action.ExplainOverview
@@ -246,12 +252,22 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.subs.add(this.itemsService.deleteRoot(item).subscribe((deletedRoot: Root)=>{
           if(this.sideBarService.selectedRoot?.id == deletedRoot.id){
             this.sideBarService.setRoot(null);
+            this.selectedRoot = null
+            this.sideBarService.setChapter(null);
+            this.selectedChapter = null
+            this.sideBarService.setNode(null);
+            this.selectedNode = false;
+            this.navigate(Action.MyContentOverview)
           }
         }));
       }else if (data.type == 'chapter'){
         this.subs.add(this.itemsService.deleteChapter(this.selectedRoot, item).subscribe((deletedChapter)=>{
           if(deletedChapter.id == this.sideBarService.selectedChapter?.id){
-            this.sideBarService.setChapter(null)
+            this.sideBarService.setChapter(null);
+            this.selectedChapter = null
+            this.sideBarService.setNode(null);
+            this.selectedNode = false;
+            this.navigate(Action.Chapters)
           }
         }));
       }else if (data.type == 'node'){
@@ -259,11 +275,15 @@ export class SideBarComponent implements OnInit, OnDestroy {
           this.subs.add(this.itemsService.deleteDeck(this.selectedChapter, item).subscribe((deletedNode:any)=>{
             if(this.sideBarService.selectedNode?.type == 'deck' && this.sideBarService.selectedNode.id == deletedNode.id)
             this.sideBarService.setNode(null)
+            this.selectedNode = false;
+            this.navigate(Action.Nodes)
           }));
         }else if (item.type == 'explain'){
           this.subs.add(this.itemsService.deleteExplain(this.selectedChapter, item).subscribe((deletedNode:any)=>{
             if(this.sideBarService.selectedNode?.type == 'explain' && this.sideBarService.selectedNode.id == deletedNode.id)
             this.sideBarService.setNode(null)
+            this.selectedNode = false;
+            this.navigate(Action.Nodes)
           }));
         }
       }
