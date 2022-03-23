@@ -104,6 +104,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
     }))
   }
 
+  onActionChange(action:Action){
+    this.action = action
+  }
+
   //################# Clicked #################
 
   onRootClicked(root: any){
@@ -132,6 +136,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.selectedChapter = null
     this.selectedNode = null
 
+    this.action = action;
     this.actionService.setAction(action);
     this.navigate(action)
   }
@@ -164,6 +169,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.selectedNode = null
 
     const action = chapter? Action.Nodes : Action.Chapters
+    this.action = action;
     this.actionService.setAction(action);
     this.navigate(action)
   }
@@ -177,6 +183,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     if(node){
       action = node.type == 'deck'? Action.Cards : Action.ExplainOverview
     }
+    this.action = action;
     this.actionService.setAction(action);
     this.navigate(action)
   }
@@ -192,6 +199,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.sideBarService.setRoot(null);
         action = Action.AddRoot
       }
+      this.action = action;
       this.actionService.setAction(action);
       this.navigate(action)
     }
@@ -205,6 +213,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       this.sideBarService.setChapter(null);
       action = Action.AddChapter;
     }
+    this.action = action;
     this.actionService.setAction(action)
     this.navigate(action)
   }
@@ -218,6 +227,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       this.sideBarService.setNode(null);
       action = Action.AddNode;
     }
+    this.action = action;
     this.actionService.setAction(action);
     this.navigate(action)
   }

@@ -1,10 +1,11 @@
 import { StateService, State } from './../../../Services/state.service';
 import { ActionService, Action } from './../../../Services/action.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Router } from '@angular/router';
 import { UrlService } from 'src/app/Services/url.service';
+import { Chapter } from 'src/app/Models/chapter.model';
 
 @Component({
   selector: 'app-side-bar-actions',
@@ -13,7 +14,13 @@ import { UrlService } from 'src/app/Services/url.service';
 })
 export class SideBarActionsComponent implements OnInit {
 
-  @Input() selectedAction:Action|null;
+  @Input() selectedAction:Action;
+  @Input() selectedRoot:Root;
+  @Input() selectedChapter:Chapter;
+  @Input() selectedNode:any;
+
+  @Output('onActionChange') onActionChangeEmitter = new EventEmitter<Action>();
+
   isEdit:boolean = true;
   constructor(
     private sideBarService: SideBarService,
@@ -24,9 +31,11 @@ export class SideBarActionsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.actionService.actionChange.subscribe((action:Action) => {
-      this.selectedAction = action;
-    })
+    // this.actionService.actionChange.subscribe((action:Action) => {
+    //   this.selectedAction = action;
+    // })
+    console.log(Action[this.selectedAction]);
+
 
     this.isEdit = this.sideBarService.editMode;
     this.sideBarService.editModeChange.subscribe((isEdit:boolean)=>{
@@ -35,36 +44,36 @@ export class SideBarActionsComponent implements OnInit {
   }
 
   isRootsState(){
-    return this.sideBarService.selectedRoot == null
-    && this.sideBarService.selectedChapter == null
-    && this.sideBarService.selectedNode == null
+    return this.selectedRoot == null
+    && this.selectedChapter == null
+    && this.selectedNode == null
   }
   isChaptersState(){
-    return this.sideBarService.selectedRoot != null
-    && this.sideBarService.selectedChapter == null
-    && this.sideBarService.selectedNode == null
+    return this.selectedRoot != null
+    && this.selectedChapter == null
+    && this.selectedNode == null
   }
   isNodesState(){
-    return this.sideBarService.selectedRoot != null
-    && this.sideBarService.selectedChapter != null
-    && this.sideBarService.selectedNode == null
+    return this.selectedRoot != null
+    && this.selectedChapter != null
+    && this.selectedNode == null
   }
   isDeckState(){
-    return this.sideBarService.selectedRoot != null
-    && this.sideBarService.selectedChapter != null
-    && this.sideBarService.selectedNode != null
-    && this.sideBarService.selectedNode.type == 'deck'
+    return this.selectedRoot != null
+    && this.selectedChapter != null
+    && this.selectedNode != null
+    && this.selectedNode.type == 'deck'
   }
   isExplainState(){
-    return this.sideBarService.selectedRoot != null
-    && this.sideBarService.selectedChapter != null
-    && this.sideBarService.selectedNode != null
-    && this.sideBarService.selectedNode.type == 'explain'
+    return this.selectedRoot != null
+    && this.selectedChapter != null
+    && this.selectedNode != null
+    && this.selectedNode.type == 'explain'
   }
 
 
   onClick(action: Action){
-    this.actionService.setAction(action);
+    // this.actionService.setAction(action);
   }
 
   backgroundActive(actionString:string){
@@ -75,6 +84,7 @@ export class SideBarActionsComponent implements OnInit {
   setAction(actionString:string){
     const action = this.actionService.getAction(actionString);
     if(this.selectedAction != action){
+      this.onActionChangeEmitter.emit(action);
       this.actionService.setAction(action)
       this.router.navigate(this.urlService.getPath(action, this.sideBarService.selectedRoot?.id,
         this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
