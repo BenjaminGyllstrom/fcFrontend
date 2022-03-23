@@ -46,26 +46,49 @@ export class DeckOverviewComponent implements OnInit {
     }
     this.urlService.handleParams(this.route.snapshot.params, 'deck');
 
-    if(this.sideBarService.selectedChapter == null) return;
+    if(this.sideBarService.selectedChapter != null){
+      this.deck = this.sideBarService.selectedNode;
+      this.chapterId = this.deck.parentId;
 
-    this.deck = this.sideBarService.selectedNode;
-    this.chapterId = this.deck.parentId;
+      this.deckForm = this.formBuilder.group({
+        title:this.deck.title
+      });
 
-    this.deckForm = this.formBuilder.group({
-      title:this.deck.title
-    });
+      this.startValues = {title: this.deck.title, explain: null};
 
-    this.startValues = {title: this.deck.title, explain: null};
+      this.explainHttpService.getTitlesInChapter(this.chapterId).subscribe((explainsInChapter: {title:string, _id:string}[]) => {
+        this.explainsInChapter = explainsInChapter;
 
-    this.explainHttpService.getTitlesInChapter(this.chapterId).subscribe((explainsInChapter: {title:string, _id:string}[]) => {
-      this.explainsInChapter = explainsInChapter;
+        if(this.deck.associatedExplain != null)
+        {
+          this.selectedExplain = this.explainsInChapter.find(explain => explain._id == this.deck.associatedExplain);
+          this.startValues.explain = this.selectedExplain;
+        }
+      });
+    }
 
-      if(this.deck.associatedExplain != null)
-      {
-        this.selectedExplain = this.explainsInChapter.find(explain => explain._id == this.deck.associatedExplain);
-        this.startValues.explain = this.selectedExplain;
+
+    this.sideBarService.selectedNodeChange.subscribe((node)=>{
+      if(node && node.type == 'deck'){
+        this.deck = node;
+        this.chapterId = this.deck.parentId;
+        this.deckForm = this.formBuilder.group({
+          title:this.deck.title
+        });
+
+        this.startValues = {title: this.deck.title, explain: null};
+
+        this.explainHttpService.getTitlesInChapter(this.chapterId).subscribe((explainsInChapter: {title:string, _id:string}[]) => {
+          this.explainsInChapter = explainsInChapter;
+
+          if(this.deck.associatedExplain != null)
+          {
+            this.selectedExplain = this.explainsInChapter.find(explain => explain._id == this.deck.associatedExplain);
+            this.startValues.explain = this.selectedExplain;
+          }
+        });
       }
-    });
+    })
   }
 
   onInputChange(){
