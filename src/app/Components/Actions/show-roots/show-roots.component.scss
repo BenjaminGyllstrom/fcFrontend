@@ -22,6 +22,8 @@ h1{
     background-color: white;
     height: 150px;
     border: 1px solid #876E2B;
+    border-radius: 5px;
+
     &:hover{
       transition: transform .2s;
       transform: scale(1.03);
