@@ -51,6 +51,17 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
+    this.subs.add(this.sideBarService.selectedChapterChange.subscribe((chapter)=>{
+      this.clickChapter(chapter)
+    }))
+    this.subs.add(this.sideBarService.selectedRootChange.subscribe((root)=>{
+      this.clickRoot(root);
+    }))
+    this.subs.add(this.sideBarService.selectedNodeChange.subscribe((node)=>{
+      this.clickNode(node);
+    }))
+
     this.subs.add(this.itemsService.getRoots().subscribe((roots:Root[]) => {
 
       this.action = this.actionService.action;
@@ -112,8 +123,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   onRootClicked(root: any){
     if(root == this.selectedRoot) root = null;
-    this.selectedRoot = root;
     this.sideBarService.setRoot(root)
+  }
+
+  clickRoot(root: any){
+    this.selectedRoot = root;
     this.addRootIsClicked = false;
     this.addChapterIsClicked = false;
     this.addNodeIsClicked = false;
@@ -142,8 +156,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   onChapterClicked(chapter:any){
     if(this.selectedChapter == chapter) chapter = null
-    this.selectedChapter = chapter;
     this.sideBarService.setChapter(chapter);
+  }
+
+  clickChapter(chapter:any){
+    this.selectedChapter = chapter;
     this.addChapterIsClicked = false;
     this.addNodeIsClicked = false;
 
@@ -173,8 +190,11 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
   onNodeClicked(node:any){
     if(this.selectedNode == node) node = null
-    this.selectedNode = node;
     this.sideBarService.setNode(node);
+  }
+
+  clickNode(node:any){
+    this.selectedNode = node;
     let action = Action.Nodes
     this.addNodeIsClicked = false;
 
@@ -185,20 +205,20 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.navigate(action)
   }
 
-    //################# ADD #################
+  //################# ADD #################
 
-    onAddRoot(bool:boolean){
-      this.addRootIsClicked = bool;
-      let action = Action.MyContentOverview;
+  onAddRoot(bool:boolean){
+    this.addRootIsClicked = bool;
+    let action = Action.MyContentOverview;
 
-      if(this.addRootIsClicked){
-        this.selectedRoot = null;
-        this.sideBarService.setRoot(null);
-        action = Action.AddRoot
-      }
-      this.action = action;
-      this.navigate(action)
+    if(this.addRootIsClicked){
+      this.selectedRoot = null;
+      this.sideBarService.setRoot(null);
+      action = Action.AddRoot
     }
+    this.action = action;
+    this.navigate(action)
+  }
 
   onAddChapter(bool: boolean){
     this.addChapterIsClicked = bool;

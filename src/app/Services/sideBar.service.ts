@@ -47,14 +47,17 @@ export class SideBarService {
 
   setRoot(root:Root|null){
     this.selectedRoot = root;
-    this.setChapter(null);
-    this.setNode(null);
+    this.selectedChapter = null;
+    this.selectedNode = null;
+    // this.setChapter(null);
+    // this.setNode(null);
     this.selectedRootChange.next(root);
   }
 
   setChapter(chapter:Chapter|null){
     this.selectedChapter = chapter;
-    this.setNode(null);
+    this.selectedNode = null;
+    // this.setNode(null);
     this.selectedChapterChange.next(chapter);
   }
 

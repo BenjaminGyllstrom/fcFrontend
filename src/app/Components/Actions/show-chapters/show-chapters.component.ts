@@ -44,6 +44,7 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
 
   onClick(chapter:Chapter){
     this.sideBarService.setChapter(chapter);
-    this.actionService.setAction(Action.Nodes)
+    // this.actionService.setAction(Action.Nodes)
+    // this.router.navigate([this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot, this.sideBarService.selectedChapter, this.sideBarService.selectedNode)]);
   }
 }

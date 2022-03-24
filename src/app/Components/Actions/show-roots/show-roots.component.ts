@@ -34,6 +34,6 @@ export class ShowRootsComponent implements OnInit, OnDestroy {
 
   onClick(root:Root){
     this.sideBarService.setRoot(root)
-    this.actionService.setAction(Action.Chapters)
+    // this.actionService.setAction(Action.Chapters)
   }
 }
