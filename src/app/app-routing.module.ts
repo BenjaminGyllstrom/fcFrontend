@@ -34,6 +34,7 @@ import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { AuthGuardService } from './Services/AuthGuard.service';
 import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';
 import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
+import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -52,6 +53,7 @@ const routes: Routes = [
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Explain/:nodeId/Overview', component: ExplainOverviewComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/:nodeType/:nodeId/Study', component: StudyNodeComponent},
   ]},
   {path: 'createRoot', component:CreateRootComponent, canActivate: [AuthGuardService]},
   {path: 'rootOverview/:id', component:RootOverviewComponent, canActivate: [AuthGuardService]},

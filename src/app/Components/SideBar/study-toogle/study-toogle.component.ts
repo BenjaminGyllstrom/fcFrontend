@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SideBarService } from 'src/app/Services/sideBar.service';
 export class StudyToogleComponent implements OnInit {
 
   @Input() isEditMode : boolean = true;
-
+  @Output('onToggle') onToogleEmitter = new EventEmitter<boolean>();
   constructor(private sideBarService: SideBarService) { }
 
   ngOnInit(): void {
@@ -17,6 +17,7 @@ export class StudyToogleComponent implements OnInit {
 
   onClick(){
     this.isEditMode = !this.isEditMode
-    this.sideBarService.changeEditMode(this.isEditMode);
+    this.onToogleEmitter.emit(this.isEditMode)
+    // this.sideBarService.changeEditMode(this.isEditMode);
   }
 }

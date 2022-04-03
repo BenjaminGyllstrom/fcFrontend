@@ -24,12 +24,14 @@ export class UrlService {
     const rootId = params['rootId'];
     const chapterId = params['chapterId'];
     const nodeId = params['nodeId'];
-    const nodeType = nodetype
+
+    let typeOfNode = params['nodeType'];
+    if(!typeOfNode) typeOfNode = nodetype
 
     this.rootId = rootId;
     this.chapterId = chapterId;
     this.nodeId = nodeId;
-    this.nodeType = nodeType;
+    this.nodeType = typeOfNode;
 
     // if(rootId)  {
     //   this.sideBarService.selectedRootParamId = rootId
@@ -47,46 +49,38 @@ export class UrlService {
   }
 
 
-  getPath(action:Action, rootId:any, chapterId:any, nodeId:any):any[]{
+  getPath(action:Action, rootId:any, chapterId:any, nodeId:any, nodeType:any=''):any[]{
     switch (action) {
       case Action.MyContentOverview:
         return ['/myContent/Roots']
-        break;
       case Action.AddRoot:
         return ['/myContent/Roots/AddRoot']
-        break;
       case Action.Chapters:
         // if(rootId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters']
-        break;
       case Action.AddChapter:
         // if(rootId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', 'AddChapter']
-        break;
       case Action.Nodes:
         // if(rootId == null || chapterId == null) return ['/myContent/Roots'];
         return['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes']
-        break;
       case Action.AddNode:
         // if(rootId == null || chapterId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'AddNode'];
-        break;
       case Action.ExplainOverview:
         // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Explain', nodeId, 'Overview'];
-        break;
       case Action.DeckOverview:
         // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Deck', nodeId, 'Overview'];
-        break;
       case Action.Cards:
         // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Deck', nodeId, 'Cards'];
-        break;
       case Action.AddCard:
         // if(rootId == null || chapterId == null || nodeId == null) return ['/myContent/Roots'];
         return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', 'Deck', nodeId, 'AddCard'];
-        break;
+      case Action.Study:
+        return ['/myContent/Roots', rootId, 'Chapters', chapterId, 'Nodes', nodeType, nodeId, 'Study'];
       default:
         return['/myContent/Roots'];
     }

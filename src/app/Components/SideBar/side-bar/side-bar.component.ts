@@ -61,6 +61,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.subs.add(this.sideBarService.selectedNodeChange.subscribe((node)=>{
       this.clickNode(node);
     }))
+    this.sideBarService.editModeChange.subscribe()
 
     this.subs.add(this.itemsService.getRoots().subscribe((roots:Root[]) => {
 
@@ -72,22 +73,26 @@ export class SideBarComponent implements OnInit, OnDestroy {
       }else if(this.action == Action.AddNode){
         this.addNodeIsClicked = true;
       }
+      if(this.action == Action.Study){
+        this.editMode = false;
+      }
 
       this.roots = roots
       this.sideBarService.setRoots(roots);
 
       if(this.urlService.rootId) {
         this.subs.add(this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>{
-          this.sideBarService.setRoot(root)
+          // this.sideBarService.setRoot(root)
+          this.sideBarService.selectedRoot = root;
           this.selectedRoot = root;
 
           this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
             this.chapters = chapters;
             this.sideBarService.setChapters(chapters);
-
             if(this.urlService.chapterId){
               this.subs.add(this.itemsService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>{
-                this.sideBarService.setChapter(chapter)
+                // this.sideBarService.setChapter(chapter)
+                this.sideBarService.selectedChapter = chapter
                 this.selectedChapter = chapter
 
                 this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
@@ -96,13 +101,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
                   if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
                     this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
-                      this.sideBarService.setNode(deck);
+                      // this.sideBarService.setNode(deck);
                       this.selectedNode = deck
                     }))
                   }
                   else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
                     this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
-                      this.sideBarService.setNode(explain);
+                      // this.sideBarService.setNode(explain);
                       this.selectedNode = explain
                     }))
                   }
@@ -115,6 +120,17 @@ export class SideBarComponent implements OnInit, OnDestroy {
     }))
   }
 
+  onToggle(toogleMode:boolean){
+    this.editMode = toogleMode;
+
+    if(this.selectedNode){
+      let action = Action.Study;
+      if(this.editMode){
+        action = this.selectedNode.type == 'deck'? Action.Cards : Action.ExplainOverview
+      }
+      this.navigate(action, this.selectedNode.type)
+    }
+  }
   onActionChange(action:Action){
     this.action = action
   }
@@ -172,12 +188,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
         if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
           this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
-            this.sideBarService.setNode(deck);
+            this.sideBarService.selectedNode = deck;
+            // this.sideBarService.setNode(deck);
           }))
         }
         else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
           this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
-            this.sideBarService.setNode(explain);
+            this.sideBarService.selectedNode = explain;
           }))
         }
       }))
@@ -200,9 +217,10 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
     if(node){
       action = node.type == 'deck'? Action.Cards : Action.ExplainOverview
+      if(this.editMode == false) action = Action.Study
     }
     this.action = action;
-    this.navigate(action)
+    this.navigate(action, node.type)
   }
 
   //################# ADD #################
@@ -314,8 +332,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigate(action:Action){
+  navigate(action:Action, nodeType:string = ''){
     this.router.navigate(this.urlService.getPath(action, this.sideBarService.selectedRoot?.id,
-      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id, nodeType))
   }
 }

@@ -3,7 +3,9 @@ import { Explain } from './../../../Models/explain.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';
-import { ActionService } from 'src/app/Services/action.service';
+import { ActionService, Action } from 'src/app/Services/action.service';
+import { ActivatedRoute } from '@angular/router';
+import { UrlService } from 'src/app/Services/url.service';
 
 @Component({
   selector: 'app-study-node',
@@ -20,19 +22,42 @@ export class StudyNodeComponent implements OnInit {
   finnished:boolean;
 
   constructor(private sideBarService: SideBarService,
-    private actionService: ActionService) { }
+    private actionService: ActionService,
+    private route: ActivatedRoute,
+    private urlService: UrlService) { }
 
   ngOnInit(): void {
-    const node = this.sideBarService.selectedNode;
-    this.setData(node);
-    this.checkFinnished(node)
-    this.sideBarService.selectedNodeChange.subscribe(()=>{
-      const node = this.sideBarService.selectedNode;
+    if(this.actionService.action == Action.Default){
+      this.actionService.setAction(Action.Study)
+    }
+    this.urlService.handleParams(this.route.snapshot.params);
 
-      if(node){
-        this.setData(node)
-        this.checkFinnished(node)
-      }
+    if(this.sideBarService.selectedNode){
+      const node = this.sideBarService.selectedNode;
+      this.setData(node);
+      this.checkFinnished(node)
+      this.sideBarService.selectedNodeChange.subscribe(()=>{
+        const node = this.sideBarService.selectedNode;
+
+        if(node){
+          this.setData(node)
+          this.checkFinnished(node)
+        }
+      })
+    }
+
+    this.sideBarService.selectedNodeChange.subscribe((node)=>{
+      this.setData(node);
+      this.checkFinnished(node)
+      this.sideBarService.selectedNodeChange.subscribe(()=>{
+        const node = this.sideBarService.selectedNode;
+
+        if(node){
+          this.setData(node)
+          this.checkFinnished(node)
+        }
+      })
+
     })
   }
 
