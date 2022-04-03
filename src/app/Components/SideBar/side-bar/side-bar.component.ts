@@ -53,13 +53,16 @@ export class SideBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subs.add(this.sideBarService.selectedChapterChange.subscribe((chapter)=>{
-      this.clickChapter(chapter)
+      this.selectedChapter = chapter
+      // this.clickChapter(chapter)
     }))
     this.subs.add(this.sideBarService.selectedRootChange.subscribe((root)=>{
-      this.clickRoot(root);
+      this.selectedRoot = root
+      // this.clickRoot(root);
     }))
     this.subs.add(this.sideBarService.selectedNodeChange.subscribe((node)=>{
-      this.clickNode(node);
+      this.selectedNode = node;
+      // this.clickNode(node);
     }))
     this.sideBarService.editModeChange.subscribe()
 
@@ -82,7 +85,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
       if(this.urlService.rootId) {
         this.subs.add(this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>{
-          // this.sideBarService.setRoot(root)
+          this.sideBarService.setRoot(root)
           this.sideBarService.selectedRoot = root;
           this.selectedRoot = root;
 
@@ -91,7 +94,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
             this.sideBarService.setChapters(chapters);
             if(this.urlService.chapterId){
               this.subs.add(this.itemsService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>{
-                // this.sideBarService.setChapter(chapter)
+                this.sideBarService.setChapter(chapter)
                 this.sideBarService.selectedChapter = chapter
                 this.selectedChapter = chapter
 
@@ -101,13 +104,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
                   if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
                     this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
-                      // this.sideBarService.setNode(deck);
+                      this.sideBarService.setNode(deck);
                       this.selectedNode = deck
                     }))
                   }
                   else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
                     this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
-                      // this.sideBarService.setNode(explain);
+                      this.sideBarService.setNode(explain);
                       this.selectedNode = explain
                     }))
                   }
@@ -140,78 +143,108 @@ export class SideBarComponent implements OnInit, OnDestroy {
   onRootClicked(root: any){
     if(root == this.selectedRoot) root = null;
     this.sideBarService.setRoot(root)
-  }
 
-  clickRoot(root: any){
-    this.selectedRoot = root;
     this.addRootIsClicked = false;
     this.addChapterIsClicked = false;
     this.addNodeIsClicked = false;
 
+    this.selectedChapter = null
+    this.selectedNode = null
+
     const action = root? Action.Chapters : Action.MyContentOverview
+    this.action = action;
+    this.navigate(action)
 
     if(root){
       this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
         this.chapters = chapters;
         this.sideBarService.setChapters(chapters);
-
-        if(this.urlService.chapterId){
-          this.subs.add(this.itemsService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>{
-            this.sideBarService.setChapter(chapter)
-            this.selectedChapter = chapter
-          }))
-        }
       }))
     }
-    this.selectedChapter = null
-    this.selectedNode = null
-
-    this.action = action;
-    this.navigate(action)
   }
+
+  // clickRoot(root: any){
+  //   this.selectedRoot = root;
+  //   this.addRootIsClicked = false;
+  //   this.addChapterIsClicked = false;
+  //   this.addNodeIsClicked = false;
+
+  //   const action = root? Action.Chapters : Action.MyContentOverview
+
+  //   if(root){
+  //     this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
+  //       this.chapters = chapters;
+  //       this.sideBarService.setChapters(chapters);
+
+  //       if(this.urlService.chapterId){
+  //         this.subs.add(this.itemsService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>{
+  //           this.sideBarService.setChapter(chapter)
+  //           this.selectedChapter = chapter
+  //         }))
+  //       }
+  //     }))
+  //   }
+  //   this.selectedChapter = null
+  //   this.selectedNode = null
+
+  //   this.action = action;
+  //   this.navigate(action)
+  // }
 
   onChapterClicked(chapter:any){
     if(this.selectedChapter == chapter) chapter = null
     this.sideBarService.setChapter(chapter);
-  }
 
-  clickChapter(chapter:any){
-    this.selectedChapter = chapter;
     this.addChapterIsClicked = false;
     this.addNodeIsClicked = false;
+
+    const action = chapter? Action.Nodes : Action.Chapters
+    this.action = action;
+    this.navigate(action)
 
     if(chapter)
     {
       this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
         this.nodes = nodes
         this.sideBarService.setNodes(nodes);
-
-        if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
-          this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
-            this.sideBarService.selectedNode = deck;
-            // this.sideBarService.setNode(deck);
-          }))
-        }
-        else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
-          this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
-            this.sideBarService.selectedNode = explain;
-          }))
-        }
       }))
     }
-    this.selectedNode = null
-
-    const action = chapter? Action.Nodes : Action.Chapters
-    this.action = action;
-    this.navigate(action)
   }
+
+  // clickChapter(chapter:any){
+  //   this.selectedChapter = chapter;
+  //   this.addChapterIsClicked = false;
+  //   this.addNodeIsClicked = false;
+
+  //   if(chapter)
+  //   {
+  //     this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
+  //       this.nodes = nodes
+  //       this.sideBarService.setNodes(nodes);
+
+  //       if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
+  //         this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
+  //           this.sideBarService.selectedNode = deck;
+  //           // this.sideBarService.setNode(deck);
+  //         }))
+  //       }
+  //       else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
+  //         this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
+  //           this.sideBarService.selectedNode = explain;
+  //         }))
+  //       }
+  //     }))
+  //   }
+  //   this.selectedNode = null
+
+  //   const action = chapter? Action.Nodes : Action.Chapters
+  //   this.action = action;
+  //   this.navigate(action)
+  // }
   onNodeClicked(node:any){
     if(this.selectedNode == node) node = null
     this.sideBarService.setNode(node);
-  }
 
-  clickNode(node:any){
-    this.selectedNode = node;
     let action = Action.Nodes
     this.addNodeIsClicked = false;
 
@@ -222,6 +255,19 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.action = action;
     this.navigate(action, node.type)
   }
+
+  // clickNode(node:any){
+  //   this.selectedNode = node;
+  //   let action = Action.Nodes
+  //   this.addNodeIsClicked = false;
+
+  //   if(node){
+  //     action = node.type == 'deck'? Action.Cards : Action.ExplainOverview
+  //     if(this.editMode == false) action = Action.Study
+  //   }
+  //   this.action = action;
+  //   this.navigate(action, node.type)
+  // }
 
   //################# ADD #################
 

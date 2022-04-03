@@ -49,15 +49,15 @@ export class SideBarService {
     this.selectedRoot = root;
     this.selectedChapter = null;
     this.selectedNode = null;
-    // this.setChapter(null);
-    // this.setNode(null);
+    this.setChapter(null);
+    this.setNode(null);
     this.selectedRootChange.next(root);
   }
 
   setChapter(chapter:Chapter|null){
     this.selectedChapter = chapter;
     this.selectedNode = null;
-    // this.setNode(null);
+    this.setNode(null);
     this.selectedChapterChange.next(chapter);
   }
 
