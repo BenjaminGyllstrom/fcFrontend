@@ -28,7 +28,7 @@ export class AddRootComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddRoot)
+      this.actionService.setAction(Action.AddRoot, false)
     }
     this.urlService.handleParams(this.route.snapshot.params);
   }

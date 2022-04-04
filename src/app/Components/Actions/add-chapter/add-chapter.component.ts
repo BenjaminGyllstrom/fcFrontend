@@ -28,7 +28,7 @@ export class AddChapterComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddChapter)
+      this.actionService.setAction(Action.AddChapter, false)
     }
     this.urlService.handleParams(this.route.snapshot.params);
   }

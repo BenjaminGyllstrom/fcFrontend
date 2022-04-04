@@ -36,7 +36,7 @@ export class ExplainOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.DeckOverview)
+      this.actionService.setAction(Action.DeckOverview, false)
     }
     this.urlService.handleParams(this.route.snapshot.params, 'explain');
 

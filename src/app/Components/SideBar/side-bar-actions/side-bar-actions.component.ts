@@ -34,9 +34,6 @@ export class SideBarActionsComponent implements OnInit {
     // this.actionService.actionChange.subscribe((action:Action) => {
     //   this.selectedAction = action;
     // })
-    console.log(Action[this.selectedAction]);
-
-
     this.isEdit = this.sideBarService.editMode;
     this.sideBarService.editModeChange.subscribe((isEdit:boolean)=>{
       this.isEdit = isEdit;

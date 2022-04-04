@@ -32,7 +32,7 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.Chapters)
+      this.actionService.setAction(Action.Chapters, false)
     }
     this.urlService.handleParams(this.route.snapshot.params);
 
@@ -45,6 +45,7 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
 
   onClick(chapter:Chapter){
     this.sideBarService.setChapter(chapter);
+
     this.actionService.setAction(Action.Nodes)
     this.navigate(Action.Nodes)
 

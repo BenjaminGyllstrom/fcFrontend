@@ -27,12 +27,13 @@ export class ActionService {
   action: Action = Action.Default;
   actionChange:Subject<Action> = new Subject<Action>();
 
-  setAction(action:Action|null){
+  setAction(action:Action|null, notify = true){
     if(action == null) action = Action.Default
 
     if(this.action != action){
       this.action = action;
-      this.actionChange.next(this.action);
+
+      if(notify)this.actionChange.next(this.action);
     }
   }
 

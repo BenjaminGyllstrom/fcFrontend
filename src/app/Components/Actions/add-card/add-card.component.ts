@@ -53,7 +53,7 @@ export class AddCardComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddCard)
+      this.actionService.setAction(Action.AddCard, false)
     }
     this.urlService.handleParams(this.route.snapshot.params, 'deck');
 

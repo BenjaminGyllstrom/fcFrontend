@@ -34,7 +34,7 @@ export class ShowCardsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.Cards)
+      this.actionService.setAction(Action.Cards, false)
     }
     this.urlService.handleParams(this.route.snapshot.params, 'deck');
 

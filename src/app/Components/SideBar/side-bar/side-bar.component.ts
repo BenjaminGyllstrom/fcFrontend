@@ -52,6 +52,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.subs.add(this.actionService.actionChange.subscribe((action:Action)=>{
+      this.action = action
+      console.log('yep');
+
+    }))
+
     this.subs.add(this.sideBarService.selectedChapterChange.subscribe((chapter)=>{
       this.selectedChapter = chapter
       // this.clickChapter(chapter)
@@ -266,7 +272,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       if(this.editMode == false) action = Action.Study
     }
     this.action = action;
-    this.navigate(action, node.type)
+    this.navigate(action, node?.type)
   }
 
   // clickNode(node:any){
