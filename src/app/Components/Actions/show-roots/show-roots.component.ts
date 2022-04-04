@@ -1,10 +1,11 @@
 import { Subscription } from 'rxjs';
 import { ItemsService } from './../../../Services/items.service';
-import { Chapter } from 'src/app/Models/chapter.model';
 import { ActionService, Action } from './../../../Services/action.service';
 import { Root } from './../../../Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { UrlService } from 'src/app/Services/url.service';
 
 @Component({
   selector: 'app-show-roots',
@@ -19,6 +20,8 @@ export class ShowRootsComponent implements OnInit, OnDestroy {
     private sideBarService: SideBarService,
     private actionService: ActionService,
     private itemsService: ItemsService,
+    private router: Router,
+    private urlService: UrlService
   ) { }
 
   sub:Subscription
@@ -34,6 +37,12 @@ export class ShowRootsComponent implements OnInit, OnDestroy {
 
   onClick(root:Root){
     this.sideBarService.setRoot(root)
-    // this.actionService.setAction(Action.Chapters)
+    this.actionService.setAction(Action.Chapters)
+    this.navigate(Action.Chapters)
+  }
+
+  navigate(action:Action, nodeType:string = ''){
+    this.router.navigate(this.urlService.getPath(action, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id, nodeType))
   }
 }

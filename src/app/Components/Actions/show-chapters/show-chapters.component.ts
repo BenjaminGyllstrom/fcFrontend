@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UrlService } from './../../../Services/url.service';
 import { ItemsService } from './../../../Services/items.service';
 import { ActionService, Action } from './../../../Services/action.service';
@@ -22,6 +22,7 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
     private itemService: ItemsService,
     private urlService: UrlService,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
   sub:Subscription
   ngOnDestroy(): void {
@@ -44,7 +45,15 @@ export class ShowChaptersComponent implements OnInit, OnDestroy {
 
   onClick(chapter:Chapter){
     this.sideBarService.setChapter(chapter);
+    this.actionService.setAction(Action.Nodes)
+    this.navigate(Action.Nodes)
+
     // this.actionService.setAction(Action.Nodes)
     // this.router.navigate([this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot, this.sideBarService.selectedChapter, this.sideBarService.selectedNode)]);
+  }
+
+  navigate(action:Action, nodeType:string = ''){
+    this.router.navigate(this.urlService.getPath(action, this.sideBarService.selectedRoot?.id,
+      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id, nodeType))
   }
 }

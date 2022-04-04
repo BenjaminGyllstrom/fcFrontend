@@ -55,10 +55,23 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.subs.add(this.sideBarService.selectedChapterChange.subscribe((chapter)=>{
       this.selectedChapter = chapter
       // this.clickChapter(chapter)
+      if(chapter)
+      {
+        this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
+          this.nodes = nodes
+          this.sideBarService.setNodes(nodes);
+        }))
+      }
     }))
     this.subs.add(this.sideBarService.selectedRootChange.subscribe((root)=>{
       this.selectedRoot = root
       // this.clickRoot(root);
+      if(root){
+        this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
+          this.chapters = chapters;
+          this.sideBarService.setChapters(chapters);
+        }))
+      }
     }))
     this.subs.add(this.sideBarService.selectedNodeChange.subscribe((node)=>{
       this.selectedNode = node;
@@ -155,12 +168,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.action = action;
     this.navigate(action)
 
-    if(root){
-      this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
-        this.chapters = chapters;
-        this.sideBarService.setChapters(chapters);
-      }))
-    }
+    // if(root){
+    //   this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
+    //     this.chapters = chapters;
+    //     this.sideBarService.setChapters(chapters);
+    //   }))
+    // }
   }
 
   // clickRoot(root: any){
@@ -202,13 +215,13 @@ export class SideBarComponent implements OnInit, OnDestroy {
     this.action = action;
     this.navigate(action)
 
-    if(chapter)
-    {
-      this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
-        this.nodes = nodes
-        this.sideBarService.setNodes(nodes);
-      }))
-    }
+    // if(chapter)
+    // {
+    //   this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
+    //     this.nodes = nodes
+    //     this.sideBarService.setNodes(nodes);
+    //   }))
+    // }
   }
 
   // clickChapter(chapter:any){
