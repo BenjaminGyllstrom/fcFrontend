@@ -103,6 +103,7 @@ import { StudyDeckComponent } from './Components/Actions/study-node/study-deck/s
 import { ExploreComponent } from './Components/explore/explore.component';
 import { RootExploreItemComponent } from './Components/explore/root-explore-item/root-explore-item.component';
 import { ExploreFilterComponent } from './Components/explore/explore-filter/explore-filter.component';
+import { ExploreRootOverviewComponent } from './Components/explore-root-overview/explore-root-overview.component';
 
 @NgModule({
   declarations: [
@@ -187,6 +188,7 @@ import { ExploreFilterComponent } from './Components/explore/explore-filter/expl
     ExploreComponent,
     RootExploreItemComponent,
     ExploreFilterComponent,
+    ExploreRootOverviewComponent,
   ],
   imports: [
     BrowserModule,

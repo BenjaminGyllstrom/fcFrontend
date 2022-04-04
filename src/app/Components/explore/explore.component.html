@@ -6,7 +6,7 @@
 
   <div class="roots">
     <div *ngFor="let root of roots" class="root">
-      <app-root-explore-item [root]="root"></app-root-explore-item>
+      <app-root-explore-item [root]="root" (onClick)="onClick(root)"></app-root-explore-item>
     </div>
   </div>
 </div>

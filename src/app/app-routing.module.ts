@@ -36,11 +36,13 @@ import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-c
 import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
 import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
 import { ExploreComponent } from './Components/explore/explore.component';
+import { ExploreRootOverviewComponent } from './Components/explore-root-overview/explore-root-overview.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'home', component:HomeComponent},
   {path: 'explore', component:ExploreComponent},
+  {path: 'exploreRoot/:rootId', component:ExploreRootOverviewComponent},
   {path: 'myDecks', component:MyDecksComponent, canActivate: [AuthGuardService]},
   {path: 'myRoots', component:MyRootsComponent, canActivate: [AuthGuardService]},
   {path: 'myContent', component:MyContentComponent, canActivate: [AuthGuardService], children:[

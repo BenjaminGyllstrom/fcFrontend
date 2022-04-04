@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { IRoot, Root } from 'src/app/Models/root.model';
 import { HttpService } from 'src/app/Services/Http/http.service';
@@ -11,7 +12,10 @@ import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
 })
 export class ExploreComponent implements OnInit {
 
-  constructor(private rootHttpService: RootHttpService, private httpService: HttpService) { }
+  constructor(
+    private rootHttpService: RootHttpService,
+    private httpService: HttpService,
+    private router: Router) { }
 
   roots: Root[]
 
@@ -36,4 +40,7 @@ export class ExploreComponent implements OnInit {
     )
   }
 
+  onClick(root:Root){
+    this.router.navigate(['exploreRoot', root.id])
+  }
 }
