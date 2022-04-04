@@ -31,9 +31,6 @@ export class ExploreComponent implements OnInit {
 
   getRoots(){
     return this.rootHttpService.getAll().pipe(
-      tap((IRoots: IRoot[]) => {
-        console.log(IRoots);
-      }),
       map((IRoots: IRoot[]) => {
         return this.rootHttpService.parseToRoots(IRoots)})
     )
