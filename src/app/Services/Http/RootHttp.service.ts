@@ -13,6 +13,9 @@ export class RootHttpService {
 
   constructor(private httpService: HttpService, private chapterHttpService: ChapterHttpService) {}
 
+  getAll() : Observable<any> {
+    return this.httpService.get('roots/Explore');
+  }
   get() : Observable<any> {
     return this.httpService.get('roots');
   }
@@ -35,6 +38,10 @@ export class RootHttpService {
     newRoot.id = collectedRoot._id;
     newRoot.title = collectedRoot.title;
     newRoot.chapters = this.chapterHttpService.parseToChapters(collectedRoot.chapters);
+
+    newRoot.creatorId = collectedRoot.creatorId
+    newRoot.creatorName = collectedRoot.creatorName
+    newRoot.creatorImage = collectedRoot.creatorImage
 
     if(collectedRoot.userData != null){
       newRoot.userData = {

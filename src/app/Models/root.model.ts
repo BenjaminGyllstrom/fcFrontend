@@ -8,6 +8,10 @@ export class Root{
     name: string;
     photoUrl: string;
   }
+
+  creatorId: string;
+  creatorName: string;
+  creatorImage: string;
 }
 
 export interface IRoot{
@@ -18,4 +22,8 @@ export interface IRoot{
     name: string;
     photoUrl: string;
   }
+
+  creatorId: string;
+  creatorName: string;
+  creatorImage: string;
 }

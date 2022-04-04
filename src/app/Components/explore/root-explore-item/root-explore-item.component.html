@@ -1,0 +1,9 @@
+<div class="root-explore-item">
+  <h1>{{root.title}}</h1>
+  <div *ngIf="userData != null" class="user">
+    <img [src]="root.creatorImage" alt="creator image" class="user__photo">
+    <p class="user__name">{{root.creatorName}}</p>
+  </div>
+</div>
+
+

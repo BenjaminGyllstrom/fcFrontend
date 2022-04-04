@@ -1,0 +1,30 @@
+
+.root-explore-item{
+  border: 1px solid #876E2B;
+  border-radius: 10px;
+  padding: 5px;
+
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.user{
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+
+  &__photo{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+  &__name{
+    margin: 0;
+    height: 100%;
+    font-size: 14px;
+  }
+}

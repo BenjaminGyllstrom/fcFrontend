@@ -100,6 +100,9 @@ import { AddCardComponent } from './Components/Actions/add-card/add-card.compone
 import { DeleteItemComponent } from './Components/SideBar/delete-item/delete-item.component';
 import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
 import { StudyDeckComponent } from './Components/Actions/study-node/study-deck/study-deck.component';
+import { ExploreComponent } from './Components/explore/explore.component';
+import { RootExploreItemComponent } from './Components/explore/root-explore-item/root-explore-item.component';
+import { ExploreFilterComponent } from './Components/explore/explore-filter/explore-filter.component';
 
 @NgModule({
   declarations: [
@@ -181,6 +184,9 @@ import { StudyDeckComponent } from './Components/Actions/study-node/study-deck/s
     DeleteItemComponent,
     StudyNodeComponent,
     StudyDeckComponent,
+    ExploreComponent,
+    RootExploreItemComponent,
+    ExploreFilterComponent,
   ],
   imports: [
     BrowserModule,

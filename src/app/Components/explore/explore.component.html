@@ -1,0 +1,15 @@
+<div class="explore">
+
+  <div class="filter">
+    <app-explore-filter></app-explore-filter>
+  </div>
+
+  <div class="roots">
+    <div *ngFor="let root of roots" class="root">
+      <app-root-explore-item [root]="root"></app-root-explore-item>
+    </div>
+  </div>
+</div>
+
+
+

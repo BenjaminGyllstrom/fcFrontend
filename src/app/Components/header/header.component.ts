@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
 
         this.auth = auth
         this.httpService.idToken = auth.idToken
+        this.httpService.idTokenChanged.next();
       }
     })
   }

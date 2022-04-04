@@ -1,0 +1,40 @@
+.explore-filter{
+  padding: 25px;
+
+  background-color: white;
+
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.search{
+  box-sizing: border-box;
+  height: 50px;
+  width: 400px;
+  padding: 15px;
+  margin: 0;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.filter-button{
+  box-sizing: border-box;
+
+  padding: 15px;
+  font-size: 20px;
+
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.filter{
+  height: 50px;
+  width: 100px;
+}
+.sort{
+  height: 50px;
+  width: 200px;
+}

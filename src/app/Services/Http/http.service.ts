@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { AuthGuardService } from '../AuthGuard.service';
 
 @Injectable({
@@ -19,6 +20,7 @@ export class HttpService {
   }
 
   idToken:string;
+  idTokenChanged = new Subject<void>();
 
   get(uri: string, params?: any) {
     this.options.params = new HttpParams();
@@ -58,7 +60,6 @@ export class HttpService {
       this.options.headers = this.options.headers.append("idToken", this.idToken);
     }else{
       this.options.headers = this.options.headers.set("idToken", this.idToken);
-
     }
   }
 }

@@ -20,6 +20,7 @@ export class RootListItemComponent implements OnInit {
   ngOnInit(): void {
     if(this.root.userData){
       this.userData = this.root.userData
+      console.log(this.userData);
     }
   }
 
