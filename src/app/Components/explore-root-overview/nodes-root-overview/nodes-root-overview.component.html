@@ -1,0 +1,32 @@
+
+<div class="show-nodes" *ngIf="_nodes && _nodes.length > 0">
+
+  <div class="nodes">
+    <div *ngFor="let node of _nodes" class="line"
+    [ngStyle]="{
+      'grid-column': getLineColumn(node),
+      'grid-row': getLineRow(node),
+      'height': getLineHeight(node),
+      'width': getLineWidth(node),
+      'background-image': getLineBackground(node)}"></div>
+
+    <div *ngFor="let node of _nodes"
+    class="circle-element"
+    (click)="onClick(node)"
+    [ngStyle]="{'grid-column': getColumn(node), 'grid-row': getRow(node)}">
+
+      <app-explain-node
+      class="node-element"
+      *ngIf="node.type == 'explain'"
+      [explain]="node"
+      ></app-explain-node>
+
+      <app-deck-node
+      class="node-element"
+      *ngIf="node.type == 'deck'"
+      [deck]="node"
+      ></app-deck-node>
+    </div>
+
+  </div>
+</div>

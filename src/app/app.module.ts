@@ -104,6 +104,7 @@ import { ExploreComponent } from './Components/explore/explore.component';
 import { RootExploreItemComponent } from './Components/explore/root-explore-item/root-explore-item.component';
 import { ExploreFilterComponent } from './Components/explore/explore-filter/explore-filter.component';
 import { ExploreRootOverviewComponent } from './Components/explore-root-overview/explore-root-overview.component';
+import { NodesRootOverviewComponent } from './Components/explore-root-overview/nodes-root-overview/nodes-root-overview.component';
 
 @NgModule({
   declarations: [
@@ -189,6 +190,7 @@ import { ExploreRootOverviewComponent } from './Components/explore-root-overview
     RootExploreItemComponent,
     ExploreFilterComponent,
     ExploreRootOverviewComponent,
+    NodesRootOverviewComponent,
   ],
   imports: [
     BrowserModule,

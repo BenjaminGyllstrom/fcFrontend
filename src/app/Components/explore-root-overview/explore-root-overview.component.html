@@ -1,1 +1,23 @@
-<p>explore-root-overview works!</p>
+<div class="explore-root-overview" *ngIf="root">
+  <h1>{{root.title}}</h1>
+  <div class="intro">
+    text
+  </div>
+  <div class="download">Download</div>
+  <div class="root-content">
+    <div class="chapters">
+      <app-chapter-list-item *ngFor="let chapter of chapters" [chapter]="chapter" (click)="onChapterClick(chapter)"></app-chapter-list-item>
+    </div>
+    <div class="nodes">
+      <app-nodes-root-overview [nodes]="nodes" (onNodeClick)="onNodeClick($event)"></app-nodes-root-overview>
+    </div>
+  </div>
+  <div *ngIf="deck" class="deck-content">
+    <div *ngFor="let card of cards" class="card" >
+      <app-card [card]="card"></app-card>
+    </div>
+  </div>
+  <div *ngIf="explain" class="explain-content">
+    <app-quill-show [content]="explainText" class="quill"></app-quill-show>
+  </div>
+</div>
