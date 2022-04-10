@@ -12,15 +12,8 @@ export class RootExploreItemComponent implements OnInit {
 
   @Input() root: Root
   @Output('onClick') onClickEmitter = new EventEmitter<void>();
-  userData: {
-    name:string,
-    photoUrl:string
-  }
 
   ngOnInit(): void {
-    if(this.root.userData){
-      this.userData = this.root.userData
-    }
   }
 
   onClick(){
