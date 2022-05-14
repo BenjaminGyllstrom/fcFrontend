@@ -105,6 +105,12 @@ import { RootExploreItemComponent } from './Components/explore/root-explore-item
 import { ExploreFilterComponent } from './Components/explore/explore-filter/explore-filter.component';
 import { ExploreRootOverviewComponent } from './Components/explore-root-overview/explore-root-overview.component';
 import { NodesRootOverviewComponent } from './Components/explore-root-overview/nodes-root-overview/nodes-root-overview.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './ngrx/custom-route-serializer';
+import { rootReducer } from './ngrx/root/root.reducer';
+import { RootEffects } from './ngrx/root/root.effects';
 
 @NgModule({
   declarations: [
@@ -206,7 +212,11 @@ import { NodesRootOverviewComponent } from './Components/explore-root-overview/n
     SocialLoginModule,
     MatDialogModule,
     MatMenuModule,
-    DragDropModule
+    DragDropModule,
+    StoreModule.forRoot({root: rootReducer, router: routerReducer}),
+    EffectsModule.forRoot([RootEffects]),
+    StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
+
   ],
   providers: [
     // SocialAuthService,

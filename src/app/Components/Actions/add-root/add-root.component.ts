@@ -7,6 +7,10 @@ import { RootHttpService } from './../../../Services/Http/RootHttp.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActionService, Action } from 'src/app/Services/action.service';
+import { AppState } from 'src/app/ngrx/appState';
+import { Store } from '@ngrx/store';
+import { createRoot } from 'src/app/ngrx/root/root.actions';
+
 
 @Component({
   selector: 'app-add-root',
@@ -20,7 +24,8 @@ export class AddRootComponent implements OnInit {
     private itemsService: ItemsService,
     private urlService: UrlService,
     private route: ActivatedRoute,
-    private actionService: ActionService) { }
+    private actionService: ActionService,
+    private store: Store<AppState>) { }
 
   rootForm = this.formBuilder.group({
     title:''
@@ -40,7 +45,7 @@ export class AddRootComponent implements OnInit {
 
     this.rootForm.reset();
 
-    this.itemsService.postRoot(root).subscribe()
+    this.store.dispatch(createRoot({root: root}))
   }
 
 }

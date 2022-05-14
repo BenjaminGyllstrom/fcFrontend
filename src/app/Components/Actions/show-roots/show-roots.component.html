@@ -2,7 +2,7 @@
   <h1>Roots</h1>
 
   <div class="roots__list">
-      <app-root-list-item *ngFor="let root of roots" [root]="root"
+      <app-root-list-item *ngFor="let root of roots$ | async" [root]="root"
       (click)="onClick(root)" class="roots__list-item"></app-root-list-item>
   </div>
 
