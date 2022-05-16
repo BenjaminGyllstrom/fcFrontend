@@ -4,6 +4,6 @@
   <div class="chapter__list">
     <!-- <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of chapters" class="chapter__list-item"></app-chapter-list-item> -->
     <!-- <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of chapters" class="chapter__list-item"></app-chapter-list-item> -->
-    <app-chapter-list-item [chapter]="chapter" *ngFor="let chapter of chapters" (click)="onClick(chapter)"></app-chapter-list-item>
+    <app-chapter-list-item [chapter]="chapter" *ngFor="let chapter of chapters$ | async" (click)="onClick(chapter)"></app-chapter-list-item>
   </div>
 </div>

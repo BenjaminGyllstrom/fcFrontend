@@ -108,9 +108,14 @@ import { NodesRootOverviewComponent } from './Components/explore-root-overview/n
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { CustomSerializer } from './ngrx/custom-route-serializer';
+import { CustomSerializer } from './ngrx/router/custom-route-serializer';
 import { rootReducer } from './ngrx/root/root.reducer';
 import { RootEffects } from './ngrx/root/root.effects';
+import { chapterReducer } from './ngrx/chapter/chapter.reducer';
+import { ChapterEffects } from './ngrx/chapter/chapter.effects';
+import { nodeReducer } from './ngrx/node/node.reducer';
+import { NodeEffects } from './ngrx/node/node.effects';
+import { RouterEffects } from './ngrx/router/router.effects';
 
 @NgModule({
   declarations: [
@@ -213,8 +218,8 @@ import { RootEffects } from './ngrx/root/root.effects';
     MatDialogModule,
     MatMenuModule,
     DragDropModule,
-    StoreModule.forRoot({root: rootReducer, router: routerReducer}),
-    EffectsModule.forRoot([RootEffects]),
+    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, router: routerReducer}),
+    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, RouterEffects]),
     StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
 
   ],

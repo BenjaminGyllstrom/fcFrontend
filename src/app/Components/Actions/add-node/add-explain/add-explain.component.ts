@@ -5,14 +5,19 @@ import { QuillService } from './../../../../Services/quill.service';
 import { FormBuilder } from '@angular/forms';
 import { Quill } from 'quill';
 import { Explain, IExplain } from './../../../../Models/explain.model';
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
+import { Subscription, tap } from 'rxjs';
+import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import { createNode } from 'src/app/ngrx/node/node.actions';
 
 @Component({
   selector: 'app-add-explain',
   templateUrl: './add-explain.component.html',
   styleUrls: ['./add-explain.component.scss']
 })
-export class AddExplainComponent implements OnInit {
+export class AddExplainComponent implements OnInit, OnDestroy {
 
 
   chapterId:string;
@@ -21,16 +26,22 @@ export class AddExplainComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private quillService: QuillService,
-    private sideBarService: SideBarService,
-    private itemsService: ItemsService) { }
+    private store: Store<AppState>) { }
 
   explainForm = this.formBuilder.group({
     title:'',
   });
 
+  sub:Subscription
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+
   ngOnInit(): void {
-    if(this.sideBarService.selectedChapter == null) return;
-    this.chapterId = this.sideBarService.selectedChapter.id;
+    this.sub = this.store.select(getChapterIdFromRoute).pipe(
+      tap(chapterId=> this.chapterId = chapterId)
+    ).subscribe();
   }
 
   onContentChange(content:string){
@@ -46,8 +57,7 @@ export class AddExplainComponent implements OnInit {
     explain.parentId = this.chapterId;
     this.reset();
 
-    if(this.sideBarService.selectedChapter)
-      this.itemsService.postExplain(this.sideBarService.selectedChapter, explain).subscribe();
+    this.store.dispatch(createNode({node:explain}))
   }
   reset(){
     this.explainForm.reset();

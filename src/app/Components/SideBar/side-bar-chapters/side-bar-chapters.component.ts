@@ -30,37 +30,9 @@ export class SideBarChaptersComponent implements OnInit {
   @Output('onChapterClicked') onChapterlickedEmitter = new EventEmitter<Chapter>();
   @Output('onDeleteChapter') onDeleteChapterEmitter = new EventEmitter<Chapter>();
 
-  constructor(
-    private sideBarService: SideBarService,
-    private actionService: ActionService,
-    private dialog: MatDialog,
-    private itemService: ItemsService,
-    private urlService: UrlService,
-    private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    // this.editMode = this.sideBarService.editMode;
-    // this.sideBarService.editModeChange.subscribe((isEditMode) => {
-    //   this.editMode = isEditMode;
-    // })
-
-    //to setChapter if chapter is clicked in showChapters
-    // this.sideBarService.selectedChapterChange.subscribe((chapter:Chapter|null)=>{
-    //   this.selectChapter(chapter);
-    // })
-
-    // this.selectChapter(this.sideBarService.selectedChapter)
-
-    // if(this.sideBarService.selectedRoot){
-    //   this.itemService.getChapters(this.sideBarService.selectedRoot).subscribe((chapters: Chapter[]) => {
-    //     this.chapters = chapters;
-    //     this.sideBarService.setChapters(chapters);
-
-    //     if(this.urlService.chapterId){
-    //       this.itemService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>this.sideBarService.setChapter(chapter))
-    //     }
-    //   })
-    // }
   }
 
   selectChapter(chapter: Chapter|null){
@@ -73,18 +45,6 @@ export class SideBarChaptersComponent implements OnInit {
 
     if(this.selectedChapter == chapter) chapter = null
     this.selectChapter(chapter)
-    // this.sideBarService.setChapter(chapter);
-
-    // if(chapter){
-    //   this.actionService.setAction(Action.Nodes);
-    //   this.router.navigate(this.urlService.getPath(Action.Nodes, this.sideBarService.selectedRoot?.id,
-    //     this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
-    //   return
-    // }
-
-    // this.actionService.setAction(Action.Chapters);
-    // this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
-    //   this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   getSideBarItem(chapter:Chapter) : ISideBarItem{
@@ -94,36 +54,10 @@ export class SideBarChaptersComponent implements OnInit {
   onAdd(){
     this.addIsClicked = !this.addIsClicked;
     this.onAddChapterEmitter.emit(this.addIsClicked)
-
-    // if(this.addIsClicked) {
-    //   this.sideBarService.setChapter(null);
-    //   this.actionService.setAction(Action.AddChapter)
-    //   this.router.navigate(this.urlService.getPath(Action.AddChapter, this.sideBarService.selectedRoot?.id,
-    //     this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
-    //   return
-    // }
-
-    // this.actionService.setAction(Action.Chapters)
-    // this.router.navigate(this.urlService.getPath(Action.Chapters, this.sideBarService.selectedRoot?.id,
-    //   this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
 
   onDelete(chapter:Chapter){
     this.onDeleteChapterEmitter.emit(chapter);
-
-    // const dialogRef = this.dialog.open(DeleteItemComponent, {
-    //   data: {name: chapter.title, type: 'chapter'},
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result == 'Delete' && this.sideBarService.selectedRoot){
-    //     this.itemService.deleteChapter(this.sideBarService.selectedRoot, chapter).subscribe((deletedChapter)=>{
-    //       if(deletedChapter.id == this.sideBarService.selectedChapter?.id){
-    //         this.sideBarService.setChapter(null)
-    //       }
-    //     });
-    //   }
-    // });
   }
 
 }

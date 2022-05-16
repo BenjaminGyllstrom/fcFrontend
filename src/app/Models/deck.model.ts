@@ -1,7 +1,9 @@
 import { Card, ICard } from "./card.model";
+import { INode } from "./node.model";
 
 export class Deck{
   id:string;
+  _id:string;
   title:string;
   numCards: number;
   cards: Card[];
@@ -20,7 +22,7 @@ export class Deck{
 }
 
 
-export interface IDeck{
+export interface IDeck extends INode{
   _id:string;
   title:string;
   numCards: number;

@@ -1,7 +1,8 @@
 
-<div class="show-nodes" *ngIf="nodes && nodes.length > 0">
+<!-- <div class="show-nodes" *ngIf="(nodes$ | async) && nodes.length > 0"> -->
+<div class="show-nodes" >
 
-  <div class="nodes">
+  <div class="nodes" *ngIf="nodes$ | async as nodes">
     <div *ngFor="let node of nodes" class="line"
     [ngStyle]="{
       'grid-column': getLineColumn(node),

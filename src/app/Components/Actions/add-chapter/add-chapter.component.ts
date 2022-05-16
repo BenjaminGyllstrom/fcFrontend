@@ -5,32 +5,44 @@ import { Chapter, IChapter } from './../../../Models/chapter.model';
 import { FormBuilder } from '@angular/forms';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActionService, Action } from 'src/app/Services/action.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import * as fromChapter from 'src/app/ngrx/chapter/chapter.actions'
+import { getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-chapter',
   templateUrl: './add-chapter.component.html',
   styleUrls: ['./add-chapter.component.scss']
 })
-export class AddChapterComponent implements OnInit {
+export class AddChapterComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
     private sideBarService: SideBarService,
     private itemsService: ItemsService,
     private urlService: UrlService,
     private route: ActivatedRoute,
-    private actionService: ActionService) { }
+    private actionService: ActionService,
+    private store: Store<AppState>) { }
 
-    chapterForm = this.formBuilder.group({
-      title:''
-    });
+  chapterForm = this.formBuilder.group({
+    title:''
+  });
+
+
+  rootId:string;
+
+  sub:Subscription
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
   ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddChapter, false)
-    }
-    this.urlService.handleParams(this.route.snapshot.params);
+    this.sub = this.store.select(getRootIdFromRoute).subscribe(rootId=> this.rootId = rootId)
   }
 
 
@@ -38,14 +50,12 @@ export class AddChapterComponent implements OnInit {
     const title = this.chapterForm.value.title;
     const chapter = new Chapter();
     chapter.title = title;
+    chapter.rootId = this.rootId
 
-    if(this.sideBarService.selectedRoot?.id == null)  return
-
-    chapter.rootId = this.sideBarService.selectedRoot?.id;
+    if(!this.rootId) return;
 
     this.chapterForm.reset();
-
-    this.itemsService.postChapter(this.sideBarService.selectedRoot, chapter).subscribe()
+    this.store.dispatch(fromChapter.createChapter({chapter:chapter}))
   }
 
 }

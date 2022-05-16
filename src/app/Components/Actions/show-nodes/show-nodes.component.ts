@@ -1,11 +1,18 @@
 import { UrlService } from './../../../Services/url.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ItemsService } from './../../../Services/items.service';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActionService, Action } from 'src/app/Services/action.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
+import * as fromNodes from 'src/app/ngrx/node/node.actions'
+import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
+import { INode } from 'src/app/Models/node.model';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-show-nodes',
@@ -13,39 +20,24 @@ import { ActionService, Action } from 'src/app/Services/action.service';
   styleUrls: ['./show-nodes.component.scss'],
   providers: [DisplayTreeService]
 })
-export class ShowNodesComponent implements OnInit, OnDestroy {
+export class ShowNodesComponent implements OnInit {
 
-  nodes: any[]
+  nodes$:Observable<any[]>
 
   constructor(
     private sideBarService: SideBarService,
     private displayTreeService: DisplayTreeService,
-    private itemsService: ItemsService,
-    private urlService: UrlService,
-    private route: ActivatedRoute,
-    private actionService: ActionService
+    private store: Store<AppState>
   ) { }
 
-  sub:Subscription
-  ngOnDestroy(): void {
-    if(this.sub)
-      this.sub.unsubscribe();
-  }
 
   ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.Nodes, false)
-    }
-    this.urlService.handleParams(this.route.snapshot.params);
-
-    this.nodes = this.sideBarService.nodes
-    this.displayTreeService.nodes = this.nodes;
-
-    this.sub = this.sideBarService.nodesChange.subscribe(()=> {
-      this.nodes = this.sideBarService.nodes
-      this.displayTreeService.nodes = this.nodes;
-    })
-
+    this.nodes$ = this.store.select(nodeSelectors.getChapterNodesFromRoute).pipe(
+      tap((nodes)=>this.displayTreeService.nodes = nodes)
+    );
+  }
+  onClick(node:any){
+    this.sideBarService.setNode(node);
   }
 
   getColumn(node:any){
@@ -69,11 +61,5 @@ export class ShowNodesComponent implements OnInit, OnDestroy {
   getLineBackground(node:any){
     if(this.sideBarService.editMode) return 'linear-gradient(to right, #BCBCBC, #BCBCBC)'
     return this.displayTreeService.getLineColor(node);
-  }
-
-  onClick(node:any){
-    console.log(node);
-
-    this.sideBarService.setNode(node);
   }
 }

@@ -21,10 +21,6 @@ export class AddRootComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private itemsService: ItemsService,
-    private urlService: UrlService,
-    private route: ActivatedRoute,
-    private actionService: ActionService,
     private store: Store<AppState>) { }
 
   rootForm = this.formBuilder.group({
@@ -32,10 +28,10 @@ export class AddRootComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddRoot, false)
-    }
-    this.urlService.handleParams(this.route.snapshot.params);
+    // if(this.actionService.action == Action.Default){
+    //   this.actionService.setAction(Action.AddRoot, false)
+    // }
+    // this.urlService.handleParams(this.route.snapshot.params);
   }
 
   onSubmit(){

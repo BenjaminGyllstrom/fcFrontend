@@ -43,6 +43,7 @@ export class DeckHttpService {
   parseToDeck(collectedDeck: IDeck) : Deck {
     var newDeck = new Deck(collectedDeck.title);
     newDeck.id = collectedDeck._id;
+    newDeck._id = collectedDeck._id;
     newDeck.numCards = collectedDeck.numCards;
     newDeck.parentId = collectedDeck.parentId;
     newDeck.listIndex = collectedDeck.listIndex;

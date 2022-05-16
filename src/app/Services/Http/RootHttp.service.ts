@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { IRoot, Root } from "src/app/Models/root.model";
 import { HttpService } from "../Http/http.service";
 import { CardHttpService } from "./CardHttp.service";

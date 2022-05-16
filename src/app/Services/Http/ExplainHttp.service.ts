@@ -45,6 +45,7 @@ export class ExplainHttpService {
     newExplain.title = collectedExplain.title;
     newExplain.text = collectedExplain.text;
     newExplain.id = collectedExplain._id;
+    newExplain._id = collectedExplain._id;
     newExplain.parentId = collectedExplain.parentId;
     newExplain.listIndex = collectedExplain.listIndex;
     newExplain.locked = collectedExplain.locked;

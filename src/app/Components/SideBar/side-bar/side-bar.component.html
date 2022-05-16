@@ -3,32 +3,41 @@
     <app-study-toogle [isEditMode]="editMode" (onToggle)="onToggle($event)"></app-study-toogle>
   </div>
 
-  <div class="roots">
+  <div class="roots" *ngIf="roots$ | async as roots">
     <app-side-bar-roots
-    [roots]="roots" [selectedRoot]="selectedRoot" [addIsClicked]="addRootIsClicked" [editMode]="editMode"
+    [roots]="roots" [selectedRoot]="root$ | async" [addIsClicked]="addRootIsClicked" [editMode]="editMode"
     (onRootClicked)="onRootClicked($event)" (onDeleteRoot)="onDeleteRoot($event)" (onAddRoot)="onAddRoot($event)"></app-side-bar-roots>
   </div>
 
-  <hr class="chapters" [ngStyle]="{'margin-bottom': state > 1? '5px':'23px'}" *ngIf="state >= 1">
-  <div class="chapters" *ngIf="selectedRoot">
-    <app-side-bar-chapters
-    [chapters]="chapters" [selectedChapter]="selectedChapter" [addIsClicked]="addChapterIsClicked" [editMode]="editMode"
-    (onChapterClicked)="onChapterClicked($event)" (onDeleteChapter)="onDeleteChapter($event)" (onAddChapter)="onAddChapter($event)"></app-side-bar-chapters>
+  <!-- <hr class="chapters" [ngStyle]="{'margin-bottom': state > 1? '5px':'23px'}" *ngIf="state >= 1"> -->
+  <div *ngIf="root$ | async">
+    <hr class="chapters" [ngStyle]="{'margin-bottom': '23px'}">
+    <div class="chapters" *ngIf="chapters$ | async as chapters">
+      <app-side-bar-chapters
+      [chapters]="chapters" [selectedChapter]="chapter$ | async" [addIsClicked]="addChapterIsClicked" [editMode]="editMode"
+      (onChapterClicked)="onChapterClicked($event)" (onDeleteChapter)="onDeleteChapter($event)" (onAddChapter)="onAddChapter($event)"></app-side-bar-chapters>
+    </div>
+
   </div>
 
-  <hr class="nodes" *ngIf="state >= 2">
-  <div class="nodes" *ngIf="selectedRoot && selectedChapter">
-    <app-side-bar-nodes
-    [nodes]="nodes" [selectedNode]="selectedNode" [addIsClicked]="addNodeIsClicked" [editMode]="editMode"
-    (onNodeClicked)="onNodeClicked($event)" (onDeleteNode)="onDeleteNode($event)" (onAddNode)="onAddNode($event)"></app-side-bar-nodes>
-  </div>
 
+  <!-- <hr class="nodes" *ngIf="state >= 2"> -->
+  <div *ngIf="chapter$ | async">
+    <hr class="nodes">
+    <div class="nodes" *ngIf="nodes$ | async as nodes">
+      <app-side-bar-nodes
+      [nodes]="nodes" [selectedNode]="node$ | async" [addIsClicked]="addNodeIsClicked" [editMode]="editMode"
+      (onNodeClicked)="onNodeClicked($event)" (onDeleteNode)="onDeleteNode($event)" (onAddNode)="onAddNode($event)"></app-side-bar-nodes>
+    </div>
+
+  </div>
+<!--
   <hr class="actions">
   <div class="actions">
     <app-side-bar-actions
     [selectedAction]="action" [selectedRoot]="selectedRoot" [selectedChapter]="selectedChapter" [selectedNode]="selectedNode"
     (onActionChange)="onActionChange($event)"></app-side-bar-actions>
-  </div>
+  </div> -->
 
   <hr class="info">
   <div class="info">

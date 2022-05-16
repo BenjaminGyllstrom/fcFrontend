@@ -1,4 +1,4 @@
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { StateService, State } from './../../../Services/state.service';
 import { ActionService, Action } from './../../../Services/action.service';
@@ -9,7 +9,16 @@ import { ItemsService } from 'src/app/Services/items.service';
 import { UrlService } from 'src/app/Services/url.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, forkJoin } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import * as rootSelectors from 'src/app/ngrx/root/root.selectors'
+import * as chapterSelectors from 'src/app/ngrx/chapter/chapter.selectors'
+import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
+import { map, tap } from 'rxjs/operators';
+import { deleteRoot } from 'src/app/ngrx/root/root.actions';
+import { deleteChapter } from 'src/app/ngrx/chapter/chapter.actions';
+import { deleteNode } from 'src/app/ngrx/node/node.actions';
 
 @Component({
   selector: 'app-side-bar',
@@ -18,26 +27,28 @@ import { Subscription } from 'rxjs';
 })
 export class SideBarComponent implements OnInit, OnDestroy {
 
-  state:State
+  // state:State
   constructor(private sideBarService: SideBarService,
     private actionService: ActionService,
     private stateService: StateService,
     private router: Router,
     private itemsService: ItemsService,
     private urlService: UrlService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private store: Store<AppState>,
+    private route: ActivatedRoute) { }
 
     editMode: boolean = true
 
-    roots: Root[];
+    // roots: Root[];
     selectedRoot: any
     addRootIsClicked: boolean
 
-    chapters: Chapter[]
+    // chapters: Chapter[]
     selectedChapter: any;
     addChapterIsClicked: boolean
 
-    nodes: any[]
+    // nodes: any[]
     selectedNode: any;
     addNodeIsClicked: boolean
 
@@ -49,109 +60,53 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
     subs : Subscription = new Subscription();
 
+    roots$:Observable<Root[]>
+    root$:Observable<Root|null>
+
+    chapters$:Observable<Chapter[]>
+    chapter$:Observable<Chapter|null>
+
+    nodes$:Observable<any[]>
+    node$:Observable<any>
 
   ngOnInit(): void {
+    this.roots$ = this.store.select(rootSelectors.getRoots)
+    this.root$ = this.store.select(rootSelectors.getRootFromRoute).pipe(
+      map(root => root? root:null),
+      tap(root => {
+        this.selectedRoot = root
+      })
+    );
 
-    this.subs.add(this.actionService.actionChange.subscribe((action:Action)=>{
-      this.action = action
-      console.log('yep');
+    this.chapters$ = this.store.select(chapterSelectors.getRootChaptersFromRoute);
+    this.chapter$ = this.store.select(chapterSelectors.getChapterFromRoute).pipe(
+      map(chapter => chapter? chapter:null),
+      tap(chapter => {
+        this.selectedChapter = chapter
+      })
+    );
 
-    }))
+    this.nodes$ = this.store.select(nodeSelectors.getChapterNodesFromRoute);
+    this.node$ = this.store.select(nodeSelectors.getNodeFromRoute).pipe(
+      map(node => node? node:null),
+      tap(node => {
+        this.selectedNode = node
+      })
+    )
 
-    this.subs.add(this.sideBarService.selectedChapterChange.subscribe((chapter)=>{
-      this.selectedChapter = chapter
-      // this.clickChapter(chapter)
-      if(chapter)
-      {
-        this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
-          this.nodes = nodes
-          this.sideBarService.setNodes(nodes);
-        }))
-      }
-    }))
-    this.subs.add(this.sideBarService.selectedRootChange.subscribe((root)=>{
-      this.selectedRoot = root
-      // this.clickRoot(root);
-      if(root){
-        this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
-          this.chapters = chapters;
-          this.sideBarService.setChapters(chapters);
-        }))
-      }
-    }))
-    this.subs.add(this.sideBarService.selectedNodeChange.subscribe((node)=>{
-      this.selectedNode = node;
-      // this.clickNode(node);
-    }))
-    this.sideBarService.editModeChange.subscribe()
 
-    this.subs.add(this.itemsService.getRoots().subscribe((roots:Root[]) => {
-
-      this.action = this.actionService.action;
-      if(this.action == Action.AddRoot){
-        this.addRootIsClicked = true;
-      }else if(this.action == Action.AddChapter){
-        this.addChapterIsClicked = true;
-      }else if(this.action == Action.AddNode){
-        this.addNodeIsClicked = true;
-      }
-      if(this.action == Action.Study){
-        this.editMode = false;
-      }
-
-      this.roots = roots
-      this.sideBarService.setRoots(roots);
-
-      if(this.urlService.rootId) {
-        this.subs.add(this.itemsService.getRootById(this.urlService.rootId).subscribe((root:Root)=>{
-          this.sideBarService.setRoot(root)
-          this.sideBarService.selectedRoot = root;
-          this.selectedRoot = root;
-
-          this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
-            this.chapters = chapters;
-            this.sideBarService.setChapters(chapters);
-            if(this.urlService.chapterId){
-              this.subs.add(this.itemsService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>{
-                this.sideBarService.setChapter(chapter)
-                this.sideBarService.selectedChapter = chapter
-                this.selectedChapter = chapter
-
-                this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
-                  this.nodes = nodes
-                  this.sideBarService.setNodes(nodes);
-
-                  if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
-                    this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
-                      this.sideBarService.setNode(deck);
-                      this.selectedNode = deck
-                    }))
-                  }
-                  else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
-                    this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
-                      this.sideBarService.setNode(explain);
-                      this.selectedNode = explain
-                    }))
-                  }
-                }))
-              }))
-            }
-          }))
-        }))
-      }
-    }))
   }
 
   onToggle(toogleMode:boolean){
-    this.editMode = toogleMode;
+    // this.editMode = toogleMode;
 
-    if(this.selectedNode){
-      let action = Action.Study;
-      if(this.editMode){
-        action = this.selectedNode.type == 'deck'? Action.Cards : Action.ExplainOverview
-      }
-      this.navigate(action, this.selectedNode.type)
-    }
+    // if(this.selectedNode){
+    //   let action = Action.Study;
+    //   if(this.editMode){
+    //     action = this.selectedNode.type == 'deck'? Action.Cards : Action.ExplainOverview
+    //   }
+    //   this.navigate(action, this.selectedNode.type)
+    // }
   }
   onActionChange(action:Action){
     this.action = action
@@ -160,176 +115,45 @@ export class SideBarComponent implements OnInit, OnDestroy {
   //################# Clicked #################
 
   onRootClicked(root: any){
-    if(root == this.selectedRoot) root = null;
-    this.sideBarService.setRoot(root)
-
-    this.addRootIsClicked = false;
-    this.addChapterIsClicked = false;
-    this.addNodeIsClicked = false;
-
-    this.selectedChapter = null
-    this.selectedNode = null
-
-    const action = root? Action.Chapters : Action.MyContentOverview
-    this.action = action;
-    this.navigate(action)
-
-    // if(root){
-    //   this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
-    //     this.chapters = chapters;
-    //     this.sideBarService.setChapters(chapters);
-    //   }))
-    // }
+    const route = root == this.selectedRoot?
+    ['Roots'] :
+    ['Roots', root.id, 'Chapters']
+    this.router.navigate(route, {relativeTo:this.route})
   }
-
-  // clickRoot(root: any){
-  //   this.selectedRoot = root;
-  //   this.addRootIsClicked = false;
-  //   this.addChapterIsClicked = false;
-  //   this.addNodeIsClicked = false;
-
-  //   const action = root? Action.Chapters : Action.MyContentOverview
-
-  //   if(root){
-  //     this.subs.add(this.itemsService.getChapters(root).subscribe((chapters: Chapter[]) => {
-  //       this.chapters = chapters;
-  //       this.sideBarService.setChapters(chapters);
-
-  //       if(this.urlService.chapterId){
-  //         this.subs.add(this.itemsService.getChapterById(chapters, this.urlService.chapterId).subscribe((chapter:Chapter)=>{
-  //           this.sideBarService.setChapter(chapter)
-  //           this.selectedChapter = chapter
-  //         }))
-  //       }
-  //     }))
-  //   }
-  //   this.selectedChapter = null
-  //   this.selectedNode = null
-
-  //   this.action = action;
-  //   this.navigate(action)
-  // }
-
   onChapterClicked(chapter:any){
-    if(this.selectedChapter == chapter) chapter = null
-    this.sideBarService.setChapter(chapter);
-
-    this.addChapterIsClicked = false;
-    this.addNodeIsClicked = false;
-
-    const action = chapter? Action.Nodes : Action.Chapters
-    this.action = action;
-    this.navigate(action)
-
-    // if(chapter)
-    // {
-    //   this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
-    //     this.nodes = nodes
-    //     this.sideBarService.setNodes(nodes);
-    //   }))
-    // }
+    const route = chapter == this.selectedChapter?
+    ['Roots', this.selectedRoot.id, 'Chapters'] :
+    ['Roots', this.selectedRoot.id, 'Chapters', chapter.id, 'Nodes']
+    this.router.navigate(route, {relativeTo:this.route})
   }
 
-  // clickChapter(chapter:any){
-  //   this.selectedChapter = chapter;
-  //   this.addChapterIsClicked = false;
-  //   this.addNodeIsClicked = false;
-
-  //   if(chapter)
-  //   {
-  //     this.subs.add(this.itemsService.getNodes(chapter).subscribe((nodes:any[]) => {
-  //       this.nodes = nodes
-  //       this.sideBarService.setNodes(nodes);
-
-  //       if(this.urlService.nodeId && this.urlService.nodeType == 'deck'){
-  //         this.subs.add(this.itemsService.getDeckById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((deck)=>{
-  //           this.sideBarService.selectedNode = deck;
-  //           // this.sideBarService.setNode(deck);
-  //         }))
-  //       }
-  //       else if(this.urlService.nodeId && this.urlService.nodeType == 'explain'){
-  //         this.subs.add(this.itemsService.getExplainById(this.sideBarService.nodes, this.urlService.nodeId).subscribe((explain)=>{
-  //           this.sideBarService.selectedNode = explain;
-  //         }))
-  //       }
-  //     }))
-  //   }
-  //   this.selectedNode = null
-
-  //   const action = chapter? Action.Nodes : Action.Chapters
-  //   this.action = action;
-  //   this.navigate(action)
-  // }
   onNodeClicked(node:any){
-    if(this.selectedNode == node) node = null
-    this.sideBarService.setNode(node);
-
-    let action = Action.Nodes
-    this.addNodeIsClicked = false;
-
-    if(node){
-      action = node.type == 'deck'? Action.Cards : Action.ExplainOverview
-      if(this.editMode == false) action = Action.Study
-    }
-    this.action = action;
-    this.navigate(action, node?.type)
+    let route:any[] = []
+    if(node == this.selectedNode) route = ['Roots', this.selectedRoot.id, 'Chapters', this.selectedChapter.id, 'Nodes']
+    else if(node.type == 'deck') route = ['Roots', this.selectedRoot.id, 'Chapters', this.selectedChapter.id, 'Nodes', 'Deck', node.id, 'Overview']
+    else if (node.type == 'explain') route = ['Roots', this.selectedRoot.id, 'Chapters', this.selectedChapter.id, 'Nodes', 'Explain', node.id, 'Overview']
+    this.router.navigate(route, {relativeTo:this.route})
   }
-
-  // clickNode(node:any){
-  //   this.selectedNode = node;
-  //   let action = Action.Nodes
-  //   this.addNodeIsClicked = false;
-
-  //   if(node){
-  //     action = node.type == 'deck'? Action.Cards : Action.ExplainOverview
-  //     if(this.editMode == false) action = Action.Study
-  //   }
-  //   this.action = action;
-  //   this.navigate(action, node.type)
-  // }
 
   //################# ADD #################
 
-  onAddRoot(bool:boolean){
-    this.addRootIsClicked = bool;
-    let action = Action.MyContentOverview;
 
-    if(this.addRootIsClicked){
-      this.selectedRoot = null;
-      this.sideBarService.setRoot(null);
-      action = Action.AddRoot
-    }
-    this.action = action;
-    this.navigate(action)
+  onAddRoot(shouldAdd:boolean){
+    const route = shouldAdd? ['Roots', 'AddRoot']:['Roots']
+    this.router.navigate(route, {relativeTo:this.route})
   }
-
-  onAddChapter(bool: boolean){
-    this.addChapterIsClicked = bool;
-    let action = Action.Chapters;
-
-    if(this.addChapterIsClicked) {
-      this.selectedChapter = null
-      this.sideBarService.setChapter(null);
-      action = Action.AddChapter;
-    }
-    this.action = action;
-    this.navigate(action)
+  onAddChapter(shouldAdd: boolean){
+    const route = shouldAdd
+    ? ['Roots', this.selectedRoot.id, 'Chapters', 'AddChapter']
+    : ['Roots', this.selectedRoot.id, 'Chapters']
+    this.router.navigate(route, {relativeTo:this.route})
   }
-
-  onAddNode(bool: boolean){
-    this.addNodeIsClicked = bool;
-    let action = Action.Nodes;
-
-    if (this.addNodeIsClicked) {
-      this.selectedNode = null
-      this.sideBarService.setNode(null);
-      action = Action.AddNode;
-    }
-    this.action = action;
-    this.navigate(action)
+  onAddNode(shouldAdd: boolean){
+    const route = shouldAdd
+    ? ['Roots', this.selectedRoot.id, 'Chapters', this.selectedChapter.id, 'Nodes', 'AddNode']
+    : ['Roots', this.selectedRoot.id, 'Chapters', this.selectedChapter.id, 'Nodes']
+    this.router.navigate(route, {relativeTo:this.route})
   }
-
-
 
 
     //################# DELETE #################
@@ -354,51 +178,16 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != 'Delete')return;
-
       if(data.type == 'root'){
-        this.subs.add(this.itemsService.deleteRoot(item).subscribe((deletedRoot: Root)=>{
-          if(this.sideBarService.selectedRoot?.id == deletedRoot.id){
-            this.sideBarService.setRoot(null);
-            this.selectedRoot = null
-            this.sideBarService.setChapter(null);
-            this.selectedChapter = null
-            this.sideBarService.setNode(null);
-            this.selectedNode = false;
-            this.navigate(Action.MyContentOverview)
-          }
-        }));
+        this.store.dispatch(deleteRoot({id: item.id}))
+        if(this.selectedRoot == item) this.router.navigate(['Roots'] , {relativeTo:this.route})
       }else if (data.type == 'chapter'){
-        this.subs.add(this.itemsService.deleteChapter(this.selectedRoot, item).subscribe((deletedChapter)=>{
-          if(deletedChapter.id == this.sideBarService.selectedChapter?.id){
-            this.sideBarService.setChapter(null);
-            this.selectedChapter = null
-            this.sideBarService.setNode(null);
-            this.selectedNode = false;
-            this.navigate(Action.Chapters)
-          }
-        }));
+        this.store.dispatch(deleteChapter({id: item.id}))
+        if(this.selectedChapter == item) this.router.navigate(['Roots', this.selectedRoot.id, 'Chapters'] , {relativeTo:this.route})
       }else if (data.type == 'node'){
-        if(item.type == 'deck'){
-          this.subs.add(this.itemsService.deleteDeck(this.selectedChapter, item).subscribe((deletedNode:any)=>{
-            if(this.sideBarService.selectedNode?.type == 'deck' && this.sideBarService.selectedNode.id == deletedNode.id)
-            this.sideBarService.setNode(null)
-            this.selectedNode = false;
-            this.navigate(Action.Nodes)
-          }));
-        }else if (item.type == 'explain'){
-          this.subs.add(this.itemsService.deleteExplain(this.selectedChapter, item).subscribe((deletedNode:any)=>{
-            if(this.sideBarService.selectedNode?.type == 'explain' && this.sideBarService.selectedNode.id == deletedNode.id)
-            this.sideBarService.setNode(null)
-            this.selectedNode = false;
-            this.navigate(Action.Nodes)
-          }));
-        }
+        this.store.dispatch(deleteNode({node: item}))
+        if(this.selectedNode == item) this.router.navigate(['Roots', this.selectedRoot.id, 'Chapters', this.selectedChapter.id, 'Nodes'] , {relativeTo:this.route})
       }
     });
-  }
-
-  navigate(action:Action, nodeType:string = ''){
-    this.router.navigate(this.urlService.getPath(action, this.sideBarService.selectedRoot?.id,
-      this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id, nodeType))
   }
 }

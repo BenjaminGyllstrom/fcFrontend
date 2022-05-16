@@ -28,7 +28,6 @@ export class ShowRootsComponent implements OnInit {
 
   ngOnInit(): void {
     this.roots$ = this.store.select(getRoots);
-    this.store.dispatch(getAllRoots())
   }
 
   onClick(root:Root){

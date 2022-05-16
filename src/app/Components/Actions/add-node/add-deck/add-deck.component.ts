@@ -4,7 +4,12 @@ import { DeckHttpService } from './../../../../Services/Http/DeckHttp.service';
 import { ExplainHttpService } from './../../../../Services/Http/ExplainHttp.service';
 import { FormBuilder } from '@angular/forms';
 import { Deck, IDeck } from './../../../../Models/deck.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription, switchMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
+import { createNode } from 'src/app/ngrx/node/node.actions';
 
 @Component({
   selector: 'app-add-deck',
@@ -14,15 +19,13 @@ import { Component, OnInit } from '@angular/core';
 export class AddDeckComponent implements OnInit {
 
   chapterId:string;
-
-  explainsInChapter: any[]
+  explainsInChapter$: Observable<any[]>
   selectedExplain:any;
 
   constructor(
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
-    private sideBarService: SideBarService,
-    private itemsService: ItemsService) { }
+    private store: Store<AppState>) { }
 
   deckForm = this.formBuilder.group({
     title:''
@@ -30,12 +33,12 @@ export class AddDeckComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.sideBarService.selectedChapter == null) return;
-    this.chapterId = this.sideBarService.selectedChapter.id;
-
-    this.explainHttpService.getTitlesInChapter(this.chapterId).subscribe((explainsInChapter: {title:string, _id:string}[]) => {
-      this.explainsInChapter = explainsInChapter;
-    });
+    this.explainsInChapter$ = this.store.select(getChapterIdFromRoute).pipe(
+      tap(chapterId=> this.chapterId = chapterId),
+      switchMap((chapterId)=>{
+        return this.explainHttpService.getTitlesInChapter(chapterId)
+      })
+    )
   }
 
   onSubmit(){
@@ -44,8 +47,7 @@ export class AddDeckComponent implements OnInit {
     deck.parentId = this.chapterId;
     deck.associatedExplain = this.selectedExplain?._id
 
-    if(this.sideBarService.selectedChapter)
-      this.itemsService.postDeck(this.sideBarService.selectedChapter, deck).subscribe();
+    this.store.dispatch(createNode({node:deck}))
     this.reset();
   }
 

@@ -17,10 +17,10 @@ export class AddNodeComponent implements OnInit {
     private actionService: ActionService) { }
 
   ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddNode, false)
-    }
-    this.urlService.handleParams(this.route.snapshot.params);
+    // if(this.actionService.action == Action.Default){
+    //   this.actionService.setAction(Action.AddNode, false)
+    // }
+    // this.urlService.handleParams(this.route.snapshot.params);
   }
   onNodeChange(nodeType: string){
     this.nodeType = nodeType;
