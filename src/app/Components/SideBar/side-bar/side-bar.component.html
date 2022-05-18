@@ -31,13 +31,13 @@
     </div>
 
   </div>
-<!--
+
   <hr class="actions">
   <div class="actions">
     <app-side-bar-actions
-    [selectedAction]="action" [selectedRoot]="selectedRoot" [selectedChapter]="selectedChapter" [selectedNode]="selectedNode"
+    [selectedAction]="action" [selectedRoot]="root$ | async" [selectedChapter]="chapter$ | async" [selectedNode]="node$ | async"
     (onActionChange)="onActionChange($event)"></app-side-bar-actions>
-  </div> -->
+  </div>
 
   <hr class="info">
   <div class="info">

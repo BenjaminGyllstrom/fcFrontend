@@ -84,6 +84,8 @@ import { ChapterEffects } from './ngrx/chapter/chapter.effects';
 import { nodeReducer } from './ngrx/node/node.reducer';
 import { NodeEffects } from './ngrx/node/node.effects';
 import { RouterEffects } from './ngrx/router/router.effects';
+import { cardReducer } from './ngrx/card/card.reducer';
+import { CardEffects } from './ngrx/card/card.effects';
 
 @NgModule({
   declarations: [
@@ -157,8 +159,8 @@ import { RouterEffects } from './ngrx/router/router.effects';
     MatDialogModule,
     MatMenuModule,
     DragDropModule,
-    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, router: routerReducer}),
-    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, RouterEffects]),
+    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, card:cardReducer, router: routerReducer}),
+    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, CardEffects, RouterEffects]),
     StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
 
   ],

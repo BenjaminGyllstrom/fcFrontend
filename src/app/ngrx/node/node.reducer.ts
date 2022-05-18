@@ -13,7 +13,12 @@ export const nodeReducer = createReducer(
   on(fromNode.getChapterNodesSuccessful, (state, {nodes})  => {
     const chapterId = nodes[0]?.parentId;
     const loadedForChapter = [...state.loadedForChapter];
-    if(chapterId) loadedForChapter.push(chapterId);
+    if(!chapterId) return {...state}
+    loadedForChapter.push(chapterId);
+    nodes.forEach(newNode => {
+      if(state.nodes.findIndex(node => node._id == newNode.id && node.type == newNode.type) >= 0)
+      nodes.splice(nodes.indexOf(newNode),1);
+    });
     return {...state, nodes: [...state.nodes, ...nodes], loadedForChapter:[...state.loadedForChapter, chapterId]}
   }),
   on(fromNode.createNodeSuccessful, (state, {node}) => {
@@ -22,8 +27,13 @@ export const nodeReducer = createReducer(
   on(fromNode.deleteNodeSuccessful, (state, {node}) => {
     const nodes = remove(node, [...state.nodes])
     return {...state, nodes: nodes}
+  }),
+  on(fromNode.updateNodeSuccessful, (state, {node}) => {
+    const oldNodes = [...state.nodes];
+    const index = oldNodes.findIndex(oldNode => oldNode._id == node._id && oldNode.type == node.type)
+    oldNodes[index] = node;
+    return {...state, nodes: oldNodes}
   })
-
 )
 
 export function remove(nodeToRemove:INode, nodes:INode[]){

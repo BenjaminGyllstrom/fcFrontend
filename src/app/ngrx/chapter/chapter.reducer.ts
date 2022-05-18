@@ -14,6 +14,14 @@ export const chapterReducer = createReducer(
     const rootId = chapters[0]?.rootId
     const loadedForRoots = [...state.loadedForRoots];
     if(rootId) loadedForRoots.push(rootId);
+    // let currentChaptersInState = [...state.chapters];
+    // currentChaptersInState = currentChaptersInState.filter(chapter => chapters.findIndex(chap => chap.id == chapter.id) >= 0);
+
+    chapters.forEach(newChapter => {
+      if(state.chapters.findIndex(chapter => chapter.id == newChapter.id) >= 0)
+        chapters.splice(chapters.indexOf(newChapter),1);
+    });
+
     return {...state, chapters: [...state.chapters, ...chapters], loadedForRoots: loadedForRoots}
   }),
   on(fromChapter.createChapterSuccessful, (state, {chapter}) => {

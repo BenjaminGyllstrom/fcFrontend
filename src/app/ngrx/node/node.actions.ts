@@ -10,3 +10,6 @@ export const createNodeSuccessful = createAction('[node] add node successful', p
 
 export const deleteNode = createAction('[node] delete node', props<{node: INode}>())
 export const deleteNodeSuccessful = createAction('[node] delete node successful', props<{node: INode}>())
+
+export const updateNode = createAction('[node] update node', props<{node:INode}>())
+export const updateNodeSuccessful = createAction('[node] update node successful', props<{node:INode}>())

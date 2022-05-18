@@ -1,25 +1,22 @@
-import { UrlService } from './../../../Services/url.service';
-import { ActivatedRoute } from '@angular/router';
-import { ItemsService } from './../../../Services/items.service';
-import { ICard } from './../../../Models/card.model';
-import { IExplain } from 'src/app/Models/explain.model';
 import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { Explain } from 'src/app/Models/explain.model';
 import { QuillService } from 'src/app/Services/quill.service';
 import { Card } from 'src/app/Models/card.model';
-import { CardHttpService } from 'src/app/Services/Http/CardHttp.service';
-import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';
-import { ActionService, Action } from 'src/app/Services/action.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import { getDeckIdFromRoute } from 'src/app/ngrx/card/card.selectors';
+import { EMPTY, map, Subscription, switchMap, tap } from 'rxjs';
+import { createCard } from 'src/app/ngrx/card/card.actions';
 
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',
   styleUrls: ['./add-card.component.scss']
 })
-export class AddCardComponent implements OnInit {
+export class AddCardComponent implements OnInit, OnDestroy {
 
   deck:Deck
   question:string = ''
@@ -41,43 +38,32 @@ export class AddCardComponent implements OnInit {
   }
 
   constructor(
-    private sideBarService: SideBarService,
     private quillService: QuillService,
     private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
-    private itemService: ItemsService,
-    private urlService: UrlService,
-    private route: ActivatedRoute,
-    private actionService: ActionService
+    private store: Store<AppState>
   ) { }
 
+  deckId:string;
+
+  sub:Subscription
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+
   ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.AddCard, false)
-    }
-    this.urlService.handleParams(this.route.snapshot.params, 'deck');
 
-    this.sideBarService.selectedNodeChange.subscribe((node)=>{
-      if(!node || node.type != 'deck') return
-
-      this.deck = node;
-
-      this.deckHttpService.getAssociatedExplain(node.id).subscribe((collectedExplain: IExplain) => {
-        if(collectedExplain){
-          this.explain = this.explainHttpService.parseToExplain(collectedExplain);
-        }
-      });
-    })
-
-    if(this.sideBarService.selectedNode){
-      this.deck = this.sideBarService.selectedNode;
-
-      this.deckHttpService.getAssociatedExplain(this.deck.id).subscribe((collectedExplain: IExplain) => {
-        if(collectedExplain){
-          this.explain = this.explainHttpService.parseToExplain(collectedExplain);
-        }
-      });
-    }
+    this.sub = this.store.select(getDeckIdFromRoute).pipe(
+      tap(deckId => this.deckId = deckId),
+      switchMap(deckId => {
+        if(!deckId) return EMPTY
+        return this.deckHttpService.getAssociatedExplain(deckId)
+      }),
+      map(iExplain => this.explainHttpService.parseToExplain(iExplain)),
+      tap(explain => this.explain = explain)
+    ).subscribe()
   }
 
   onShowExplain(){
@@ -99,9 +85,9 @@ export class AddCardComponent implements OnInit {
     const card = new Card();
     card.question = this.question
     card.answer = this.answer
-    card.deckId = this.deck.id;
+    card.deckId = this.deckId;
 
-    this.itemService.postCard(this.deck, card).subscribe();
+    this.store.dispatch(createCard({card:card}))
 
     this.question = '';
     this.answer = '';

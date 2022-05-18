@@ -46,6 +46,11 @@ export class NodeEffects{
       map(node => fromNode.deleteNodeSuccessful({node:node}))
     ))
 
+    updateNode$ = createEffect(()=> this.actions$.pipe(
+      ofType(fromNode.updateNode),
+      mergeMap((action)=> this.updateNode(action.node)),
+      map(node => fromNode.updateNodeSuccessful({node: node}))
+    ))
 
     getChapterNodes(id: string):Observable<INode[]>{
       return this.chapterHttpService.getById(id).pipe(
@@ -79,6 +84,20 @@ export class NodeEffects{
         );
       }
       throw new Error("Trying to delete a non valid Node");
+    }
+
+    updateNode(node:INode){
+      if(node.type == 'deck'){
+        return this.deckHttpService.edit(node, node._id).pipe(
+          map(IDeck => this.deckHttpService.parseToDeck(IDeck))
+        );
+      }else if(node.type == 'explain'){
+        return this.explainHttpService.edit(node, node._id).pipe(
+          map(IExplain => this.explainHttpService.parseToExplain(IExplain))
+        );
+      }
+      throw new Error("Trying to delete a non valid Node");
+
     }
 }
 

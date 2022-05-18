@@ -6,3 +6,13 @@ export const getRouterState = createFeatureSelector<RouterReducerState<RouterSta
 
 export const getCurrentRoute = createSelector(
   getRouterState, router => router.state)
+
+export const getCurrentAction = createSelector(
+  getRouterState, router => {
+    const urlArray = router.state.url.split('/');
+    return urlArray[urlArray.length - 1]
+  }
+)
+
+export const getUrl = createSelector(
+  getRouterState, router => router.state.url)

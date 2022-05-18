@@ -1,19 +1,18 @@
-import { ActivatedRoute } from '@angular/router';
-import { UrlService } from './../../../Services/url.service';
-import { ItemsService } from './../../../Services/items.service';
-import { ExplainHttpService } from './../../../Services/Http/ExplainHttp.service';
-import { Explain, IExplain } from './../../../Models/explain.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Component, OnInit } from '@angular/core';
+import { Explain } from './../../../Models/explain.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActionService, Action } from 'src/app/Services/action.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import { updateNode } from 'src/app/ngrx/node/node.actions';
+import { map, Subscription, tap } from 'rxjs';
+import { getNodeFromRoute } from 'src/app/ngrx/node/node.selectors';
 
 @Component({
   selector: 'app-explain-overview',
   templateUrl: './explain-overview.component.html',
   styleUrls: ['./explain-overview.component.scss']
 })
-export class ExplainOverviewComponent implements OnInit {
+export class ExplainOverviewComponent implements OnInit, OnDestroy {
 
   explain:Explain
   edit:boolean;
@@ -25,40 +24,27 @@ export class ExplainOverviewComponent implements OnInit {
   });
 
   constructor(
-    private sideBarService: SideBarService,
-    private explainHttpService: ExplainHttpService,
-    private itemService: ItemsService,
     private formBuilder: FormBuilder,
-    private urlService: UrlService,
-    private route: ActivatedRoute,
-    private actionService: ActionService
+    private store:Store<AppState>
     ) { }
 
+    sub:Subscription
+    ngOnDestroy(): void {
+      if(this.sub) this.sub.unsubscribe()
+    }
   ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.DeckOverview, false)
-    }
-    this.urlService.handleParams(this.route.snapshot.params, 'explain');
-
-    if(this.sideBarService.selectedNode){
-
-      this.explain = this.sideBarService.selectedNode;
-      this.startValues = {title: this.explain.title, text: this.explain.text};
-      this.content = this.explain.text;
-      this.explainForm = this.formBuilder.group({
-        title:this.explain.title
-      });
-    }
-    this.sideBarService.selectedNodeChange.subscribe((node:any)=>{
-      if(node && node.type == 'explain'){
-        this.explain = this.explainHttpService.parseToExplain(node);
-        this.startValues = {title: this.explain.title, text: this.explain.text};
-        this.content = this.explain.text;
+    this.sub = this.store.select(getNodeFromRoute).pipe(
+      map(node => node?.type == 'explain'? node as Explain: undefined),
+    ).subscribe(node => {
+      if(node){
+        this.explain = {...node};
         this.explainForm = this.formBuilder.group({
           title:this.explain.title
         });
+        this.content = this.explain.text
+        this.startValues = {title: this.explain.title, text: this.explain.text};
       }
-    })
+    });
   }
 
   onQuillClick(){
@@ -72,11 +58,13 @@ export class ExplainOverviewComponent implements OnInit {
   }
 
   onSave(){
+    if(!this.explain) return
+
     this.explain.text = this.content;
     this.explain.title = this.explainForm.value.title
 
-    if(this.sideBarService.selectedChapter)
-    this.itemService.updateExplain(this.sideBarService.selectedChapter, this.explain).subscribe(()=>this.edit = false)
+    this.store.dispatch(updateNode({node:this.explain}))
+    this.edit = false
   }
   onCancel(){
     this.edit = false;
