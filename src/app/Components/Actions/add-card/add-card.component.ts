@@ -88,7 +88,10 @@ export class AddCardComponent implements OnInit, OnDestroy {
     card.deckId = this.deckId;
 
     this.store.dispatch(createCard({card:card}))
+    this.reset();
+  }
 
+  reset(){
     this.question = '';
     this.answer = '';
     this.quillService.onReset.next();

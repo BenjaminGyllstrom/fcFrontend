@@ -1,11 +1,7 @@
-import { ItemsService } from './../../../../Services/items.service';
-import { SideBarService } from './../../../../Services/sideBar.service';
-import { ExplainHttpService } from './../../../../Services/Http/ExplainHttp.service';
 import { QuillService } from './../../../../Services/quill.service';
 import { FormBuilder } from '@angular/forms';
-import { Quill } from 'quill';
-import { Explain, IExplain } from './../../../../Models/explain.model';
-import { Component, OnInit, ViewChild, ElementRef, HostListener, OnDestroy } from '@angular/core';
+import { Explain } from './../../../../Models/explain.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, tap } from 'rxjs';
 import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
 import { Store } from '@ngrx/store';
@@ -18,11 +14,6 @@ import { createNode } from 'src/app/ngrx/node/node.actions';
   styleUrls: ['./add-explain.component.scss']
 })
 export class AddExplainComponent implements OnInit, OnDestroy {
-
-
-  chapterId:string;
-  quillContent:string = '';
-
   constructor(
     private formBuilder: FormBuilder,
     private quillService: QuillService,
@@ -32,11 +23,12 @@ export class AddExplainComponent implements OnInit, OnDestroy {
     title:'',
   });
 
+  chapterId:string;
+  quillContent:string = '';
   sub:Subscription
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
 
   ngOnInit(): void {
     this.sub = this.store.select(getChapterIdFromRoute).pipe(

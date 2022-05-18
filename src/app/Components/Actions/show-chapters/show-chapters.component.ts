@@ -1,18 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { UrlService } from './../../../Services/url.service';
-import { ItemsService } from './../../../Services/items.service';
-import { ActionService, Action } from './../../../Services/action.service';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Chapter } from './../../../Models/chapter.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AppState } from 'src/app/ngrx/appState';
 import { Store } from '@ngrx/store';
-import { getRootFromRoute, getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
-import { getRootChapters } from 'src/app/ngrx/chapter/chapter.actions';
-import * as fromChapters from 'src/app/ngrx/chapter/chapter.actions';
 import * as chapterSelectors from 'src/app/ngrx/chapter/chapter.selectors';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-show-chapters',
@@ -22,8 +14,6 @@ import { tap } from 'rxjs/operators';
 export class ShowChaptersComponent implements OnInit {
 
   chapters$: Observable<Chapter[]>;
-
-  rootId:string;
 
   constructor(
     private route: ActivatedRoute,

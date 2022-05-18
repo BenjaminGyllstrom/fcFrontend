@@ -1,11 +1,8 @@
-import { ItemsService } from './../../../../Services/items.service';
-import { SideBarService } from './../../../../Services/sideBar.service';
-import { DeckHttpService } from './../../../../Services/Http/DeckHttp.service';
 import { ExplainHttpService } from './../../../../Services/Http/ExplainHttp.service';
 import { FormBuilder } from '@angular/forms';
-import { Deck, IDeck } from './../../../../Models/deck.model';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, switchMap, tap } from 'rxjs';
+import { Deck } from './../../../../Models/deck.model';
+import { Component, OnInit } from '@angular/core';
+import { Observable, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';

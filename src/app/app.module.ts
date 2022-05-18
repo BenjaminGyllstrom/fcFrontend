@@ -49,7 +49,6 @@ import { SideBarInfoComponent } from './Components/SideBar/side-bar-info/side-ba
 import { SideBarChaptersComponent } from './Components/SideBar/side-bar-chapters/side-bar-chapters.component';
 import { SideBarNodesComponent } from './Components/SideBar/side-bar-nodes/side-bar-nodes.component';
 import { MyContentComponent } from './Components/my-content/my-content.component';
-import { ActionContentComponent } from './Components/action-content/action-content.component';
 import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
 import { RootListItemComponent } from './Components/Actions/show-roots/root-list-item/root-list-item.component';
 import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';
@@ -119,7 +118,6 @@ import { CardEffects } from './ngrx/card/card.effects';
     SideBarChaptersComponent,
     SideBarNodesComponent,
     MyContentComponent,
-    ActionContentComponent,
     ShowRootsComponent,
     RootListItemComponent,
     ShowChaptersComponent,

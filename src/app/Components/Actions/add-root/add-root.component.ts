@@ -1,12 +1,6 @@
-import { UrlService } from './../../../Services/url.service';
-import { ActivatedRoute } from '@angular/router';
-import { ItemsService } from './../../../Services/items.service';
-import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Root, IRoot } from './../../../Models/root.model';
-import { RootHttpService } from './../../../Services/Http/RootHttp.service';
+import { Root } from './../../../Models/root.model';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ActionService, Action } from 'src/app/Services/action.service';
 import { AppState } from 'src/app/ngrx/appState';
 import { Store } from '@ngrx/store';
 import { createRoot } from 'src/app/ngrx/root/root.actions';
@@ -28,10 +22,6 @@ export class AddRootComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // if(this.actionService.action == Action.Default){
-    //   this.actionService.setAction(Action.AddRoot, false)
-    // }
-    // this.urlService.handleParams(this.route.snapshot.params);
   }
 
   onSubmit(){

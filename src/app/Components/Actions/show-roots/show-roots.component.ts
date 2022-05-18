@@ -1,14 +1,9 @@
-import { Observable, Subscription } from 'rxjs';
-import { ItemsService } from './../../../Services/items.service';
-import { ActionService, Action } from './../../../Services/action.service';
+import { Observable } from 'rxjs';
 import { Root } from './../../../Models/root.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UrlService } from 'src/app/Services/url.service';
 import { Store } from '@ngrx/store';
-import { AppState, RootState } from 'src/app/ngrx/appState';
-import { getAllRoots } from 'src/app/ngrx/root/root.actions';
+import { AppState } from 'src/app/ngrx/appState';
 import { getRoots } from 'src/app/ngrx/root/root.selectors';
 
 

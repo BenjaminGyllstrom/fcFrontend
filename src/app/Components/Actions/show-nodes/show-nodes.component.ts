@@ -1,17 +1,10 @@
-import { UrlService } from './../../../Services/url.service';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { ItemsService } from './../../../Services/items.service';
+import { Observable } from 'rxjs';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActionService, Action } from 'src/app/Services/action.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
-import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
-import * as fromNodes from 'src/app/ngrx/node/node.actions'
 import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
-import { INode } from 'src/app/Models/node.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
