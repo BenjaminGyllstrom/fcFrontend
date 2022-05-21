@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Card } from 'src/app/Models/card.model';
 import { Chapter, IChapter } from 'src/app/Models/chapter.model';
@@ -16,7 +16,7 @@ import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
   templateUrl: './explore-root-overview.component.html',
   styleUrls: ['./explore-root-overview.component.scss']
 })
-export class ExploreRootOverviewComponent implements OnInit {
+export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +24,14 @@ export class ExploreRootOverviewComponent implements OnInit {
     private httpService: HttpService,
     private chapterHttpService: ChapterHttpService
   ) { }
+
+
+  subs:Subscription[] = []
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => {
+      sub.unsubscribe()
+    });
+  }
 
   root: Root
   chapters: Chapter[]
@@ -40,16 +48,16 @@ export class ExploreRootOverviewComponent implements OnInit {
 
 
     if(this.httpService.idToken && this.httpService.idToken != ""){
-      this.getRoot(rootId).subscribe((root)=>{
+      this.subs.push(this.getRoot(rootId).subscribe((root)=>{
         this.root = root
         this.chapters = root.chapters;
-      })
+      }))
     }
     this.httpService.idTokenChanged.subscribe(()=>{
-      this.getRoot(rootId).subscribe((root)=>{
+      this.subs.push(this.getRoot(rootId).subscribe((root)=>{
         this.root = root
         this.chapters = root.chapters;
-      })
+      }))
     })
 
   }
@@ -61,12 +69,12 @@ export class ExploreRootOverviewComponent implements OnInit {
   }
 
   onChapterClick(chapter: Chapter){
-    this.chapterHttpService.getById(chapter.id).pipe(
+    this.subs.push(this.chapterHttpService.getById(chapter.id).pipe(
       map((collectedChapter:IChapter)=> {
         return this.chapterHttpService.getListOfNodes(collectedChapter.nodes)
       }),
       tap((collectedNodes: any[]) => {this.nodes = collectedNodes})
-    ).subscribe();
+    ).subscribe());
   }
 
   onNodeClick(node: any){
@@ -83,5 +91,9 @@ export class ExploreRootOverviewComponent implements OnInit {
       this.explain = node;
       if(this.explain?.text) this.explainText = this.explain.text;
     }
+  }
+
+  onDownload(){
+    this.subs.push(this.rootHttpService.download(this.root.id).subscribe())
   }
 }

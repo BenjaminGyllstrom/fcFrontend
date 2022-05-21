@@ -179,6 +179,9 @@ export class DisplayTreeService {
     const finnishedColor = '#BEDB81'
     const inProgressColor = 'white'
 
+    if(nodeState == 'finnished') return `linear-gradient(to right, ${finnishedColor}, ${finnishedColor})`
+
+
     if(nodeState == 'locked') return `linear-gradient(to right, ${lockedColor}, ${lockedColor})`
     if(nodeState == 'inProgress') return `linear-gradient(to right, ${inProgressColor}, ${lockedColor})`
     if(nextNodeState == null) return `linear-gradient(to right, white, white)`;

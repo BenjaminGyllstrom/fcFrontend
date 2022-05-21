@@ -3,7 +3,7 @@
   <div class="intro">
     text
   </div>
-  <div class="download">Download</div>
+  <div class="download" (click)="onDownload()">Download</div>
   <div class="root-content">
     <div class="chapters">
       <app-chapter-list-item *ngFor="let chapter of chapters" [chapter]="chapter" (click)="onChapterClick(chapter)"></app-chapter-list-item>
