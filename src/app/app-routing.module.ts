@@ -23,6 +23,7 @@ import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.c
 import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
 import { ExploreComponent } from './Components/explore/explore.component';
 import { ExploreRootOverviewComponent } from './Components/explore-root-overview/explore-root-overview.component';
+import { StudyCardsComponent } from './Components/Actions/study-node/study-cards/study-cards.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Explain/:nodeId/Overview', component: ExplainOverviewComponent},
+    // {path:'Roots/:rootId/Chapters/:chapterId/Nodes/:nodeType/:nodeId/Study', component: StudyCardsComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/:nodeType/:nodeId/Study', component: StudyNodeComponent},
   ]},
   {path: 'deckOverview', component:DeckOverviewComponent, canActivate: [AuthGuardService]},

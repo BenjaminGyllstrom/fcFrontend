@@ -1,6 +1,9 @@
 import { ExplainHttpService } from './../../../../Services/Http/ExplainHttp.service';
 import { Explain, IExplain } from './../../../../Models/explain.model';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import * as fromStudy from 'src/app/ngrx/study/study.actions';
 
 @Component({
   selector: 'app-study-explain',
@@ -10,20 +13,14 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class StudyExplainComponent implements OnInit {
 
   @Input() explain: Explain
-  @Output('finnished') finnishedEmitter = new EventEmitter<Explain>()
   constructor(
-    private explainHttpService: ExplainHttpService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
   }
 
   onContinueStudy(){
-
-    this.explainHttpService.updateAsRead(this.explain, this.explain.id).subscribe((updatedIExplain: IExplain) => {
-      const explain = this.explainHttpService.parseToExplain(updatedIExplain);
-      this.finnishedEmitter.emit(explain);
-    });
+    this.store.dispatch(fromStudy.setExplainAsRead({explain: this.explain}))
   }
-
 }

@@ -1,4 +1,4 @@
-.study-deck{
+.study-cards{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,9 +20,13 @@
 }
 
 .no-due{
-  &__content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+
+}
+
+.skip-wait{
+  margin-top: 5px;
+  background-color: inherit;
+  border: none;
+  color: grey;
+  cursor: pointer;
 }

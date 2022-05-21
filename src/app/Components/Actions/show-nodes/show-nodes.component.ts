@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
 import { tap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-nodes',
@@ -20,7 +21,9 @@ export class ShowNodesComponent implements OnInit {
   constructor(
     private sideBarService: SideBarService,
     private displayTreeService: DisplayTreeService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
 
@@ -30,7 +33,11 @@ export class ShowNodesComponent implements OnInit {
     );
   }
   onClick(node:any){
-    this.sideBarService.setNode(node);
+    let route:any[] = ['']
+    if(node.type == 'deck') route = ['Deck', node.id, 'Overview']
+    if(node.type == 'explain') route = ['Explain', node.id, 'Overview']
+
+    this.router.navigate(route, {relativeTo: this.route})
   }
 
   getColumn(node:any){

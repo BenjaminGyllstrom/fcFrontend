@@ -1,41 +1,47 @@
 import { DueTimerService } from 'src/app/Services/dueTimer.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-study-due-timer',
   templateUrl: './study-due-timer.component.html',
   styleUrls: ['./study-due-timer.component.scss']
 })
-export class StudyDueTimerComponent implements OnInit {
+export class StudyDueTimerComponent implements OnInit, OnDestroy {
 
   dueTime: number;
 
-  minutes: number;
-  seconds: number;
+  minutes: number = 0;
+  seconds: number = 0;
   interval: any;
 
   constructor(private dueTimerService: DueTimerService) { }
 
-  ngOnInit(): void {
+  sub:Subscription;
+  ngOnDestroy(): void {
+    if(this.sub) this.sub.unsubscribe()
+  }
 
-    if(this.dueTimerService.timerIsActive()){
-      this.dueTime = this.dueTimerService.timer;
-      this.setTimer();
-    }
-    this.dueTimerService.timeUpdated.subscribe(() => {
-      this.dueTime = this.dueTimerService.timer;
+  ngOnInit(): void {
+    this.dueTime = this.dueTimerService.timer;
+    this.setTimer();
+
+    this.sub = this.dueTimerService.timeUpdated.subscribe( time => {
+      this.dueTime = time;
       this.setTimer();
     })
   }
 
   setTimer(){
-
     clearInterval(this.interval)
 
     const dateNow = new Date();
-
     let timeDifference = this.dueTime - dateNow.getTime();
     timeDifference = timeDifference / 1000
+    if(timeDifference <= 0) {
+      return;
+    }
+
     this.minutes = Math.floor(timeDifference / 60);
     this.seconds = Math.round(timeDifference - this.minutes * 60);
 

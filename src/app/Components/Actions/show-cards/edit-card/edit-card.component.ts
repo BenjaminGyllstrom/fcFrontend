@@ -29,11 +29,11 @@ export class EditCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     if(this.sideBarService.selectedCard == null) return
     this.card = this.sideBarService.selectedCard;
     this.question = this.card.question;
     this.answer = this.card.answer;
-    this.deck = this.sideBarService.selectedNode;
   }
   onContentChange(content:string){
     if(this.showQuestion){

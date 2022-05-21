@@ -8,7 +8,7 @@ import { Deck } from 'src/app/Models/deck.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import { getDeckIdFromRoute } from 'src/app/ngrx/card/card.selectors';
-import { EMPTY, map, Subscription, switchMap, tap } from 'rxjs';
+import { EMPTY, filter, map, Subscription, switchMap, tap } from 'rxjs';
 import { createCard } from 'src/app/ngrx/card/card.actions';
 
 @Component({
@@ -61,8 +61,11 @@ export class AddCardComponent implements OnInit, OnDestroy {
         if(!deckId) return EMPTY
         return this.deckHttpService.getAssociatedExplain(deckId)
       }),
-      map(iExplain => this.explainHttpService.parseToExplain(iExplain)),
-      tap(explain => this.explain = explain)
+      map(iExplain => {
+        if(!iExplain) return undefined
+        return this.explainHttpService.parseToExplain(iExplain)}),
+      tap(explain => {
+        if(explain) this.explain = explain})
     ).subscribe()
   }
 

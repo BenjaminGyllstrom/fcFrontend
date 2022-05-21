@@ -1,0 +1,25 @@
+<div *ngIf="card$|async as card" class="study-cards">
+  <div  class="card-container">
+    <app-card-study
+    [showAnswer]="showAnswer"
+    [card]="card"
+    [showAnswerButtons]="showAnswerButtons"
+    (showAnswerChange)="onShowAnswerChange($event)"></app-card-study>
+  </div>
+
+  <div *ngIf="showAnswerButtons" class="answer-buttons">
+    <button  class="button button__next" (click)="onNext(card, '1')">{{nextRecurrenceText[0]}}</button>
+    <button  class="button button__next" (click)="onNext(card, '2')">{{nextRecurrenceText[1]}}</button>
+    <button  class="button button__next" (click)="onNext(card, '3')">{{nextRecurrenceText[2]}}</button>
+  </div>
+  <button class="skip-wait" (click)="skipWait()">Skip wait time: {{skipWaitTime}}</button>
+</div>
+
+
+<div *ngIf="!(card$|async)" class="no-due">
+  <p>No new cards available</p>
+  <app-study-due-timer></app-study-due-timer>
+  <button class="skip-wait" (click)="skipWait()">Skip wait time: {{skipWaitTime}}</button>
+  <button *ngIf="!(cardsToStudyAvailable$|async)">Next</button>
+</div>
+

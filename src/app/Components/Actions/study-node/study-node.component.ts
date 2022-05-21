@@ -1,76 +1,41 @@
 import { Card } from './../../../Models/card.model';
 import { Explain } from './../../../Models/explain.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';
 import { ActionService, Action } from 'src/app/Services/action.service';
 import { ActivatedRoute } from '@angular/router';
 import { UrlService } from 'src/app/Services/url.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import { getNodeFromRoute } from 'src/app/ngrx/node/node.selectors';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-study-node',
   templateUrl: './study-node.component.html',
   styleUrls: ['./study-node.component.scss']
 })
-export class StudyNodeComponent implements OnInit {
+export class StudyNodeComponent implements OnInit, OnDestroy {
 
-  deck:Deck|undefined
-  cards:Card[]|undefined
+  // deck:Deck|undefined
+  // cards:Card[]|undefined
 
-  explain:Explain|undefined
+  // explain:Explain|undefined
 
   finnished:boolean;
 
-  constructor(private sideBarService: SideBarService,
-    private actionService: ActionService,
-    private route: ActivatedRoute,
-    private urlService: UrlService) { }
+  constructor(
+    private store: Store<AppState>) { }
 
-  ngOnInit(): void {
-    if(this.actionService.action == Action.Default){
-      this.actionService.setAction(Action.Study)
-    }
-    this.urlService.handleParams(this.route.snapshot.params);
-
-    if(this.sideBarService.selectedNode){
-      const node = this.sideBarService.selectedNode;
-      this.setData(node);
-      this.checkFinnished(node)
-      this.sideBarService.selectedNodeChange.subscribe(()=>{
-        const node = this.sideBarService.selectedNode;
-
-        if(node){
-          this.setData(node)
-          this.checkFinnished(node)
-        }
-      })
-    }
-
-    this.sideBarService.selectedNodeChange.subscribe((node)=>{
-      this.setData(node);
-      this.checkFinnished(node)
-      this.sideBarService.selectedNodeChange.subscribe(()=>{
-        const node = this.sideBarService.selectedNode;
-
-        if(node){
-          this.setData(node)
-          this.checkFinnished(node)
-        }
-      })
-
-    })
+  sub:Subscription
+  ngOnDestroy(): void {
+    if(this.sub) this.sub.unsubscribe()
   }
+  node$ :Observable<any>
+  ngOnInit(): void {
 
-  setData(node:any){
-    if(node.type == 'deck') {
-      this.explain = undefined
-      this.deck = node;
-      this.cards = this.deck?.cards;
-    }
-    else if(node.type == 'explain') {
-      this.deck = undefined
-      this.explain = node;
-    }
+    this.node$ = this.store.select(getNodeFromRoute)
   }
 
   checkFinnished(node:any){
@@ -86,17 +51,4 @@ export class StudyNodeComponent implements OnInit {
     this.finnished = true;
   }
 
-  onCardUpdated(updatedCard: Card){
-    this.deck?.cards.forEach((card, index) => {
-      if(card.id == updatedCard.id){
-        this.deck?.cards.splice(index, 1, updatedCard)
-      }
-    });
-
-    this.cards?.forEach((card, index) => {
-      if(card.id == updatedCard.id){
-        this.cards?.splice(index, 1, updatedCard)
-      }
-    });
-  }
 }

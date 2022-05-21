@@ -7,18 +7,18 @@ export class DueTimerService {
   constructor() {
   }
 
-  timeUpdated: Subject<void> = new Subject<void>();
+  timeUpdated: Subject<number> = new Subject<number>();
 
   timer:number;
 
   setTimer(time: number){
     this.timer = time;
-    this.timeUpdated.next();
+    this.timeUpdated.next(this.timer);
   }
 
   stopTimer(){
     this.timer = 0;
-    this.timeUpdated.next();
+    this.timeUpdated.next(this.timer);
   }
 
   timerIsActive(){

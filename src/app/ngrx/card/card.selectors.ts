@@ -21,3 +21,7 @@ export const getDeckIdFromRoute = createSelector(
     return undefined;
   }
 )
+
+export const getCardsForRouteDeck = createSelector(
+  getCards, getDeckIdFromRoute, (cards, deckId) => cards.filter(card => card.deckId && card.deckId == deckId)
+)

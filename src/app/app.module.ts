@@ -66,7 +66,6 @@ import { QuillEditComponent } from './Components/Quill/quill-edit/quill-edit.com
 import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
 import { DeleteItemComponent } from './Components/SideBar/delete-item/delete-item.component';
 import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
-import { StudyDeckComponent } from './Components/Actions/study-node/study-deck/study-deck.component';
 import { ExploreComponent } from './Components/explore/explore.component';
 import { RootExploreItemComponent } from './Components/explore/root-explore-item/root-explore-item.component';
 import { ExploreFilterComponent } from './Components/explore/explore-filter/explore-filter.component';
@@ -85,6 +84,9 @@ import { NodeEffects } from './ngrx/node/node.effects';
 import { RouterEffects } from './ngrx/router/router.effects';
 import { cardReducer } from './ngrx/card/card.reducer';
 import { CardEffects } from './ngrx/card/card.effects';
+import { studyReducer } from './ngrx/study/study.reducer';
+import { StudyEffects } from './ngrx/study/study.effects';
+import { StudyCardsComponent } from './Components/Actions/study-node/study-cards/study-cards.component';
 
 @NgModule({
   declarations: [
@@ -135,12 +137,12 @@ import { CardEffects } from './ngrx/card/card.effects';
     AddCardComponent,
     DeleteItemComponent,
     StudyNodeComponent,
-    StudyDeckComponent,
     ExploreComponent,
     RootExploreItemComponent,
     ExploreFilterComponent,
     ExploreRootOverviewComponent,
     NodesRootOverviewComponent,
+    StudyCardsComponent,
   ],
   imports: [
     BrowserModule,
@@ -157,8 +159,8 @@ import { CardEffects } from './ngrx/card/card.effects';
     MatDialogModule,
     MatMenuModule,
     DragDropModule,
-    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, card:cardReducer, router: routerReducer}),
-    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, CardEffects, RouterEffects]),
+    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, card:cardReducer, study:studyReducer, router: routerReducer}),
+    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, CardEffects, StudyEffects, RouterEffects]),
     StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
 
   ],

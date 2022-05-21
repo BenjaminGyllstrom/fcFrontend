@@ -9,6 +9,8 @@ import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
 import { getChapterNodes } from 'src/app/ngrx/node/node.actions';
 import { getAllRoots } from 'src/app/ngrx/root/root.actions';
 import { getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
+import { studyDeck } from 'src/app/ngrx/study/study.actions';
+import { getDeckIdStudyFromRoute } from 'src/app/ngrx/study/study.selectors';
 
 @Component({
   selector: 'app-my-content',
@@ -47,11 +49,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.subs.push(this.store.select(getDeckIdFromRoute)
     .subscribe((deckId) => {
       if(deckId == undefined) return;
-      console.log(deckId);
-
       this.store.dispatch(getDeckCards({deckId:deckId}))
     }))
 
+    this.subs.push(this.store.select(getDeckIdStudyFromRoute)
+    .subscribe((deckId) => {
+      if(deckId == undefined) return;
+      this.store.dispatch(studyDeck({deckId:deckId}))
+    }))
   }
 
 }

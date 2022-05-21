@@ -6,7 +6,7 @@ import { EditCardComponent } from './edit-card/edit-card.component';
 import { DeleteItemComponent } from '../../SideBar/delete-item/delete-item.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
-import { getCards } from 'src/app/ngrx/card/card.selectors';
+import { getCards, getCardsForRouteDeck } from 'src/app/ngrx/card/card.selectors';
 import { Observable } from 'rxjs';
 import { deleteCard } from 'src/app/ngrx/card/card.actions';
 
@@ -28,7 +28,7 @@ export class ShowCardsComponent implements OnInit {
 
   cards$:Observable<Card[]>
   ngOnInit(): void {
-    this.cards$ = this.store.select(getCards)
+    this.cards$ = this.store.select(getCardsForRouteDeck)
   }
 
   onClick(card:Card){
