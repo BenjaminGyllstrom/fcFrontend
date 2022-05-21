@@ -16,10 +16,12 @@
 </div>
 
 
-<div *ngIf="!(card$|async)" class="no-due">
+<div *ngIf="!(card$|async) && (cardsToStudyAvailable$|async)" class="no-due">
   <p>No new cards available</p>
   <app-study-due-timer></app-study-due-timer>
   <button class="skip-wait" (click)="skipWait()">Skip wait time: {{skipWaitTime}}</button>
-  <button *ngIf="!(cardsToStudyAvailable$|async)">Next</button>
+</div>
+<div *ngIf="!(cardsToStudyAvailable$|async)" class="no-due complete">
+  <button  (click)="onComplete()" class="button">Complete</button>
 </div>
 

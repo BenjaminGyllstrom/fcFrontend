@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { iif, Observable, Subscription, tap } from 'rxjs';
 import { Card } from 'src/app/Models/card.model';
@@ -17,7 +18,9 @@ export class StudyCardsComponent implements OnInit {
 
   constructor(
     private dueTimerService:DueTimerService,
-    private store: Store<AppState>) { }
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   card$:Observable<Card|undefined>
   cardsToStudyAvailable$:Observable<boolean>
@@ -70,6 +73,9 @@ export class StudyCardsComponent implements OnInit {
     this.showAnswerButtons = false;
     this.showAnswer = false;
     this.store.dispatch(fromStudy.updateCardDue({card:card, nextRecurrence:option}))
+  }
+  onComplete(){
+    this.router.navigate(['../../../'], {relativeTo: this.route})
   }
   onShowAnswerChange(showAnswer:boolean){
     this.showAnswer = showAnswer;

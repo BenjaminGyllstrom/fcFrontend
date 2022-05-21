@@ -4,6 +4,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import * as fromStudy from 'src/app/ngrx/study/study.actions';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-study-explain',
@@ -14,13 +15,17 @@ export class StudyExplainComponent implements OnInit {
 
   @Input() explain: Explain
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
   }
 
   onContinueStudy(){
-    this.store.dispatch(fromStudy.setExplainAsRead({explain: this.explain}))
+    if(this.explain.new)
+      this.store.dispatch(fromStudy.setExplainAsRead({explain: this.explain}))
+    this.router.navigate(['../../../'], {relativeTo: this.route})
   }
 }
