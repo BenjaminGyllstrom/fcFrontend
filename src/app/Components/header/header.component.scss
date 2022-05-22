@@ -1,49 +1,61 @@
 
 $main-color: #D4BB79;
 
-.header{
-  height: 64px;
-  width: 100vw;
+mat-toolbar{
+  min-height: 65px;
+  min-width: 280px;
+  width: 100%;
   background-color: $main-color;
-  font: white;
-
-  display: grid;
-  grid-template-columns: min-content 1fr 1fr;
-  align-items: center;
+  color: white;
+  position: relative;
 }
-
+a{
+  color: white;
+}
 .logo{
   display: flex;
   align-items: center;
   img{
     width: 50px;
-    justify-self: start;
-    margin-left: 40px;
+    justify-self: end;
+    // margin-left: 40px;
   }
   a{
     margin-left: 20px;
-    color: white;
+    color: inherit;
     font-size: 36px;
   }
 }
 
-.actions{
-  justify-self: start;
-  display: flex;
-  a{
-    color: white;
-    margin-left: 30px;
-    font-size: 20px;
+.header-row{
+  min-height: 64px;
+  mat-icon{
+    margin-left: auto;
+    cursor: pointer;
   }
 }
 
+.header-menu{
+  top: 60px;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  // min-height: 20vh;
+  min-height: 150px;
+  // row-gap: 20px;
+  flex-direction: column;
+  // justify-content: center;
+  color: white;
+  background-color: $main-color;
+}
 .user{
-  margin-right: 70px;
-  justify-self: end;
+  margin-right: 10px;
+  margin-left: auto;
   display: flex;
 
   &__name{
     color: white;
+    font-size: 16px;
   }
   &__log-in{
     cursor: pointer;
@@ -58,4 +70,18 @@ $main-color: #D4BB79;
   }
 }
 
+@media(min-width:900px){
+  .logo a{
+  }
+}
+
+.actions{
+  justify-self: start;
+  display: flex;
+  a{
+    color: white;
+    margin-left: 30px;
+    font-size: 20px;
+  }
+}
 

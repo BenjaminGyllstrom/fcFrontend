@@ -6,8 +6,23 @@
   display: flex;
 
 }
-
-
+mat-sidenav-container{
+  width: 100%;
+  height: calc(100% - 65px);
+  background-color: #F9F5EC;
+  display: flex;
+}
+mat-sidenav{
+  // background-color: white;
+  // position: inherit;
+  // height: calc(100%);
+  width: 240px;
+  // display: inherit;
+  // border-radius: 5px;
+}
+mat-sidenav-content{
+  width: 100%;
+}
 .side-bar {
   background-color: white;
   position: inherit;

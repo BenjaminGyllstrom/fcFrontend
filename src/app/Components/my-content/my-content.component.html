@@ -1,4 +1,4 @@
-<div class="my-content">
+<!-- <div class="my-content">
 
   <div class="side-bar">
     <app-side-bar></app-side-bar>
@@ -7,5 +7,16 @@
   <div class="content">
     <router-outlet></router-outlet>
   </div>
-</div>
+</div> -->
+
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <app-side-bar></app-side-bar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
 

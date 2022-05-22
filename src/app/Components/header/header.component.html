@@ -1,18 +1,29 @@
-<div class="header">
-  <div class="logo">
-    <img src="../../../assets/icons/Header-icon.svg" alt="" class="header-icon">
-    <a class="header-button__logo" routerLink="/">WiseStar</a>
-  </div>
+<mat-toolbar>
+  <mat-toolbar-row class="header-row">
+    <div class="logo">
+      <img src="../../../assets/icons/Header-icon.svg" alt="" class="header-icon">
+      <a routerLink="/">WiseStar</a>
+    </div>
 
-  <div class="actions">
+    <div class="actions" *ngIf="!menuMode">
+      <a class="action" routerLink="">HOME</a>
+      <a class="action" routerLink="/myContent/Roots">MY CONTENT</a>
+      <a class="action" routerLink="/explore">EXPLORE</a>
+    </div>
+
+    <div class="user" *ngIf="!menuMode">
+      <a class="user__log-in" *ngIf="auth == null" (click)="onLogin()">Log In</a>
+      <!-- <div class="user__name" *ngIf="auth != null">{{auth.name}}</div> -->
+      <a class="user__log-out" *ngIf="auth != null" (click)="logout()" >Log Out</a>
+    </div>
+
+    <mat-icon class="header-row__menu" *ngIf="menuMode" (click)="showActions = !showActions">menu</mat-icon>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="header-menu" *ngIf="menuMode && showActions">
     <a class="action" routerLink="">HOME</a>
     <a class="action" routerLink="/myContent/Roots">MY CONTENT</a>
     <a class="action" routerLink="/explore">EXPLORE</a>
-  </div>
-
-  <div class="user">
     <a class="user__log-in" *ngIf="auth == null" (click)="onLogin()">Log In</a>
-    <div class="user__name" *ngIf="auth != null">Welcome {{auth.name}}</div>
     <a class="user__log-out" *ngIf="auth != null" (click)="logout()" >Log Out</a>
-  </div>
-</div>
+  </mat-toolbar-row>
+</mat-toolbar>

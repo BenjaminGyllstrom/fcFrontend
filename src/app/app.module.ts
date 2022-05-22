@@ -11,6 +11,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatIconModule } from "@angular/material/icon";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 // import {  } from '@angular/material/';
 
@@ -158,6 +161,9 @@ import { StudyCardsComponent } from './Components/Actions/study-node/study-cards
     SocialLoginModule,
     MatDialogModule,
     MatMenuModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
     DragDropModule,
     StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, card:cardReducer, study:studyReducer, router: routerReducer}),
     EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, CardEffects, StudyEffects, RouterEffects]),

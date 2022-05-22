@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialAuthService } from 'angularx-social-login';
 import { HttpService } from 'src/app/Services/Http/http.service';
+import { BreakpointObserver } from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-header',
@@ -13,12 +14,26 @@ import { HttpService } from 'src/app/Services/Http/http.service';
 export class HeaderComponent implements OnInit {
 
   auth: any
+  menuMode = false;
+  showActions = false;
 
   constructor(
     public socialAuthService: SocialAuthService,
     private httpService: HttpService,
     public dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private observer: BreakpointObserver) { }
+
+    ngAfterViewInit(){
+      this.observer.observe(['(min-width:750px)']).subscribe(res=>{
+        if(res.matches){
+          this.menuMode = false
+          this.showActions = false;
+        }else{
+          this.menuMode = true;
+        }
+      })
+    }
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((auth: any) => {

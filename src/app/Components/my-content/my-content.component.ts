@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/ngrx/appState';
@@ -11,6 +11,8 @@ import { getAllRoots } from 'src/app/ngrx/root/root.actions';
 import { getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
 import { studyDeck } from 'src/app/ngrx/study/study.actions';
 import { getDeckIdStudyFromRoute } from 'src/app/ngrx/study/study.selectors';
+import { BreakpointObserver } from "@angular/cdk/layout";
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-my-content',
@@ -20,7 +22,23 @@ import { getDeckIdStudyFromRoute } from 'src/app/ngrx/study/study.selectors';
 })
 export class MyContentComponent implements OnInit, OnDestroy {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(
+    private observer: BreakpointObserver,
+    private store: Store<AppState>) { }
+
+  @ViewChild(MatSidenav) sidenav!:MatSidenav
+
+  ngAfterViewInit(){
+    this.observer.observe(['(min-width:750px)']).subscribe(res=>{
+      if(res.matches){
+        this.sidenav.mode = 'side'
+        this.sidenav.open()
+      }else{
+        this.sidenav.mode = 'over'
+        this.sidenav.close()
+      }
+    })
+  }
 
   subs:Subscription[] = []
   ngOnDestroy(): void {
@@ -29,6 +47,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       sub.unsubscribe();
     })
   }
+
 
   ngOnInit(): void {
     this.store.dispatch(getAllRoots())
