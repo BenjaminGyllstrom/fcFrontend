@@ -12,7 +12,9 @@
 }
 .inputField{
   height: 55px;
-  width: 370px;
+  min-width: 200px;
+  margin: 0 50px;
+  // width: 370px;
   border: 1px solid #876E2B;
   background-color: white;
   border-radius: 100px;
@@ -26,19 +28,20 @@
   p{
     margin: 0;
     margin-left: 15px;
-    font-size: 24px;
+    font-size: 14px;
   }
   input{
     margin-left: 10px;
-    font-size: 24px;
+    font-size: 14px;
     width: 90%;
     border: none;
   }
 }
 
 .quill{
-  width: 980px;
+  // width: 980px;
   height: 60vh;
+  margin: 0 50px;
   padding-bottom: 10px;
 
   border: 1px solid #876E2B;
@@ -62,4 +65,20 @@
   margin-top: 30px;
   display: flex;
   gap: 15px;
+}
+
+@media (min-width:500px){
+  .inputField{
+    p{
+      font-size: 24px;
+    }
+    input{
+      font-size: 24px;
+    }
+  }
+}
+@media (min-width:1500px){
+  .quill{
+    width: 980px;
+  }
 }

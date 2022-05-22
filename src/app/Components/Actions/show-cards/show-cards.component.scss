@@ -1,8 +1,9 @@
 .show-cards{
   padding: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
   gap: 50px;
+  max-width: 1500px;
 }
 
 // .card{
@@ -16,4 +17,16 @@
 .card{
   width: 100%;
   height: 230px;
+}
+
+@media (min-width:1000px){
+  .show-cards{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width:1500px){
+  .show-cards{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

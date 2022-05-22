@@ -9,15 +9,16 @@
 .explain-card{
   margin-top: 80px;
   display: flex;
-  gap: 40px;
+  flex-direction: column;
 }
 
 .explain{
   border: 1px solid #876E2B;
   border-radius: 35px;
   background-color: white;
-  width: 350px;
-  height: 450px;
+  margin: 0 50px;
+
+  height: 250px;
   padding: 10px;
 }
 
@@ -32,10 +33,13 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-
+  margin: 0 50px;
+  min-width: 280px;
   &__content{
+    // margin: 0 50px;
     height: 400px;
-    width: 800px;
+    max-width: 800px;
+    // width: 800px;
   }
   &__switch{
     height: 55px;
@@ -54,7 +58,7 @@
 
 .show-explain-button{
   margin-top: 10px;
-  margin-left: 30px;
+  margin-left: 80px;
   border: none;
   background-color: #F9F5EC;
   color: #606060;
@@ -71,4 +75,41 @@
   width: 100px;
   border: 1px solid #876E2B;
   font-size: 24px;
+}
+
+
+
+@media(min-width:1000px){
+  // .explain-card{
+  //   flex-direction: row;
+  // }
+  // .explain{
+  //   margin-right: 0;
+  //   height: 430px;
+  //   max-width: 260px;
+  // }
+  .card{
+    min-width: 430px;
+  }
+}
+
+@media(min-width:1100px){
+  .explain{
+    margin-right: 0;
+    height: 430px;
+    max-width: 260px;
+  }
+  .explain-card{
+    flex-direction: row;
+  }
+}
+
+@media(min-width:1200px){
+  .explain-card{
+    gap: 40px;
+  }
+  .card__content{
+    height: 400px;
+    max-width: 800px;
+  }
 }

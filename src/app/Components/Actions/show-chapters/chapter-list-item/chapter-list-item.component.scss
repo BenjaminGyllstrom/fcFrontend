@@ -8,7 +8,21 @@
   background-color: white;
 
   height: 60px;
-  width: 700px;
+
+  width: 200px;
+
   display: flex;
+
   align-items: center;
+}
+
+@media (min-width:500px){
+  .chapter-list-item{
+    width: 400px;
+  }
+}
+@media (min-width:1000px){
+  .chapter-list-item{
+    width: 650px;
+  }
 }

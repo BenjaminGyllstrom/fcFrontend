@@ -18,7 +18,7 @@ h1{
 
 .inputField{
   height: 55px;
-  width: 370px;
+  min-width: 200px;
   border: 1px solid #876E2B;
   background-color: white;
   border-radius: 100px;
@@ -32,11 +32,11 @@ h1{
   p{
     margin: 0;
     margin-left: 15px;
-    font-size: 24px;
+    font-size: 14px;
   }
   input{
     margin-left: 10px;
-    font-size: 24px;
+    font-size: 14px;
     width: 90%;
     border: none;
   }
@@ -49,4 +49,15 @@ h1{
   width: 100px;
   border: 1px solid #876E2B;
   font-size: 24px;
+}
+
+@media (min-width:500px){
+  .inputField{
+    p{
+      font-size: 24px;
+    }
+    input{
+      font-size: 24px;
+    }
+  }
 }

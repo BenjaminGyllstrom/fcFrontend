@@ -13,9 +13,7 @@ h1{
 .roots{
   &__list{
     display: grid;
-    grid-template-columns: 45% 45%;
     gap: 15px;
-
     justify-content: center;
   }
   &__list-item{
@@ -28,5 +26,12 @@ h1{
       transition: transform .2s;
       transform: scale(1.03);
     }
+  }
+}
+
+@media (min-width:1000px){
+  .roots__list{
+    display: grid;
+    grid-template-columns: 45% 45%;
   }
 }

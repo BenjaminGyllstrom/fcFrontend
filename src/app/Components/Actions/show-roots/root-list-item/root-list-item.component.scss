@@ -5,26 +5,33 @@
 
   display: flex;
   justify-content: space-between;
+  column-gap: 5px;
   &__title{
 
   }
 }
 
 .userData{
-
   margin-right: 30px;
 
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
-  gap: 7px;
+  align-content: center;
   &__name{
+    min-width: 125px;
 
   }
   &__photo{
     height: 100px;
     width: 100px;
+
     border-radius: 50%;
   }
+}
+
+
+
+@media (min-width:1000px){
 }

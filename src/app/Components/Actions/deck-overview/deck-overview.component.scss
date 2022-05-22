@@ -10,7 +10,7 @@
 
 .inputField{
   height: 55px;
-  width: 370px;
+  min-width: 200px;
   border: 1px solid #876E2B;
   background-color: white;
   border-radius: 100px;
@@ -24,11 +24,11 @@
   p{
     margin: 0;
     margin-left: 15px;
-    font-size: 24px;
+    font-size: 14px;
   }
   input{
     margin-left: 10px;
-    font-size: 24px;
+    font-size: 14px;
     width: 90%;
     border: none;
   }
@@ -56,4 +56,16 @@
   justify-content: center;
   align-items: center;
 
+}
+
+
+@media (min-width:500px){
+  .inputField{
+    p{
+      font-size: 24px;
+    }
+    input{
+      font-size: 24px;
+    }
+  }
 }

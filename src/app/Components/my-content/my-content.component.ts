@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { AppState } from 'src/app/ngrx/appState';
 import { getDeckCards } from 'src/app/ngrx/card/card.actions';
 import { getDeckIdFromRoute } from 'src/app/ngrx/card/card.selectors';
@@ -29,15 +29,16 @@ export class MyContentComponent implements OnInit, OnDestroy {
   @ViewChild(MatSidenav) sidenav!:MatSidenav
 
   ngAfterViewInit(){
-    this.observer.observe(['(min-width:750px)']).subscribe(res=>{
-      if(res.matches){
-        this.sidenav.mode = 'side'
-        this.sidenav.open()
-      }else{
-        this.sidenav.mode = 'over'
-        this.sidenav.close()
-      }
-    })
+    this.subs.push(this.observer.observe(['(min-width:750px)']).pipe(
+      tap((res)=>{setTimeout(()=>{
+        if(res.matches){
+          this.sidenav.mode = 'side'
+          this.sidenav.open()
+        }else{
+          this.sidenav.mode = 'over'
+          this.sidenav.close()
+        }
+      },10)})).subscribe())
   }
 
   subs:Subscription[] = []
@@ -48,6 +49,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
     })
   }
 
+  mode = 'side'
+  open = true
 
   ngOnInit(): void {
     this.store.dispatch(getAllRoots())
