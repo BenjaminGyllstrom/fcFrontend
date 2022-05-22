@@ -14,7 +14,10 @@ export class RootHttpService {
   constructor(private httpService: HttpService, private chapterHttpService: ChapterHttpService) {}
 
   getAll() : Observable<any> {
-    return this.httpService.get('roots/Explore');
+    return this.httpService.get('roots/Explore')
+  }
+  getByIdExplore(id:String) : Observable<any> {
+    return this.httpService.get(`roots/Explore/${id}`)
   }
   get() : Observable<any> {
     return this.httpService.get('roots');
@@ -31,11 +34,8 @@ export class RootHttpService {
   edit(root: any, id:string) : Observable<any> {
     return this.httpService.patch(`roots/${id}`, root);
   }
-  download(rootId:string){
-    return this.httpService.post(`roots/Copy/${rootId}`, null).pipe(
-      tap(val => {console.log(val);
-      })
-    );
+  download(rootId:string) : Observable<any>{
+    return this.httpService.post(`roots/Copy/${rootId}`, null);
   }
 
   parseToRoot(collectedRoot: IRoot) : Root {

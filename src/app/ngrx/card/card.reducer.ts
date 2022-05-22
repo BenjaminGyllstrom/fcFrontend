@@ -31,8 +31,12 @@ export const cardReducer = createReducer(
     const index = oldCards.findIndex(oldCard => oldCard.id == card.id)
     oldCards[index] = card;
     return {...state, cards: oldCards}
+  }),
+  on(fromCard.downloadCardsSuccessful, (state, {cards}) => {
+    if(!cards || cards.length <= 0) return {...state}
+    const deckId = cards[0].deckId;
+    return {...state, cards: [...state.cards, ...cards], loadedForDeck:[...state.loadedForDeck, deckId]}
   })
-
 )
 
 export function remove(cardToRemove:Card, cards:Card[]){

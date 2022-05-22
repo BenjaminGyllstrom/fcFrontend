@@ -13,3 +13,5 @@ export const deleteNodeSuccessful = createAction('[node] delete node successful'
 
 export const updateNode = createAction('[node] update node', props<{node:INode}>())
 export const updateNodeSuccessful = createAction('[node] update node successful', props<{node:INode}>())
+
+export const downloadNodesSuccessful = createAction('[chapter] download nodes successful', props<{nodes: any[]}>())

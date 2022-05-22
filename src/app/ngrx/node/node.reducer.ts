@@ -17,7 +17,7 @@ export const nodeReducer = createReducer(
     loadedForChapter.push(chapterId);
     nodes.forEach(newNode => {
       if(state.nodes.findIndex(node => node._id == newNode.id && node.type == newNode.type) >= 0)
-      nodes.splice(nodes.indexOf(newNode),1);
+      nodes = [...nodes].splice(nodes.indexOf(newNode),1);
     });
     return {...state, nodes: [...state.nodes, ...nodes], loadedForChapter:[...state.loadedForChapter, chapterId]}
   }),
@@ -33,6 +33,11 @@ export const nodeReducer = createReducer(
     const index = oldNodes.findIndex(oldNode => oldNode._id == node._id && oldNode.type == node.type)
     oldNodes[index] = node;
     return {...state, nodes: oldNodes}
+  }),
+  on(fromNode.downloadNodesSuccessful, (state, {nodes}) => {
+    if(!nodes || nodes.length <= 0) return {...state}
+    const chapterId = nodes[0].parentId;
+    return {...state, nodes: [...state.nodes, ...nodes], loadedForChapter:[...state.loadedForChapter, chapterId]}
   })
 )
 

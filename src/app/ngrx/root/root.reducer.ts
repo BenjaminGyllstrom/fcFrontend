@@ -19,6 +19,9 @@ export const rootReducer = createReducer(
   on(fromRoot.deleteRootSuccessful, (state, {root}) => {
     const newRootList = remove(root, [...state.roots])
     return {...state, roots: newRootList}
+  }),
+  on(fromRoot.downloadRootSuccessful, (state, {root}) => {
+    return {...state, roots: [...state.roots, root]}
   })
 )
 

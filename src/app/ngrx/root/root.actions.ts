@@ -9,3 +9,6 @@ export const createRootSuccessful = createAction('[root] create root successful'
 
 export const deleteRoot = createAction('[root] delete root', props<{id: string}>())
 export const deleteRootSuccessful = createAction('[root] delete root successful', props<{root: Root}>())
+
+export const downloadRoot = createAction('[root] download root', props<{id: string}>())
+export const downloadRootSuccessful = createAction('[root] download root successful', props<{root: Root}>())

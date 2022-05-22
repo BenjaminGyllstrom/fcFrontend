@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Card } from 'src/app/Models/card.model';
@@ -7,6 +8,8 @@ import { Chapter, IChapter } from 'src/app/Models/chapter.model';
 import { Deck } from 'src/app/Models/deck.model';
 import { Explain } from 'src/app/Models/explain.model';
 import { IRoot, Root } from 'src/app/Models/root.model';
+import { AppState } from 'src/app/ngrx/appState';
+import { downloadRoot } from 'src/app/ngrx/root/root.actions';
 import { ChapterHttpService } from 'src/app/Services/Http/ChapterHttp.service';
 import { HttpService } from 'src/app/Services/Http/http.service';
 import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
@@ -22,7 +25,8 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private rootHttpService: RootHttpService,
     private httpService: HttpService,
-    private chapterHttpService: ChapterHttpService
+    private chapterHttpService: ChapterHttpService,
+    private store:Store<AppState>
   ) { }
 
 
@@ -46,24 +50,14 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const rootId = this.route.snapshot.params['rootId']
 
-
-    if(this.httpService.idToken && this.httpService.idToken != ""){
-      this.subs.push(this.getRoot(rootId).subscribe((root)=>{
-        this.root = root
-        this.chapters = root.chapters;
-      }))
-    }
-    this.httpService.idTokenChanged.subscribe(()=>{
-      this.subs.push(this.getRoot(rootId).subscribe((root)=>{
-        this.root = root
-        this.chapters = root.chapters;
-      }))
-    })
-
+    this.subs.push(this.getRoot(rootId).subscribe((root)=>{
+      this.root = root
+      this.chapters = root.chapters;
+    }))
   }
 
   getRoot(rootId:string): Observable<Root>{
-    return this.rootHttpService.getById(rootId).pipe(
+    return this.rootHttpService.getByIdExplore(rootId).pipe(
       map((iRoot: IRoot) => {return this.rootHttpService.parseToRoot(iRoot)})
     )
   }
@@ -94,6 +88,7 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
   }
 
   onDownload(){
-    this.subs.push(this.rootHttpService.download(this.root.id).subscribe())
+    this.store.dispatch(downloadRoot({id: this.root.id}))
+    // this.subs.push(this.rootHttpService.download(this.root.id).subscribe())
   }
 }

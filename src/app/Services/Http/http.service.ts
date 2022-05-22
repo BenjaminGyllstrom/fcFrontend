@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, tap } from 'rxjs';
 import { AuthGuardService } from '../AuthGuard.service';
 
 @Injectable({
@@ -28,7 +28,8 @@ export class HttpService {
     if(params){
       this.options.params = new HttpParams({fromObject: params});
     }
-    this.setIdToken();
+
+    if(this.idToken)this.setIdToken();
 
     return this.httpClient.get(`${this.baseUrl}/${uri}`, this.options);
   }

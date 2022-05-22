@@ -12,3 +12,5 @@ export const deleteCardSuccessful = createAction('[card] delete card successful'
 
 export const updateCard = createAction('[card] update card', props<{card:Card}>())
 export const updateCardSuccessful = createAction('[card] update card successful', props<{card:Card}>())
+
+export const downloadCardsSuccessful = createAction('[card] download cards successful', props<{cards:Card[]}>())

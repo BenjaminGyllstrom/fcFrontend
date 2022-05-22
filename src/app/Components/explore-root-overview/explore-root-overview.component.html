@@ -5,7 +5,7 @@
   </div>
   <div class="download" (click)="onDownload()">Download</div>
   <div class="root-content">
-    <div class="chapters">
+    <div class="chapters" *ngIf="chapters">
       <app-chapter-list-item *ngFor="let chapter of chapters" [chapter]="chapter" (click)="onChapterClick(chapter)"></app-chapter-list-item>
     </div>
     <div class="nodes">

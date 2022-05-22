@@ -19,7 +19,7 @@ export const chapterReducer = createReducer(
 
     chapters.forEach(newChapter => {
       if(state.chapters.findIndex(chapter => chapter.id == newChapter.id) >= 0)
-        chapters.splice(chapters.indexOf(newChapter),1);
+        chapters = [...chapters].splice(chapters.indexOf(newChapter),1);
     });
 
     return {...state, chapters: [...state.chapters, ...chapters], loadedForRoots: loadedForRoots}
@@ -30,6 +30,11 @@ export const chapterReducer = createReducer(
   on(fromChapter.deleteChapterSuccessful, (state, {chapter}) => {
     const newChapterList = remove(chapter, [...state.chapters])
     return {...state, chapters: newChapterList}
+  }),
+  on(fromChapter.downloadChaptersSuccessful, (state, {chapters}) => {
+    if(!chapters || chapters.length <= 0) return {...state}
+    const rootId = chapters[0].rootId;
+    return {...state, chapters: [...state.chapters, ...chapters], loadedForRoots:[...state.loadedForRoots, rootId]}
   })
 )
 

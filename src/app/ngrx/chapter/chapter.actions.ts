@@ -12,3 +12,5 @@ export const createChapterSuccessful = createAction('[chapter] create chapter su
 
 export const deleteChapter = createAction('[chapter] delete chapter', props<{id: string}>())
 export const deleteChapterSuccessful = createAction('[chapter] delete chapter successful', props<{chapter: Chapter}>())
+
+export const downloadChaptersSuccessful = createAction('[chapter] download chapters successful', props<{chapters: Chapter[]}>())
