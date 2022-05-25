@@ -4,10 +4,8 @@
 
 }
 .nodes{
-  margin-top: 100px;
-
+  margin-top: 10vw;
   width: 250px;
-  // background-color: red;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
@@ -16,12 +14,17 @@
 .line{
   margin-top: 20px;
   margin-left: 32px;
-  // align-self: center;
-  // justify-self: center;
   background-color: #BCBCBC;
 }
 
 .circle-element{
   display: flex;
   justify-content: center;
+}
+
+
+@media (min-width:1000px){
+  .nodes{
+    margin-top: 100px;
+  }
 }
