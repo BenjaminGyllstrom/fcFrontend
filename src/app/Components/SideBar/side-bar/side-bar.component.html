@@ -1,6 +1,7 @@
 <div class="side-bar">
   <div class="toogle">
-    <app-study-toogle [isEditMode]="editMode" (onToggle)="onToggle($event)"></app-study-toogle>
+    <!-- <app-study-toogle [isEditMode]="editMode" (onToggle)="onToggle($event)"></app-study-toogle> -->
+    <mat-icon class="close-button" (click)="onClose()">chevron_left</mat-icon>
   </div>
 
   <div class="roots" *ngIf="roots$ | async as roots">

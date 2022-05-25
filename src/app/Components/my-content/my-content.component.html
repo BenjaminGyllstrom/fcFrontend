@@ -12,9 +12,10 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
-    <app-side-bar></app-side-bar>
+    <app-side-bar (onClose)="sidenav.close()"></app-side-bar>
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-icon *ngIf="!sidenav.opened" (click)="sidenav.open()" class="menu-button">chevron_right</mat-icon>
       <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

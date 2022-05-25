@@ -2,7 +2,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { StateService, State } from './../../../Services/state.service';
 import { ActionService, Action } from './../../../Services/action.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
 import { ItemsService } from 'src/app/Services/items.service';
@@ -37,6 +37,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private store: Store<AppState>,
     private route: ActivatedRoute) { }
+
+    @Output('onClose') closeEmitter = new EventEmitter<void>()
 
     editMode: boolean = true
 
@@ -107,6 +109,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
     //   }
     //   this.navigate(action, this.selectedNode.type)
     // }
+  }
+  onClose(){
+    this.closeEmitter.emit();
   }
   onActionChange(action:Action){
     this.action = action
