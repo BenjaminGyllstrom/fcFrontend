@@ -10,13 +10,30 @@
 }
 
 .roots{
-  margin-top: 200px;
+  margin-top: 10vw;
+  // margin-top: 200px;
 
   display: grid;
-  grid-template-columns: min-content min-content min-content;
+  grid-template-columns: min-content;
   gap: 20px;
 }
 .root{
-  width: 423px;
   height: 100px;
+  width: 280px;
+}
+
+@media (min-width:500px){
+  .root{
+    width: 423px;
+  }
+}
+@media (min-width:900px){
+  .roots{
+    grid-template-columns: min-content min-content;
+  }
+}
+@media (min-width:1430px){
+  .roots{
+    grid-template-columns: min-content min-content min-content;
+  }
 }

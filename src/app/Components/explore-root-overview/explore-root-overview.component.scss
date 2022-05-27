@@ -32,7 +32,16 @@ h1{
 .root-content{
   margin-top: 110px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media(min-width:1200px){
+  .root-content{
+    grid-template-columns: 1fr 1fr;
+  }
+  .nodes{
+    margin-top: 0;
+  }
 }
 
 .chapters{
@@ -42,8 +51,10 @@ h1{
   gap: 15px;
 }
 .nodes{
-  justify-self: center;
-  margin-left: -250px;
+  // justify-self: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .explain-content{
@@ -51,7 +62,7 @@ h1{
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
 }
 .quill{
   width: 980px;
