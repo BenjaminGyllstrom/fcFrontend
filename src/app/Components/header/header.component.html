@@ -19,10 +19,10 @@
     <mat-icon class="header-row__menu" *ngIf="menuMode" (click)="showActions = !showActions">menu</mat-icon>
   </mat-toolbar-row>
   <mat-toolbar-row class="header-menu" *ngIf="menuMode && showActions">
-    <a class="action" routerLink="">HOME</a>
-    <a class="action" routerLink="/myContent/Roots">MY CONTENT</a>
-    <a class="action" routerLink="/explore">EXPLORE</a>
-    <a class="user__log-in" *ngIf="auth == null" (click)="onLogin()">Log In</a>
-    <a class="user__log-out" *ngIf="auth != null" (click)="logout()" >Log Out</a>
+    <a class="action" routerLink="" (click)="showActions = false">HOME</a>
+    <a class="action" routerLink="/myContent/Roots" (click)="showActions = false">MY CONTENT</a>
+    <a class="action" routerLink="/explore" (click)="showActions = false">EXPLORE</a>
+    <a class="user__log-in" *ngIf="auth == null" (click)="onLogin()" (click)="showActions = false">Log In</a>
+    <a class="user__log-out" *ngIf="auth != null" (click)="logout()" (click)="showActions = false">Log Out</a>
   </mat-toolbar-row>
 </mat-toolbar>
