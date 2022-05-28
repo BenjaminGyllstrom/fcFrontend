@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { Subject, tap } from 'rxjs';
 import { AuthGuardService } from '../AuthGuard.service';
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class HttpService {
     private httpClient: HttpClient,
     private auth: AuthGuardService) { }
 
-  private baseUrl: string = "http://localhost:3000";
+  private baseUrl: string = environment.serverUrl;
 
   options = {
     params: new HttpParams(),

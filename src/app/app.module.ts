@@ -90,6 +90,7 @@ import { CardEffects } from './ngrx/card/card.effects';
 import { studyReducer } from './ngrx/study/study.reducer';
 import { StudyEffects } from './ngrx/study/study.effects';
 import { StudyCardsComponent } from './Components/Actions/study-node/study-cards/study-cards.component';
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -179,7 +180,7 @@ import { StudyCardsComponent } from './Components/Actions/study-node/study-cards
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('658846696658-qio83qm2tc6q7sm856fu1igd6bingpv7.apps.googleusercontent.com') // your client id
+            provider: new GoogleLoginProvider(environment.googleAuthKey) // your client id
           }
         ]
       }
