@@ -90,6 +90,6 @@ export function calculateRecurrenceTimes(card: Card) : string[]{
   if(card.recurrenceNumber == 0){
     return ['1 min', '10 min', '4 days'];
   }else{
-    return ['10 min', `${2 ** card.recurrenceNumber} days`, `${2 ** (card.recurrenceNumber + 1)} days`];
+    return ['10 min', `${card.recurrenceNumber ** 2} days`, `${(card.recurrenceNumber + 1) ** 2} days`];
   }
 }
