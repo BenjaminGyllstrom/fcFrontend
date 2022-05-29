@@ -12,8 +12,8 @@
     </div>
 
     <div class="user" *ngIf="!menuMode">
-      <a class="user__log-in" *ngIf="auth == null" (click)="onLogin()">Log In</a>
-      <a class="user__log-out" *ngIf="auth != null" (click)="logout()" >Log Out</a>
+      <a class="user__log-in" *ngIf="!isLoggedIn" (click)="onLogin()">Log In</a>
+      <a class="user__log-out" *ngIf="isLoggedIn" (click)="logout()" >Log Out</a>
     </div>
 
     <mat-icon class="header-row__menu" *ngIf="menuMode" (click)="showActions = !showActions">menu</mat-icon>

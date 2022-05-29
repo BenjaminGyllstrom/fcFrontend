@@ -1,0 +1,43 @@
+<div>
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="login">
+    <label for="chk" aria-hidden="true">{{isLoginMode ? 'Login' : 'Sign Up'}}</label>
+    <div *ngIf="!isLoginMode" class="center">
+      <input
+      type="text"
+      id="username"
+      ngModel
+      placeholder="Username"
+      name="username"
+      required>
+    </div>
+    <div class="center">
+      <input
+      type="email"
+      id="email"
+      ngModel
+      placeholder="Email"
+      name="email"
+      required
+      email
+      >
+    </div>
+    <div class="center">
+      <input
+      type="password"
+      id="password"
+      ngModel
+      placeholder="Password"
+      name="password"
+      required
+      minlength="8">
+    </div>
+    <div class="center buttons">
+      <button type="submit" [disabled]="!authForm.valid">{{ isLoginMode ? 'Login' : 'Sign Up'}}</button>
+      <a (click)="onSwitchMode()" type="button">{{isLoginMode ? 'Sign Up' : 'Login'}}</a>
+      <!-- <button (click)="onSwitchMode()" type="button">Switch to {{isLoginMode ? 'Sign Up' : 'Login'}}</button> -->
+    </div>
+  </form>
+  <div *ngIf="serverErrorMessages">
+    {{serverErrorMessages}}
+  </div>
+</div>

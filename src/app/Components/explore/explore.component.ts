@@ -21,16 +21,20 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.httpService.idToken && this.httpService.idToken != ""){
-      this.getRoots().subscribe((roots: Root[])=>{
-        this.roots = roots;
-      })
-    }
-    this.httpService.idTokenChanged.subscribe(()=>{
-      this.getRoots().subscribe((roots: Root[])=>{
-        this.roots = roots;
-      })
+    this.getRoots().subscribe((roots: Root[])=>{
+      this.roots = roots;
     })
+
+    // if(this.httpService.idToken && this.httpService.idToken != ""){
+    //   this.getRoots().subscribe((roots: Root[])=>{
+    //     this.roots = roots;
+    //   })
+    // }
+    // this.httpService.idTokenChanged.subscribe(()=>{
+    //   this.getRoots().subscribe((roots: Root[])=>{
+    //     this.roots = roots;
+    //   })
+    // })
   }
 
   getRoots(){

@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { IRoot, Root } from "src/app/Models/root.model";
@@ -10,11 +11,12 @@ import { ChapterHttpService } from "./ChapterHttp.service";
 })
 export class RootHttpService {
 
+  noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' })}
 
   constructor(private httpService: HttpService, private chapterHttpService: ChapterHttpService) {}
 
   getAll() : Observable<any> {
-    return this.httpService.get('roots/Explore')
+    return this.httpService.get('roots/Explore',null, this.noAuthHeader)
   }
   getByIdExplore(id:String) : Observable<any> {
     return this.httpService.get(`roots/Explore/${id}`)

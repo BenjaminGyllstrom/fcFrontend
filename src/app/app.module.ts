@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './Services/auth.interceptor';
 import { Action } from 'src/app/Services/action.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -91,6 +92,7 @@ import { studyReducer } from './ngrx/study/study.reducer';
 import { StudyEffects } from './ngrx/study/study.effects';
 import { StudyCardsComponent } from './Components/Actions/study-node/study-cards/study-cards.component';
 import { environment } from "../environments/environment";
+import { LoginComponent } from './Components/Profile/login/login.component';
 
 @NgModule({
   declarations: [
@@ -147,6 +149,7 @@ import { environment } from "../environments/environment";
     ExploreRootOverviewComponent,
     NodesRootOverviewComponent,
     StudyCardsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -172,6 +175,11 @@ import { environment } from "../environments/environment";
 
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     // SocialAuthService,
     {
       provide: 'SocialAuthServiceConfig',
@@ -185,7 +193,7 @@ import { environment } from "../environments/environment";
         ]
       }
     },
-    AuthGuardService
+    AuthGuardService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

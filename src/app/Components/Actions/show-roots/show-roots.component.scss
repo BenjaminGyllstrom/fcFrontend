@@ -13,11 +13,13 @@ h1{
   &__list{
     display: grid;
     gap: 15px;
+    // grid-template-columns: 45%;
     justify-content: center;
   }
   &__list-item{
     background-color: white;
-    height: 150px;
+    height: 75px;
+    min-width: 250px;
     border: 1px solid #876E2B;
     border-radius: 5px;
 

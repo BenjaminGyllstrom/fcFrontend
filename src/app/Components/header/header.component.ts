@@ -1,6 +1,9 @@
+import { Subscription } from 'rxjs';
+import { AuthGuardService } from './../../Services/AuthGuard.service';
+import { LoginComponent } from './../../Components/Profile/login/login.component';
 import { Router } from '@angular/router';
 import { LogInComponent } from './../Profile/log-in/log-in.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialAuthService } from 'angularx-social-login';
 import { HttpService } from 'src/app/Services/Http/http.service';
@@ -11,7 +14,7 @@ import { BreakpointObserver } from "@angular/cdk/layout";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   auth: any
   menuMode = false;
@@ -22,7 +25,15 @@ export class HeaderComponent implements OnInit {
     private httpService: HttpService,
     public dialog: MatDialog,
     private router: Router,
-    private observer: BreakpointObserver) { }
+    private observer: BreakpointObserver,
+    private authService: AuthGuardService) { }
+
+    subs:Subscription[] = [];
+    ngOnDestroy(): void {
+      this.subs.forEach(sub => {
+        sub.unsubscribe();
+      })
+    }
 
     ngAfterViewInit(){
       this.observer.observe(['(min-width:750px)']).subscribe(res=>{
@@ -37,32 +48,22 @@ export class HeaderComponent implements OnInit {
       })
     }
 
+  isLoggedIn = false;
   ngOnInit(): void {
-    this.socialAuthService.authState.subscribe((auth: any) => {
-      this.auth = auth
-      if(auth){
-        console.log('setting token in header');
-
-        this.auth = auth
-        this.httpService.idToken = auth.idToken
-        this.httpService.idTokenChanged.next();
-      }
-    })
+    this.subs.push(this.authService.tokenChanged.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    }))
   }
 
   onLogin(){
-    const dialogRef = this.dialog.open(LogInComponent);
+    const dialogRef = this.dialog.open(LoginComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-
   logout(): void {
-    this.socialAuthService.signOut().then(() => {
-      this.httpService.idToken = "";
-      console.log('logged out');
-      this.router.navigate(['/home'])
-    }) ;
+    this.authService.deleteToken();
+    this.router.navigate(['home'])
   }
 }

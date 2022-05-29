@@ -10,8 +10,7 @@ import { environment } from "../../../environments/environment";
 export class HttpService {
 
   constructor(
-    private httpClient: HttpClient,
-    private auth: AuthGuardService) { }
+    private httpClient: HttpClient) { }
 
   private baseUrl: string = environment.serverUrl;
 
@@ -20,48 +19,43 @@ export class HttpService {
     headers: new HttpHeaders()
   }
 
-  idToken:string;
-  idTokenChanged = new Subject<void>();
-
-  get(uri: string, params?: any) {
+  get(uri: string, params?: any, headers?: any) {
     this.options.params = new HttpParams();
+    this.options.headers = new HttpHeaders();
 
     if(params){
       this.options.params = new HttpParams({fromObject: params});
     }
-
-    if(this.idToken)this.setIdToken();
+    if(headers){
+      this.options.headers = headers.headers
+    }
 
     return this.httpClient.get(`${this.baseUrl}/${uri}`, this.options);
   }
 
-  post(uri: string, payload: any, params?: any){
+  post(uri: string, payload: any, params?: any, headers?: any){
     this.options.params = new HttpParams();
+    this.options.headers = new HttpHeaders();
     if(params){
       this.options.params = new HttpParams({fromObject: params});
     }
-    this.setIdToken();
+    if(headers){
+      this.options.headers = headers.headers
+    }
 
     return this.httpClient.post(`${this.baseUrl}/${uri}`, payload, this.options);
   }
 
   patch(uri: string, payload: any){
     this.options.params = new HttpParams();
-    this.setIdToken();
+    this.options.headers = new HttpHeaders();
+
     return this.httpClient.patch(`${this.baseUrl}/${uri}`, payload, this.options);
   }
 
   delete(uri: string){
     this.options.params = new HttpParams();
-    this.setIdToken();
+    this.options.headers = new HttpHeaders();
     return this.httpClient.delete(`${this.baseUrl}/${uri}`, this.options);
-  }
-
-  setIdToken(){
-    if(this.idToken && !this.options.headers.has("idToken")){
-      this.options.headers = this.options.headers.append("idToken", this.idToken);
-    }else{
-      this.options.headers = this.options.headers.set("idToken", this.idToken);
-    }
   }
 }

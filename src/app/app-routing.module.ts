@@ -1,3 +1,4 @@
+import { LoginComponent } from './Components/Profile/login/login.component';
 import { DeckOverviewComponent } from './Components/Actions/deck-overview/deck-overview.component';
 import { AddNodeComponent } from './Components/Actions/add-node/add-node.component';
 import { AddRootComponent } from './Components/Actions/add-root/add-root.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'home', component:HomeComponent},
   {path: 'explore', component:ExploreComponent},
+  {path: 'login', component:LoginComponent},
   {path: 'exploreRoot/:rootId', component:ExploreRootOverviewComponent},
   {path: 'myContent', component:MyContentComponent, canActivate: [AuthGuardService], children:[
     {path: 'Roots', component:ShowRootsComponent},

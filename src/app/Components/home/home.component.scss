@@ -28,14 +28,14 @@ main{
     font-size: 16px;
     line-height: 100%;
   }
-  button{
+  a{
     margin-top: 20px;
     color: white;
     border: none;
     background-color: #876E2B;
     padding: 10px 15px;
     border-radius: 10px;
-
+    cursor: pointer;
     align-self: start;
   }
 
