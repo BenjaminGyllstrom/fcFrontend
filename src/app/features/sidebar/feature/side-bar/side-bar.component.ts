@@ -34,15 +34,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
     editMode: boolean = true
 
-    // roots: Root[];
     selectedRoot: any
     addRootIsClicked: boolean
 
-    // chapters: Chapter[]
     selectedChapter: any;
     addChapterIsClicked: boolean
 
-    // nodes: any[]
     selectedNode: any;
     addNodeIsClicked: boolean
 
@@ -87,21 +84,8 @@ export class SideBarComponent implements OnInit, OnDestroy {
         this.selectedNode = node
       })
     )
-
-
   }
 
-  onToggle(toogleMode:boolean){
-    // this.editMode = toogleMode;
-
-    // if(this.selectedNode){
-    //   let action = Action.Study;
-    //   if(this.editMode){
-    //     action = this.selectedNode.type == 'deck'? Action.Cards : Action.ExplainOverview
-    //   }
-    //   this.navigate(action, this.selectedNode.type)
-    // }
-  }
   onClose(){
     this.closeEmitter.emit();
   }
@@ -110,7 +94,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   //################# Clicked #################
-
   onRootClicked(root: any){
     const route = root == this.selectedRoot?
     ['Roots'] :
@@ -133,8 +116,6 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
   //################# ADD #################
-
-
   onAddRoot(shouldAdd:boolean){
     const route = shouldAdd? ['Roots', 'AddRoot']:['Roots']
     this.router.navigate(route, {relativeTo:this.route})
@@ -153,8 +134,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
 
 
-    //################# DELETE #################
-
+  //################# DELETE #################
   onDeleteRoot(root: Root){
     const data= {name: root.title, type: 'root'}
     this.delete(root, data);
