@@ -1,24 +1,24 @@
-import { LoginComponent } from './Components/Profile/login/login.component';
-import { DeckOverviewComponent } from './Components/Actions/deck-overview/deck-overview.component';
-import { AddNodeComponent } from './Components/Actions/add-node/add-node.component';
-import { AddRootComponent } from './Components/Actions/add-root/add-root.component';
-import { AddChapterComponent } from './Components/Actions/add-chapter/add-chapter.component';
-import { ShowCardsComponent } from './Components/Actions/show-cards/show-cards.component';
-import { ShowNodesComponent } from './Components/Actions/show-nodes/show-nodes.component';
-import { AddCardComponent } from './Components/Actions/add-card/add-card.component';
-import { MyContentComponent } from './Components/my-content/my-content.component';
+import { LoginComponent } from 'src/app/features/Profile/login/login.component';
+import { DeckOverviewComponent } from './features/nodes/feature/deck-overview/deck-overview.component';
+import { AddNodeComponent } from './features/nodes/feature/add-node/add-node.component';
+import { AddRootComponent } from './features/roots/feature/add-root/add-root.component';
+import { AddChapterComponent } from './features/chapters/feature/add-chapter/add-chapter.component';
+import { ShowCardsComponent } from './features/cards/feature/show-cards/show-cards.component';
+import { ShowNodesComponent } from './features/nodes/feature/show-nodes/show-nodes.component';
+import { AddCardComponent } from './features/cards/feature/add-card/add-card.component';
+import { MyContentComponent } from './features/my-content/feature/my-content/my-content.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './Components/home/home.component';
-import { ExplainOverviewComponent } from './Components/Actions/explain-overview/explain-overview.component';
-import { LogInComponent } from './Components/Profile/log-in/log-in.component';
+import { HomeComponent } from './features/home/feature/home/home.component';
+import { ExplainOverviewComponent } from './features/nodes/feature/explain-overview/explain-overview.component';
+import { LogInComponent } from './features/Profile/log-in/log-in.component';
 import { AuthGuardService } from './Services/AuthGuard.service';
-import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';
-import { ShowRootsComponent } from './Components/Actions/show-roots/show-roots.component';
-import { StudyNodeComponent } from './Components/Actions/study-node/study-node.component';
-import { ExploreComponent } from './Components/explore/explore.component';
-import { ExploreRootOverviewComponent } from './Components/explore-root-overview/explore-root-overview.component';
-import { StudyCardsComponent } from './Components/Actions/study-node/study-cards/study-cards.component';
+import { ShowChaptersComponent } from './features/chapters/feature/show-chapters/show-chapters.component';
+import { ShowRootsComponent } from './features/roots/feature/show-roots/show-roots.component';
+import { StudyNodeComponent } from './features/study/feature/study-node/study-node.component';
+import { ExploreComponent } from './features/explore/feature/explore/explore.component';
+import { ExploreRootOverviewComponent } from './features/explore/feature/explore-root-overview/explore-root-overview.component';
+import { StudyCardsComponent } from './features/study/feature/study-cards/study-cards.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},

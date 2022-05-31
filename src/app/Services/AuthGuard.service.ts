@@ -1,12 +1,8 @@
-import { LoginComponent } from '../Components/Profile/login/login.component';
-import { LoginHttpService } from 'src/app/Services/Http/LoginHttp.service';
-import { LogInComponent } from './../Components/Profile/log-in/log-in.component';
 import { MatDialog } from '@angular/material/dialog';
 import {Injectable} from '@angular/core';
-import {SocialAuthService, SocialUser} from 'angularx-social-login';
+import {SocialAuthService} from 'angularx-social-login';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
