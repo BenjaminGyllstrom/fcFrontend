@@ -1,3 +1,4 @@
+import { LoginPopupComponent } from '../Profile/login-popup/login-popup.component';
 import { Subscription } from 'rxjs';
 import { AuthGuardService } from './../../Services/AuthGuard.service';
 import { LoginComponent } from './../../Components/Profile/login/login.component';
@@ -56,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogin(){
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(LoginPopupComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

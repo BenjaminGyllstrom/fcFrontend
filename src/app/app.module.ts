@@ -93,6 +93,7 @@ import { StudyEffects } from './ngrx/study/study.effects';
 import { StudyCardsComponent } from './Components/Actions/study-node/study-cards/study-cards.component';
 import { environment } from "../environments/environment";
 import { LoginComponent } from './Components/Profile/login/login.component';
+import { LoginPopupComponent } from './Components/Profile/login-popup/login-popup.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +151,7 @@ import { LoginComponent } from './Components/Profile/login/login.component';
     NodesRootOverviewComponent,
     StudyCardsComponent,
     LoginComponent,
+    LoginPopupComponent,
   ],
   imports: [
     BrowserModule,
