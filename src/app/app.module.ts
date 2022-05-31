@@ -24,7 +24,6 @@ import { HomeComponent } from './Components/home/home.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { DeckOverviewComponent } from './Components/Actions/deck-overview/deck-overview.component';
 import { EditCardComponent } from './Components/Actions/show-cards/edit-card/edit-card.component';
-import { StudyComponent } from './Components/study/study.component';
 import { ChapterListItemComponent } from './Components/Actions/show-chapters/chapter-list-item/chapter-list-item.component';
 import { DeckNodeComponent } from './Components/Nodes/deck-node/deck-node.component';
 import { ExplainNodeComponent } from './Components/Nodes/explain-node/explain-node.component';
@@ -97,7 +96,6 @@ import { LoginPopupComponent } from './Components/Profile/login-popup/login-popu
     HeaderComponent,
     DeckOverviewComponent,
     EditCardComponent,
-    StudyComponent,
     ChapterListItemComponent,
     DeckNodeComponent,
     ExplainNodeComponent,

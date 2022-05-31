@@ -14,7 +14,6 @@ import { HomeComponent } from './Components/home/home.component';
 // import { CreateRootComponent } from './Components/roots/create-root/create-root.component';
 // import { MyRootsComponent } from './Components/roots/my-roots/my-roots.component';
 // import { RootOverviewComponent } from './Components/roots/root-overview/root-overview.component';
-import { StudyComponent } from './Components/study/study.component';
 import { ExplainOverviewComponent } from './Components/Actions/explain-overview/explain-overview.component';
 // import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
 import { LogInComponent } from './Components/Profile/log-in/log-in.component';
@@ -50,7 +49,6 @@ const routes: Routes = [
   {path: 'deckOverview', component:DeckOverviewComponent, canActivate: [AuthGuardService]},
   {path: 'deckOverview/:id', component:DeckOverviewComponent, canActivate: [AuthGuardService]},
   {path: 'explainOverview/:id', component:ExplainOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'study/:type/:id', component:StudyComponent, canActivate: [AuthGuardService]},
   {path: 'login', component:LogInComponent},
 ];
 
