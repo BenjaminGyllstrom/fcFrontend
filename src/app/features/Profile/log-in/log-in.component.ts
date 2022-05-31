@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
-import { HttpService } from 'src/app/Services/Http/http.service';
-import { LoginHttpService } from 'src/app/Services/Http/LoginHttp.service';
+import { HttpService } from 'src/app/features/shared/data-access/Http/http.service';
+import { LoginHttpService } from 'src/app/features/shared/data-access/Http/LoginHttp.service';
 
 @Component({
   selector: 'app-log-in',

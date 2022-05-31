@@ -4,9 +4,9 @@ import { Store } from "@ngrx/store";
 import { EMPTY, iif, Observable } from "rxjs";
 import { map, mergeMap, switchMap, tap } from "rxjs/operators";
 import { INode } from "src/app/Models/node.model";
-import { ChapterHttpService } from "src/app/Services/Http/ChapterHttp.service";
-import { DeckHttpService } from "src/app/Services/Http/DeckHttp.service";
-import { ExplainHttpService } from "src/app/Services/Http/ExplainHttp.service";
+import { ChapterHttpService } from "src/app/features/shared/data-access/Http/ChapterHttp.service";
+import { DeckHttpService } from "src/app/features/shared/data-access/Http/DeckHttp.service";
+import { ExplainHttpService } from "src/app/features/shared/data-access/Http/ExplainHttp.service";
 import { AppState } from "../appState";
 import { getChapterNodes } from "./node.actions";
 import * as fromNode from "src/app/ngrx/node/node.actions"

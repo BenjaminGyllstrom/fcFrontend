@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { EMPTY, iif, map, mergeMap, Observable, switchMap, tap } from "rxjs";
 import { Card, ICard } from "src/app/Models/card.model";
-import { CardHttpService } from "src/app/Services/Http/CardHttp.service";
-import { DeckHttpService } from "src/app/Services/Http/DeckHttp.service";
+import { CardHttpService } from "src/app/features/shared/data-access/Http/CardHttp.service";
+import { DeckHttpService } from "src/app/features/shared/data-access/Http/DeckHttp.service";
 import { AppState } from "../appState";
 import * as fromCard from './card.actions'
 import { cardsLoadedForDeck } from "./card.selectors";

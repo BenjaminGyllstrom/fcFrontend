@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Chapter, IChapter } from "src/app/Models/chapter.model";
 import { IDeck } from "src/app/Models/deck.model";
-import { HttpService } from "../Http/http.service";
+import { HttpService } from "./http.service";
 import { CardHttpService } from "./CardHttp.service";
 import { DeckHttpService } from "./DeckHttp.service";
 import { ExplainHttpService } from "./ExplainHttp.service";

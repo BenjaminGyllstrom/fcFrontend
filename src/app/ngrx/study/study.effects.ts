@@ -4,9 +4,9 @@ import { Store } from "@ngrx/store";
 import { catchError, EMPTY, filter, iif, interval, map, mergeMap, Observable, of, switchMap, takeUntil, takeWhile, tap } from "rxjs";
 import { Card, ICard } from "src/app/Models/card.model";
 import { Explain } from "src/app/Models/explain.model";
-import { CardHttpService } from "src/app/Services/Http/CardHttp.service";
-import { DeckHttpService } from "src/app/Services/Http/DeckHttp.service";
-import { ExplainHttpService } from "src/app/Services/Http/ExplainHttp.service";
+import { CardHttpService } from "src/app/features/shared/data-access/Http/CardHttp.service";
+import { DeckHttpService } from "src/app/features/shared/data-access/Http/DeckHttp.service";
+import { ExplainHttpService } from "src/app/features/shared/data-access/Http/ExplainHttp.service";
 import { AppState } from "../appState";
 import { createCardSuccessful } from "../card/card.actions";
 import * as fromStudy from "./study.actions"

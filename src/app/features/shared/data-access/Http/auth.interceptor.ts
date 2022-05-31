@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AuthGuardService } from '../features/shared/utils/AuthGuard.service';
+import { AuthGuardService } from '../../utils/AuthGuard.service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";

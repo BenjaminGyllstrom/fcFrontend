@@ -1,4 +1,4 @@
-import { AuthInterceptor } from './Services/auth.interceptor';
+import { AuthInterceptor } from './features/shared/data-access/Http/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Deck, IDeck } from "src/app/Models/deck.model";
-import { HttpService } from "../Http/http.service";
+import { HttpService } from "./http.service";
 import { CardHttpService } from "./CardHttp.service";
 
 @Injectable({

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialAuthService } from 'angularx-social-login';
-import { HttpService } from 'src/app/Services/Http/http.service';
+import { HttpService } from 'src/app/features/shared/data-access/Http/http.service';
 import { BreakpointObserver } from "@angular/cdk/layout";
 
 @Component({

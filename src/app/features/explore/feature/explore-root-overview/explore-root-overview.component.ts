@@ -10,9 +10,9 @@ import { Explain } from 'src/app/Models/explain.model';
 import { IRoot, Root } from 'src/app/Models/root.model';
 import { AppState } from 'src/app/ngrx/appState';
 import { downloadRoot } from 'src/app/ngrx/root/root.actions';
-import { ChapterHttpService } from 'src/app/Services/Http/ChapterHttp.service';
-import { HttpService } from 'src/app/Services/Http/http.service';
-import { RootHttpService } from 'src/app/Services/Http/RootHttp.service';
+import { ChapterHttpService } from 'src/app/features/shared/data-access/Http/ChapterHttp.service';
+import { HttpService } from 'src/app/features/shared/data-access/Http/http.service';
+import { RootHttpService } from 'src/app/features/shared/data-access/Http/RootHttp.service';
 
 @Component({
   selector: 'app-explore-root-overview',

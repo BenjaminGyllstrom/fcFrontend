@@ -7,10 +7,10 @@ import { map, mergeMap, switchMap, tap, combineLatestWith } from "rxjs/operators
 import { Chapter } from "src/app/Models/chapter.model";
 import { INode } from "src/app/Models/node.model";
 import { Root } from "src/app/Models/root.model";
-import { ChapterHttpService } from "src/app/Services/Http/ChapterHttp.service";
-import { DeckHttpService } from "src/app/Services/Http/DeckHttp.service";
-import { ExplainHttpService } from "src/app/Services/Http/ExplainHttp.service";
-import { RootHttpService } from "src/app/Services/Http/RootHttp.service";
+import { ChapterHttpService } from "src/app/features/shared/data-access/Http/ChapterHttp.service";
+import { DeckHttpService } from "src/app/features/shared/data-access/Http/DeckHttp.service";
+import { ExplainHttpService } from "src/app/features/shared/data-access/Http/ExplainHttp.service";
+import { RootHttpService } from "src/app/features/shared/data-access/Http/RootHttp.service";
 import { AppState } from "../appState";
 import { chaptersLoadedForRoot } from "../chapter/chapter.selectors";
 import { getChapterNodesSuccessful } from "../node/node.actions";

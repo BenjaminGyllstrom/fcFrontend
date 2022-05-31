@@ -6,7 +6,7 @@ import { Card } from 'src/app/Models/card.model';
 import { AppState } from 'src/app/ngrx/appState';
 import * as fromStudy from 'src/app/ngrx/study/study.actions';
 import { cardsToStudyAvailable, getNextCardStudyForRoute, getNextDueCardStudyForRoute, timeUntilDue } from 'src/app/ngrx/study/study.selectors';
-import { DueTimerService } from 'src/app/Services/dueTimer.service';
+import { DueTimerService } from 'src/app/features/study/utils/dueTimer.service';
 // import * as fromStudy from ""
 @Component({
   selector: 'app-study-cards',

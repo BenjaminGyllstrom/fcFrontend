@@ -2,7 +2,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../../shared/utils/AuthGuard.service';
 import { Subscription } from 'rxjs';
-import { LoginHttpService } from 'src/app/Services/Http/LoginHttp.service';
+import { LoginHttpService } from 'src/app/features/shared/data-access/Http/LoginHttp.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 

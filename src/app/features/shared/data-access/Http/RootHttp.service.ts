@@ -2,7 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { IRoot, Root } from "src/app/Models/root.model";
-import { HttpService } from "../Http/http.service";
+import { HttpService } from "./http.service";
 import { CardHttpService } from "./CardHttp.service";
 import { ChapterHttpService } from "./ChapterHttp.service";
 

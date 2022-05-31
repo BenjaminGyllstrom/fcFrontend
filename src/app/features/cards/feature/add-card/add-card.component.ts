@@ -1,5 +1,5 @@
-import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
-import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
+import { ExplainHttpService } from 'src/app/features/shared/data-access/Http/ExplainHttp.service';
+import { DeckHttpService } from 'src/app/features/shared/data-access/Http/DeckHttp.service';
 import { Explain } from 'src/app/Models/explain.model';
 import { QuillService } from 'src/app/features/shared/utils/quill.service';
 import { Card } from 'src/app/Models/card.model';

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { Card, ICard } from "src/app/Models/card.model";
-import { CardHttpService } from "./Http/CardHttp.service";
+import { CardHttpService } from "../../shared/data-access/Http/CardHttp.service";
 
 @Injectable({
   providedIn: 'root'

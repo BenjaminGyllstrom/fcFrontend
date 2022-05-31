@@ -1,4 +1,4 @@
-import { DueTimerService } from 'src/app/Services/dueTimer.service';
+import { DueTimerService } from 'src/app/features/study/utils/dueTimer.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 

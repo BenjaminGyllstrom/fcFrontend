@@ -7,7 +7,7 @@ import { Card } from "src/app/Models/card.model";
 import { Chapter } from "src/app/Models/chapter.model";
 import { Deck } from "src/app/Models/deck.model";
 import { IRoot, Root } from "src/app/Models/root.model";
-import { RootHttpService } from "src/app/Services/Http/RootHttp.service";
+import { RootHttpService } from "src/app/features/shared/data-access/Http/RootHttp.service";
 import { AppState } from "../appState";
 import { downloadCardsSuccessful } from "../card/card.actions";
 import { downloadChaptersSuccessful } from "../chapter/chapter.actions";
