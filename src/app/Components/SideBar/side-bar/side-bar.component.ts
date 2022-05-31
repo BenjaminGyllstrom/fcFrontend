@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chapter } from 'src/app/Models/chapter.model';
-import { Action } from './../../../Services/action.service';
+import { Action } from 'src/app/Models/action.model';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { MatDialog } from '@angular/material/dialog';

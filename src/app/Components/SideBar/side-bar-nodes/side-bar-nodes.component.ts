@@ -1,4 +1,3 @@
-import { Action } from './../../../Services/action.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
@@ -97,13 +96,13 @@ export class SideBarNodesComponent implements OnInit {
     // this.router.navigate(this.urlService.getPath(this.getAction(node), this.sideBarService.selectedRoot?.id,
     //   this.sideBarService.selectedChapter?.id, this.sideBarService.selectedNode?.id))
   }
-  getAction(node:any){
-    if(node == null) return Action.Nodes
-    else if(!this.editMode) return Action.Study
-    else if(node.type == 'deck') return Action.Cards
-    else if(node.type == 'explain') return Action.ExplainOverview
-    else return Action.Default
-  }
+  // getAction(node:any){
+  //   if(node == null) return Action.Nodes
+  //   else if(!this.editMode) return Action.Study
+  //   else if(node.type == 'deck') return Action.Cards
+  //   else if(node.type == 'explain') return Action.ExplainOverview
+  //   else return Action.Default
+  // }
 
 
   getSideBarItem(node:any) : ISideBarItem{
