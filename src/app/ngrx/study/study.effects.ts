@@ -48,12 +48,6 @@ export class StudyEffects{
       map(deckId=> fromStudy.checkDue({deckId:deckId})))
   })
 
-  createdCard$ = createEffect(()=> this.actions$.pipe(
-    ofType(createCardSuccessful),
-    map(action => fromStudy.updateCardDueSuccessul({card:action.card}))
-  ))
-
-
   setExplainAsRead$ = createEffect(()=> this.actions$.pipe(
     ofType(fromStudy.setExplainAsRead),
     switchMap(action => this.updateAsRead(action.explain)),
