@@ -1,14 +1,11 @@
-import { StateService, State } from './../../../Services/state.service';
-import { ActionService, Action } from './../../../Services/action.service';
+import { Action } from './../../../Services/action.service';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Router } from '@angular/router';
-import { UrlService } from 'src/app/Services/url.service';
 import { Chapter } from 'src/app/Models/chapter.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
-import { getCurrentAction, getUrl } from 'src/app/ngrx/router/router.selector';
+import { getUrl } from 'src/app/ngrx/router/router.selector';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -31,7 +28,6 @@ export class SideBarActionsComponent implements OnInit, OnDestroy {
   currentAction:string=''
   isEdit:boolean = true;
   constructor(
-    private actionService: ActionService,
     private router: Router,
     private store: Store<AppState>
     ) { }

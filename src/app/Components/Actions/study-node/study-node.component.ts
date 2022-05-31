@@ -1,11 +1,4 @@
-import { Card } from './../../../Models/card.model';
-import { Explain } from './../../../Models/explain.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Deck } from 'src/app/Models/deck.model';
-import { ActionService, Action } from 'src/app/Services/action.service';
-import { ActivatedRoute } from '@angular/router';
-import { UrlService } from 'src/app/Services/url.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import { getNodeFromRoute } from 'src/app/ngrx/node/node.selectors';

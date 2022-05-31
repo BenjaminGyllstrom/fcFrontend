@@ -1,21 +1,7 @@
-import { UrlService } from './../../../Services/url.service';
-import { ItemsService } from './../../../Services/items.service';
-import { IExplain } from './../../../Models/explain.model';
-import { IDeck } from './../../../Models/deck.model';
-import { ExplainHttpService } from './../../../Services/Http/ExplainHttp.service';
-import { DeckHttpService } from './../../../Services/Http/DeckHttp.service';
-
-import { MatDialog } from '@angular/material/dialog';
-import { ActionService, Action } from './../../../Services/action.service';
-import { IChapter } from './../../../Models/chapter.model';
-import { ChapterHttpService } from './../../../Services/Http/ChapterHttp.service';
+import { Action } from './../../../Services/action.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ISideBarItem } from 'src/app/Models/sideBarItem';
-import { SideBarService } from 'src/app/Services/sideBar.service';
-import { DeleteItemComponent } from '../delete-item/delete-item.component';
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { Identifiers, ThrowStmt } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
 
 
 @Component({
@@ -33,15 +19,7 @@ export class SideBarNodesComponent implements OnInit {
   @Output('onDeleteNode') onDeleteNodeEmitter = new EventEmitter<any>();
 
   constructor(
-    private sideBarService: SideBarService,
-    private chapterHttpService: ChapterHttpService,
-    private actionService: ActionService,
-    private dialog: MatDialog,
-    private deckHttpService: DeckHttpService,
-    private explainHttpService: ExplainHttpService,
-    private itemsService: ItemsService,
-    private urlService: UrlService,
-    private router: Router) { }
+    ) { }
 
   ngOnInit(): void {
     // this.editMode = this.sideBarService.editMode;
@@ -83,14 +61,14 @@ export class SideBarNodesComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any[]>){
-    moveItemInArray(this.nodes, event.previousIndex, event.currentIndex);
+    // moveItemInArray(this.nodes, event.previousIndex, event.currentIndex);
 
-    const chapter = this.sideBarService.selectedChapter
-    if(!chapter) return
+    // const chapter = this.sideBarService.selectedChapter
+    // if(!chapter) return
 
-    this.itemsService.updateNodeOrder(chapter, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
-      this.sideBarService.setNodes(updatedNodes);
-    })
+    // this.itemsService.updateNodeOrder(chapter, event.previousIndex, event.currentIndex).subscribe((updatedNodes:any)=>{
+    //   this.sideBarService.setNodes(updatedNodes);
+    // })
   }
 
   onClick(node:any){

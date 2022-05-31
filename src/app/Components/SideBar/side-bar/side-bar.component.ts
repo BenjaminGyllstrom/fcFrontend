@@ -1,12 +1,9 @@
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chapter } from 'src/app/Models/chapter.model';
-import { StateService, State } from './../../../Services/state.service';
-import { ActionService, Action } from './../../../Services/action.service';
+import { Action } from './../../../Services/action.service';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
 import { SideBarService } from 'src/app/Services/sideBar.service';
-import { ItemsService } from 'src/app/Services/items.service';
-import { UrlService } from 'src/app/Services/url.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { Observable, Subscription, forkJoin } from 'rxjs';
@@ -29,11 +26,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
 
   // state:State
   constructor(private sideBarService: SideBarService,
-    private actionService: ActionService,
-    private stateService: StateService,
     private router: Router,
-    private itemsService: ItemsService,
-    private urlService: UrlService,
     private dialog: MatDialog,
     private store: Store<AppState>,
     private route: ActivatedRoute) { }
