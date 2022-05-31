@@ -1,6 +1,5 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Card } from './../../../Models/card.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { EditCardComponent } from './edit-card/edit-card.component';
 import { DeleteItemComponent } from '../../SideBar/delete-item/delete-item.component';
@@ -21,7 +20,6 @@ export class ShowCardsComponent implements OnInit {
   cards: Card[] = []
 
   constructor(
-    private sideBarService: SideBarService,
     public dialog: MatDialog,
     private store:Store<AppState>
   ) { }
@@ -32,8 +30,6 @@ export class ShowCardsComponent implements OnInit {
   }
 
   onClick(card:Card){
-    this.sideBarService.selectedCard = card;
-
     const dialogRef = this.dialog.open(EditCardComponent);
 
     dialogRef.afterClosed().subscribe(result => {

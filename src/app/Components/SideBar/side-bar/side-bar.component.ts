@@ -3,7 +3,6 @@ import { Chapter } from 'src/app/Models/chapter.model';
 import { Action } from './../../../Services/action.service';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Root } from 'src/app/Models/root.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../delete-item/delete-item.component';
 import { Observable, Subscription, forkJoin } from 'rxjs';
@@ -25,7 +24,7 @@ import { deleteNode } from 'src/app/ngrx/node/node.actions';
 export class SideBarComponent implements OnInit, OnDestroy {
 
   // state:State
-  constructor(private sideBarService: SideBarService,
+  constructor(
     private router: Router,
     private dialog: MatDialog,
     private store: Store<AppState>,

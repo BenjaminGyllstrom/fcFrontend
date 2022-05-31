@@ -1,7 +1,6 @@
 import { MatDialogRef } from '@angular/material/dialog';
 import { Deck } from 'src/app/Models/deck.model';
 import { Card } from 'src/app/Models/card.model';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
@@ -23,17 +22,16 @@ export class EditCardComponent implements OnInit {
   content:string = '';
 
   constructor(
-    private sideBarService: SideBarService,
     private dialogRef: MatDialogRef<EditCardComponent>,
     private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
 
-    if(this.sideBarService.selectedCard == null) return
-    this.card = this.sideBarService.selectedCard;
-    this.question = this.card.question;
-    this.answer = this.card.answer;
+    // if(this.sideBarService.selectedCard == null) return
+    // this.card = this.sideBarService.selectedCard;
+    // this.question = this.card.question;
+    // this.answer = this.card.answer;
   }
   onContentChange(content:string){
     if(this.showQuestion){

@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { DisplayTreeService } from './../../../Services/displayTree.service';
-import { SideBarService } from 'src/app/Services/sideBar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
@@ -19,7 +18,6 @@ export class ShowNodesComponent implements OnInit {
   nodes$:Observable<any[]>
 
   constructor(
-    private sideBarService: SideBarService,
     private displayTreeService: DisplayTreeService,
     private store: Store<AppState>,
     private router: Router,
