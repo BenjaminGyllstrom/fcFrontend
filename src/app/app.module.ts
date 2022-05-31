@@ -38,7 +38,6 @@ import {AuthGuardService} from './Services/AuthGuard.service';
 import { Study2Component } from './Components/study2/study2.component';
 import { StudyDueTimerComponent } from './Components/study2/study-due-timer/study-due-timer.component';
 import { CardStudyComponent } from './Components/study2/card-study/card-study.component';
-import { CircleComponent } from './Components/circle/circle.component';
 import { HomeCircleComponent } from './Components/home/home-circle/home-circle.component';
 import { SideBarComponent } from './Components/SideBar/side-bar/side-bar.component';
 import { SideBarRootsComponent } from './Components/SideBar/side-bar-roots/side-bar-roots.component';
@@ -108,7 +107,6 @@ import { LoginPopupComponent } from './Components/Profile/login-popup/login-popu
     Study2Component,
     StudyDueTimerComponent,
     CardStudyComponent,
-    CircleComponent,
     HomeCircleComponent,
     SideBarComponent,
     SideBarRootsComponent,
