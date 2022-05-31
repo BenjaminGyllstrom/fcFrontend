@@ -1,7 +1,7 @@
 import { ExplainHttpService } from 'src/app/Services/Http/ExplainHttp.service';
 import { DeckHttpService } from 'src/app/Services/Http/DeckHttp.service';
 import { Explain } from 'src/app/Models/explain.model';
-import { QuillService } from 'src/app/Services/quill.service';
+import { QuillService } from 'src/app/features/shared/utils/quill.service';
 import { Card } from 'src/app/Models/card.model';
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Deck } from 'src/app/Models/deck.model';

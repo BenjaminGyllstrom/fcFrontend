@@ -1,4 +1,4 @@
-import { QuillService } from 'src/app/Services/quill.service';
+import { QuillService } from 'src/app/features/shared/utils/quill.service';
 import { Quill } from 'quill';
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 
