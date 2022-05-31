@@ -9,13 +9,8 @@ import { AddCardComponent } from './Components/Actions/add-card/add-card.compone
 import { MyContentComponent } from './Components/my-content/my-content.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { DeckOverviewComponent } from './Components/Decks/deck-overview/deck-overview.component';
 import { HomeComponent } from './Components/home/home.component';
-// import { CreateRootComponent } from './Components/roots/create-root/create-root.component';
-// import { MyRootsComponent } from './Components/roots/my-roots/my-roots.component';
-// import { RootOverviewComponent } from './Components/roots/root-overview/root-overview.component';
 import { ExplainOverviewComponent } from './Components/Actions/explain-overview/explain-overview.component';
-// import { ExplainOverviewComponent } from './Components/Explains/explain-overview/explain-overview.component';
 import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { AuthGuardService } from './Services/AuthGuard.service';
 import { ShowChaptersComponent } from './Components/Actions/show-chapters/show-chapters.component';

@@ -34,7 +34,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { GoogleLoginProvider, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
 import {AuthGuardService} from './Services/AuthGuard.service';
-import { Study2Component } from './Components/study2/study2.component';
 import { StudyDueTimerComponent } from './Components/Actions/study-node/study-due-timer/study-due-timer.component';
 import { CardStudyComponent } from './Components/Actions/study-node/card-study/card-study.component';
 import { HomeCircleComponent } from './Components/home/home-circle/home-circle.component';
@@ -102,7 +101,6 @@ import { LoginPopupComponent } from './Components/Profile/login-popup/login-popu
     ExplainOverviewComponent,
     StudyExplainComponent,
     LogInComponent,
-    Study2Component,
     StudyDueTimerComponent,
     CardStudyComponent,
     HomeCircleComponent,
