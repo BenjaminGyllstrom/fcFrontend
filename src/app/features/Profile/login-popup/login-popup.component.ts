@@ -1,6 +1,6 @@
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthGuardService } from './../../../Services/AuthGuard.service';
+import { AuthGuardService } from '../../shared/utils/AuthGuard.service';
 import { Subscription } from 'rxjs';
 import { LoginHttpService } from 'src/app/Services/Http/LoginHttp.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';

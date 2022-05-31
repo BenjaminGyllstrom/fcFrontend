@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DisplayTreeService } from 'src/app/Services/displayTree.service';
+import { DisplayTreeService } from 'src/app/features/nodes/utils/displayTree.service';
 
 @Component({
   selector: 'app-nodes-root-overview',

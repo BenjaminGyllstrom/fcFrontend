@@ -12,7 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './features/home/feature/home/home.component';
 import { ExplainOverviewComponent } from './features/nodes/feature/explain-overview/explain-overview.component';
 import { LogInComponent } from './features/Profile/log-in/log-in.component';
-import { AuthGuardService } from './Services/AuthGuard.service';
+import { AuthGuardService } from './features/shared/utils/AuthGuard.service';
 import { ShowChaptersComponent } from './features/chapters/feature/show-chapters/show-chapters.component';
 import { ShowRootsComponent } from './features/roots/feature/show-roots/show-roots.component';
 import { StudyNodeComponent } from './features/study/feature/study-node/study-node.component';

@@ -1,6 +1,6 @@
 import { LoginPopupComponent } from 'src/app/features/Profile/login-popup/login-popup.component';
 import { Subscription } from 'rxjs';
-import { AuthGuardService } from '../../../../Services/AuthGuard.service';
+import { AuthGuardService } from '../../../shared/utils/AuthGuard.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';

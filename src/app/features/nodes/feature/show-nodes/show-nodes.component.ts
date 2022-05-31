@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { DisplayTreeService } from '../../../../Services/displayTree.service';
+import { DisplayTreeService } from '../../utils/displayTree.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';

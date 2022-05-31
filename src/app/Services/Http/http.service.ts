@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, tap } from 'rxjs';
-import { AuthGuardService } from '../AuthGuard.service';
+import { AuthGuardService } from '../../features/shared/utils/AuthGuard.service';
 import { environment } from "../../../environments/environment";
 
 @Injectable({

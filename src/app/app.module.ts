@@ -32,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LogInComponent } from './features/Profile/log-in/log-in.component';
 import { GoogleLoginProvider, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
-import {AuthGuardService} from './Services/AuthGuard.service';
+import {AuthGuardService} from './features/shared/utils/AuthGuard.service';
 import { StudyDueTimerComponent } from './features/study/ui/study-due-timer/study-due-timer.component';
 import { CardStudyComponent } from './features/study/feature/card-study/card-study.component';
 import { HomeCircleComponent } from './features/home/ui/home-circle/home-circle.component';
