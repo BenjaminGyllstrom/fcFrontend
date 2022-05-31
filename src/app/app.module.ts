@@ -32,10 +32,6 @@ import { ExplainOverviewComponent } from './Components/Actions/explain-overview/
 import { StudyExplainComponent } from './Components/Actions/study-node/study-explain/study-explain.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MainDisplayComponent } from './Components/MainDisplay/main-display/main-display.component';
-import { MainDisplayHomeComponent } from './Components/MainDisplay/main-display-home/main-display-home.component';
-import { MainDisplayRootsComponent } from './Components/MainDisplay/main-display-roots/main-display-roots.component';
-import { MainDisplayChaptersComponent } from './Components/MainDisplay/main-display-chapters/main-display-chapters.component';
 import { LogInComponent } from './Components/Profile/log-in/log-in.component';
 import { GoogleLoginProvider, SocialAuthService, SocialLoginModule } from 'angularx-social-login';
 import {AuthGuardService} from './Services/AuthGuard.service';
@@ -108,10 +104,6 @@ import { LoginPopupComponent } from './Components/Profile/login-popup/login-popu
     ExplainNodeComponent,
     ExplainOverviewComponent,
     StudyExplainComponent,
-    MainDisplayComponent,
-    MainDisplayHomeComponent,
-    MainDisplayRootsComponent,
-    MainDisplayChaptersComponent,
     LogInComponent,
     Study2Component,
     StudyDueTimerComponent,
