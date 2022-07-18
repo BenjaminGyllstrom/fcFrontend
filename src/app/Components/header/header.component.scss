@@ -1,16 +1,18 @@
 
-$main-color: #D4BB79;
+// $main-color: #D4BB79;
+$main-color: #fff;
+$text-color:black;
 
 mat-toolbar{
   min-height: 65px;
   min-width: 280px;
   width: 100%;
   background-color: $main-color;
-  color: white;
+  color: $text-color;
   position: relative;
 }
 a{
-  color: white;
+  color: $text-color;
 }
 .logo{
   display: flex;
@@ -45,7 +47,7 @@ a{
   // row-gap: 20px;
   flex-direction: column;
   // justify-content: center;
-  color: white;
+  color: $text-color;
   background-color: $main-color;
 }
 .user{
@@ -54,17 +56,17 @@ a{
   display: flex;
 
   &__name{
-    color: white;
+    color: $text-color;
     font-size: 16px;
   }
   &__log-in{
     cursor: pointer;
-    color: white;
+    color: $text-color;
     font-size: 20px;
   }
   &__log-out{
     cursor: pointer;
-    color: white;
+    color: $text-color;
     font-size: 20px;
   }
 }
@@ -78,7 +80,7 @@ a{
   justify-self: start;
   display: flex;
   a{
-    color: white;
+    color: $text-color;
     margin-left: 30px;
     font-size: 20px;
   }
