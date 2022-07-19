@@ -3,8 +3,9 @@
     <app-side-bar (onClose)="sidenav.close()"></app-side-bar>
   </mat-sidenav>
   <mat-sidenav-content>
+    <app-header class="header"></app-header>
     <mat-icon *ngIf="!sidenav.opened" (click)="sidenav.open()" class="menu-button">chevron_right</mat-icon>
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
