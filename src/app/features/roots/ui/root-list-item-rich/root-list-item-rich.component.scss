@@ -112,6 +112,7 @@ p{
   .status{
     grid-column: 3/5;
     grid-row: 1;
+    justify-self: center;
   }
   .card-count{
     grid-column:5/7;
@@ -134,13 +135,6 @@ p{
 
 @media screen and (min-width:1440px){
   .status{
-    justify-self: center;
     grid-column: 4;
-  }
-  .card-count{
-    grid-column: 5/7;
-  }
-  .user{
-    grid-column: 7/9;
   }
 }

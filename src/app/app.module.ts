@@ -89,6 +89,7 @@ import { LoginComponent } from './features/Profile/login/login.component';
 import { LoginPopupComponent } from './features/Profile/login-popup/login-popup.component';
 import { RootListItemRichComponent } from './features/roots/ui/root-list-item-rich/root-list-item-rich.component';
 import { ItemStatusComponent } from './features/shared/ui/item-status/item-status.component';
+import { RootListHeadersComponent } from './features/roots/ui/root-list-headers/root-list-headers.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { ItemStatusComponent } from './features/shared/ui/item-status/item-statu
     LoginPopupComponent,
     RootListItemRichComponent,
     ItemStatusComponent,
+    RootListHeadersComponent,
   ],
   imports: [
     BrowserModule,
