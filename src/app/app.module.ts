@@ -87,6 +87,8 @@ import { StudyCardsComponent } from './features/study/feature/study-cards/study-
 import { environment } from "../environments/environment";
 import { LoginComponent } from './features/Profile/login/login.component';
 import { LoginPopupComponent } from './features/Profile/login-popup/login-popup.component';
+import { RootListItemRichComponent } from './features/roots/ui/root-list-item-rich/root-list-item-rich.component';
+import { ItemStatusComponent } from './features/shared/ui/item-status/item-status.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +140,8 @@ import { LoginPopupComponent } from './features/Profile/login-popup/login-popup.
     StudyCardsComponent,
     LoginComponent,
     LoginPopupComponent,
+    RootListItemRichComponent,
+    ItemStatusComponent,
   ],
   imports: [
     BrowserModule,

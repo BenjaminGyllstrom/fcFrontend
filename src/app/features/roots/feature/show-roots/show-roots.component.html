@@ -1,9 +1,20 @@
 <div class="show-roots">
+  <!-- <div class="title-elements">
+  </div> -->
   <h1>Roots</h1>
-
+  <a routerLink="AddRoot" class="add-element-button">Add Root</a>
+  <!-- <button class="add-element-button">New Root</button> -->
   <div class="roots__list">
-      <app-root-list-item *ngFor="let root of roots$ | async" [root]="root"
-      (click)="onClick(root)" class="roots__list-item"></app-root-list-item>
+
+    <app-root-list-item-rich
+    *ngFor="let root of roots$ | async"
+    [root]="root"
+    class="roots__list-item-rich"
+    (click)="onClick(root)">
+    </app-root-list-item-rich>
+
+      <!-- <app-root-list-item *ngFor="let root of roots$ | async" [root]="root"
+      (click)="onClick(root)" class="roots__list-item"></app-root-list-item> -->
   </div>
 
 </div>
