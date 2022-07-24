@@ -5,6 +5,7 @@ import { AddRootComponent } from './features/roots/feature/add-root/add-root.com
 import { AddChapterComponent } from './features/chapters/feature/add-chapter/add-chapter.component';
 import { ShowCardsComponent } from './features/cards/feature/show-cards/show-cards.component';
 import { ShowNodesComponent } from './features/nodes/feature/show-nodes/show-nodes.component';
+import { ShowNodesRichComponent } from './features/nodes/feature/show-nodes-rich/show-nodes-rich.component';
 import { AddCardComponent } from './features/cards/feature/add-card/add-card.component';
 import { MyContentComponent } from './features/my-content/feature/my-content/my-content.component';
 import { NgModule } from '@angular/core';
@@ -32,7 +33,7 @@ const routes: Routes = [
     // {path:'Roots/:rootId/Introduction', component: RootOverviewComponent},
     {path:'Roots/:rootId/Chapters', component: ShowChaptersComponent},
     {path:'Roots/:rootId/Chapters/AddChapter', component: AddChapterComponent},
-    {path:'Roots/:rootId/Chapters/:chapterId/Nodes', component: ShowNodesComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes', component: ShowNodesRichComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/AddNode', component: AddNodeComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Overview', component: DeckOverviewComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsComponent},

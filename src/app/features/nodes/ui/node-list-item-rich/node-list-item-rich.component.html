@@ -1,0 +1,13 @@
+<main *ngIf="node">
+  <h1>{{node.title}}</h1>
+  <app-item-status [status]="getStatus()" class="status"></app-item-status>
+  <p class="type">{{node.type}}</p>
+  <div class="new-cards" *ngIf="node.type == 'deck'">
+    <p class="count-title">New</p>
+    <p class="count">3333</p>
+  </div>
+  <div class="due-cards" *ngIf="node.type == 'deck'">
+    <p class="count-title">Due</p>
+    <p class="count">3333</p>
+  </div>
+</main>

@@ -1,0 +1,20 @@
+
+<!-- <div class="show-nodes" *ngIf="(nodes$ | async) && nodes.length > 0"> -->
+  <div class="show-nodes" >
+    <div class="page-title">
+      <h1>Nodes</h1>
+      <a routerLink="AddNode">
+        <mat-icon class="add-button">control_point</mat-icon>
+      </a>
+    </div>
+    <div class="headers-container">
+      <app-node-list-headers class="headers"></app-node-list-headers>
+    </div>
+    <div class="node__list">
+      <app-node-list-item-rich
+      *ngFor="let node of nodes$|async"
+      [node]="node"
+      class="node__item"></app-node-list-item-rich>
+    </div>
+
+  </div>

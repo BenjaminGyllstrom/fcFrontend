@@ -1,0 +1,35 @@
+main{
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  column-gap: 16px;
+  padding: 0 24px;
+  align-content: flex-end;
+  justify-items: center;
+}
+h3{
+  font-size: 12px;
+  margin: 0;
+}
+
+.title{
+  justify-self: start;
+}
+
+.status{
+  grid-column: 4/6;
+}
+.type{
+  grid-column: 6;
+}
+.new{
+  grid-column: 7;
+}
+.due{
+  grid-column: 8;
+}
+
+// @media screen and (min-width:1240px) {
+//   .status{
+//     grid-column: 5;
+//   }
+// }

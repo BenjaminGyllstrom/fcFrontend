@@ -92,6 +92,9 @@ import { ItemStatusComponent } from './features/shared/ui/item-status/item-statu
 import { RootListHeadersComponent } from './features/roots/ui/root-list-headers/root-list-headers.component';
 import { ChapterListItemRichComponent } from './features/chapters/ui/chapter-list-item-rich/chapter-list-item-rich.component';
 import { ChapterListHeadersComponent } from './features/chapters/ui/chapter-list-headers/chapter-list-headers.component';
+import { ShowNodesRichComponent } from './features/nodes/feature/show-nodes-rich/show-nodes-rich.component';
+import { NodeListItemRichComponent } from './features/nodes/ui/node-list-item-rich/node-list-item-rich.component';
+import { NodeListHeadersComponent } from './features/nodes/ui/node-list-headers/node-list-headers.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +151,9 @@ import { ChapterListHeadersComponent } from './features/chapters/ui/chapter-list
     RootListHeadersComponent,
     ChapterListItemRichComponent,
     ChapterListHeadersComponent,
+    ShowNodesRichComponent,
+    NodeListItemRichComponent,
+    NodeListHeadersComponent,
   ],
   imports: [
     BrowserModule,
