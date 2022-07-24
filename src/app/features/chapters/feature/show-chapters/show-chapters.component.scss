@@ -1,20 +1,89 @@
 .show-chapters{
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
-
-h1{
-  align-self: center;
+.page-title{
   margin-top: 5vw;
   margin-bottom: 5vw;
+  margin-left: 10px;
+
+  display: flex;
+  align-items: center;
+}
+h1{
+  margin: 0;
 }
 
+.add-button{
+  margin-left: 20px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  cursor: pointer;
+
+  color: #D4BB79;
+}
 .chapters{
   &__list{
-
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(8, 1fr);
   }
   &__list-item{
+    grid-column: 1/9;
+    height: 75px;
+    min-width: 320px;
+    max-width: 1130px;
+    border-bottom: 1px solid #969696;
+  }
 
+  &__list-item:last-of-type{
+    border: none;
+  }
+}
+
+.headers{
+  display:none;
+}
+
+
+@media (min-width:768px){
+  .page-title{
+    margin-bottom: 60px;
+    margin-left: 24px;
+  }
+  h1{
+    font-size: 36px ;
+  }
+  .add-button{
+    margin-left: 20px;
+    width: 36px;
+    height: 36px;
+    font-size: 36px;
+  }
+  .headers{
+    display:flex;
+    padding: 0 24px;
+    max-width: 1130px;
+  }
+  .chapters{
+    &__list{
+      padding: 0 24px;
+    }
+  }
+}
+
+
+@media (min-width:1024px){
+  .page-title{
+    margin-left: 54px;
+  }
+  .headers{
+    padding: 0 54px;
+  }
+  .chapters{
+    &__list{
+      padding: 0 54px;
+    }
   }
 }

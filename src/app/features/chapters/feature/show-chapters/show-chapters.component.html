@@ -1,9 +1,19 @@
 <div class="show-chapters">
-
-  <h1>Chapters</h1>
-  <div class="chapter__list">
+  <div class="page-title">
+    <h1>Chapters</h1>
+    <a routerLink="AddChapter">
+      <mat-icon class="add-button">control_point</mat-icon>
+    </a>
+  </div>
+  <app-chapter-list-headers class="headers"></app-chapter-list-headers>
+  <div class="chapters__list">
     <!-- <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of chapters" class="chapter__list-item"></app-chapter-list-item> -->
     <!-- <app-chapter-list-item  [chapter]="chapter" *ngFor="let chapter of chapters" class="chapter__list-item"></app-chapter-list-item> -->
-    <app-chapter-list-item [chapter]="chapter" *ngFor="let chapter of chapters$ | async" (click)="onClick(chapter)"></app-chapter-list-item>
+    <!-- <app-chapter-list-item [chapter]="chapter" *ngFor="let chapter of chapters$ | async" (click)="onClick(chapter)"></app-chapter-list-item> -->
+    <app-chapter-list-item-rich
+    *ngFor="let chapter of chapters$ | async"
+    [chapter]="chapter"
+    (click)="onClick(chapter)"
+    class="chapters__list-item"></app-chapter-list-item-rich>
   </div>
 </div>

@@ -90,6 +90,8 @@ import { LoginPopupComponent } from './features/Profile/login-popup/login-popup.
 import { RootListItemRichComponent } from './features/roots/ui/root-list-item-rich/root-list-item-rich.component';
 import { ItemStatusComponent } from './features/shared/ui/item-status/item-status.component';
 import { RootListHeadersComponent } from './features/roots/ui/root-list-headers/root-list-headers.component';
+import { ChapterListItemRichComponent } from './features/chapters/ui/chapter-list-item-rich/chapter-list-item-rich.component';
+import { ChapterListHeadersComponent } from './features/chapters/ui/chapter-list-headers/chapter-list-headers.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +146,8 @@ import { RootListHeadersComponent } from './features/roots/ui/root-list-headers/
     RootListItemRichComponent,
     ItemStatusComponent,
     RootListHeadersComponent,
+    ChapterListItemRichComponent,
+    ChapterListHeadersComponent,
   ],
   imports: [
     BrowserModule,
