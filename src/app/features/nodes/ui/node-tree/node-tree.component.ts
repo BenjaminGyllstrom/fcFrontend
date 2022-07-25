@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, range, tap } from 'rxjs';
 import { AppState } from 'src/app/ngrx/appState';
@@ -13,6 +13,7 @@ import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
 export class NodeTreeComponent implements OnInit {
 
   @Input() rowLength: number = 3;
+  @Output('Clicked') clickEmitter = new EventEmitter<any>();
   nodes$: Observable<any[]>;
   rows: any[] = []
 
@@ -33,5 +34,9 @@ export class NodeTreeComponent implements OnInit {
         }
       })
     )
+  }
+
+  onClick(node:any){
+    this.clickEmitter.emit(node);
   }
 }

@@ -29,4 +29,12 @@ export class ShowNodesRichComponent implements OnInit {
       tap((nodes)=>this.displayTreeService.nodes = nodes)
     );
   }
+
+  onClick(node:any){
+    let route:any[] = ['']
+    if(node.type == 'deck') route = ['Deck', node.id, 'Overview']
+    if(node.type == 'explain') route = ['Explain', node.id, 'Overview']
+
+    this.router.navigate(route, {relativeTo: this.route})
+  }
 }

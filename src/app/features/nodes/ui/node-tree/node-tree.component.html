@@ -20,7 +20,7 @@
     <div *ngFor="let row of rows" class="row"
     [ngStyle]="{'grid-template-columns': 'repeat('+ rowLength +', 1fr)'}">
 
-      <div *ngFor="let node of row; let i = index" class="node-element">
+      <div *ngFor="let node of row; let i = index" class="node-element" (click)="onClick(node)">
         <!-- {{node.title}} -->
         <app-explain-node
 

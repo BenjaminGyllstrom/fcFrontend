@@ -18,9 +18,6 @@ export class ExplainNodeComponent implements OnInit {
   ngOnInit(): void {
     this.isLocked = this.explain.locked;
     this.finnished = !this.explain.new;
-
-    console.log(this.explain);
-
   }
 
   onClick(){

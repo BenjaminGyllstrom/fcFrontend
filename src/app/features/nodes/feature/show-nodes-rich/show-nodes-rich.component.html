@@ -20,11 +20,12 @@
         <app-node-list-item-rich
         *ngFor="let node of nodes"
         [node]="node"
-        class="node__item"></app-node-list-item-rich>
+        class="node__item"
+        (click)="onClick(node)"></app-node-list-item-rich>
       </div>
 
       <div class="node-tree" >
-        <app-node-tree [rowLength]="3"></app-node-tree>
+        <app-node-tree [rowLength]="3" (Clicked)="onClick($event)"></app-node-tree>
       </div>
     </div>
   </div>
