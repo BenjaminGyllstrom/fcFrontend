@@ -5,6 +5,25 @@
 }
 .editor{
   width: 100%;
-  height: calc(100% - 66px);
+  height: calc(100% - 138px);
   border: none;
+}
+
+@media (min-width:356px){
+  .editor{
+    height: calc(100% - 114px);
+  }
+}
+
+@media (min-width:459px){
+  .editor{
+    height: calc(100% - 90);
+  }
+}
+
+
+@media (min-width:653px){
+  .editor{
+    height: calc(100% - 66px);
+  }
 }

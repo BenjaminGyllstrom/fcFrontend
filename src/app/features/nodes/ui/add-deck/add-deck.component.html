@@ -3,7 +3,9 @@
   <form [formGroup]="deckForm" (ngSubmit)="onSubmit()" class="form">
     <div class="inputField">
       <p>Title:</p>
-      <input type="text" id="title" formControlName="title">
+      <div class="input">
+        <input type="text" id="title" formControlName="title">
+      </div>
     </div>
 
     <mat-form-field>

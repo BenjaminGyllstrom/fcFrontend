@@ -6,7 +6,9 @@
   <form [formGroup]="rootForm" (ngSubmit)="onSubmit()" class="form">
     <div class="inputField">
       <p>Title:</p>
-      <input type="text" id="title" formControlName="title">
+      <div class="input">
+        <input type="text" id="title" formControlName="title">
+      </div>
     </div>
 
     <button type="submit" class="button add-root-button">Add</button>
