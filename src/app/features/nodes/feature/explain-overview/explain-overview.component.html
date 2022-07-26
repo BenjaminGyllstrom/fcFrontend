@@ -1,9 +1,13 @@
 <div class="explain-overview">
 
+  <h1>Overview</h1>
+
   <form [formGroup]="explainForm" (ngSubmit)="onSave()" class="form">
     <div class="inputField">
       <p>Title:</p>
-      <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+      <div class="input">
+        <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+      </div>
     </div>
   </form>
 

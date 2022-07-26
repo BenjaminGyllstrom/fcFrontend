@@ -1,8 +1,13 @@
 <div class="deck-overview">
+
+  <h1>Overview</h1>
+
   <form [formGroup]="deckForm" (ngSubmit)="onSave()" class="form">
     <div class="inputField">
       <p>Title:</p>
-      <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+      <div class="input">
+        <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+      </div>
     </div>
 
     <mat-form-field>

@@ -40,6 +40,7 @@
 .quill{
   margin-top: 15px;
   width: 100%;
+  max-width: 1150px;
   height: 50vh;
   padding-bottom: 10px;
 
@@ -60,14 +61,6 @@
     p{
       font-size: 24px;
     }
-    // input{
-    //   font-size: 24px;
-    // }
-  }
-}
-@media (min-width:1500px){
-  .quill{
-    width: 980px;
   }
 }
 
