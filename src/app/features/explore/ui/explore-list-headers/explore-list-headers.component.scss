@@ -1,0 +1,23 @@
+main{
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  column-gap: 16px;
+  padding: 0 10px;
+  align-content: flex-end;
+  justify-items: center;
+}
+h3{
+  font-size: 12px;
+  margin: 0;
+}
+
+.title{
+  justify-self: start;
+}
+
+.user{
+  grid-column: 8;
+  justify-self: end;
+}

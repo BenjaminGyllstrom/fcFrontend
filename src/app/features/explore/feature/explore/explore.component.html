@@ -1,13 +1,13 @@
+<app-header class="header"></app-header>
 <div class="explore">
-
-  <div class="filter">
+  <!-- <div class="filter">
     <app-explore-filter></app-explore-filter>
-  </div>
+  </div> -->
 
+  <h1>Explore</h1>
+  <app-explore-list-headers></app-explore-list-headers>
   <div class="roots">
-    <div *ngFor="let root of roots" class="root">
-      <app-root-explore-item [root]="root" (onClick)="onClick(root)"></app-root-explore-item>
-    </div>
+    <app-root-explore-item [root]="root" class="root" *ngFor="let root of roots" (click)="onClick(root)" ></app-root-explore-item>
   </div>
 </div>
 

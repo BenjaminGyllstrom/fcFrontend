@@ -1,31 +1,28 @@
+main{
+  height: 100%;
+  width: 100%;
+  box-sizing:border-box;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: 1fr;
+  column-gap: 16px;
+  padding: 0 10px;
+  align-items: center;
 
-.root-explore-item{
-  border: 1px solid #876E2B;
-  border-radius: 10px;
-  padding: 5px;
   cursor: pointer;
-
-  background-color: white;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 
-.user{
-  display: flex;
-  align-items: flex-end;
-  gap: 5px;
+h1{
+  grid-column: 1/6;
+  margin: 0;
+  font-size: 14px;
+}
 
-  &__photo{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-  }
-  &__name{
-    margin: 0;
-    height: 100%;
-    font-size: 14px;
-  }
+p{
+  grid-column: 6/9;
+  margin: 0;
+  font-size: 12px;
+  color: #969696;
+  justify-self: end;
 }
