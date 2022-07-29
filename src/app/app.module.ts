@@ -97,6 +97,8 @@ import { NodeListItemRichComponent } from './features/nodes/ui/node-list-item-ri
 import { NodeListHeadersComponent } from './features/nodes/ui/node-list-headers/node-list-headers.component';
 import { NodeTreeComponent } from './features/nodes/ui/node-tree/node-tree.component';
 import { ExploreListHeadersComponent } from './features/explore/ui//explore-list-headers/explore-list-headers.component';
+import { exploreReducer } from './ngrx/explore/explore.reducer';
+import { ExploreEffects } from './ngrx/explore/explore.effects';
 
 @NgModule({
   declarations: [
@@ -177,8 +179,8 @@ import { ExploreListHeadersComponent } from './features/explore/ui//explore-list
     MatSidenavModule,
     MatIconModule,
     DragDropModule,
-    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, card:cardReducer, study:studyReducer, router: routerReducer}),
-    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, CardEffects, StudyEffects, RouterEffects]),
+    StoreModule.forRoot({root: rootReducer, chapter: chapterReducer, node:nodeReducer, card:cardReducer, study:studyReducer, explore: exploreReducer,router: routerReducer}),
+    EffectsModule.forRoot([RootEffects, ChapterEffects, NodeEffects, CardEffects, StudyEffects, ExploreEffects, RouterEffects]),
     StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
 
   ],

@@ -5,9 +5,9 @@
   </div> -->
 
   <h1>Explore</h1>
-  <app-explore-list-headers></app-explore-list-headers>
+  <app-explore-list-headers class="headers"></app-explore-list-headers>
   <div class="roots">
-    <app-root-explore-item [root]="root" class="root" *ngFor="let root of roots" (click)="onClick(root)" ></app-root-explore-item>
+    <app-root-explore-item [root]="root" class="root" *ngFor="let root of roots$|async" (click)="onClick(root)" ></app-root-explore-item>
   </div>
 </div>
 

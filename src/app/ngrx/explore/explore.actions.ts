@@ -8,7 +8,7 @@ export const getRoots = createAction('[explore] get roots');
 export const getRootsSuccessful = createAction('[explore] get roots successful', props<{roots: Root[]}>());
 
 export const getChapters = createAction('[explore] get chapters', props<{rootId: number}>())
-export const getChaptersSuccessful = createAction('[explore] get chapters successful', props<{chapters: Chapter[]}>)
+export const getChaptersSuccessful = createAction('[explore] get chapters successful', props<{chapters: Chapter[]}>())
 
 export const getNodes = createAction('[explore] get nodes', props<{chapterId: number}>())
 export const getNodesSuccessful = createAction('[explore] get nodes successful', props<{nodes: any[]}>())

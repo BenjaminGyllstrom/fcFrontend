@@ -4,6 +4,11 @@ import { map, tap } from 'rxjs/operators';
 import { IRoot, Root } from 'src/app/Models/root.model';
 import { HttpService } from 'src/app/features/shared/data-access/Http/http.service';
 import { RootHttpService } from 'src/app/features/shared/data-access/Http/RootHttp.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/ngrx/appState';
+import * as fromExplore from "src/app/ngrx/explore/explore.actions";
+import { getRoots } from 'src/app/ngrx/explore/explore.selectors';
 
 @Component({
   selector: 'app-explore',
@@ -13,35 +18,19 @@ import { RootHttpService } from 'src/app/features/shared/data-access/Http/RootHt
 export class ExploreComponent implements OnInit {
 
   constructor(
-    private rootHttpService: RootHttpService,
-    private httpService: HttpService,
-    private router: Router) { }
+    private router: Router,
+    private store: Store<AppState>
+    ) { }
 
   roots: Root[]
 
+  roots$: Observable<Root[]>;
+
   ngOnInit(): void {
 
-    this.getRoots().subscribe((roots: Root[])=>{
-      this.roots = roots;
-    })
+    this.store.dispatch(fromExplore.getRoots());
 
-    // if(this.httpService.idToken && this.httpService.idToken != ""){
-    //   this.getRoots().subscribe((roots: Root[])=>{
-    //     this.roots = roots;
-    //   })
-    // }
-    // this.httpService.idTokenChanged.subscribe(()=>{
-    //   this.getRoots().subscribe((roots: Root[])=>{
-    //     this.roots = roots;
-    //   })
-    // })
-  }
-
-  getRoots(){
-    return this.rootHttpService.getAll().pipe(
-      map((IRoots: IRoot[]) => {
-        return this.rootHttpService.parseToRoots(IRoots)})
-    )
+    this.roots$ = this.store.select(getRoots);
   }
 
   onClick(root:Root){

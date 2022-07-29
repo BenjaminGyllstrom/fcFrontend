@@ -8,6 +8,7 @@ export interface AppState {
   chapter: ChapterState
   node: NodeState
   study:StudyState
+  explore:ExploreState
 }
 
 export interface RootState{
@@ -36,4 +37,8 @@ export interface StudyState{
   newCards: Card[]
   loadedForIds: string[],
   dueExists:boolean
+}
+
+export interface ExploreState{
+  AllRoots: Root[]
 }
