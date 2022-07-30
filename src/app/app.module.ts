@@ -96,9 +96,10 @@ import { ShowNodesRichComponent } from './features/nodes/feature/show-nodes-rich
 import { NodeListItemRichComponent } from './features/nodes/ui/node-list-item-rich/node-list-item-rich.component';
 import { NodeListHeadersComponent } from './features/nodes/ui/node-list-headers/node-list-headers.component';
 import { NodeTreeComponent } from './features/nodes/ui/node-tree/node-tree.component';
-import { ExploreListHeadersComponent } from './features/explore/ui//explore-list-headers/explore-list-headers.component';
+import { ExploreListHeadersComponent } from './features/explore/ui/explore-list-headers/explore-list-headers.component';
 import { exploreReducer } from './ngrx/explore/explore.reducer';
 import { ExploreEffects } from './ngrx/explore/explore.effects';
+import { ExploreChapterItemComponent } from './features/explore/ui/explore-chapter-item/explore-chapter-item.component';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { ExploreEffects } from './ngrx/explore/explore.effects';
     NodeListHeadersComponent,
     NodeTreeComponent,
     ExploreListHeadersComponent,
+    ExploreChapterItemComponent,
   ],
   imports: [
     BrowserModule,

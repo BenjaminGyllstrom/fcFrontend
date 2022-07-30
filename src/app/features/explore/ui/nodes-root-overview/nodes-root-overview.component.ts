@@ -11,8 +11,10 @@ export class NodesRootOverviewComponent implements OnInit {
 
   _nodes: any[]
   @Input() set nodes(nodes:any[]){
+
     this._nodes = nodes;
     this.displayTreeService.nodes = nodes;
+
   }
 
   @Output('onNodeClick') onNodeClickEmitter = new EventEmitter<any>();

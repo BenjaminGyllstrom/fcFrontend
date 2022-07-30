@@ -1,17 +1,19 @@
-<div class="explore-root-overview" *ngIf="root">
+<app-header></app-header>
+<div class="explore-root-overview" *ngIf="root$|async as root">
   <h1>{{root.title}}</h1>
-  <div class="intro">
+  <!-- <div class="intro">
     text
-  </div>
+  </div> -->
   <div class="download" (click)="onDownload()">Download</div>
-  <div class="root-content">
-    <div class="chapters" *ngIf="chapters">
-      <app-chapter-list-item *ngFor="let chapter of chapters" [chapter]="chapter" (click)="onChapterClick(chapter)"></app-chapter-list-item>
-    </div>
-    <div class="nodes">
-      <app-nodes-root-overview [nodes]="nodes" (onNodeClick)="onNodeClick($event)"></app-nodes-root-overview>
-    </div>
+
+  <div class="chapters">
+
+    <app-explore-chapter-item *ngFor="let chapter of chapters$|async" class="chapter" [chapter]="chapter" (click)="onChapterClick(chapter)"></app-explore-chapter-item>
   </div>
+  <div class="nodes" *ngIf="nodes$|async as nodes">
+    <app-nodes-root-overview [nodes]="nodes" (onNodeClick)="onNodeClick($event)"></app-nodes-root-overview>
+  </div>
+
   <div *ngIf="deck" class="deck-content">
     <div *ngFor="let card of cards" class="card" >
       <app-card [card]="card"></app-card>

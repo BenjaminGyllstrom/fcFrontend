@@ -41,4 +41,8 @@ export interface StudyState{
 
 export interface ExploreState{
   AllRoots: Root[]
+  chapters: Chapter[]
+  nodes: any[]
+  chaptersLoadedForRoot:string[]
+  nodesLoadedForChapter:string[]
 }

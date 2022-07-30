@@ -13,6 +13,10 @@ import { downloadRoot } from 'src/app/ngrx/root/root.actions';
 import { ChapterHttpService } from 'src/app/features/shared/data-access/Http/ChapterHttp.service';
 import { HttpService } from 'src/app/features/shared/data-access/Http/http.service';
 import { RootHttpService } from 'src/app/features/shared/data-access/Http/RootHttp.service';
+import { getRootIdFromRoute } from 'src/app/ngrx/explore/explore.selectors';
+import * as fromExplore from "src/app/ngrx/explore/explore.actions";
+import * as fromExploreSelectors from "src/app/ngrx/explore/explore.selectors";
+
 
 @Component({
   selector: 'app-explore-root-overview',
@@ -37,8 +41,10 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  root: Root
-  chapters: Chapter[]
+  // root: Root
+  root$: Observable<Root|undefined>
+  rootId:string;
+  // chapters: Chapter[]
   nodes: any[]
 
   deck: Deck|null;
@@ -47,28 +53,32 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
   explain: Explain|null;
   explainText:string;
 
+  chapters$:Observable<Chapter[]>
+  nodes$:Observable<any[]>
+
   ngOnInit(): void {
-    const rootId = this.route.snapshot.params['rootId']
-
-    this.subs.push(this.getRoot(rootId).subscribe((root)=>{
-      this.root = root
-      this.chapters = root.chapters;
+    this.subs.push(this.store.select(getRootIdFromRoute)
+    .subscribe((rootId) => {
+      if(rootId == undefined) return;
+      this.store.dispatch(fromExplore.getRootContent({rootId:rootId}))
     }))
+
+    this.root$ = this.store.select(fromExploreSelectors.getRootFromRoute).pipe(
+      tap(root => {
+        if(!root) return
+        this.rootId = root.id;
+        if(root.chapters && root.chapters.length > 0){
+          this.onChapterClick(root.chapters[0])
+        }
+      })
+    )
+    this.chapters$ = this.store.select(fromExploreSelectors.getChaptersFromRoute)
   }
 
-  getRoot(rootId:string): Observable<Root>{
-    return this.rootHttpService.getByIdExplore(rootId).pipe(
-      map((iRoot: IRoot) => {return this.rootHttpService.parseToRoot(iRoot)})
-    )
-  }
 
   onChapterClick(chapter: Chapter){
-    this.subs.push(this.chapterHttpService.getById(chapter.id).pipe(
-      map((collectedChapter:IChapter)=> {
-        return this.chapterHttpService.getListOfNodes(collectedChapter.nodes)
-      }),
-      tap((collectedNodes: any[]) => {this.nodes = collectedNodes})
-    ).subscribe());
+    this.nodes$ = this.store.select(fromExploreSelectors.getNodesForChapter(chapter.id))
+    this.store.dispatch(fromExplore.getNodes({chapterId: chapter.id}))
   }
 
   onNodeClick(node: any){
@@ -88,7 +98,7 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
   }
 
   onDownload(){
-    this.store.dispatch(downloadRoot({id: this.root.id}))
+    this.store.dispatch(downloadRoot({id: this.rootId}))
     // this.subs.push(this.rootHttpService.download(this.root.id).subscribe())
   }
 }
