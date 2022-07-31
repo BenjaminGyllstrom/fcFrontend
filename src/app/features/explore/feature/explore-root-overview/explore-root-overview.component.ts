@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { Card } from 'src/app/Models/card.model';
 import { Chapter, IChapter } from 'src/app/Models/chapter.model';
 import { Deck } from 'src/app/Models/deck.model';
@@ -50,11 +50,13 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
   deck: Deck|null;
   cards: Card[];
 
-  explain: Explain|null;
+  explain: Explain|undefined;
   explainText:string;
 
   chapters$:Observable<Chapter[]>
   nodes$:Observable<any[]>
+  exampleCards$:Observable<Card[]>
+  explain$:Observable<Explain|undefined>
 
   ngOnInit(): void {
     this.subs.push(this.store.select(getRootIdFromRoute)
@@ -70,9 +72,12 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
         if(root.chapters && root.chapters.length > 0){
           this.onChapterClick(root.chapters[0])
         }
+        this.store.dispatch(fromExplore.getExamples({rootId: root.id}))
       })
     )
     this.chapters$ = this.store.select(fromExploreSelectors.getChaptersFromRoute)
+    this.exampleCards$ = this.store.select(fromExploreSelectors.getExampleCards)
+    this.explain$ = this.store.select(fromExploreSelectors.getExampleExplain)
   }
 
 
@@ -86,7 +91,7 @@ export class ExploreRootOverviewComponent implements OnInit, OnDestroy {
 
 
     if(node.type == 'deck') {
-      this.explain = null;
+      this.explain = undefined;
       this.deck = node
       if(this.deck?.cards) this.cards = this.deck.cards;
     };

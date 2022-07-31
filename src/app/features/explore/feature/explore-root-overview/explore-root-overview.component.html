@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="explore-root-overview" *ngIf="root$|async as root">
-  <h1>{{root.title}}</h1>
+  <h1 class="title">{{root.title}}</h1>
   <!-- <div class="intro">
     text
   </div> -->
@@ -15,12 +15,15 @@
     <!-- <app-nodes-root-overview [nodes]="nodes" (onNodeClick)="onNodeClick($event)"></app-nodes-root-overview> -->
   </div>
 
-  <div *ngIf="deck" class="deck-content">
-    <div *ngFor="let card of cards" class="card" >
+  <h1>Example Cards</h1>
+  <div class="deck-content">
+    <div *ngFor="let card of exampleCards$|async" class="card" >
       <app-card [card]="card"></app-card>
     </div>
   </div>
-  <div *ngIf="explain" class="explain-content">
-    <app-quill-show [content]="explainText" class="quill"></app-quill-show>
+
+  <h1>Example Cards</h1>
+  <div *ngIf="explain$|async as explain" class="explain-content">
+    <app-quill-show [content]="explain.text" class="quill"></app-quill-show>
   </div>
 </div>

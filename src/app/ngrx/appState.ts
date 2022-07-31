@@ -1,5 +1,6 @@
 import { Card } from "../Models/card.model";
 import { Chapter } from "../Models/chapter.model"
+import { Explain } from "../Models/explain.model";
 import { INode } from "../Models/node.model";
 import { Root } from "../Models/root.model"
 
@@ -43,6 +44,8 @@ export interface ExploreState{
   AllRoots: Root[]
   chapters: Chapter[]
   nodes: any[]
+  exampleCards:Card[]
+  exampleExplain:Explain|undefined
   chaptersLoadedForRoot:string[]
   nodesLoadedForChapter:string[]
 }

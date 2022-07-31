@@ -11,7 +11,9 @@ export const initialState: ExploreState = {
   chapters: [],
   nodes: [],
   chaptersLoadedForRoot: [],
-  nodesLoadedForChapter: []
+  nodesLoadedForChapter: [],
+  exampleCards:[],
+  exampleExplain:undefined
 
 }
 
@@ -31,8 +33,14 @@ export const exploreReducer = createReducer(
     const chapterId = nodes[0]?.parentId;
     if(!chapterId) return {...state}
     return {...state, nodes: [...state.nodes, ...nodes], nodesLoadedForChapter: [...state.nodesLoadedForChapter, chapterId]}
+  }),
+  on(fromExplore.getExampleCardsSuccessful, (state, {cards}) => {
+    return {...state, exampleCards: [...cards]}
+  }),
+  on(fromExplore.getExamplesSuccessful, (state, {cards, explain}) => {
+    return {...state, exampleCards: [...cards], exampleExplain:explain}
+  }),
 
-  })
 )
 
 

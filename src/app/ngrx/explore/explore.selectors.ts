@@ -55,3 +55,15 @@ export const nodesLoadedForChapter = (chapterId: string) => createSelector(
     return state.nodesLoadedForChapter.findIndex(id => id == chapterId) >= 0;
   }
 )
+
+export const getExampleCards = createSelector(
+  getExploreState, state => {
+    return state.exampleCards;
+  }
+)
+
+export const getExampleExplain = createSelector(
+  getExploreState, state => {
+    return state.exampleExplain;
+  }
+)

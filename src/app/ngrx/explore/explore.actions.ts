@@ -22,3 +22,6 @@ export const getExampleCardsSuccessful = createAction('[explore] get example car
 
 export const getExampleExplain = createAction('[explore] get example explain', props<{rootId: string}>())
 export const getExampleExplainSuccessful = createAction('[explore] get example explain successful', props<{explore: Explain}>())
+
+export const getExamples = createAction('[explore] get example', props<{rootId:string}>())
+export const getExamplesSuccessful = createAction('[explore] get example successful', props<{cards:Card[]; explain:Explain|undefined}>())

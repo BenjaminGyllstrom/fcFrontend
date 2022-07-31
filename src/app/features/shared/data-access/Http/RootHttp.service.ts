@@ -40,6 +40,10 @@ export class RootHttpService {
     return this.httpService.post(`roots/Copy/${rootId}`, null);
   }
 
+  getExample(rootId:string){
+    return this.httpService.get(`roots/Explore/Example/${rootId}`)
+  }
+
   parseToRoot(collectedRoot: IRoot) : Root {
 
     const newRoot = new Root();
