@@ -24,8 +24,11 @@
         (click)="onClick(node)"></app-node-list-item-rich>
       </div>
 
-      <div class="node-tree" >
-        <app-node-tree [rowLength]="3" (Clicked)="onClick($event)"></app-node-tree>
+      <div class="node-tree" *ngIf="nodes.length > 0">
+        <app-node-tree
+        [rowLength]="3"
+        [nodes]="nodes"
+        (Clicked)="onClick($event)"></app-node-tree>
       </div>
     </div>
   </div>

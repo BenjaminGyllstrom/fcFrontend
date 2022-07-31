@@ -9,6 +9,7 @@ import { Explain } from 'src/app/Models/explain.model';
 export class ExplainNodeComponent implements OnInit {
 
   @Input() explain: Explain
+  @Input() standardBackground:boolean
 
   isLocked:boolean;
   finnished:boolean;
@@ -25,7 +26,7 @@ export class ExplainNodeComponent implements OnInit {
   }
 
   getBackgroundColor():string{
-
+    if(this.standardBackground) return 'rgba(238, 238, 238, .5)'
 
     if(this.finnished) return 'rgba(169, 240, 185, .5)'
     if(this.isLocked) return 'rgba(238, 238, 238, .5)'
@@ -44,6 +45,7 @@ export class ExplainNodeComponent implements OnInit {
     return 'white';
   }
   getBorder(){
+    if(this.standardBackground) return 'rgba(238, 238, 238, .5)'
 
     if(this.finnished) return '1px solid rgba(7, 109, 30, .2)'
     if(this.isLocked) return '1px solid rgba(83, 83, 83, .2)'

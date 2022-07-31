@@ -12,6 +12,12 @@ import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
 })
 export class NodeTreeComponent implements OnInit {
 
+  _nodes: any[]
+  @Input() set nodes(nodes:any[]){
+    this._nodes = nodes;
+    this.rows = this.createRows(nodes)
+  }
+  @Input() useDefaultBackground:boolean = false
   @Input() rowLength: number = 3;
   @Output('Clicked') clickEmitter = new EventEmitter<any>();
   nodes$: Observable<any[]>;
@@ -21,19 +27,20 @@ export class NodeTreeComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.nodes$ = this.store.select(nodeSelectors.getChapterNodesFromRoute).pipe(
-      tap(nodes => {
-        if(nodes && nodes.length > 0){
-          for (let i = 0; i < nodes.length; i+=this.rowLength) {
-            const row = [...nodes.slice(i,i+this.rowLength)];
+  }
 
-            if(row && row.length > 0){
-              this.rows.push(row);
-            }
-          }
+  createRows(nodes: any[]){
+    const rows:any[] = []
+    if(nodes && nodes.length > 0){
+      for (let i = 0; i < nodes.length; i+=this.rowLength) {
+        const row = [...nodes.slice(i,i+this.rowLength)];
+
+        if(row && row.length > 0){
+          rows.push(row);
         }
-      })
-    )
+      }
+    }
+    return rows
   }
 
   onClick(node:any){

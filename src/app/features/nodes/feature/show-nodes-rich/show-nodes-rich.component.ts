@@ -16,7 +16,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ShowNodesRichComponent implements OnInit {
 
   nodes$:Observable<any[]>
-
   constructor(
     private displayTreeService: DisplayTreeService,
     private store: Store<AppState>,

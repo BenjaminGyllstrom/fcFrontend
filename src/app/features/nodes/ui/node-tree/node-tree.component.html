@@ -15,8 +15,7 @@
 </div> -->
 
 <div class="node-tree-container">
-  <div class="node-list" *ngIf="nodes$|async">
-
+  <div class="node-list" *ngIf="_nodes">
     <div *ngFor="let row of rows" class="row"
     [ngStyle]="{'grid-template-columns': 'repeat('+ rowLength +', 1fr)'}">
 
@@ -26,12 +25,14 @@
 
           *ngIf="node.type == 'explain'"
           [explain]="node"
+          [standardBackground]="useDefaultBackground"
         ></app-explain-node>
 
         <app-deck-node
 
           *ngIf="node.type == 'deck'"
           [deck]="node"
+          [standardBackground]="useDefaultBackground"
         ></app-deck-node>
       </div>
     </div>

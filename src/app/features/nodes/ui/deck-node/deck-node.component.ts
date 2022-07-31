@@ -9,7 +9,7 @@ import { Deck } from 'src/app/Models/deck.model';
 export class DeckNodeComponent implements OnInit {
 
   @Input() deck: Deck;
-
+  @Input() standardBackground:boolean
   isLocked:boolean;
   finnished:boolean;
 
@@ -24,6 +24,7 @@ export class DeckNodeComponent implements OnInit {
     // this.router.navigate(['/study/', 'deck', this.deck.id])
   }
   getBackgroundColor():string{
+    if(this.standardBackground) return 'rgba(238, 238, 238, .5)'
 
     if(this.finnished) return 'rgba(169, 240, 185, .5)'
     if(this.isLocked) return 'rgba(238, 238, 238, .5)'
@@ -36,6 +37,8 @@ export class DeckNodeComponent implements OnInit {
     // return 'white';
   }
   getBorder(){
+    if(this.standardBackground) return 'rgba(238, 238, 238, .5)'
+
     if(this.finnished) return 'rgba(169, 240, 185, .5)'
     if(this.isLocked) return 'rgba(238, 238, 238, .5)'
     return 'rgba(240, 229, 169, .5)'

@@ -11,7 +11,8 @@
     <app-explore-chapter-item *ngFor="let chapter of chapters$|async" class="chapter" [chapter]="chapter" (click)="onChapterClick(chapter)"></app-explore-chapter-item>
   </div>
   <div class="nodes" *ngIf="nodes$|async as nodes">
-    <app-nodes-root-overview [nodes]="nodes" (onNodeClick)="onNodeClick($event)"></app-nodes-root-overview>
+    <app-node-tree [nodes]="nodes" [rowLength]="3" [useDefaultBackground]="true"></app-node-tree>
+    <!-- <app-nodes-root-overview [nodes]="nodes" (onNodeClick)="onNodeClick($event)"></app-nodes-root-overview> -->
   </div>
 
   <div *ngIf="deck" class="deck-content">
