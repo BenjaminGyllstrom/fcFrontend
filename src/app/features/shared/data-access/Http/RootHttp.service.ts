@@ -45,10 +45,12 @@ export class RootHttpService {
   }
 
   parseToRoot(collectedRoot: IRoot) : Root {
+    console.log(collectedRoot);
 
     const newRoot = new Root();
     newRoot.id = collectedRoot._id;
     newRoot.title = collectedRoot.title;
+    newRoot.description = collectedRoot.description;
     newRoot.chapters = this.chapterHttpService.parseToChapters(collectedRoot.chapters);
 
     newRoot.creatorId = collectedRoot.creatorId

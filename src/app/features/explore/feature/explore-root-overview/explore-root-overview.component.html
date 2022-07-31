@@ -1,9 +1,10 @@
 <app-header></app-header>
 <div class="explore-root-overview" *ngIf="root$|async as root">
   <h1 class="title">{{root.title}}</h1>
-  <!-- <div class="intro">
-    text
-  </div> -->
+
+  <div class="description">
+    <app-quill-show [content]="root.description"></app-quill-show>
+  </div>
   <div class="download" (click)="onDownload()">Download</div>
 
   <div class="chapters">

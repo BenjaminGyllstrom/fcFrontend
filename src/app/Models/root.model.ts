@@ -3,6 +3,7 @@ import { Chapter, IChapter } from "./chapter.model";
 export class Root{
   id: string;
   title: string;
+  description:string;
   chapters: Chapter[];
   userData: {
     name: string;
@@ -17,6 +18,7 @@ export class Root{
 export interface IRoot{
   _id: string;
   title: string;
+  description:string;
   chapters: IChapter[];
   userData: {
     name: string;

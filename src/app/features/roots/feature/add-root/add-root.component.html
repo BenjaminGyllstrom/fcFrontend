@@ -11,6 +11,9 @@
       </div>
     </div>
 
+    <p class="description-title">Description:</p>
+    <app-quill-edit (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
+
     <button type="submit" class="button add-root-button">Add</button>
   </form>
 

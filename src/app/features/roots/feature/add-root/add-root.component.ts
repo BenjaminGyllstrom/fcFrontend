@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/ngrx/appState';
 import { Store } from '@ngrx/store';
 import { createRoot } from 'src/app/ngrx/root/root.actions';
+import { QuillService } from 'src/app/features/shared/utils/quill.service';
 
 
 @Component({
@@ -15,11 +16,15 @@ export class AddRootComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>) { }
+    private store: Store<AppState>,
+    private quillService: QuillService) { }
 
   rootForm = this.formBuilder.group({
-    title:''
+    title:'',
+    description:''
   });
+
+  quillContent:string = '';
 
   ngOnInit(): void {
   }
@@ -28,10 +33,16 @@ export class AddRootComponent implements OnInit {
     const title = this.rootForm.value.title;
     const root = new Root();
     root.title = title;
+    root.description = this.quillContent;
 
     this.rootForm.reset();
+    this.quillService.onReset.next();
 
     this.store.dispatch(createRoot({root: root}))
+  }
+
+  onContentChange(content:string){
+    this.quillContent = content;
   }
 
 }
