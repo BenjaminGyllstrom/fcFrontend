@@ -20,8 +20,10 @@ export class ItemStatusComponent implements OnInit {
         return '#A9F0B9'
       case 'In Progress':
         return '#F0E5A9'
-      default:
+      case 'Not Started':
         return '#EEEEEE'
+      default:
+        return '#fff'
     }
   }
 
@@ -31,8 +33,10 @@ export class ItemStatusComponent implements OnInit {
         return '#076D1E'
       case 'In Progress':
         return '#6D6307'
-      default:
+      case 'Not Started':
         return '#535353'
+      default:
+        return '#fff'
     }
   }
 
