@@ -1,7 +1,7 @@
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Deck } from 'src/app/Models/deck.model';
 import { Card } from 'src/app/Models/card.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import { updateCard } from 'src/app/ngrx/card/card.actions';
@@ -23,15 +23,16 @@ export class EditCardComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<EditCardComponent>,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    @Inject(MAT_DIALOG_DATA) public data: {card:Card}
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data);
 
-    // if(this.sideBarService.selectedCard == null) return
-    // this.card = this.sideBarService.selectedCard;
-    // this.question = this.card.question;
-    // this.answer = this.card.answer;
+    this.card = this.data.card;
+    this.question = this.card.question;
+    this.answer = this.card.answer
   }
   onContentChange(content:string){
     if(this.showQuestion){

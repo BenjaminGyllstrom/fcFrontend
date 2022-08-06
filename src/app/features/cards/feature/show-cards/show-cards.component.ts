@@ -30,10 +30,11 @@ export class ShowCardsComponent implements OnInit {
   }
 
   onClick(card:Card){
-    const dialogRef = this.dialog.open(EditCardComponent);
+    const dialogRef = this.dialog.open(EditCardComponent, {
+      data: {card:card}
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
 
   }

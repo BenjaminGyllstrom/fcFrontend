@@ -45,7 +45,6 @@ export class RootHttpService {
   }
 
   parseToRoot(collectedRoot: IRoot) : Root {
-    console.log(collectedRoot);
 
     const newRoot = new Root();
     newRoot.id = collectedRoot._id;
