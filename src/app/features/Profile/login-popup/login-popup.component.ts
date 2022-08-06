@@ -56,8 +56,18 @@ export class LoginPopupComponent implements OnInit {
       }
       ));
     }else{
-      this.subs.push(this.loginService.registerUser(user).subscribe(val =>{
-        this.router.navigate(['home'])
+
+
+
+      this.subs.push(this.loginService.registerUser(user).subscribe({
+        next: (res) =>{
+          this.serverErrorMessages = ''
+          this.dialogRef.close();
+          this.router.navigate(['home'])
+        },
+        error: (err) => {
+          this.serverErrorMessages = err.error.message
+        }
       }));
     }
   }

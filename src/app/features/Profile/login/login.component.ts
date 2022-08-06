@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password:form.value.password
     }
 
+    //OLD COMPONENT NOT USED ANYMORE
     if(this.isLoginMode){
       this.subs.push(this.loginService.loginUser({email:form.value.email, password: form.value.password}).subscribe({
         next: (res) =>{
@@ -53,8 +54,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       ));
     }else{
-      this.subs.push(this.loginService.registerUser(user).subscribe(val =>{
+
+      this.subs.push(this.loginService.registerUser(user).subscribe( val => {
+        this.serverErrorMessages = ''
         this.router.navigate(['home'])
+
       }));
     }
   }
