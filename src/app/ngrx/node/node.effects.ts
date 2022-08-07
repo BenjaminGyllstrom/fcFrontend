@@ -52,6 +52,16 @@ export class NodeEffects{
       map(node => fromNode.updateNodeSuccessful({node: node}))
     ))
 
+    updateNodeOrder$ = createEffect(()=> this.actions$.pipe(
+      ofType(fromNode.changeNodeOrder),
+      mergeMap(action => this.updateNodeOrder(action.chapterId, action.newIndex, action.oldIndex)),
+      map(nodes => fromNode.changeNodeOrderSuccessful({nodes: nodes}))
+    ))
+
+    updateNodeOrder(chapterId:string, newIndex:number, oldIndex:number):Observable<INode[]>{
+      return this.chapterHttpService.updateListOrder(chapterId, newIndex, oldIndex);
+    }
+
     getChapterNodes(id: string):Observable<INode[]>{
       return this.chapterHttpService.getById(id).pipe(
         map(iChapter => this.chapterHttpService.getListOfNodes(iChapter.nodes))

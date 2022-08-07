@@ -57,6 +57,19 @@ a{
   display:none;
 }
 
+.order-button{
+  grid-column: 6/9;
+  justify-self: end;
+
+  margin-right: 5px;
+  margin-bottom: 5px;
+
+  background-color: inherit;
+  border: none;
+
+  cursor: pointer;
+}
+
 @media (min-width:768px){
   .page-title{
     margin-bottom: 60px;
@@ -75,6 +88,9 @@ a{
     &__list{
       padding: 0 24px;
     }
+  }
+  .order-button{
+    margin-right: 0;
   }
 }
 

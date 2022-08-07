@@ -8,20 +8,19 @@
       </a>
     </div>
 
-
-
-    <!-- <div class="headers-container">
-      <app-node-list-headers class="headers"></app-node-list-headers>
-    </div> -->
     <div class="nodes" *ngIf="(nodes$|async) as nodes">
 
-      <div class="node__list">
+      <div class="node__list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="!orderMode">
+        <button *ngIf="!orderMode" class="order-button" (click)="orderMode = !orderMode">change order</button>
+        <button *ngIf="orderMode" class="order-button" (click)="orderMode = !orderMode">lock order</button>
+
         <app-node-list-headers class="headers"></app-node-list-headers>
         <app-node-list-item-rich
         *ngFor="let node of nodes"
         [node]="node"
         class="node__item"
-        (click)="onClick(node)"></app-node-list-item-rich>
+        (click)="onClick(node)"
+        cdkDrag></app-node-list-item-rich>
       </div>
 
       <div class="node-tree" *ngIf="nodes.length > 0">

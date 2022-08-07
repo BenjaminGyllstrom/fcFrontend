@@ -6,6 +6,7 @@ import { HttpService } from "./http.service";
 import { CardHttpService } from "./CardHttp.service";
 import { DeckHttpService } from "./DeckHttp.service";
 import { ExplainHttpService } from "./ExplainHttp.service";
+import { INode } from "src/app/Models/node.model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class ChapterHttpService {
     return this.httpService.get(`chapters/data/${chapterId}`);
   }
 
-  updateListOrder(chapterId:string, fromIndex:number, toIndex:number){
+  updateListOrder(chapterId:string, fromIndex:number, toIndex:number):Observable<any>{
     return this.httpService.patch(`chapters/updateListOrder/${chapterId}`, {oldIndex:fromIndex, newIndex:toIndex});
   }
 

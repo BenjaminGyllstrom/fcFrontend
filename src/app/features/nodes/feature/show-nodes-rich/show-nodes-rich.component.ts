@@ -6,6 +6,8 @@ import { AppState } from 'src/app/ngrx/appState';
 import * as nodeSelectors from 'src/app/ngrx/node/node.selectors'
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import * as fromNode from "src/app/ngrx/node/node.actions";
 
 @Component({
   selector: 'app-show-nodes-rich',
@@ -16,6 +18,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ShowNodesRichComponent implements OnInit {
 
   nodes$:Observable<any[]>
+  orderMode: boolean = false;
+  chapterId:string;
+
   constructor(
     private displayTreeService: DisplayTreeService,
     private store: Store<AppState>,
@@ -25,7 +30,13 @@ export class ShowNodesRichComponent implements OnInit {
 
   ngOnInit(): void {
     this.nodes$ = this.store.select(nodeSelectors.getChapterNodesFromRoute).pipe(
-      tap((nodes)=>this.displayTreeService.nodes = nodes)
+      tap((nodes)=>{
+        this.displayTreeService.nodes = nodes
+
+        if(nodes.length > 0){
+          this.chapterId = nodes[0].parentId;
+        }
+      })
     );
   }
 
@@ -35,5 +46,12 @@ export class ShowNodesRichComponent implements OnInit {
     if(node.type == 'explain') route = ['Explain', node.id, 'Overview']
 
     this.router.navigate(route, {relativeTo: this.route})
+  }
+
+  drop(event: CdkDragDrop<any[]>){
+    if(!this.orderMode) return;
+
+    if(this.chapterId)
+      this.store.dispatch(fromNode.changeNodeOrder({chapterId: this.chapterId, oldIndex: event.previousIndex, newIndex: event.currentIndex}))
   }
 }

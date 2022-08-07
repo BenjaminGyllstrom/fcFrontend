@@ -15,3 +15,6 @@ export const updateNode = createAction('[node] update node', props<{node:INode}>
 export const updateNodeSuccessful = createAction('[node] update node successful', props<{node:INode}>())
 
 export const downloadNodesSuccessful = createAction('[chapter] download nodes successful', props<{nodes: any[]}>())
+
+export const changeNodeOrder = createAction('[chapter] change node order' , props<{chapterId: string, oldIndex: number, newIndex: number}>())
+export const changeNodeOrderSuccessful = createAction('[chapter] change node order successful' , props<{nodes: INode[]}>())

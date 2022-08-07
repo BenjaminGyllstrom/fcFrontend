@@ -38,6 +38,16 @@ export const nodeReducer = createReducer(
     if(!nodes || nodes.length <= 0) return {...state}
     const chapterId = nodes[0].parentId;
     return {...state, nodes: [...state.nodes, ...nodes], loadedForChapter:[...state.loadedForChapter, chapterId]}
+  }),
+  on(fromNode.changeNodeOrderSuccessful, (state, {nodes}) => {
+
+    let stateNodes = [...state.nodes]
+    for (const node of nodes) {
+      stateNodes = remove(node, stateNodes);
+      stateNodes.push(node)
+    }
+
+    return {...state, nodes: stateNodes}
   })
 )
 
