@@ -12,4 +12,9 @@ export class Home2Component implements OnInit {
   ngOnInit(): void {
   }
 
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({
+      behavior: "smooth"
+    });
+}
 }
