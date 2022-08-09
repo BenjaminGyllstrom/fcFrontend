@@ -20,10 +20,11 @@ import { StudyNodeComponent } from './features/study/feature/study-node/study-no
 import { ExploreComponent } from './features/explore/feature/explore/explore.component';
 import { ExploreRootOverviewComponent } from './features/explore/feature/explore-root-overview/explore-root-overview.component';
 import { StudyCardsComponent } from './features/study/feature/study-cards/study-cards.component';
+import { Home2Component } from './features/home/feature/home2/home2.component';
 
 const routes: Routes = [
-  {path: '', component:HomeComponent},
-  {path: 'home', component:HomeComponent},
+  {path: '', component:Home2Component},
+  {path: 'home', component:Home2Component},
   {path: 'explore', component:ExploreComponent},
   {path: 'login', component:LoginComponent},
   {path: 'exploreRoot/:rootId', component:ExploreRootOverviewComponent},

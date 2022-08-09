@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar [ngStyle]="{'background-color': backgroundColor}">
   <mat-toolbar-row class="header-row">
     <div class="logo">
       <img src="../../../assets/icons/Header-icon.svg" alt="" class="header-icon">
@@ -18,7 +18,7 @@
 
     <mat-icon class="header-row__menu" *ngIf="menuMode" (click)="showActions = !showActions">menu</mat-icon>
   </mat-toolbar-row>
-  <mat-toolbar-row class="header-menu" *ngIf="menuMode && showActions">
+  <mat-toolbar-row class="header-menu" [ngStyle]="{'background-color': backgroundColor}" *ngIf="menuMode && showActions">
     <a class="action" routerLink="" (click)="showActions = false">HOME</a>
     <a class="action" routerLink="/myContent/Roots" (click)="showActions = false">MY CONTENT</a>
     <a class="action" routerLink="/explore" (click)="showActions = false">EXPLORE</a>

@@ -2,7 +2,7 @@ import { LoginPopupComponent } from 'src/app/features/Profile/login-popup/login-
 import { Subscription } from 'rxjs';
 import { AuthGuardService } from '../../../shared/utils/AuthGuard.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialAuthService } from 'angularx-social-login';
 import { HttpService } from 'src/app/features/shared/data-access/Http/http.service';
@@ -15,9 +15,11 @@ import { BreakpointObserver } from "@angular/cdk/layout";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  @Input() backgroundColor: string = '#fff'
   auth: any
   menuMode = false;
   showActions = false;
+
 
   constructor(
     public socialAuthService: SocialAuthService,

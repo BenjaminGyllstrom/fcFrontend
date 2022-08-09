@@ -1,0 +1,125 @@
+main{
+  position: relative;
+}
+
+// .triangle{
+//   position: absolute;
+//   width: 64px;
+//   height: 64px;
+
+//   background: #FFCD48;
+//   transform: rotate(-180deg);
+// }
+
+// .triangle {
+//   --path: 50% 0,100% 100%,0 100%;
+//   --border: 5px;
+
+//   width: 200px;
+//   height: 200px;
+//   background: red;
+//   display: inline-block;
+//   clip-path: polygon(var(--path));
+//   -webkit-mask: paint(polygon-border)
+// }
+
+.star-triangle{
+  fill: #FFCD48;
+}
+.background-triangle{
+  fill: #929ADE;
+}
+
+.triangle-1{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+.triangle-2{
+  position: absolute;
+  top: 20px;
+  left: 0;
+  z-index: 2;
+}
+.triangle-3{
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 1;
+}
+
+.triangle {
+
+  transform: scale3d(0.5, 0.5, 0.5);
+  // // animation: move 3s ease-out 1s infinite;
+}
+
+.triangle:first-child {
+  animation: move 5s ease-out 1s infinite;
+}
+
+.triangle:nth-child(2) {
+  animation: move 5s ease-out 1s infinite;
+}
+.triangle:nth-child(3) {
+  animation: move 5s ease-out 1s infinite;
+}
+
+.triangle:before,
+.triangle:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 51%;
+}
+
+.triangle:before {
+  left: 0;
+  transform: skew(0deg, 30deg);
+}
+
+.triangle:after {
+  right: 0;
+  width: 50%;
+  transform: skew(0deg, -30deg);
+}
+
+@keyframes move {
+  25% {
+    opacity: 1;
+
+  }
+  33% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+  67% {
+    opacity: 1;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+  }
+}
+
+.text {
+  display: block;
+  margin-top: 75px;
+  // margin-left: -30px;
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: .25;
+  animation: pulse 2s linear alternate infinite;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,113 @@
+.images{
+  height: 270px;
+  width: 270px;
+  border-radius: 100%;
+
+  background-color: #1C2639;
+
+  position: relative;
+  overflow: hidden;
+}
+.inner-circle{
+  content: '';
+  height: 210px;
+  width: 210px;
+  border-radius: 100%;
+
+  background-color: #929ADE;
+  opacity: 0.5;
+
+  position: absolute;
+  left: 5px;
+  bottom: 13px;
+}
+.astronaut{
+  height: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 25px;
+}
+.star{
+  height: 25px;
+}
+
+.star1{
+  position: absolute;
+  top: 55px;
+  left: 80px;
+
+  filter: blur(1px);
+}
+.star2{
+  position: absolute;
+  top: 40px;
+  right: 50px;
+}
+.star3{
+  position: absolute;
+  top: 110px;
+  right: 70px;
+
+  filter: blur(1px);
+}
+
+
+@media (min-width: 1024px){
+  .images{
+    height: 370px;
+    width: 370px;
+  }
+  .inner-circle{
+    height: 300px;
+    width: 300px;
+  }
+  .astronaut{
+    height: 200px;
+    left: 30px;
+  }
+  .star{
+    height: 30px;
+  }
+  .star1{
+    top: 80px;
+    left: 110px;
+  }
+  .star2{
+    top: 50px;
+    right: 80px;
+  }
+  .star3{
+    top: 140px;
+    right: 100px;
+  }
+}
+
+@media (min-width: 1440px){
+  .images{
+    height: 470px;
+    width: 470px;
+  }
+  .inner-circle{
+    height: 390px;
+    width: 390px;
+  }
+  .astronaut{
+    height: 250px;
+    left: 40px;
+  }
+  .star{
+    height: 35px;
+  }
+  .star1{
+    top: 100px;
+    left: 130px;
+  }
+  .star2{
+    top: 70px;
+    right: 90px;
+  }
+  .star3{
+    top: 160px;
+    right: 120px;
+  }
+}

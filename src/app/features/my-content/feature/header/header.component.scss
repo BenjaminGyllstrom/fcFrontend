@@ -7,12 +7,15 @@ mat-toolbar{
   min-height: 65px;
   min-width: 280px;
   width: 100%;
-  background-color: $main-color;
+  // background-color: $main-color;
   color: $text-color;
   position: relative;
 }
 a{
   color: $text-color;
+
+  font-family: 'Quicksand';
+  font-weight: 300;
 }
 .logo{
   display: flex;
@@ -48,7 +51,7 @@ a{
   flex-direction: column;
   // justify-content: center;
   color: $text-color;
-  background-color: $main-color;
+  // background-color: $main-color;
 }
 .user{
   margin-right: 10px;

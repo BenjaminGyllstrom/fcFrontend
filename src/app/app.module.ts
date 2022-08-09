@@ -100,6 +100,9 @@ import { ExploreListHeadersComponent } from './features/explore/ui/explore-list-
 import { exploreReducer } from './ngrx/explore/explore.reducer';
 import { ExploreEffects } from './ngrx/explore/explore.effects';
 import { ExploreChapterItemComponent } from './features/explore/ui/explore-chapter-item/explore-chapter-item.component';
+import { Home2Component } from './features/home/feature/home2/home2.component';
+import { HomeAustroCircleComponent } from './features/home/ui/home-austro-circle/home-austro-circle.component';
+import { StarScrollButtonComponent } from './features/home/ui/star-scroll-button/star-scroll-button.component';
 
 @NgModule({
   declarations: [
@@ -162,6 +165,9 @@ import { ExploreChapterItemComponent } from './features/explore/ui/explore-chapt
     NodeTreeComponent,
     ExploreListHeadersComponent,
     ExploreChapterItemComponent,
+    Home2Component,
+    HomeAustroCircleComponent,
+    StarScrollButtonComponent,
   ],
   imports: [
     BrowserModule,
