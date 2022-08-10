@@ -2,27 +2,6 @@ main{
   position: relative;
 }
 
-// .triangle{
-//   position: absolute;
-//   width: 64px;
-//   height: 64px;
-
-//   background: #FFCD48;
-//   transform: rotate(-180deg);
-// }
-
-// .triangle {
-//   --path: 50% 0,100% 100%,0 100%;
-//   --border: 5px;
-
-//   width: 200px;
-//   height: 200px;
-//   background: red;
-//   display: inline-block;
-//   clip-path: polygon(var(--path));
-//   -webkit-mask: paint(polygon-border)
-// }
-
 .star-triangle{
   fill: #FFCD48;
 }
@@ -33,19 +12,19 @@ main{
 .triangle-1{
   position: absolute;
   top: 0;
-  left: 0;
+  left: -32px;
   z-index: 3;
 }
 .triangle-2{
   position: absolute;
   top: 20px;
-  left: 0;
+  left: -32px;
   z-index: 2;
 }
 .triangle-3{
   position: absolute;
   top: 40px;
-  left: 0;
+  left: -32px;
   z-index: 1;
 }
 

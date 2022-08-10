@@ -103,6 +103,7 @@ import { ExploreChapterItemComponent } from './features/explore/ui/explore-chapt
 import { Home2Component } from './features/home/feature/home2/home2.component';
 import { HomeAustroCircleComponent } from './features/home/ui/home-austro-circle/home-austro-circle.component';
 import { StarScrollButtonComponent } from './features/home/ui/star-scroll-button/star-scroll-button.component';
+import { HomeDescriptionComponent } from './features/home/ui/home-description/home-description.component';
 
 @NgModule({
   declarations: [
@@ -168,6 +169,7 @@ import { StarScrollButtonComponent } from './features/home/ui/star-scroll-button
     Home2Component,
     HomeAustroCircleComponent,
     StarScrollButtonComponent,
+    HomeDescriptionComponent,
   ],
   imports: [
     BrowserModule,
