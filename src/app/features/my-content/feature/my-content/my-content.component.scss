@@ -21,6 +21,12 @@ mat-sidenav-content{
 .menu-button{
   cursor: pointer;
   position: absolute;
-  top: 80px;
+  top: 60px;
   left: 10px;
+}
+
+@media (min-width: 768px){
+  .menu-button{
+    top: 80px;
+  }
 }
