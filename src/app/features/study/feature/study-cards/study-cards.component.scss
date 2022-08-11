@@ -24,6 +24,9 @@
 .button__next{
   width: 93px;
 }
+.button{
+  width: min-content;
+}
 
 .no-due{
   display: flex;
