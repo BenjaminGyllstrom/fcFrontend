@@ -1,0 +1,29 @@
+<div class="root-overview">
+
+  <h1>Overview</h1>
+
+  <form [formGroup]="rootForm" (ngSubmit)="onSave()" class="form">
+    <div class="inputField">
+      <p>Title:</p>
+      <div class="input">
+        <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+      </div>
+    </div>
+  </form>
+
+  <app-quill-show *ngIf="!edit" [content]="content" class="quill" (click)="onQuillClick()"></app-quill-show>
+  <app-quill-edit *ngIf="edit" [content]="content" (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
+
+  <div class="buttons">
+    <button *ngIf="edit" class="button explain-save-button" (click)="onSave()">Save</button>
+    <button *ngIf="edit" class="button explain-save-button" (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+
+<div style="display: flex; justify-content:center;">
+  <div class="routing-buttons">
+    <a class="routing-button routing-button-active" >Overview</a>
+    <a class="routing-button" (click)="onNav('Chapters')">Chapters</a>
+    <a class="routing-button" (click)="onNav('AddChapter')">Add Chapter</a>
+  </div>
+</div>

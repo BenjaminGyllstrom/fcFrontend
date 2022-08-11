@@ -22,6 +22,13 @@ export const rootReducer = createReducer(
   }),
   on(fromRoot.downloadRootSuccessful, (state, {root}) => {
     return {...state, roots: [...state.roots, root]}
+  }),
+  on(fromRoot.updateRootSuccessful, (state, {root}) => {
+    const oldRoots = [...state.roots];
+    const index = oldRoots.findIndex(oldRoot => oldRoot.id == root.id)
+    oldRoots[index] = root;
+
+    return {...state, roots:oldRoots}
   })
 )
 

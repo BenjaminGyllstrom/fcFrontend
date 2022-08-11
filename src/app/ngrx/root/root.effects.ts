@@ -57,6 +57,11 @@ export class RootEffects{
     })
   ))
 
+  updateRoot$ = createEffect(()=> this.actions$.pipe(
+    ofType(actions.updateRoot),
+    mergeMap((action)=> this.updateRoot(action.root)),
+    map(root => actions.updateRootSuccessful({root: root}))
+  ))
 
   getRoots():Observable<Root[]>{
     return this.rootHttpService.get().pipe(
@@ -75,6 +80,11 @@ export class RootEffects{
   }
   downloadRoot(rootId:string){
     return this.rootHttpService.download(rootId).pipe(
+      map(iRoot => this.rootHttpService.parseToRoot(iRoot))
+    )
+  }
+  updateRoot(root:Root){
+    return this.rootHttpService.edit(root, root.id).pipe(
       map(iRoot => this.rootHttpService.parseToRoot(iRoot))
     )
   }

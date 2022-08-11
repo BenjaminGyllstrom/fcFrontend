@@ -12,3 +12,6 @@ export const deleteRootSuccessful = createAction('[root] delete root successful'
 
 export const downloadRoot = createAction('[root] download root', props<{id: string}>())
 export const downloadRootSuccessful = createAction('[root] download root successful', props<{root: Root}>())
+
+export const updateRoot = createAction('[root] update root', props<{root:Root}>())
+export const updateRootSuccessful = createAction('[root] update root successful', props<{root:Root}>())

@@ -48,7 +48,11 @@ export class AddChapterComponent implements OnInit, OnDestroy {
     this.store.dispatch(fromChapter.createChapter({chapter:chapter}))
   }
 
-  onNav(){
-    this.router.navigate(['../'], {relativeTo: this.route})
+  onNav(action:string){
+    if(action == 'Overview'){
+      this.router.navigate(['../../', action], {relativeTo: this.route})
+    }else{
+      this.router.navigate(['../'], {relativeTo: this.route})
+    }
   }
 }

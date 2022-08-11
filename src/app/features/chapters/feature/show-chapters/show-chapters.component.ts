@@ -30,6 +30,11 @@ export class ShowChaptersComponent implements OnInit {
   }
 
   onNav(action:string){
-    this.router.navigate([action], {relativeTo: this.route})
+    if(action == 'Overview'){
+      this.router.navigate(['../', action], {relativeTo: this.route})
+    }else{
+
+      this.router.navigate([action], {relativeTo: this.route})
+    }
   }
 }
