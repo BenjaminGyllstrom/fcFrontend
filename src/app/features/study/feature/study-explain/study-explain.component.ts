@@ -17,7 +17,7 @@ export class StudyExplainComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -27,5 +27,9 @@ export class StudyExplainComponent implements OnInit {
     if(this.explain.new)
       this.store.dispatch(fromStudy.setExplainAsRead({explain: this.explain}))
     this.router.navigate(['../../../'], {relativeTo: this.route})
+  }
+
+  onNav(action:string){
+    this.router.navigate(['../', action], {relativeTo: this.route})
   }
 }

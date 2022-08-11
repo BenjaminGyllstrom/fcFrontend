@@ -5,3 +5,11 @@
 
   <button (click)="onContinueStudy()" class="button">Next</button>
 </div>
+
+<div style="display: flex; justify-content:center;">
+  <div class="routing-buttons">
+    <a class="routing-button" (click)="onNav('Overview')">Overview</a>
+    <a class="routing-button routing-button-active" (click)="onNav('Study')">Study</a>
+  </div>
+</div>
+

@@ -10,6 +10,7 @@ import { AppState } from 'src/app/ngrx/appState';
 import { getDeckIdFromRoute } from 'src/app/ngrx/card/card.selectors';
 import { EMPTY, filter, map, Subscription, switchMap, tap } from 'rxjs';
 import { createCard } from 'src/app/ngrx/card/card.actions';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-card',
@@ -41,7 +42,10 @@ export class AddCardComponent implements OnInit, OnDestroy {
     private quillService: QuillService,
     private deckHttpService: DeckHttpService,
     private explainHttpService: ExplainHttpService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
+
   ) { }
 
   deckId:string;
@@ -99,5 +103,9 @@ export class AddCardComponent implements OnInit, OnDestroy {
     this.answer = '';
     this.quillService.onReset.next();
     this.showQuestion = true;
+  }
+
+  onNav(action:string){
+    this.router.navigate(['../', action], {relativeTo: this.route})
   }
 }

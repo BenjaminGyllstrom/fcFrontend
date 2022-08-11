@@ -83,6 +83,10 @@ export class StudyCardsComponent implements OnInit {
       this.showAnswerButtons = true;
     }
   }
+
+  onNav(action:string){
+    this.router.navigate(['../', action], {relativeTo: this.route})
+  }
 }
 
 

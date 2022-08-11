@@ -6,6 +6,7 @@ import { AppState } from 'src/app/ngrx/appState';
 import { updateNode } from 'src/app/ngrx/node/node.actions';
 import { map, Subscription, tap } from 'rxjs';
 import { getNodeFromRoute } from 'src/app/ngrx/node/node.selectors';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-explain-overview',
@@ -25,7 +26,9 @@ export class ExplainOverviewComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store:Store<AppState>
+    private store:Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
     ) { }
 
     sub:Subscription
@@ -72,5 +75,9 @@ export class ExplainOverviewComponent implements OnInit, OnDestroy {
     this.explainForm = this.formBuilder.group({
       title:this.startValues.title
     });
+  }
+
+  onNav(action:string){
+    this.router.navigate(['../', action], {relativeTo: this.route})
   }
 }

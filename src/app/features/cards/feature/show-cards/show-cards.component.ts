@@ -8,6 +8,7 @@ import { AppState } from 'src/app/ngrx/appState';
 import { getCards, getCardsForRouteDeck } from 'src/app/ngrx/card/card.selectors';
 import { Observable } from 'rxjs';
 import { deleteCard } from 'src/app/ngrx/card/card.actions';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-cards',
@@ -21,7 +22,9 @@ export class ShowCardsComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private store:Store<AppState>
+    private store:Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   cards$:Observable<Card[]>
@@ -49,5 +52,9 @@ export class ShowCardsComponent implements OnInit {
         this.store.dispatch(deleteCard({card:card}))
       }
     });
+  }
+
+  onNav(action:string){
+    this.router.navigate(['../', action], {relativeTo: this.route})
   }
 }

@@ -7,6 +7,7 @@ import { AppState } from 'src/app/ngrx/appState';
 import { updateNode } from 'src/app/ngrx/node/node.actions';
 import { EMPTY, map, Subscription, switchMap, tap } from 'rxjs';
 import { getNodeFromRoute } from 'src/app/ngrx/node/node.selectors';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-deck-overview',
@@ -31,7 +32,10 @@ export class DeckOverviewComponent implements OnInit {
   constructor(
     private explainHttpService: ExplainHttpService,
     private formBuilder: FormBuilder,
-    private store:Store<AppState>) { }
+    private store:Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
+) { }
 
   sub:Subscription
   ngOnDestroy(): void {
@@ -89,5 +93,9 @@ export class DeckOverviewComponent implements OnInit {
     });
 
     this.selectedExplain = this.startValues.explain;
+  }
+
+  onNav(action:string){
+    this.router.navigate(['../', action], {relativeTo: this.route})
   }
 }
