@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Root } from '../../../../Models/root.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/appState';
 import { getRoots } from 'src/app/ngrx/root/root.selectors';
@@ -18,6 +18,7 @@ export class ShowRootsComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private store: Store<AppState>
   ){}
 
@@ -27,5 +28,8 @@ export class ShowRootsComponent implements OnInit {
 
   onClick(root:Root){
     this.router.navigate(['/myContent/Roots', root.id, 'Chapters'])
+  }
+  onNav(action:string){
+    this.router.navigate([action], {relativeTo: this.route})
   }
 }

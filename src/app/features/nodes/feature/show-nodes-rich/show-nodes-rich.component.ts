@@ -54,4 +54,8 @@ export class ShowNodesRichComponent implements OnInit {
     if(this.chapterId)
       this.store.dispatch(fromNode.changeNodeOrder({chapterId: this.chapterId, oldIndex: event.previousIndex, newIndex: event.currentIndex}))
   }
+
+  onNav(action:string){
+    this.router.navigate([action], {relativeTo: this.route})
+  }
 }

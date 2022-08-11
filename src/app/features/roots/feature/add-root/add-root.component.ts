@@ -5,6 +5,7 @@ import { AppState } from 'src/app/ngrx/appState';
 import { Store } from '@ngrx/store';
 import { createRoot } from 'src/app/ngrx/root/root.actions';
 import { QuillService } from 'src/app/features/shared/utils/quill.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,10 @@ export class AddRootComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private quillService: QuillService) { }
+    private quillService: QuillService,
+    private router: Router,
+    private route: ActivatedRoute,
+) { }
 
   rootForm = this.formBuilder.group({
     title:'',
@@ -45,4 +49,7 @@ export class AddRootComponent implements OnInit {
     this.quillContent = content;
   }
 
+  onNav(){
+    this.router.navigate(['../'], {relativeTo: this.route})
+  }
 }

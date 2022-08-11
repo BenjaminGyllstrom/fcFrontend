@@ -38,6 +38,10 @@ export class ShowNodesComponent implements OnInit {
     this.router.navigate(route, {relativeTo: this.route})
   }
 
+  onNav(action:string){
+    this.router.navigate([action], {relativeTo: this.route})
+  }
+
   getColumn(node:any){
     return this.displayTreeService.getColumn(node);
   }
@@ -60,4 +64,5 @@ export class ShowNodesComponent implements OnInit {
 
     return this.displayTreeService.getLineColor(node);
   }
+
 }

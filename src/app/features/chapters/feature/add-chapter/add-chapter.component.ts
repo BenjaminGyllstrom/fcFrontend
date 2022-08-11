@@ -6,6 +6,7 @@ import { AppState } from 'src/app/ngrx/appState';
 import * as fromChapter from 'src/app/ngrx/chapter/chapter.actions'
 import { getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-chapter',
@@ -15,7 +16,10 @@ import { Subscription } from 'rxjs';
 export class AddChapterComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
-    private store: Store<AppState>) { }
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
+) { }
 
   chapterForm = this.formBuilder.group({
     title:''
@@ -44,4 +48,7 @@ export class AddChapterComponent implements OnInit, OnDestroy {
     this.store.dispatch(fromChapter.createChapter({chapter:chapter}))
   }
 
+  onNav(){
+    this.router.navigate(['../'], {relativeTo: this.route})
+  }
 }

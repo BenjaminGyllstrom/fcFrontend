@@ -28,4 +28,8 @@ export class ShowChaptersComponent implements OnInit {
   onClick(chapter:Chapter){
     this.router.navigate([chapter.id, 'Nodes'], {relativeTo: this.route})
   }
+
+  onNav(action:string){
+    this.router.navigate([action], {relativeTo: this.route})
+  }
 }
