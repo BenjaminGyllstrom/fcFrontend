@@ -17,12 +17,14 @@ export const chapterReducer = createReducer(
     // let currentChaptersInState = [...state.chapters];
     // currentChaptersInState = currentChaptersInState.filter(chapter => chapters.findIndex(chap => chap.id == chapter.id) >= 0);
 
-    chapters.forEach(newChapter => {
-      if(state.chapters.findIndex(chapter => chapter.id == newChapter.id) >= 0)
-        chapters = [...chapters].splice(chapters.indexOf(newChapter),1);
-    });
+    let newChapters = [...chapters]
+    for (const newChapter of chapters) {
+      if(state.chapters.findIndex(chapter => chapter.id == newChapter.id) >= 0) {
+        newChapters = newChapters.splice(chapters.indexOf(newChapter),1);
+      }
+    }
 
-    return {...state, chapters: [...state.chapters, ...chapters], loadedForRoots: loadedForRoots}
+    return {...state, chapters: [...state.chapters, ...newChapters], loadedForRoots: loadedForRoots}
   }),
   on(fromChapter.createChapterSuccessful, (state, {chapter}) => {
     return {...state, chapters: [...state.chapters, chapter]}

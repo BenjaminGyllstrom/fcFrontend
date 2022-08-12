@@ -15,11 +15,15 @@ export const nodeReducer = createReducer(
     const loadedForChapter = [...state.loadedForChapter];
     if(!chapterId) return {...state}
     loadedForChapter.push(chapterId);
-    nodes.forEach(newNode => {
-      if(state.nodes.findIndex(node => node._id == newNode.id && node.type == newNode.type) >= 0)
-      nodes = [...nodes].splice(nodes.indexOf(newNode),1);
-    });
-    return {...state, nodes: [...state.nodes, ...nodes], loadedForChapter:[...state.loadedForChapter, chapterId]}
+
+    let newNodes = [...nodes]
+    for (const newNode of nodes) {
+      if(state.nodes.findIndex(node => node._id == newNode.id && node.type == newNode.type) >= 0){
+        newNodes = newNodes.splice(nodes.indexOf(newNode),1);
+      }
+    }
+
+    return {...state, nodes: [...state.nodes, ...newNodes], loadedForChapter:[...state.loadedForChapter, chapterId]}
   }),
   on(fromNode.createNodeSuccessful, (state, {node}) => {
     return {...state, nodes: [...state.nodes, node]}
