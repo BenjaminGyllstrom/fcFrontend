@@ -35,10 +35,18 @@ p{
   border-radius: 10px;
   background-color: white;
 
-  // display: grid;
-  // grid-template-rows: calc(100% - 29px) 55px;
+  display: grid;
+  grid-template-rows: calc(100% - 29px) 29px;
+  align-items: center;
+  // justify-content: center;
   overflow: hidden;
-  position: relative;
+  // position: relative;
+  p{
+    // text-align: center;
+    justify-self: center;
+    font-size: 12px;
+    max-width: 150px;
+  }
 }
 
 .question-answer-switch{
@@ -48,8 +56,8 @@ p{
   color: white;
   font-size: 12px;
 
-  position:absolute;
-  bottom: 0;
+  // position:absolute;
+  // bottom: 0;
 
   display: flex;
   justify-content: center;
@@ -85,6 +93,10 @@ p{
     grid-column: 2;
     align-self: center;
     transform: scale(1.2);
+    p{
+      grid-row: 1;
+      text-align: center;
+    }
   }
 }
 

@@ -2,9 +2,14 @@
   <h1>Active Recall</h1>
 
   <div class="card">
-    <p></p>
-    <div class="question-answer-switch not-select"> Show Answer</div>
-    <!-- <div class="question-answer-switch not-select" (click)="switchContent()"> Show Question</div> -->
+    <p *ngIf="!showAnswer">
+      Is using Flashcards a good method of implementing active learning?
+    </p>
+    <p *ngIf="showAnswer">
+      Yes!
+    </p>
+    <div *ngIf="!showAnswer" class="question-answer-switch not-select" (click)="showAnswer = !showAnswer"> Show Answer</div>
+    <div *ngIf="showAnswer" class="question-answer-switch not-select" (click)="showAnswer = !showAnswer"> Show Question</div>
   </div>
 
   <p>

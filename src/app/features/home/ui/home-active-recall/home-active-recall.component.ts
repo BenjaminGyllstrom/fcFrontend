@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeActiveRecallComponent implements OnInit {
 
+  showAnswer = false;
+
   constructor() { }
 
   ngOnInit(): void {
