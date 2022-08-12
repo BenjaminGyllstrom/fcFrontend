@@ -106,6 +106,7 @@ import { StarScrollButtonComponent } from './features/home/ui/star-scroll-button
 import { HomeDescriptionComponent } from './features/home/ui/home-description/home-description.component';
 import { RootOverviewComponent } from './features/roots/feature/root-overview/root-overview.component';
 import { HomeStudyMapComponent } from './features/home/ui/home-study-map/home-study-map.component';
+import { HomeActiveRecallComponent } from './features/home/ui/home-active-recall/home-active-recall.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,7 @@ import { HomeStudyMapComponent } from './features/home/ui/home-study-map/home-st
     HomeDescriptionComponent,
     RootOverviewComponent,
     HomeStudyMapComponent,
+    HomeActiveRecallComponent,
   ],
   imports: [
     BrowserModule,
