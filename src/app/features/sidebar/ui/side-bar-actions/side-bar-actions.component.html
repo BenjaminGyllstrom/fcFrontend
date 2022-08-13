@@ -18,6 +18,8 @@
 
 <div *ngIf="isNodesState()">
   <p>Chapter Actions</p>
+  <app-side-bar-item (click)="setAction('Overview')" [item]="{icon:'Action2-black.svg', name:'Overview'}" [showActive]="true"
+  [backgroundActive]="backgroundActive('Overview')" [optionsAvailable]="false"></app-side-bar-item>
   <app-side-bar-item (click)="setAction('Nodes')" [item]="{icon:'Action2-black.svg', name:'Nodes'}" [showActive]="true"
   [backgroundActive]="backgroundActive('Nodes')" [optionsAvailable]="false"></app-side-bar-item>
 </div>

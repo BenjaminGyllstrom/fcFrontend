@@ -44,6 +44,12 @@ export class ChapterEffects{
     map(chapter => actions.deleteChapterSuccessful({chapter: chapter}))
   ))
 
+  updateChapter$ = createEffect(()=> this.actions$.pipe(
+    ofType(actions.updateChapter),
+    mergeMap(action => this.updateChapter(action.chapter)),
+    map(updatedChapter => actions.updateChapterSuccessful({chapter:updatedChapter}))
+  ))
+
   getRootChapters(rootId: string): Observable<Chapter[]>{
     return this.rootHttpService.getById(rootId).pipe(
       map((iRoot) => this.chapterHttpService.parseToChapters(iRoot.chapters))
@@ -56,6 +62,12 @@ export class ChapterEffects{
   }
   deleteChapter(id: string): Observable<Chapter>{
     return this.chapterHttpService.delete(id).pipe(
+      map(iChapter => this.chapterHttpService.parseToChapter(iChapter))
+    )
+  }
+
+  updateChapter(chapter:Chapter):Observable<Chapter>{
+    return this.chapterHttpService.edit(chapter, chapter.id).pipe(
       map(iChapter => this.chapterHttpService.parseToChapter(iChapter))
     )
   }

@@ -109,6 +109,7 @@ import { HomeStudyMapComponent } from './features/home/ui/home-study-map/home-st
 import { HomeActiveRecallComponent } from './features/home/ui/home-active-recall/home-active-recall.component';
 import { HomeExplanationComponent } from './features/home/ui/home-explanation/home-explanation.component';
 import { HomeSpacedRepetitionComponent } from './features/home/ui/home-spaced-repetition/home-spaced-repetition.component';
+import { ChapterOverviewComponent } from './features/chapters/feature/chapter-overview/chapter-overview.component';
 
 @NgModule({
   declarations: [
@@ -180,6 +181,7 @@ import { HomeSpacedRepetitionComponent } from './features/home/ui/home-spaced-re
     HomeActiveRecallComponent,
     HomeExplanationComponent,
     HomeSpacedRepetitionComponent,
+    ChapterOverviewComponent,
   ],
   imports: [
     BrowserModule,

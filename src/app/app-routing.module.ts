@@ -22,6 +22,7 @@ import { ExploreRootOverviewComponent } from './features/explore/feature/explore
 import { StudyCardsComponent } from './features/study/feature/study-cards/study-cards.component';
 import { Home2Component } from './features/home/feature/home2/home2.component';
 import { RootOverviewComponent } from './features/roots/feature/root-overview/root-overview.component';
+import { ChapterOverviewComponent } from './features/chapters/feature/chapter-overview/chapter-overview.component';
 
 const routes: Routes = [
   {path: '', component:Home2Component},
@@ -36,6 +37,7 @@ const routes: Routes = [
     {path:'Roots/:rootId/Chapters', component: ShowChaptersComponent},
     {path:'Roots/:rootId/Overview', component: RootOverviewComponent},
     {path:'Roots/:rootId/Chapters/AddChapter', component: AddChapterComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Overview', component: ChapterOverviewComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes', component: ShowNodesRichComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/AddNode', component: AddNodeComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Overview', component: DeckOverviewComponent},

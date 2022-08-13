@@ -37,6 +37,12 @@ export const chapterReducer = createReducer(
     if(!chapters || chapters.length <= 0) return {...state}
     const rootId = chapters[0].rootId;
     return {...state, chapters: [...state.chapters, ...chapters], loadedForRoots:[...state.loadedForRoots, rootId]}
+  }),
+  on(fromChapter.updateChapterSuccessful, (state, {chapter}) => {
+    const oldChapters = [...state.chapters];
+    const index = oldChapters.findIndex(chapter => chapter.id == chapter.id);
+    oldChapters[index] = chapter;
+    return {...state, chapters: oldChapters}
   })
 )
 

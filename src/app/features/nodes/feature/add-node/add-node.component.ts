@@ -22,7 +22,11 @@ export class AddNodeComponent implements OnInit {
     this.nodeType = nodeType;
   }
 
-  onNav(){
-    this.router.navigate(['../'], {relativeTo: this.route})
+  onNav(action:string){
+    if(action == 'Overview'){
+      this.router.navigate(['../../', action], {relativeTo: this.route})
+    }else{
+      this.router.navigate(['../'], {relativeTo: this.route})
+    }
   }
 }

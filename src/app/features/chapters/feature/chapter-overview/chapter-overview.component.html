@@ -1,0 +1,26 @@
+<div class="chapter-overview">
+
+  <h1>Overview</h1>
+
+  <form [formGroup]="chapterForm" (ngSubmit)="onSave()" class="form">
+    <div class="inputField">
+      <p>Title:</p>
+      <div class="input">
+        <input (change)="onInputChange()" type="text" id="title" formControlName="title">
+      </div>
+    </div>
+  </form>
+
+  <div class="buttons">
+    <button *ngIf="edit" class="button chapter-save-button" (click)="onSave()">Save</button>
+    <button *ngIf="edit" class="button chapter-save-button" (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+
+<div style="display: flex; justify-content:center;">
+  <div class="routing-buttons">
+    <a class="routing-button routing-button-active" >Overview</a>
+    <a class="routing-button" (click)="onNav('Nodes')">Nodes</a>
+    <a class="routing-button" (click)="onNav('AddNode')">Add Node</a>
+  </div>
+</div>
