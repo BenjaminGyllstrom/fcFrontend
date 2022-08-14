@@ -1,10 +1,7 @@
 <app-header class="header" [backgroundColor]="'#929ADE'"></app-header>
 <main>
-  <div class="outer-stars">
-    <img class="star star4" src="../../../assets/images/Star 3.svg" alt="">
-    <img class="star star5" src="../../../assets/images/Star 2.svg" alt="">
-    <img class="star star6" src="../../../assets/images/Star 1.svg" alt="">
-  </div>
+  <app-star-background></app-star-background>
+
   <div class="content">
     <h1>
       Study the way you were
@@ -12,6 +9,7 @@
       supposed to.
     </h1>
     <app-home-austro-circle class="image"></app-home-austro-circle>
+
     <a routerLink="/login">
       <p>Sign up for free</p>
     </a>
@@ -21,17 +19,11 @@
       learn by using the most efficient<br>
       techniques
     </p>
-    <app-star-scroll-button class="star-button" (click)="scroll(target)"></app-star-scroll-button>
+    <!-- <app-star-scroll-button class="star-button" (click)="scroll(target)"></app-star-scroll-button> -->
   </div>
 
   <div #target>
 
     <app-home-description></app-home-description>
   </div>
-
-  <!-- <div style="height: 100vh; color:white;" #target>
-    <h1>
-      What is WiseStar
-    </h1>
-  </div> -->
 </main>
