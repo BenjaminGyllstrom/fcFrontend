@@ -1,17 +1,19 @@
 <app-header class="header" [backgroundColor]="'#929ADE'"></app-header>
 <main>
-  <div class="outer-stars">
+  <!-- <div class="outer-stars">
     <img class="star star4" src="../../../assets/images/Star 3.svg" alt="">
     <img class="star star5" src="../../../assets/images/Star 2.svg" alt="">
     <img class="star star6" src="../../../assets/images/Star 1.svg" alt="">
-  </div>
+  </div> -->
   <div class="content">
     <h1>
       Study the way you were
       <br>
       supposed to.
     </h1>
-    <app-home-austro-circle class="image"></app-home-austro-circle>
+    <!-- <app-home-austro-circle class="image"></app-home-austro-circle> -->
+    <img src="../../../../../assets/images/HeroImage-medium.svg" class="image">
+
     <a routerLink="/login">
       <p>Sign up for free</p>
     </a>
@@ -21,7 +23,7 @@
       learn by using the most efficient<br>
       techniques
     </p>
-    <app-star-scroll-button class="star-button" (click)="scroll(target)"></app-star-scroll-button>
+    <!-- <app-star-scroll-button class="star-button" (click)="scroll(target)"></app-star-scroll-button> -->
   </div>
 
   <div #target>
