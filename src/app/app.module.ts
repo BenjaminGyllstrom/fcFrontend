@@ -110,6 +110,7 @@ import { HomeActiveRecallComponent } from './features/home/ui/home-active-recall
 import { HomeExplanationComponent } from './features/home/ui/home-explanation/home-explanation.component';
 import { HomeSpacedRepetitionComponent } from './features/home/ui/home-spaced-repetition/home-spaced-repetition.component';
 import { ChapterOverviewComponent } from './features/chapters/feature/chapter-overview/chapter-overview.component';
+import { StarBackgroundComponent } from './features/home/ui/star-background/star-background.component';
 
 @NgModule({
   declarations: [
@@ -182,6 +183,7 @@ import { ChapterOverviewComponent } from './features/chapters/feature/chapter-ov
     HomeExplanationComponent,
     HomeSpacedRepetitionComponent,
     ChapterOverviewComponent,
+    StarBackgroundComponent,
   ],
   imports: [
     BrowserModule,
