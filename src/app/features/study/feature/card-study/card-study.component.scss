@@ -21,6 +21,7 @@
 .card-field{
   justify-self: center;
   height: 100%;
+  max-height: calc(100% - 55px);
 }
 
 
@@ -34,4 +35,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
 }

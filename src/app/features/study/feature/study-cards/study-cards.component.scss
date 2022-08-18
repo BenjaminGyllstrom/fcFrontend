@@ -22,7 +22,8 @@
 }
 
 .button__next{
-  width: 93px;
+  min-width: 93px;
+  width: 100px;
 }
 .button{
   width: min-content;
