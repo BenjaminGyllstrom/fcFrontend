@@ -40,7 +40,10 @@ export class StudyCardsComponent implements OnInit {
 
   this.card$ = this.store.select(getNextDueCardStudyForRoute).pipe(
     tap(card => {
-      if(card) this.nextRecurrenceText = calculateRecurrenceTimes(card);
+      if(card) {
+        this.nextRecurrenceText = calculateRecurrenceTimes(card);
+        this.showAnswer = false;
+      }
     })
   )
 
