@@ -63,57 +63,9 @@ a{
   }
 }
 
-.star{
-  height: 25px;
-  filter: blur(2px);
-}
-
-.outer-stars{
-  position: relative;
-}
-.star4{
-  position: absolute;
-  top: 110px;
-  left: calc(50vw - 110px);
-}
-.star5{
-  position: absolute;
-  top: 80px;
-  left: calc(50vw + 80px);
-}
-.star6{
-  position: absolute;
-  top: 380px;
-  left: calc(50vw + 100px);
-}
-
-.star-button{
-  grid-column: 6/8;
-  // grid-row: 8;
-  justify-self: center;
-  align-self: center;
-  filter: blur(2px);
-
-  cursor: pointer;
-
-  display: none;
-  position: absolute;
-  top:calc(100vh - 250px);
-  left: 50%;
-}
-
 @media (min-width:375px){
   .image{
     height: 300px;
-  }
-}
-
-@media (min-width: 415px){
-  .star4{
-    top: 80px;
-  }
-  .star5{
-    top: 60px;
   }
 }
 
@@ -155,24 +107,6 @@ a{
   a{
     grid-column: 2/7;
     grid-row: 6;
-  }
-
-  .star-button{
-    grid-row: 8;
-    display: block;
-  }
-
-  .star4{
-    top: calc(10vh + 150px);
-    left: calc(50vw - 110px);
-  }
-  .star5{
-    top: calc(10vh);
-    left: calc(50vw + 80px);
-  }
-  .star6{
-    top: calc(10vh + 230px);
-    left: calc(50vw + 50px);
   }
 }
 
@@ -240,22 +174,6 @@ a{
     }
 
   }
-  .star-button{
-    // grid-column: 6/8;
-    grid-row: 10;
-  }
-  .star4{
-    top: calc(10vh + 240px);
-    left: calc(50vw - 110px);
-  }
-  .star5{
-    top: calc(10vh + 20px);
-    left: calc(50vw + 80px);
-  }
-  .star6{
-    top: calc(10vh + 330px);
-    left: calc(50vw + 50px);
-  }
 }
 
 @media (min-width: 1224px){
@@ -283,63 +201,6 @@ a{
   }
   .image{
     height: 400px;
-  }
-  .star4{
-    top: calc(10vh + 280px);
-    left: calc(50vw - 110px);
-  }
-  .star5{
-    top: calc(10vh);
-    left: calc(50vw + 120px);
-  }
-  .star6{
-    top: calc(10vh + 420px);
-    left: calc(50vw + 70px);
-  }
-  .star7{
-    position: absolute;
-    top: calc(10vh + 600px);
-    left: calc(50vw - 100px);
-  }
-  .star8{
-    position: absolute;
-    top: calc(10vh + 720px);
-    left: calc(20vw + 70px);
-  }
-  .star9{
-    position: absolute;
-    top: calc(10vh + 120px);
-    left: calc(10vw + 70px);
-  }
-  .star10{
-    position: absolute;
-    top: calc(10vh + 120px);
-    left: calc(50vw + 700px);
-  }
-  .star11{
-    position: absolute;
-    top: calc(10vh + 420px);
-    left: calc(5vw + 70px);
-  }
-  .star12{
-    position: absolute;
-    top: calc(10vh + 520px);
-    left: calc(50vw + 700px);
-  }
-  .star13{
-    position: absolute;
-    top: calc(5vh + 0px);
-    left: calc(40vw + 700px);
-  }
-  .star14{
-    position: absolute;
-    top: calc(10vh + 420px);
-    left: calc(20vw + 150px);
-  }
-  .star15{
-    position: absolute;
-    top: calc(10vh + 0px);
-    left: calc(20vw + 200px);
   }
 }
 
