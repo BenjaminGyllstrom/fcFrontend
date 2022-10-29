@@ -1,0 +1,22 @@
+<div class="add-card-conatiner">
+
+  <app-quill-show *ngIf="showExplain && (explain$|async) as explain" [content]="explain.text"></app-quill-show>
+
+  <app-card-v2
+  [disableDelete]="true"
+  [question]="question"
+  [answer]="answer"
+  (onChange)="onContentChange($event)"
+  ></app-card-v2>
+
+</div>
+
+
+<div style="display: flex; justify-content:center;">
+  <div class="routing-buttons">
+    <a class="routing-button" (click)="onNav('Overview')">Overview</a>
+    <a class="routing-button" (click)="onNav('Study')">Study</a>
+    <a class="routing-button" (click)="onNav('Cards')">Cards</a>
+    <a class="routing-button routing-button-active" (click)="onNav('AddCard')">Add Card</a>
+  </div>
+</div>

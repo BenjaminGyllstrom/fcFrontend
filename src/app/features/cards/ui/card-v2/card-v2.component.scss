@@ -1,0 +1,29 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+::ng-deep .ql-toolbar.ql-snow{
+  border: none;
+  padding: 5px 0px 0px 0px;
+}
+
+::ng-deep .ql-toolbar.ql-snow .ql-formats{
+  margin: 3px;
+}
+
+app-quill-edit app-quill-show{
+  max-height: calc(100% - 40px);
+  height: calc(100% - 40px);
+}
+
+
+app-card-switch-button{
+  margin-top: auto;
+  height: 40px;
+}
+
+img{
+  width: 30px;
+}

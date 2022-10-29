@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { ElementRef, Injectable } from "@angular/core";
-import Quill from "quill";
+import Quill, { RangeStatic } from "quill";
 
 
 
@@ -12,17 +12,13 @@ export class QuillService{
 
   constructor() {}
 
+
   onReset:Subject<void> = new Subject<void>();
-  // onContentChange:Subject<{text:string, cursorPosition:number}> = new Subject<{text:string, cursorPosition:number}>();
-  // content:{text:string, cursorPosition:number};
+  onSetContent:Subject<string> = new Subject<string>();
+  onSetSelection:Subject<StaticRange> = new Subject<StaticRange>();
 
-  // updateContent(content:{text:string, cursorPosition:number}){
-  //   this.content = content;
-  //   this.onContentChange.next(content)
-  // }
-  // changeContent(content:{text:string, cursorPosition:number}){
-
-  // }
+  onContentChange:Subject<string> = new Subject<string>();
+  onSelectionChange:Subject<StaticRange> = new Subject<StaticRange>();
 
   toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -41,10 +37,22 @@ export class QuillService{
     ['link', 'image', 'video'],
   ];
 
-  createQuill(editor :ElementRef){
+  toolbarOptionsSmall = [
+    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+    [{ 'align': [] }],
+  ];
+
+  createQuill(editor :ElementRef, large=true){
+
+    let options = this.toolbarOptions;
+    if(!large) options = this.toolbarOptionsSmall
+
     const quill = new Quill(editor.nativeElement, {
       modules: {
-        toolbar: this.toolbarOptions,
+        toolbar: options,
         keyboard: {
           bindings: {
             'tab': {

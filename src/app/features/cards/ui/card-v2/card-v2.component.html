@@ -1,0 +1,15 @@
+<img *ngIf="!disableDelete" [src]="'../../../../assets/icons/Options.svg'" alt="">
+
+<app-quill-show *ngIf="disableEdit" [content]="content"></app-quill-show>
+<app-quill-edit-v2 *ngIf="!disableEdit"
+[content]="content"
+[selection]="selection"
+(onContentChange)="onContentChange($event)"
+(onSelectionChange)="onSelectionChange($event)"></app-quill-edit-v2>
+
+<app-card-switch-button [showQuestion]="showQuestion" (onSwitch)="switchContent()"></app-card-switch-button>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="onDelete()">Delete</button>
+</mat-menu>
