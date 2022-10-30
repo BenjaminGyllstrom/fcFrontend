@@ -15,10 +15,6 @@ export class CardV2Component implements OnInit, OnDestroy {
   @Input() answer:string = '<p class="ql-align-center"></p>'
   questionSelection:RangeStatic = {index:0, length:0}
   answerSelection:RangeStatic = {index:0, length:0}
-  @Input() disableEdit:boolean
-  @Input() disableDelete:boolean
-  @Output('onClick') onClickEmitter = new EventEmitter<void>();
-  @Output('onDelete') onDeleteEmitter = new EventEmitter<void>();
   @Output('onChange') onChangeEmitter = new EventEmitter<{question:string, answer:string}>();
 
   showQuestion:boolean = true;
@@ -78,13 +74,6 @@ export class CardV2Component implements OnInit, OnDestroy {
   switchContent(){
     this.showQuestion = !this.showQuestion;
     this.setContent()
-  }
-
-  onContentClick(){
-    this.onClickEmitter.emit();
-  }
-  onDelete(){
-    this.onDeleteEmitter.emit();
   }
 
   onContentChange(text:string){
