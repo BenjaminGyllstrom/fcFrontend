@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngAfterViewInit(){
-      this.observer.observe(['(min-width:750px)']).subscribe(res=>{
+      this.observer.observe(['(min-width:999px)']).subscribe(res=>{
         setTimeout(()=>{
           if(res.matches){
             this.menuMode = false
