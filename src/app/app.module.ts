@@ -111,6 +111,10 @@ import { HomeExplanationComponent } from './features/home/ui/home-explanation/ho
 import { HomeSpacedRepetitionComponent } from './features/home/ui/home-spaced-repetition/home-spaced-repetition.component';
 import { ChapterOverviewComponent } from './features/chapters/feature/chapter-overview/chapter-overview.component';
 import { StarBackgroundComponent } from './features/home/ui/star-background/star-background.component';
+import { AddCardV2Component } from './features/cards/feature/add-card-v2/add-card-v2.component';
+import { CardV2Component } from './features/cards/ui/card-v2/card-v2.component';
+import { CardSwitchButtonComponent } from './features/cards/ui/card-switch-button/card-switch-button.component';
+import { QuillEditV2Component } from './features/shared/ui/quill-edit-v2/quill-edit-v2.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +188,10 @@ import { StarBackgroundComponent } from './features/home/ui/star-background/star
     HomeSpacedRepetitionComponent,
     ChapterOverviewComponent,
     StarBackgroundComponent,
+    AddCardV2Component,
+    CardV2Component,
+    CardSwitchButtonComponent,
+    QuillEditV2Component,
   ],
   imports: [
     BrowserModule,

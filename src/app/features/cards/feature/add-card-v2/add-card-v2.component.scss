@@ -1,12 +1,51 @@
-.add-card-conatiner{
+.conatiner{
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+app-quill-show{
+  max-width: 500px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.add-card-container{
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
 app-card-v2{
   max-width: 400px;
   height: 250px;
+  min-width: 320px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.show-explain-button{
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
+.add-card-button{
+  height: 35px;
+  width: 80px;
+}
+
+@media(min-width:1024px){
+  .conatiner{
+    flex-direction: row;
+    justify-content: center;
+  }
+  app-card-v2{
+    min-width: 380px;
+  }
+  app-quill-show{
+    max-width: 700px;
+    max-height: calc(90vh - 52px - 64px);
+  }
 }

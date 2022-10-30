@@ -15,10 +15,10 @@ export class QuillService{
 
   onReset:Subject<void> = new Subject<void>();
   onSetContent:Subject<string> = new Subject<string>();
-  onSetSelection:Subject<StaticRange> = new Subject<StaticRange>();
+  onSetSelection:Subject<RangeStatic> = new Subject<RangeStatic>();
 
   onContentChange:Subject<string> = new Subject<string>();
-  onSelectionChange:Subject<StaticRange> = new Subject<StaticRange>();
+  onSelectionChange:Subject<RangeStatic> = new Subject<RangeStatic>();
 
   toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons

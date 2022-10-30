@@ -15,18 +15,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-add-card-v2',
   templateUrl: './add-card-v2.component.html',
-  styleUrls: ['./add-card-v2.component.scss']
+  styleUrls: ['./add-card-v2.component.scss'],
+  providers: [QuillService]
 })
 export class AddCardV2Component implements OnInit {
 
   deck:Deck
-  question:string = '<p class="ql-align-center"></p>'
-  answer:string = '<p class="ql-align-center"><br></p>'
-  showQuestion:boolean = true;
-  content:string = '';
-
-  // explain:Explain
-
+  question:string = ''
+  answer:string = ''
   explain$:Observable<Explain|undefined>
 
   showExplain:boolean;
@@ -68,10 +64,6 @@ export class AddCardV2Component implements OnInit {
     card.question = this.question
     card.answer = this.answer
     card.deckId = this.deckId;
-
-    console.log(card.question);
-
-
     // this.store.dispatch(createCard({card:card}))
     this.reset();
   }
@@ -82,9 +74,9 @@ export class AddCardV2Component implements OnInit {
   }
 
   reset(){
-    this.question = '<p class="ql-align-center"></p>'
-    this.answer = '<p class="ql-align-center"><br></p>'
-    this.showQuestion = true;
+    this.question = ''
+    this.answer = ''
+    this.quillService.onReset.next();
   }
 
   onNav(action:string){

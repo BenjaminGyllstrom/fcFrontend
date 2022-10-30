@@ -1,13 +1,15 @@
-<div class="add-card-conatiner">
+<div class="conatiner">
 
-  <app-quill-show *ngIf="showExplain && (explain$|async) as explain" [content]="explain.text"></app-quill-show>
+    <app-quill-show *ngIf="showExplain && (explain$|async) as explain" [content]="explain.text"></app-quill-show>
 
-  <app-card-v2
-  [disableDelete]="true"
-  [question]="question"
-  [answer]="answer"
-  (onChange)="onContentChange($event)"
-  ></app-card-v2>
+  <div class="add-card-container">
+    <app-card-v2 [disableDelete]="true" (onChange)="onContentChange($event)"></app-card-v2>
+    <button (click)="this.showExplain = !this.showExplain" class="show-explain-button">
+      {{showExplain? 'Hide Explain':'Show Explain'}}
+    </button>
+    <button type="submit" class="button add-card-button" (click)="onSave()">Add</button>
+  </div>
+
 
 </div>
 

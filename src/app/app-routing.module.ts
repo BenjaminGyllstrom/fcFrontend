@@ -23,6 +23,7 @@ import { StudyCardsComponent } from './features/study/feature/study-cards/study-
 import { Home2Component } from './features/home/feature/home2/home2.component';
 import { RootOverviewComponent } from './features/roots/feature/root-overview/root-overview.component';
 import { ChapterOverviewComponent } from './features/chapters/feature/chapter-overview/chapter-overview.component';
+import { AddCardV2Component } from './features/cards/feature/add-card-v2/add-card-v2.component';
 
 const routes: Routes = [
   {path: '', component:Home2Component},
@@ -42,7 +43,8 @@ const routes: Routes = [
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/AddNode', component: AddNodeComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Overview', component: DeckOverviewComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsComponent},
-    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardV2Component},
+    // {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Explain/:nodeId/Overview', component: ExplainOverviewComponent},
     // {path:'Roots/:rootId/Chapters/:chapterId/Nodes/:nodeType/:nodeId/Study', component: StudyCardsComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/:nodeType/:nodeId/Study', component: StudyNodeComponent},

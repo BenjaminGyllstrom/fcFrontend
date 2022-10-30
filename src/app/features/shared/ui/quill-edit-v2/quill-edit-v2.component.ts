@@ -1,34 +1,16 @@
 import { QuillService } from 'src/app/features/shared/utils/quill.service';
 import { Quill, RangeStatic } from 'quill';
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'app-quill-edit-v2',
   templateUrl: './quill-edit-v2.component.html',
   styleUrls: ['./quill-edit-v2.component.scss']
 })
-export class QuillEditV2Component implements OnInit {
+export class QuillEditV2Component implements OnInit, OnDestroy {
 
-  _selection: RangeStatic = {index:0, length:0}
-  _content:string;
-
-  @Input() set selection(value: RangeStatic){
-    if(this.quill){
-      setTimeout(() => this.quill.setSelection(value), 1);
-    }
-  }
-
-  @Input() set content(value: string){
-    this._content = value;
-    if(this.quill){
-
-      this.quill.root.innerHTML = this._content;
-    }
-  }
-
-
-  @Output('onContentChange') contentChangeEmitter = new EventEmitter<string>()
-  @Output('onSelectionChange') selectionChangeEmitter = new EventEmitter<RangeStatic>()
+  content:string
 
   @ViewChild('editor', { read: ElementRef, static: false }) editor: ElementRef
   quill:Quill;
@@ -37,28 +19,56 @@ export class QuillEditV2Component implements OnInit {
     private quillService: QuillService
     ) { }
 
+  subs:Subscription[] = []
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => {
+      sub.unsubscribe();
+    });
+  }
+
   ngAfterViewInit(){
     this.quill = this.quillService.createQuill(this.editor, false);
     this.quill.format('align', 'center')
 
-    if(this._content){
-      this.quill.root.innerHTML = this._content;
+    if(this.content){
+      this.quill.root.innerHTML = this.content;
     }
 
     this.quill.focus();
 
     this.quill.on('text-change', (delta, oldContents, source) => {
-      this.contentChangeEmitter.emit(this.quill.root.innerHTML);
-      var selection = this.quill.getSelection();
-      this.selectionChangeEmitter.emit(selection == null? undefined: selection)
 
+      this.quillService.onContentChange.next(this.quill.root.innerHTML)
+
+      let selection = this.quill.getSelection();
+      if(selection == null) selection = {index:0, length:0}
+      this.quillService.onSelectionChange.next(selection)
     })
-    this.quill.on('selection-change', (range) => {
-      this.selectionChangeEmitter.emit(range)
+    this.quill.on('selection-change', (selection) => {
+      this.quillService.onSelectionChange.next(selection)
     })
   }
 
+
+
   ngOnInit(): void {
+
+    this.subs.push(this.quillService.onSetContent.pipe(
+      tap(content => {
+        this.content = content;
+        if(this.quill){
+          this.quill.root.innerHTML = content
+        }
+      })
+    ).subscribe())
+
+    this.subs.push(this.quillService.onSetSelection.pipe(
+      tap(selection => {
+        if(this.quill){
+          setTimeout(() => this.quill.setSelection(selection), 1);
+        }
+      })
+    ).subscribe())
   }
 
 }
