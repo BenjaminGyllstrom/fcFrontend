@@ -49,6 +49,7 @@ export class RootHttpService {
     const newRoot = new Root();
     newRoot.id = collectedRoot._id;
     newRoot.title = collectedRoot.title;
+    newRoot.public = collectedRoot.public;
     newRoot.description = collectedRoot.description;
     newRoot.chapters = this.chapterHttpService.parseToChapters(collectedRoot.chapters);
 

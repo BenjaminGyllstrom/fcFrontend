@@ -11,6 +11,11 @@
     </div>
   </form>
 
+  <div class="public">
+    <p class="public-title">Public:</p>
+    <app-toggle (onToggle)="onToggle($event)" [toggled]="public"></app-toggle>
+  </div>
+
   <app-quill-show *ngIf="!edit" [content]="content" class="quill" (click)="onQuillClick()"></app-quill-show>
   <app-quill-edit *ngIf="edit" [content]="content" (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
 
@@ -20,7 +25,7 @@
   </div>
 </div>
 
-<div style="display: flex; justify-content:center;">
+<div style="display: flex; justify-content:center; margin-top: 52px">
   <div class="routing-buttons">
     <a class="routing-button routing-button-active" >Overview</a>
     <a class="routing-button" (click)="onNav('Chapters')">Chapters</a>

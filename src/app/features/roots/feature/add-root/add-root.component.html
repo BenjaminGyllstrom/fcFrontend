@@ -11,6 +11,9 @@
       </div>
     </div>
 
+    <p class="public-title">Public:</p>
+    <app-toggle (onToggle)="onToggle($event)"></app-toggle>
+
     <p class="description-title">Description:</p>
     <app-quill-edit (onContentChange)="onContentChange($event)" class="quill"></app-quill-edit>
 

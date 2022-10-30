@@ -3,6 +3,7 @@ import { Chapter, IChapter } from "./chapter.model";
 export class Root{
   id: string;
   title: string;
+  public:boolean
   description:string;
   chapters: Chapter[];
   userData: {
@@ -18,6 +19,7 @@ export class Root{
 export interface IRoot{
   _id: string;
   title: string;
+  public:boolean
   description:string;
   chapters: IChapter[];
   userData: {

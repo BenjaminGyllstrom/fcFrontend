@@ -118,6 +118,7 @@ import { QuillEditV2Component } from './features/shared/ui/quill-edit-v2/quill-e
 import { ShowCardsV2Component } from './features/cards/feature/show-cards-v2/show-cards-v2.component';
 import { QuillShowV2Component } from './features/shared/ui/quill-show-v2/quill-show-v2.component';
 import { ShowCardComponent } from './features/cards/ui/show-card/show-card.component';
+import { ToggleComponent } from './features/shared/ui/toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -198,6 +199,7 @@ import { ShowCardComponent } from './features/cards/ui/show-card/show-card.compo
     ShowCardsV2Component,
     QuillShowV2Component,
     ShowCardComponent,
+    ToggleComponent,
   ],
   imports: [
     BrowserModule,

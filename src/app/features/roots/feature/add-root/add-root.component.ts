@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddRootComponent implements OnInit {
 
+  public:boolean
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
@@ -33,10 +34,15 @@ export class AddRootComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onToggle(toggled:boolean){
+    this.public = toggled
+  }
+
   onSubmit(){
     const title = this.rootForm.value.title;
     const root = new Root();
     root.title = title;
+    root.public = this.public
     root.description = this.quillContent;
 
     this.rootForm.reset();

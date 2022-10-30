@@ -16,10 +16,11 @@ import { getRootFromRoute } from 'src/app/ngrx/root/root.selectors';
 })
 export class RootOverviewComponent implements OnInit, OnDestroy {
 
+  public:boolean
   root:Root;
   edit:boolean;
   content:string
-  startValues:{title:string, text: any}
+  startValues:{title:string, public:boolean, text: any}
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,14 +48,17 @@ export class RootOverviewComponent implements OnInit, OnDestroy {
           title: root.title,
           description: root.description
         })
-
+        this.public = root.public;
         this.content = root.description;
-        this.startValues = {title: root.title, text: root.description};
+        this.startValues = {title: root.title, public: root.public, text: root.description};
       }
     })
 
   }
-
+  onToggle(toggled:boolean){
+    this.public = toggled
+    this.edit = true;
+  }
   onQuillClick(){
     this.edit = true;
   }
@@ -69,6 +73,7 @@ export class RootOverviewComponent implements OnInit, OnDestroy {
 
     this.root.description = this.content;
     this.root.title = this.rootForm.value.title
+    this.root.public = this.public;
 
     this.store.dispatch(updateRoot({root:this.root}))
     this.edit = false
@@ -76,6 +81,7 @@ export class RootOverviewComponent implements OnInit, OnDestroy {
   onCancel(){
     this.edit = false;
     this.content = this.startValues.text;
+    this.public = this.startValues.public;
     this.rootForm = this.formBuilder.group({
       title:this.startValues.title
     });
