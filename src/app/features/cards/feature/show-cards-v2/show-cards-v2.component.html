@@ -1,8 +1,5 @@
 <div class="show-cards">
-
-  <!-- <div *ngFor="let card of cards$ | async" class="card" > -->
-    <app-show-card *ngFor="let card of cards$ | async" [card]="card"></app-show-card>
-  <!-- </div> -->
+    <app-show-card *ngFor="let card of cards$ | async" (onClick)="onClick(card)" [card]="card"></app-show-card>
 </div>
 
 <div style="display: flex; justify-content:center;">

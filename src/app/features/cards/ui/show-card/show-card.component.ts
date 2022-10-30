@@ -39,6 +39,9 @@ export class ShowCardComponent implements OnInit {
     const content = this.showQuestion? this.question : this.answer
     this.quillService.onSetContent.next(content)
   }
+  onClick(){
+    this.onClickEmitter.emit()
+  }
 
   onDelete(){
     this.onDeleteEmitter.emit();

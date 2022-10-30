@@ -2,7 +2,7 @@
   <img [src]="'../../../../assets/icons/Options.svg'" alt="">
 </div>
 
-<app-quill-show-v2></app-quill-show-v2>
+<app-quill-show-v2 (click)="onClick()"></app-quill-show-v2>
 <app-card-switch-button [showQuestion]="showQuestion" (onSwitch)="switchContent()"></app-card-switch-button>
 
 <mat-menu #menu="matMenu">
