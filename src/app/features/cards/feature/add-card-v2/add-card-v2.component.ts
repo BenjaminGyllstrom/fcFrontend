@@ -64,7 +64,7 @@ export class AddCardV2Component implements OnInit {
     card.question = this.question
     card.answer = this.answer
     card.deckId = this.deckId;
-    // this.store.dispatch(createCard({card:card}))
+    this.store.dispatch(createCard({card:card}))
     this.reset();
   }
 
