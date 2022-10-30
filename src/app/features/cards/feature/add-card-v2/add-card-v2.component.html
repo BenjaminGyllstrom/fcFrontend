@@ -1,4 +1,4 @@
-<div class="conatiner" *ngIf="deckId$ | async">
+<div class="conatiner">
 
     <app-quill-show *ngIf="showExplain && (explain$|async) as explain" [content]="explain.text"></app-quill-show>
 

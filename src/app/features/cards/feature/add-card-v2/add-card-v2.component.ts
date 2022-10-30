@@ -11,6 +11,8 @@ import { getDeckIdFromRoute } from 'src/app/ngrx/card/card.selectors';
 import { EMPTY, filter, map, Observable, Subscription, switchMap, tap } from 'rxjs';
 import { createCard } from 'src/app/ngrx/card/card.actions';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
+import { getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
 
 @Component({
   selector: 'app-add-card-v2',
@@ -18,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-card-v2.component.scss'],
   providers: [QuillService]
 })
-export class AddCardV2Component implements OnInit {
+export class AddCardV2Component implements OnInit, OnDestroy {
 
   deck:Deck
   question:string = ''
@@ -27,7 +29,10 @@ export class AddCardV2Component implements OnInit {
 
   showExplain:boolean;
   deckId:string;
-  deckId$ :Observable<string>
+  // deckId$ :Observable<string>
+  chapterId: string
+  rootId: string
+
 
   @HostListener('window:keydown', ['$event'])
     keyEvent(event: KeyboardEvent) {
@@ -45,11 +50,26 @@ export class AddCardV2Component implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
+  subs: Subscription[] = []
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => {
+      sub.unsubscribe();
+    });
+  }
+
   ngOnInit(): void {
 
-    this.deckId$ = this.store.select(getDeckIdFromRoute).pipe(
+    this.subs.push(this.store.select(getDeckIdFromRoute).pipe(
       tap(deckId => this.deckId = deckId),
-    );
+    ).subscribe())
+
+    this.subs.push(this.store.select(getChapterIdFromRoute).pipe(
+      tap(chapterId => this.chapterId = chapterId),
+    ).subscribe())
+
+    this.subs.push(this.store.select(getRootIdFromRoute).pipe(
+      tap(rootId => this.rootId = rootId),
+    ).subscribe())
 
     this.explain$ = this.store.select(getDeckIdFromRoute).pipe(
       switchMap(deckId => {
@@ -68,6 +88,8 @@ export class AddCardV2Component implements OnInit {
     card.question = this.question
     card.answer = this.answer
     card.deckId = this.deckId;
+    card.chapterId = this.chapterId;
+    card.rootId = this.rootId;
 
     this.store.dispatch(createCard({card:card}))
     this.reset();

@@ -38,6 +38,8 @@ export class CardHttpService {
 
     newCard.id = collectedCard._id;
     newCard.deckId = collectedCard.deckId;
+    newCard.chapterId = collectedCard.chapterId;
+    newCard.rootId = collectedCard.rootId;
     newCard.question = collectedCard.question;
     newCard.answer = collectedCard.answer;
     newCard.new = collectedCard.new;

@@ -7,6 +7,8 @@ export class Card{
   recurrenceNumber: number;
   new:boolean;
   deckId:string
+  chapterId:string
+  rootId:string
 }
 
 export interface ICard{
@@ -18,4 +20,6 @@ export interface ICard{
   recurrenceNumber: number;
   new:boolean;
   deckId: string;
+  chapterId:string
+  rootId:string
 }
