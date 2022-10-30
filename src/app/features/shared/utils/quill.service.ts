@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { ElementRef, Injectable } from "@angular/core";
 import Quill, { RangeStatic } from "quill";
 
@@ -14,7 +14,7 @@ export class QuillService{
 
 
   onReset:Subject<void> = new Subject<void>();
-  onSetContent:Subject<string> = new Subject<string>();
+  onSetContent:BehaviorSubject<string> = new BehaviorSubject<string>('');
   onSetSelection:Subject<RangeStatic> = new Subject<RangeStatic>();
 
   onContentChange:Subject<string> = new Subject<string>();

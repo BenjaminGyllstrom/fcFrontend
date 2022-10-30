@@ -115,6 +115,9 @@ import { AddCardV2Component } from './features/cards/feature/add-card-v2/add-car
 import { CardV2Component } from './features/cards/ui/card-v2/card-v2.component';
 import { CardSwitchButtonComponent } from './features/cards/ui/card-switch-button/card-switch-button.component';
 import { QuillEditV2Component } from './features/shared/ui/quill-edit-v2/quill-edit-v2.component';
+import { ShowCardsV2Component } from './features/cards/feature/show-cards-v2/show-cards-v2.component';
+import { QuillShowV2Component } from './features/shared/ui/quill-show-v2/quill-show-v2.component';
+import { ShowCardComponent } from './features/cards/ui/show-card/show-card.component';
 
 @NgModule({
   declarations: [
@@ -192,6 +195,9 @@ import { QuillEditV2Component } from './features/shared/ui/quill-edit-v2/quill-e
     CardV2Component,
     CardSwitchButtonComponent,
     QuillEditV2Component,
+    ShowCardsV2Component,
+    QuillShowV2Component,
+    ShowCardComponent,
   ],
   imports: [
     BrowserModule,

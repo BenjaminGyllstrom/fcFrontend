@@ -27,6 +27,7 @@ export class AddCardV2Component implements OnInit {
 
   showExplain:boolean;
   deckId:string;
+  deckId$ :Observable<string>
 
   @HostListener('window:keydown', ['$event'])
     keyEvent(event: KeyboardEvent) {
@@ -46,8 +47,11 @@ export class AddCardV2Component implements OnInit {
 
   ngOnInit(): void {
 
-    this.explain$ = this.store.select(getDeckIdFromRoute).pipe(
+    this.deckId$ = this.store.select(getDeckIdFromRoute).pipe(
       tap(deckId => this.deckId = deckId),
+    );
+
+    this.explain$ = this.store.select(getDeckIdFromRoute).pipe(
       switchMap(deckId => {
         if(!deckId) return EMPTY
         return this.deckHttpService.getAssociatedExplain(deckId)
@@ -64,6 +68,7 @@ export class AddCardV2Component implements OnInit {
     card.question = this.question
     card.answer = this.answer
     card.deckId = this.deckId;
+
     this.store.dispatch(createCard({card:card}))
     this.reset();
   }

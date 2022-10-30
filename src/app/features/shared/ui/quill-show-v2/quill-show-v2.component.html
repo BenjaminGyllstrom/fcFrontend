@@ -1,0 +1,4 @@
+<!-- <div *ngIf="content$|async as content" class="quill"> -->
+  <!-- <quill-view [content]="content" format="html" class="editor"></quill-view> -->
+  <quill-view *ngIf="content$|async as content" [content]="content" format="html" class="editor"></quill-view>
+<!-- </div> -->

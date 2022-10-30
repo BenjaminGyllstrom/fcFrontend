@@ -1,0 +1,39 @@
+.show-cards{
+  // padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+app-show-card{
+  width: 100%;
+  // width: 320px;
+  max-width: 380px;
+  height: 250px;
+  min-width: 320px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+
+@media(min-width:375px){
+  .show-cards{
+    padding: 10px;
+  }
+
+}
+
+@media(min-width:400px){
+  .show-cards{
+    padding: 20px;
+  }
+
+}
+
+@media(min-width:1024px){
+  app-show-card{
+    max-width: 360px;
+  }
+
+}

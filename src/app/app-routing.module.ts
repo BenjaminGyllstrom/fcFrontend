@@ -3,7 +3,8 @@ import { DeckOverviewComponent } from './features/nodes/feature/deck-overview/de
 import { AddNodeComponent } from './features/nodes/feature/add-node/add-node.component';
 import { AddRootComponent } from './features/roots/feature/add-root/add-root.component';
 import { AddChapterComponent } from './features/chapters/feature/add-chapter/add-chapter.component';
-import { ShowCardsComponent } from './features/cards/feature/show-cards/show-cards.component';
+import { ShowCardsV2Component } from './features/cards/feature/show-cards-v2/show-cards-v2.component';
+// import { ShowCardsComponent } from './features/cards/feature/show-cards/show-cards.component';
 import { ShowNodesComponent } from './features/nodes/feature/show-nodes/show-nodes.component';
 import { ShowNodesRichComponent } from './features/nodes/feature/show-nodes-rich/show-nodes-rich.component';
 import { AddCardComponent } from './features/cards/feature/add-card/add-card.component';
@@ -42,7 +43,7 @@ const routes: Routes = [
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes', component: ShowNodesRichComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/AddNode', component: AddNodeComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Overview', component: DeckOverviewComponent},
-    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsComponent},
+    {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/Cards', component: ShowCardsV2Component},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardV2Component},
     // {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Deck/:nodeId/AddCard', component: AddCardComponent},
     {path:'Roots/:rootId/Chapters/:chapterId/Nodes/Explain/:nodeId/Overview', component: ExplainOverviewComponent},

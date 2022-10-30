@@ -21,7 +21,6 @@ export class CardV2Component implements OnInit, OnDestroy {
   @Output('onDelete') onDeleteEmitter = new EventEmitter<void>();
   @Output('onChange') onChangeEmitter = new EventEmitter<{question:string, answer:string}>();
 
-
   showQuestion:boolean = true;
 
   @HostListener('window:keydown', ['$event'])
