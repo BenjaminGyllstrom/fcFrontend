@@ -21,7 +21,7 @@ export class StudyServiceV2 {
     if(!cards) return undefined
     else if(cards.dueCards.length > 0){
       const card = cards.dueCards[0];
-      cards.dueCards.splice(0);
+      cards.dueCards.splice(0,1);
       return card;
     }
     else if(cards.newCards.length > 0) {
