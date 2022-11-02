@@ -20,3 +20,6 @@ export const checkDue = createAction('[study] check due', props<{deckId:string}>
 
 export const setExplainAsRead = createAction('[study] set explain as read', props<{explain: Explain}>())
 export const setExplainAsReadSuccessful = createAction('[study] set explain as read successful', props<{explain: Explain}>())
+
+export const getDueRoot = createAction('[study] get due root', props<{rootId:string}>())
+export const getDueRootSuccessful = createAction('[study] get due root succsessful', props<{cards:Card[]}>())

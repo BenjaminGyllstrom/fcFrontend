@@ -1,0 +1,30 @@
+
+<div *ngIf="currentCard" class="container">
+  <app-card-study
+  [showAnswer]="showAnswer"
+  [card]="currentCard"
+  [showAnswerButtons]="showAnswerButtons"
+  (showAnswerChange)="onShowAnswerChange($event)"></app-card-study>
+
+  <app-recurrence-buttons *ngIf="showAnswerButtons" [recurrenceNumber]="currentCard.recurrenceNumber" (nextRecurrence)="onNext($event)"></app-recurrence-buttons>
+
+  <!-- <button class="skip-wait" (click)="skipWait()">Skip wait time: {{skipWaitTime}}</button> -->
+</div>
+
+<p class="no-cards" *ngIf="!currentCard && cards.dueCards.length == 0 && cards.newCards.length == 0">
+  No new or due cards
+</p>
+
+<!-- <div class="no-cards" *ngIf="!currentCard && cards.dueCards.length == 0 && cards.newCards.length == 0">
+
+</div> -->
+
+
+<div style="display: flex; justify-content:center;">
+  <div class="routing-buttons">
+    <a class="routing-button" (click)="onNav('Overview')">Overview</a>
+    <a class="routing-button routing-button-active" (click)="onNav('Study')">Study</a>
+    <a class="routing-button" (click)="onNav('Cards')">Cards</a>
+    <a class="routing-button" (click)="onNav('AddCard')">Add Card</a>
+  </div>
+</div>

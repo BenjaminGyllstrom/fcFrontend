@@ -9,8 +9,8 @@ import { getChapterIdFromRoute } from 'src/app/ngrx/chapter/chapter.selectors';
 import { getChapterNodes } from 'src/app/ngrx/node/node.actions';
 import { getAllRoots } from 'src/app/ngrx/root/root.actions';
 import { getRootIdFromRoute } from 'src/app/ngrx/root/root.selectors';
-import { studyDeck } from 'src/app/ngrx/study/study.actions';
-import { getDeckIdStudyFromRoute } from 'src/app/ngrx/study/study.selectors';
+import { getDueRoot, studyDeck } from 'src/app/ngrx/study/study.actions';
+import { getDeckIdStudyFromRoute, getRootIdStudyFromRoute } from 'src/app/ngrx/study/study.selectors';
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -78,6 +78,13 @@ export class MyContentComponent implements OnInit, OnDestroy {
     .subscribe((deckId) => {
       if(deckId == undefined) return;
       this.store.dispatch(studyDeck({deckId:deckId}))
+    }))
+
+
+    this.subs.push(this.store.select(getRootIdStudyFromRoute)
+    .subscribe((rootId) => {
+      if(rootId == undefined) return;
+      this.store.dispatch(getDueRoot({rootId: rootId}))
     }))
   }
 

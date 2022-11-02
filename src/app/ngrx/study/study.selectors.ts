@@ -12,6 +12,12 @@ export const getDeckIdStudyFromRoute = createSelector(
     return undefined;
   }
 )
+export const getRootIdStudyFromRoute = createSelector(
+  getCurrentRoute, (route:RouterStateUrl) => {
+    if(route.url.includes('/Deck/') && route.url.includes('/Study')) return route.params['rootId'];
+    return undefined;
+  }
+)
 
 export const getCardsForDeck = createSelector(
   getStudyState, getDeckIdStudyFromRoute, (state:StudyState, deckId:string|undefined) => {
@@ -19,6 +25,18 @@ export const getCardsForDeck = createSelector(
       dueCards: state.dueCards.filter(card => card.deckId == deckId),
       newCards: state.newCards.filter(card => card.deckId == deckId)
     }
+  }
+)
+
+export const getNewCards = createSelector(
+  getStudyState, state => {
+    return state.newCards
+  }
+)
+export const getNewCardsForDeck = createSelector(
+  getNewCards, getCurrentRoute, (cards:Card[], route:RouterStateUrl) => {
+    const deckId = route.params['nodeId'];
+    return cards.filter(card => card.deckId == deckId)
   }
 )
 
@@ -60,11 +78,14 @@ export const timeUntilDue = createSelector(
 
 export const getNextDueCardStudyForRoute = createSelector(
   getDue, getNew, (dueCards:Card[], newCards: Card[]) => {
+
     if(dueCards.length > 0) return dueCards[0]
     if(newCards.length > 0) return newCards[0]
     return undefined
   }
 )
+
+
 
 export const getNextCardStudyForRoute = createSelector(
   getDueToday, getNew, (dueCards:Card[], newCards: Card[]) => {
@@ -74,9 +95,17 @@ export const getNextCardStudyForRoute = createSelector(
   }
 )
 
+
+
 export const loadedForDeck = (deckId: string) => createSelector(
   getStudyState, state => {
     return state.loadedForIds.findIndex(id => id == deckId) >= 0
+  }
+)
+
+export const dueLoadedForRoot = (rootId: string) => createSelector(
+  getStudyState, state => {
+    return state.dueLoadedForRoot.findIndex(id => id == rootId) >= 0
   }
 )
 

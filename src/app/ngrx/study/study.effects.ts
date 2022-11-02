@@ -10,7 +10,7 @@ import { ExplainHttpService } from "src/app/features/shared/data-access/Http/Exp
 import { AppState } from "../appState";
 import { createCardSuccessful } from "../card/card.actions";
 import * as fromStudy from "./study.actions"
-import { getDeckIdStudyFromRoute, loadedForDeck } from "./study.selectors";
+import { dueLoadedForRoot, getDeckIdStudyFromRoute, loadedForDeck } from "./study.selectors";
 
 @Injectable()
 export class StudyEffects{
@@ -34,6 +34,20 @@ export class StudyEffects{
     ),
     map(cards => fromStudy.getCardsDeckSuccessul({cards: cards}))
   ))
+
+  getDueRoot$ = createEffect(()=> this.actions$.pipe(
+    ofType(fromStudy.getDueRoot),
+    switchMap(action => {
+      return this.store.select(dueLoadedForRoot(action.rootId)).pipe(
+        mergeMap(areLoaded => {
+          return iif(()=> areLoaded,
+          EMPTY,
+          this.getDueRoot(action.rootId))})
+      )}
+    ),
+    map(cards => fromStudy.getDueRootSuccessful({cards: cards}))
+  ))
+
 
   updateReacurrence = createEffect(()=> this.actions$.pipe(
     ofType(fromStudy.updateCardDue),
@@ -61,6 +75,13 @@ export class StudyEffects{
       map((iCards:ICard[]) => this.cardHttpService.parseToCards(iCards))
     )
   }
+
+  getDueRoot(rootId: string):Observable<Card[]>{
+    return this.cardHttpService.getDueRoot(rootId).pipe(
+      map((iCards:ICard[]) => this.cardHttpService.parseToCards(iCards))
+    );
+  }
+
   getDueCards(deckId: string):Observable<Card[]>{
     return of([])
   }

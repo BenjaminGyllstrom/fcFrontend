@@ -37,6 +37,7 @@ export interface StudyState{
   dueCards: Card[]
   newCards: Card[]
   loadedForIds: string[],
+  dueLoadedForRoot:string[]
   dueExists:boolean
 }
 

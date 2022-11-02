@@ -14,7 +14,7 @@ import { DueTimerService } from 'src/app/features/study/utils/dueTimer.service';
   styleUrls: ['./study-cards.component.scss'],
   providers:[DueTimerService]
 })
-export class StudyCardsComponent implements OnInit {
+export class StudyCardsComponent implements OnInit, OnDestroy {
 
   constructor(
     private dueTimerService:DueTimerService,
@@ -41,6 +41,8 @@ export class StudyCardsComponent implements OnInit {
   this.card$ = this.store.select(getNextDueCardStudyForRoute).pipe(
     tap(card => {
       if(card) {
+        console.log(card);
+
         this.nextRecurrenceText = calculateRecurrenceTimes(card);
         this.showAnswer = false;
       }

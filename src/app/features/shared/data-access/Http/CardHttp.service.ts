@@ -30,6 +30,9 @@ export class CardHttpService {
   updateDueDate(card: Card, id:string, recurrenceOption:string) : Observable<any> {
     return this.httpService.patch(`cards/Study/${id}/${recurrenceOption}`, card);
   }
+  getDueRoot(rootId:string): Observable<any> {
+    return this.httpService.get(`cards/dueRoot/${rootId}`);
+  }
 
 
 

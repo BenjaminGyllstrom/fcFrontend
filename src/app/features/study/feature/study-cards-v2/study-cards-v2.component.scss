@@ -1,0 +1,15 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-card-study{
+  min-width: 280px;
+  min-height: 200px;
+}
+
+.no-cards{
+  margin: auto;
+  width: max-content;
+}

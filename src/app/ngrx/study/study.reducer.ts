@@ -9,7 +9,8 @@ export const initialState:StudyState = {
   dueCards: [],
   newCards: [],
   loadedForIds:[],
-  dueExists:false
+  dueExists:false,
+  dueLoadedForRoot:[],
 }
 
 export const studyReducer = createReducer(
@@ -32,6 +33,7 @@ export const studyReducer = createReducer(
 
       const dueCards = [...state.dueCards]
       const index = dueCards.findIndex(oldCard => oldCard.id == card.id)
+
       dueCards[index] = card
       return {...state, dueCards: dueCards}
     }
@@ -58,6 +60,14 @@ export const studyReducer = createReducer(
     console.log('set as read');
 
     return {...state}
+  }),
+  on(fromStudy.getDueRootSuccessful, (state, {cards}) => {
+
+    if(!cards || cards.length == 0) return {...state}
+    const rootId = cards[0].rootId;
+    const cardsNotInState = getDueCards([...cards]).filter(newCard => state.dueCards.findIndex(card => card.id == newCard.id) == -1)
+
+    return {...state, dueCards: [...state.dueCards, ...cardsNotInState], dueLoadedForRoot: [...state.dueLoadedForRoot, rootId]}
   })
 )
 

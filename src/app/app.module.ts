@@ -119,6 +119,9 @@ import { ShowCardsV2Component } from './features/cards/feature/show-cards-v2/sho
 import { QuillShowV2Component } from './features/shared/ui/quill-show-v2/quill-show-v2.component';
 import { ShowCardComponent } from './features/cards/ui/show-card/show-card.component';
 import { ToggleComponent } from './features/shared/ui/toggle/toggle.component';
+import { StudyCardsV2Component } from './features/study/feature/study-cards-v2/study-cards-v2.component';
+import { RecurrenceButtonsComponent } from './features/study/ui/recurrence-buttons/recurrence-buttons.component';
+import { CardStudyV2Component } from './features/study/ui/card-study-v2/card-study-v2.component';
 
 @NgModule({
   declarations: [
@@ -200,6 +203,9 @@ import { ToggleComponent } from './features/shared/ui/toggle/toggle.component';
     QuillShowV2Component,
     ShowCardComponent,
     ToggleComponent,
+    StudyCardsV2Component,
+    RecurrenceButtonsComponent,
+    CardStudyV2Component,
   ],
   imports: [
     BrowserModule,

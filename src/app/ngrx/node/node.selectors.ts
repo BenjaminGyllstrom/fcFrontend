@@ -25,6 +25,7 @@ export const getChapterNodes = (chapterId: string) => createSelector(
 export const getChapterNodesFromRoute = createSelector(
   getNodes, getCurrentRoute, (nodes:INode[], route:RouterStateUrl) => {
     const chapterId = route.params['chapterId'];
+
     return nodes.filter(node => node.parentId == chapterId)
   }
 )
