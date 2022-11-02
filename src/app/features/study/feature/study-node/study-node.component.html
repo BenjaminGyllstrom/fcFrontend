@@ -1,9 +1,8 @@
 
-<div *ngIf="node$|async as node">
+<div class="container" *ngIf="node$|async as node">
   <div *ngIf="node.type == 'deck'">
     <!-- <app-study-cards></app-study-cards> -->
     <app-study-cards-v2></app-study-cards-v2>
-    <!-- <app-study-deck style="width: 100%;" *ngIf="cards" [cards]="cards" (updatedRecurrence)="onCardUpdated($event)"></app-study-deck> -->
   </div>
   <div *ngIf="node.type == 'explain'">
     <app-study-explain [explain]="node" (finnished)="onExplainFinnished()"></app-study-explain>

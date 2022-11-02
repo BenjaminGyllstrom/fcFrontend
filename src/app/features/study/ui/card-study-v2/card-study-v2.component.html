@@ -1,1 +1,7 @@
-<p>card-study-v2 works!</p>
+
+<div>
+  <quill-view [content]="content" format="html"></quill-view>
+</div>
+
+<app-card-switch-button [showQuestion]="!showAnswer" (onSwitch)="onToggle()"></app-card-switch-button>
+

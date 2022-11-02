@@ -1,10 +1,11 @@
 
 <div *ngIf="currentCard" class="container">
-  <app-card-study
+
+  <app-card-study-v2
   [showAnswer]="showAnswer"
   [card]="currentCard"
   [showAnswerButtons]="showAnswerButtons"
-  (showAnswerChange)="onShowAnswerChange($event)"></app-card-study>
+  (showAnswerChange)="onShowAnswerChange($event)"></app-card-study-v2>
 
   <app-recurrence-buttons *ngIf="showAnswerButtons" [recurrenceNumber]="currentCard.recurrenceNumber" (nextRecurrence)="onNext($event)"></app-recurrence-buttons>
 
@@ -14,11 +15,6 @@
 <p class="no-cards" *ngIf="!currentCard && cards.dueCards.length == 0 && cards.newCards.length == 0">
   No new or due cards
 </p>
-
-<!-- <div class="no-cards" *ngIf="!currentCard && cards.dueCards.length == 0 && cards.newCards.length == 0">
-
-</div> -->
-
 
 <div style="display: flex; justify-content:center;">
   <div class="routing-buttons">

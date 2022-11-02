@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Card } from '../../../../Models/card.model';
+import { Component, Input, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-card-study-v2',
@@ -7,9 +8,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardStudyV2Component implements OnInit {
 
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if(event.key == "Tab"){
+      this.onToggle();
+    }
+  }
+
+  @Input() card: Card
+  @Input() showAnswer: boolean
+
+  @Output('showAnswerChange') toggleEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  content: string;
   constructor() { }
 
   ngOnInit(): void {
+    this.setContent();
   }
 
+  onToggle(){
+    this.showAnswer = !this.showAnswer;
+    this.setContent();
+    this.toggleEmitter.emit(this.showAnswer);
+  }
+
+  setContent(){
+    if(this.showAnswer){
+      this.content = this.card.answer
+    }else{
+      this.content = this.card.question
+    }
+
+  }
 }

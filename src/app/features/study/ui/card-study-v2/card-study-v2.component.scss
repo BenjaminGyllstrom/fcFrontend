@@ -1,0 +1,15 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+div{
+  max-height: calc(100% - 40px);
+  height: calc(100% - 40px);
+}
+
+app-card-switch-button{
+  margin-top: auto;
+  height: 40px;
+}
