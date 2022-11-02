@@ -1,5 +1,5 @@
 
-<div *ngIf="currentCard" class="container">
+<div *ngIf="currentCard; else noCurrent" class="container">
 
   <app-card-study-v2
   [showAnswer]="showAnswer"
@@ -12,9 +12,11 @@
   <!-- <button class="skip-wait" (click)="skipWait()">Skip wait time: {{skipWaitTime}}</button> -->
 </div>
 
-<p class="no-cards" *ngIf="!currentCard && cards.dueCards.length == 0 && cards.newCards.length == 0">
-  No new or due cards
-</p>
+<ng-template #noCurrent>
+  <p>
+    No new or due cards
+  </p>
+</ng-template>
 
 <div style="display: flex; justify-content:center;">
   <div class="routing-buttons">

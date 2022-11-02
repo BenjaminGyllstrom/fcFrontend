@@ -15,7 +15,11 @@ export class CardStudyV2Component implements OnInit {
     }
   }
 
-  @Input() card: Card
+  _card:Card
+  @Input() set card(value:Card){
+    this._card = value;
+    this.setContent();
+  }
   @Input() showAnswer: boolean
 
   @Output('showAnswerChange') toggleEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -35,10 +39,9 @@ export class CardStudyV2Component implements OnInit {
 
   setContent(){
     if(this.showAnswer){
-      this.content = this.card.answer
+      this.content = this._card.answer
     }else{
-      this.content = this.card.question
+      this.content = this._card.question
     }
-
   }
 }
