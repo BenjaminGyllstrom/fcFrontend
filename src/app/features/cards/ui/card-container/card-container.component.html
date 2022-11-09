@@ -1,0 +1,12 @@
+
+
+<div class="container">
+  <div class="content" *ngIf="showQuestion">
+    <ng-content select="[front]"></ng-content>
+  </div>
+  <div class="content" *ngIf="!showQuestion">
+    <ng-content select="[back]"></ng-content>
+  </div>
+
+  <app-card-switch-button class="back" [showQuestion]="showQuestion" (onSwitch)="switchContent()"></app-card-switch-button>
+</div>

@@ -1,0 +1,9 @@
+:host{
+  height: 100%;
+}
+.editor{
+  width: 100%;
+  height: calc(100% - 35px);
+  border: none;
+  box-sizing: border-box;
+}

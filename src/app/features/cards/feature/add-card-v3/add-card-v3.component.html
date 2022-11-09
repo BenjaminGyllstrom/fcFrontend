@@ -1,0 +1,32 @@
+<div class="container">
+
+  <app-quill-show *ngIf="showExplain && (explain$|async) as explain" [content]="explain.text"></app-quill-show>
+
+
+  <div class="add-card-container">
+    <app-card-container>
+      <div front class="quill-container">
+        <app-quill-edit-v3 [content]="question" [selection]="questionSelection" (onContentChange)="questionChange($event)" (onSelectionChange)="questionSelectionChange($event)"></app-quill-edit-v3>
+      </div>
+      <div back class="quill-container">
+        <app-quill-edit-v3 [content]="answer" [selection]="answerSelection" (onContentChange)="answerChange($event)" (onSelectionChange)="answerSelectionChange($event)"></app-quill-edit-v3>
+      </div>
+    </app-card-container>
+
+    <button (click)="this.showExplain = !this.showExplain" class="show-explain-button">
+      {{showExplain? 'Hide Explain':'Show Explain'}}
+    </button>
+
+    <button type="submit" class="button add-card-button" (click)="onSave()">Add</button>
+  </div>
+
+</div>
+
+<div style="display: flex; justify-content:center;">
+  <div class="routing-buttons">
+    <a class="routing-button" (click)="onNav('Overview')">Overview</a>
+    <a class="routing-button" (click)="onNav('Study')">Study</a>
+    <a class="routing-button" (click)="onNav('Cards')">Cards</a>
+    <a class="routing-button routing-button-active" (click)="onNav('AddCard')">Add Card</a>
+  </div>
+</div>

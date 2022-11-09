@@ -1,0 +1,48 @@
+.container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-quill-show{
+  max-width: 500px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.add-card-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.quill-container{
+  height: 100%;
+}
+.show-explain-button{
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
+@media(min-width:1024px){
+  .container{
+    flex-direction: row;
+    justify-content: center;
+  }
+  app-quill-show{
+    max-width: 700px;
+    max-height: calc(90vh - 52px - 64px);
+  }
+}
+
+::ng-deep .ql-toolbar.ql-snow{
+  border: none;
+  padding: 5px 0px 0px 0px;
+}
+
+::ng-deep .ql-toolbar.ql-snow .ql-formats{
+  margin: 3px;
+}
