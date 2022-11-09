@@ -69,7 +69,8 @@ export class ChapterHttpService {
     const nodes: any[] = [];
 
     collectedNodes.forEach(node => {
-      if(node.type == 'deck'){
+
+      if(node.type == 'Deck'){
         nodes.push(this.deckHttpService.parseToDeck(node));
       }
       else{
